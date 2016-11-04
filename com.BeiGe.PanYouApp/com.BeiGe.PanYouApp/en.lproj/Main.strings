@@ -1,0 +1,126 @@
+
+/* Class = "UILabel"; text = "端口号："; ObjectID = "0Zh-c2-QLm"; */
+"0Zh-c2-QLm.text" = "端口号：";
+
+/* Class = "UILabel"; text = "微信：CSkanglin"; ObjectID = "0dZ-eb-WFn"; */
+"0dZ-eb-WFn.text" = "微信：CSkanglin";
+
+/* Class = "UILabel"; text = "更改密码"; ObjectID = "2Vy-Gi-nKH"; */
+"2Vy-Gi-nKH.text" = "更改密码";
+
+/* Class = "UIButton"; normalTitle = "设置网络连接通道"; ObjectID = "33R-LY-70v"; */
+"33R-LY-70v.normalTitle" = "设置网络连接通道";
+
+/* Class = "UIButton"; normalTitle = "确定"; ObjectID = "3ir-88-1RT"; */
+"3ir-88-1RT.normalTitle" = "确定";
+
+/* Class = "UILabel"; text = "批        号："; ObjectID = "3my-Py-cJM"; */
+"3my-Py-cJM.text" = "批        号：";
+
+/* Class = "UILabel"; text = "药品规格："; ObjectID = "4zg-Zb-yqX"; */
+"4zg-Zb-yqX.text" = "药品规格：";
+
+/* Class = "UILabel"; text = "盘点药品"; ObjectID = "74Y-wH-u69"; */
+"74Y-wH-u69.text" = "盘点药品";
+
+/* Class = "UILabel"; text = "提交盘点结果"; ObjectID = "7J8-UU-aVU"; */
+"7J8-UU-aVU.text" = "提交盘点结果";
+
+/* Class = "UILabel"; text = "同步全部库存"; ObjectID = "Cbp-Rv-M0r"; */
+"Cbp-Rv-M0r.text" = "同步全部库存";
+
+/* Class = "UILabel"; text = "答题"; ObjectID = "Dz0-3g-Ufr"; */
+"Dz0-3g-Ufr.text" = "答题";
+
+/* Class = "UILabel"; text = "."; ObjectID = "FYZ-wx-iBG"; */
+"FYZ-wx-iBG.text" = ".";
+
+/* Class = "UILabel"; text = "考勤"; ObjectID = "Gra-wP-psZ"; */
+"Gra-wP-psZ.text" = "考勤";
+
+/* Class = "UILabel"; text = "药品编号："; ObjectID = "Jrn-QC-bdQ"; */
+"Jrn-QC-bdQ.text" = "药品编号：";
+
+/* Class = "UILabel"; text = "联系我们"; ObjectID = "K0G-Jg-CUG"; */
+"K0G-Jg-CUG.text" = "联系我们";
+
+/* Class = "UILabel"; text = "."; ObjectID = "Lbb-UH-FyK"; */
+"Lbb-UH-FyK.text" = ".";
+
+/* Class = "UITextField"; placeholder = "请输入新密码"; ObjectID = "Myi-VZ-Nki"; */
+"Myi-VZ-Nki.placeholder" = "请输入新密码";
+
+/* Class = "UILabel"; text = "设置"; ObjectID = "P4V-4L-QmU"; */
+"P4V-4L-QmU.text" = "设置";
+
+/* Class = "UILabel"; text = "电话：18390907126"; ObjectID = "PK1-8j-6Dz"; */
+"PK1-8j-6Dz.text" = "电话：18390907126";
+
+/* Class = "UILabel"; text = "盘点"; ObjectID = "PLM-P0-LfN"; */
+"PLM-P0-LfN.text" = "盘点";
+
+/* Class = "UILabel"; text = "药品名称："; ObjectID = "QNF-Td-UPG"; */
+"QNF-Td-UPG.text" = "药品名称：";
+
+/* Class = "UILabel"; text = "软件说明"; ObjectID = "SaX-dd-isP"; */
+"SaX-dd-isP.text" = "软件说明";
+
+/* Class = "UITextField"; placeholder = "请输入原密码"; ObjectID = "Yka-NM-xAM"; */
+"Yka-NM-xAM.placeholder" = "请输入原密码";
+
+/* Class = "UILabel"; text = "货        位:"; ObjectID = "bRT-4W-qoB"; */
+"bRT-4W-qoB.text" = "货        位:";
+
+/* Class = "UILabel"; text = " Q Q：2941808616"; ObjectID = "ba0-wu-mcu"; */
+"ba0-wu-mcu.text" = " Q Q：2941808616";
+
+/* Class = "UILabel"; text = "IP地址："; ObjectID = "bbe-gA-Pif"; */
+"bbe-gA-Pif.text" = "IP地址：";
+
+/* Class = "UILabel"; text = "请设置局域网访问地址"; ObjectID = "bcv-6X-I2Y"; */
+"bcv-6X-I2Y.text" = "请设置局域网访问地址";
+
+/* Class = "UILabel"; text = "同步异常数据"; ObjectID = "cke-ng-z5d"; */
+"cke-ng-z5d.text" = "同步异常数据";
+
+/* Class = "UILabel"; text = "收银台"; ObjectID = "cl3-uc-Iqf"; */
+"cl3-uc-Iqf.text" = "收银台";
+
+/* Class = "UILabel"; text = "生产厂家："; ObjectID = "ej3-Sb-doG"; */
+"ej3-Sb-doG.text" = "生产厂家：";
+
+/* Class = "UILabel"; text = "🔍扫描或输入药品条形码"; ObjectID = "fd7-s9-fB3"; */
+"fd7-s9-fB3.text" = "🔍扫描或输入药品条形码";
+
+/* Class = "UINavigationItem"; title = "返回"; ObjectID = "gSy-fd-eWG"; */
+"gSy-fd-eWG.title" = "返回";
+
+/* Class = "UILabel"; text = "."; ObjectID = "m2e-5e-39H"; */
+"m2e-5e-39H.text" = ".";
+
+/* Class = "UIButton"; normalTitle = "返回"; ObjectID = "pam-18-o0X"; */
+"pam-18-o0X.normalTitle" = "返回";
+
+/* Class = "UITextField"; placeholder = "请再次输入新密码"; ObjectID = "r9S-HB-cgg"; */
+"r9S-HB-cgg.placeholder" = "请再次输入新密码";
+
+/* Class = "UITextField"; placeholder = "登陆密码"; ObjectID = "riS-qd-5QN"; */
+"riS-qd-5QN.placeholder" = "登陆密码";
+
+/* Class = "UILabel"; text = "助  记  码："; ObjectID = "tLZ-by-gxC"; */
+"tLZ-by-gxC.text" = "助  记  码：";
+
+/* Class = "UILabel"; text = "药品数量："; ObjectID = "u6H-TS-f59"; */
+"u6H-TS-f59.text" = "药品数量：";
+
+/* Class = "UILabel"; text = "如有问题，可通过以下方式联系到我们，我们将尽快做出反馈。"; ObjectID = "vEX-w9-2IX"; */
+"vEX-w9-2IX.text" = "如有问题，可通过以下方式联系到我们，我们将尽快做出反馈。";
+
+/* Class = "UITextField"; placeholder = "登陆账号"; ObjectID = "vKB-bk-Fip"; */
+"vKB-bk-Fip.placeholder" = "登陆账号";
+
+/* Class = "UITextField"; placeholder = "🔍输入药品助记码"; ObjectID = "vM1-v8-zy2"; */
+"vM1-v8-zy2.placeholder" = "🔍输入药品助记码";
+
+/* Class = "UIButton"; normalTitle = "上一条"; ObjectID = "vm4-48-eYK"; */
+"vm4-48-eYK.normalTitle" = "上一条";
