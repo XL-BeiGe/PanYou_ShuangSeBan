@@ -8,6 +8,9 @@
 
 #import "XLMainViewController.h"
 #import "XLAttendanceViewController.h"
+#import "XLLogin_ViewController.h"
+#import "XLCheckstandViewController.h"
+
 @interface XLMainViewController ()
 
 @end
@@ -25,32 +28,33 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+//通知
+-(void)tongzhi{
+    
 }
-*/
 
+//出勤
 - (IBAction)Attend:(id)sender {
     
     XLAttendanceViewController *xl = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"attendance"];
     [self.navigationController pushViewController:xl animated:YES];
 }
-
+//答题
 - (IBAction)Answer:(id)sender {
+    
 }
 
 - (IBAction)PanDian:(id)sender {
+    XLLogin_ViewController *xll=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"login"];
+    [self.navigationController pushViewController:xll animated:YES];
 }
-
+//设置
 - (IBAction)Set:(id)sender {
+    
 }
-
+//收银
 - (IBAction)CashierDesk:(id)sender {
+    XLCheckstandViewController *xxll=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"checkstand"];
+    [self.navigationController pushViewController:xxll animated:YES];
 }
 @end
