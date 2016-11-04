@@ -11,6 +11,10 @@
 @interface XLAttendanceViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UILabel *week;//星期
 @property (weak, nonatomic) IBOutlet UILabel *day;//年月日
+@property (weak, nonatomic) IBOutlet UIButton *qiandao;
+@property (weak, nonatomic) IBOutlet UIButton *qiantui;
+
+
 - (IBAction)QianDao:(id)sender;
 - (IBAction)QianTui:(id)sender;
 - (IBAction)WaiQin:(id)sender;
