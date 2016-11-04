@@ -212,6 +212,8 @@
 		D772CD0A1DC9BE3100BB28D9 /* E1.png in Resources */ = {isa = PBXBuildFile; fileRef = D772CCE01DC9BE3100BB28D9 /* E1.png */; };
 		D772CD0B1DC9BE3100BB28D9 /* E2.png in Resources */ = {isa = PBXBuildFile; fileRef = D772CCE11DC9BE3100BB28D9 /* E2.png */; };
 		D772CD0C1DC9BE3100BB28D9 /* E3.png in Resources */ = {isa = PBXBuildFile; fileRef = D772CCE21DC9BE3100BB28D9 /* E3.png */; };
+		D7959B731DCC5A2600985309 /* XLNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7959B721DCC5A2600985309 /* XLNoteViewController.m */; };
+		D7959B761DCC5A4200985309 /* XLNoteInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7959B751DCC5A4200985309 /* XLNoteInfoViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -504,6 +506,10 @@
 		D772CCE01DC9BE3100BB28D9 /* E1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = E1.png; sourceTree = "<group>"; };
 		D772CCE11DC9BE3100BB28D9 /* E2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = E2.png; sourceTree = "<group>"; };
 		D772CCE21DC9BE3100BB28D9 /* E3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = E3.png; sourceTree = "<group>"; };
+		D7959B711DCC5A2600985309 /* XLNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLNoteViewController.h; sourceTree = "<group>"; };
+		D7959B721DCC5A2600985309 /* XLNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLNoteViewController.m; sourceTree = "<group>"; };
+		D7959B741DCC5A4200985309 /* XLNoteInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLNoteInfoViewController.h; sourceTree = "<group>"; };
+		D7959B751DCC5A4200985309 /* XLNoteInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLNoteInfoViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -607,6 +613,7 @@
 			children = (
 				D772CCB51DC9B52B00BB28D9 /* XLMainViewController.h */,
 				D772CCB61DC9B52B00BB28D9 /* XLMainViewController.m */,
+				D7959B701DCC59FA00985309 /* 通知 */,
 				D730F8A01DCAD93900F07053 /* 考勤 */,
 				D730F8A71DCB0CCA00F07053 /* XLEditAttViewController.h */,
 				D730F8A81DCB0CCA00F07053 /* XLEditAttViewController.m */,
@@ -1058,6 +1065,17 @@
 			name = Image;
 			sourceTree = "<group>";
 		};
+		D7959B701DCC59FA00985309 /* 通知 */ = {
+			isa = PBXGroup;
+			children = (
+				D7959B711DCC5A2600985309 /* XLNoteViewController.h */,
+				D7959B721DCC5A2600985309 /* XLNoteViewController.m */,
+				D7959B741DCC5A4200985309 /* XLNoteInfoViewController.h */,
+				D7959B751DCC5A4200985309 /* XLNoteInfoViewController.m */,
+			);
+			name = "通知";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1347,6 +1365,7 @@
 				D2C1AC8A1DC97D8C00092F44 /* ViewController.m in Sources */,
 				D76B34BD1DC9925F00E285AB /* DSKyeboard.m in Sources */,
 				D76B34DF1DC9927C00E285AB /* XL_SearchViewController.m in Sources */,
+				D7959B731DCC5A2600985309 /* XLNoteViewController.m in Sources */,
 				D76B350E1DC992F400E285AB /* SBJsonStreamParser.m in Sources */,
 				D76B34E41DC9927C00E285AB /* XLLogin_ViewController.m in Sources */,
 				D76B34DD1DC9927C00E285AB /* XL_FMDB.m in Sources */,
@@ -1354,6 +1373,7 @@
 				D730F8AD1DCB108600F07053 /* XLCheckstandViewController.m in Sources */,
 				D730F8A61DCADFBC00F07053 /* XLOutsideViewController.m in Sources */,
 				D76B353A1DC9930800E285AB /* AFNetworkReachabilityManager.m in Sources */,
+				D7959B761DCC5A4200985309 /* XLNoteInfoViewController.m in Sources */,
 				D76B34BC1DC9925F00E285AB /* DSBaseKeyboard.m in Sources */,
 				D76B35171DC992F400E285AB /* SBJsonWriter.m in Sources */,
 				D76B34E31DC9927C00E285AB /* XLHomeViewController.m in Sources */,
@@ -1545,6 +1565,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = com.BeiGe.PanYouApp/com.BeiGe.PanYouApp.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = com.BeiGe.PanYouApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -1560,6 +1581,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = com.BeiGe.PanYouApp/com.BeiGe.PanYouApp.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = com.BeiGe.PanYouApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
