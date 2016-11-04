@@ -11,20 +11,26 @@
 #import "XLLeaveViewController.h"
 #import "XLStatisticsViewController.h"
 #import "Color+Hex.h"
-@interface XLAttendanceViewController (){
+#import <CoreLocation/CoreLocation.h>
+@interface XLAttendanceViewController ()<CLLocationManagerDelegate>
+{
     //签到标识
     int dao;
     //签退标识
     int tui;
+    //经纬度
+    NSString*jing;NSString*wei;
 }
-
+@property (nonatomic, strong) CLLocationManager* locationManager;
 @end
 /*
     现缺少两个网络接口
  
  */
 @implementation XLAttendanceViewController
-
+-(void)viewWillAppear:(BOOL)animated{
+    [self dingwei];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -32,7 +38,6 @@
     tui=0;
     [self riqixianshi];
     [self wangluolianjie];
-    
     [self anniupanduan];
 }
 -(void)anniupanduan{
@@ -107,7 +112,69 @@
     controller=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:ming];
     [self.navigationController pushViewController:controller animated:YES];
 }
+//签到签退接口；
 -(void)qiandao_tui:(int)nage{
+    
+}
+-(void)dingwei{
+    [self initializeLocationService];
+}
+- (void)initializeLocationService {
+    
+    // 初始化定位管理器
+    _locationManager = [[CLLocationManager alloc] init];
+    // 设置代理
+    _locationManager.delegate = self;
+    // 设置定位精确度到米
+    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    // 设置过滤器为无
+    _locationManager.distanceFilter = kCLDistanceFilterNone;
+    // 开始定位
+    // 取得定位权限，有两个方法，取决于你的定位使用情况
+    // 一个是requestAlwaysAuthorization，一个是requestWhenInUseAuthorization
+    [_locationManager requestAlwaysAuthorization];//这句话ios8以上版本使用。
+    [_locationManager startUpdatingLocation];
+}
+-(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
+    //将经度显示到label上
+    jing = [NSString stringWithFormat:@"%lf", newLocation.coordinate.longitude];
+    //将纬度现实到label上
+    wei = [NSString stringWithFormat:@"%lf", newLocation.coordinate.latitude];
+    NSLog(@"%@,%@",jing ,wei);
+    // 获取当前所在的城市名
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    //根据经纬度反向地理编译出地址信息
+    [geocoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray *array, NSError *error){
+        if (array.count > 0){
+//            CLPlacemark *placemark = [array objectAtIndex:0];
+            
+//            sheng=[NSString stringWithFormat:@"%@",[placemark.addressDictionary objectForKey:@"State"]];
+//            
+//            
+//            //获取城市
+//            NSString *city = placemark.locality;
+//            
+//            if (city) {
+//                //四大直辖市的城市信息无法通过locality获得，只能通过获取省份的方法来获得（如果city为空，则可知为直辖市）
+//                city = placemark.administrativeArea;
+//                
+//                //市
+//                
+//                shi=[NSString stringWithFormat:@"%@",placemark.locality];
+//                //区
+//                qu=[NSString stringWithFormat:@"%@",placemark.subLocality];
+//            }
+            
+        }
+        else if (error == nil && [array count] == 0)
+        {
+        }
+        else if (error != nil)
+        {
+        }
+    }];
+    //系统会一直更新数据，直到选择停止更新，因为我们只需要获得一次经纬度即可，所以获取之后就停止更新
+    [manager stopUpdatingLocation];
     
 }
 

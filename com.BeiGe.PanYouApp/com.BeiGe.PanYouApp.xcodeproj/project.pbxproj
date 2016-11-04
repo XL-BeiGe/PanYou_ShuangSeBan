@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D23B407A1DCC792B00CDACCB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23B40791DCC792B00CDACCB /* CoreLocation.framework */; };
 		D2C1AC841DC97D8C00092F44 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C1AC831DC97D8C00092F44 /* main.m */; };
 		D2C1AC871DC97D8C00092F44 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C1AC861DC97D8C00092F44 /* AppDelegate.m */; };
 		D2C1AC8A1DC97D8C00092F44 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C1AC891DC97D8C00092F44 /* ViewController.m */; };
@@ -234,6 +235,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D23B40791DCC792B00CDACCB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		D2C1AC7F1DC97D8C00092F44 /* com.BeiGe.PanYouApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = com.BeiGe.PanYouApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2C1AC831DC97D8C00092F44 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D2C1AC851DC97D8C00092F44 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -517,6 +519,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D23B407A1DCC792B00CDACCB /* CoreLocation.framework in Frameworks */,
 				D76B35FA1DC9935D00E285AB /* libsqlite3.0.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1008,6 +1011,7 @@
 		D76B35F81DC9935D00E285AB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D23B40791DCC792B00CDACCB /* CoreLocation.framework */,
 				D76B35F91DC9935D00E285AB /* libsqlite3.0.tbd */,
 			);
 			name = Frameworks;
