@@ -7,7 +7,7 @@
 //
 
 #import "XLShopCarViewController.h"
-
+#import "XLSetAccountViewController.h"
 @interface XLShopCarViewController ()
 
 @end
@@ -16,6 +16,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"购物车";
+    
+    [self tableviewdelegate];
     // Do any additional setup after loading the view.
 }
 
@@ -34,6 +37,56 @@
 }
 */
 
+-(void)tableviewdelegate{
+    _tabel.dataSource = self;
+    _tabel.delegate = self;
+    _tabel.tableFooterView =[[UIView alloc]initWithFrame:CGRectZero];
+}
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 10;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 80;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *aa=@"shopcell";
+    UITableViewCell *cell=[self.tabel dequeueReusableCellWithIdentifier:aa];
+    if (cell==nil) {
+        cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:aa];
+    }
+    //    for (UIView *v in [cell.contentView subviews]) {
+    //        [v removeFromSuperview];
+    //    }
+    UILabel *name =(UILabel*)[cell viewWithTag:100];
+    UILabel *price =(UILabel*)[cell viewWithTag:300];
+    UILabel *namete =(UILabel*)[cell viewWithTag:200];
+    UILabel *pricete =(UILabel*)[cell viewWithTag:400];
+    UILabel *number =(UILabel*)[cell viewWithTag:600];
+    UIButton *subtrace = (UIButton*)[cell viewWithTag:500];
+    UIButton *sum = (UIButton*)[cell viewWithTag:700];
+     name.text = @"药品名称";
+     price.text = @"药品价格";
+     namete.text = @"测试名称";
+     pricete.text = [NSString stringWithFormat:@"￥1235.0"];
+     number.text = [NSString stringWithFormat:@"12"];
+    //    [cell.contentView addSubview:titl];
+    //    [cell.contentView addSubview:mess];
+    //    [cell.contentView addSubview:time];
+    //    [cell.contentView addSubview:icoimg];
+    //    [cell.contentView addSubview:img];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+   
+}
+
+
+
+
+
 - (IBAction)SetAccounts:(id)sender {
+    XLSetAccountViewController *shop = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"setacc"];
+    [self.navigationController pushViewController:shop animated:YES];
 }
 @end

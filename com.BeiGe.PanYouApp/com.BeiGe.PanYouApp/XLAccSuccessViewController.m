@@ -16,6 +16,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"结账结果";
+    _fkmoney.text = [NSString stringWithFormat:@"￥987654132.0"];
+    _someone.text = [NSString stringWithFormat:@"测试人员"];
+    _sytime.text = [NSString stringWithFormat:@"16.45"];
+    
     // Do any additional setup after loading the view.
 }
 

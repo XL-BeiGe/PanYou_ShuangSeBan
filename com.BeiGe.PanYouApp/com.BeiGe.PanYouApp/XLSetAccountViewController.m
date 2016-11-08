@@ -7,7 +7,7 @@
 //
 
 #import "XLSetAccountViewController.h"
-
+#import "XLAccSuccessViewController.h"
 @interface XLSetAccountViewController ()
 
 @end
@@ -16,6 +16,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"结账";
+    _accmoney.text = [NSString stringWithFormat:@"￥15643.00"];
+    //_fumoney.text;//用户输入textfield
+    _zlmoney.text =[NSString stringWithFormat:@"￥13687.50元"];
     // Do any additional setup after loading the view.
 }
 
@@ -35,5 +39,7 @@
 */
 
 - (IBAction)Sure:(id)sender {
+    XLAccSuccessViewController *shop = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"accsuc"];
+    [self.navigationController pushViewController:shop animated:YES];
 }
 @end

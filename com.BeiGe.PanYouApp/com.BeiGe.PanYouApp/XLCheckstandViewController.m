@@ -7,15 +7,29 @@
 //
 
 #import "XLCheckstandViewController.h"
-
+#import "XLShopCarViewController.h"
+#import "Color+Hex.h"
+#import "XL_Header.h"
+#import "XL_FMDB.h"
 @interface XLCheckstandViewController ()
-
+{
+    XL_FMDB  *XL;//数据库调用者
+    FMDatabase *db;//数据库
+}
 @end
 
 @implementation XLCheckstandViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+   
+    
+    _queding.layer.borderWidth = 1;
+    _queding.layer.borderColor = [[UIColor colorWithHexString:@"32CC96"] CGColor];
+  
+    [self navagation];
+    [self xianshi];
+    [self shujuku];
     // Do any additional setup after loading the view.
 }
 
@@ -33,19 +47,69 @@
     // Pass the selected object to the new view controller.
 }
 */
+-(void)xianshi{
+  _ypname.text = @"测试药品测试测试";
+  _sccomp.text = @"这里是测试生产厂家";
+  _scday.text = @"2016年10月20日";
+  _price.text =[NSString stringWithFormat:@"￥25.53元/个"];
+  _number.text =[NSString stringWithFormat:@"0"];
+    
+}
+-(void)clear{
+    _ypname.text = @"";
+    _sccomp.text = @"";
+    _scday.text = @"";
+    _price.text =[NSString stringWithFormat:@""];
+    _number.text =[NSString stringWithFormat:@""];
+}
+-(void)navagation{
+    self.title = @"收银台";
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    UIButton *btn =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 20)];
+    [btn setImage:[UIImage imageNamed:@"download.png"] forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(Download:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *right = [[UIBarButtonItem alloc]initWithCustomView:btn];
+    self.navigationItem.rightBarButtonItem = right;
+}
+-(void)Download:(UIButton *)button{
+    NSLog(@"下载药品信息");
+}
 
 - (IBAction)Finding:(id)sender {
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:_checkyp.text,@"product_code",_checkyp.text,@"bar_code",_checkyp.text,@"pycode", nil];
+    NSArray *arr =[XL DataBase:db selectKeyTypes:ChaXunShiTiLei fromTable:ChaXunBiaoMing whereConditionz:dic];
+    NSLog(@"%@",arr);
 }
 
 - (IBAction)Sum:(id)sender {
+    int num =[_number.text intValue];
+    _number.text = [NSString stringWithFormat:@"%d",num+1];
 }
 
 - (IBAction)Subtract:(id)sender {
+    int num =[_number.text intValue];
+    _number.text = [NSString stringWithFormat:@"%d",num-1];
+    if (num==0){
+    _number.text = [NSString stringWithFormat:@"0"];
+    }
 }
 
 - (IBAction)Sure:(id)sender {
 }
 
 - (IBAction)Shopping:(id)sender {
+    XLShopCarViewController *shop = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"shopcar"];
+    [self.navigationController pushViewController:shop animated:YES];
+    
 }
+-(void)shujuku{
+    XL = [XL_FMDB tool];
+    [XL_FMDB allocWithZone:NULL];
+    db = [XL getDBWithDBName:@"pandian.sqlite"];
+    //新建查询表，里边是收银台药品数据信息
+    [XL DataBase:db createTable:ChaXunBiaoMing keyTypes:ChaXunShiTiLei];
+   
+}
+
+
 @end

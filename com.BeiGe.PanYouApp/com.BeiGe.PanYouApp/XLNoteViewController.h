@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XLNoteViewController : UIViewController
+@interface XLNoteViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segment;
 @property (weak, nonatomic) IBOutlet UITableView *table;
+//- (IBAction)Changed:(id)sender;
+
+- (IBAction)ChangeV:(UISegmentedControl *)sender;
 
 @end

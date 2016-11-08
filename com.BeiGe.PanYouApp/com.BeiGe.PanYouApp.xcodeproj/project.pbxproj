@@ -18,6 +18,7 @@
 		D2C1ACA81DC97D8C00092F44 /* com_BeiGe_PanYouAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C1ACA71DC97D8C00092F44 /* com_BeiGe_PanYouAppUITests.m */; };
 		D2C1ACC51DC9BB3E00092F44 /* 登录页面的.png in Resources */ = {isa = PBXBuildFile; fileRef = D2C1ACC31DC9BB3E00092F44 /* 登录页面的.png */; };
 		D2C1ACC61DC9BB3E00092F44 /* 盘点助手引导页.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D2C1ACC41DC9BB3E00092F44 /* 盘点助手引导页.jpg */; };
+		D72F30C41DD1BD13007F754F /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = D72F30C31DD1BD13007F754F /* camera.png */; };
 		D730F89C1DCACFB100F07053 /* XLLeaveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D730F89B1DCACFB000F07053 /* XLLeaveViewController.m */; };
 		D730F89F1DCAD93200F07053 /* XLStatisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D730F89E1DCAD93200F07053 /* XLStatisticsViewController.m */; };
 		D730F8A61DCADFBC00F07053 /* XLOutsideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D730F8A51DCADFBC00F07053 /* XLOutsideViewController.m */; };
@@ -255,6 +256,7 @@
 		D2C1ACB51DC97DDA00092F44 /* com.BeiGe.PanYouApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = com.BeiGe.PanYouApp.entitlements; sourceTree = "<group>"; };
 		D2C1ACC31DC9BB3E00092F44 /* 登录页面的.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "登录页面的.png"; sourceTree = "<group>"; };
 		D2C1ACC41DC9BB3E00092F44 /* 盘点助手引导页.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "盘点助手引导页.jpg"; sourceTree = "<group>"; };
+		D72F30C31DD1BD13007F754F /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
 		D730F89A1DCACFB000F07053 /* XLLeaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLLeaveViewController.h; sourceTree = "<group>"; };
 		D730F89B1DCACFB000F07053 /* XLLeaveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLLeaveViewController.m; sourceTree = "<group>"; };
 		D730F89D1DCAD93200F07053 /* XLStatisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLStatisticsViewController.h; sourceTree = "<group>"; };
@@ -790,8 +792,8 @@
 		D76B34E91DC992A200E285AB /* 数据库封装 */ = {
 			isa = PBXGroup;
 			children = (
-				D76B34C71DC9927C00E285AB /* XL_FMDB.m */,
 				D76B34C61DC9926E00E285AB /* XL_FMDB.h */,
+				D76B34C71DC9927C00E285AB /* XL_FMDB.m */,
 			);
 			name = "数据库封装";
 			sourceTree = "<group>";
@@ -1022,6 +1024,7 @@
 			children = (
 				D730F8B21DCB1DEF00F07053 /* download.png */,
 				D730F8AE1DCB1DDB00F07053 /* cuo.png */,
+				D72F30C31DD1BD13007F754F /* camera.png */,
 				D730F8AF1DCB1DDB00F07053 /* dui.png */,
 				D772CCB91DC9BE3100BB28D9 /* 按钮.png */,
 				D772CCBA1DC9BE3100BB28D9 /* 按钮2.png */,
@@ -1201,6 +1204,7 @@
 				D76B35DA1DC9932C00E285AB /* jianpan_mr_25.png in Resources */,
 				D76B35DB1DC9932C00E285AB /* jianpan_mr_33.png in Resources */,
 				D772CCF91DC9BE3100BB28D9 /* 统计-工作天数.png in Resources */,
+				D72F30C41DD1BD13007F754F /* camera.png in Resources */,
 				D76B35A71DC9932C00E285AB /* dot.png in Resources */,
 				D772CD091DC9BE3100BB28D9 /* D3.png in Resources */,
 				D76B35A51DC9932C00E285AB /* change2.png in Resources */,
