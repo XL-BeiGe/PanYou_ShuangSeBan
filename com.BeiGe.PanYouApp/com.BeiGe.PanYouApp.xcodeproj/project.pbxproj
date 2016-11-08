@@ -802,8 +802,8 @@
 			isa = PBXGroup;
 			children = (
 				D76B34C31DC9926900E285AB /* TextFlowView.h */,
-				D76B34C81DC9927C00E285AB /* XL_Header.h */,
 				D76B34C41DC9926900E285AB /* TextFlowView.m */,
+				D76B34C81DC9927C00E285AB /* XL_Header.h */,
 				D76B34AD1DC9924900E285AB /* Color+Hex.h */,
 				D76B34AE1DC9924900E285AB /* Color+Hex.m */,
 				D76B34AA1DC9923500E285AB /* XL_WangLuo.h */,

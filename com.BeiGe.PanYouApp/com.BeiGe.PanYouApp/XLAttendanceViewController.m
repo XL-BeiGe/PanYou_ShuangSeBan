@@ -12,6 +12,7 @@
 #import "XLStatisticsViewController.h"
 #import "Color+Hex.h"
 #import <CoreLocation/CoreLocation.h>
+
 @interface XLAttendanceViewController ()<CLLocationManagerDelegate>
 {
     //签到标识
@@ -40,6 +41,7 @@
     [self wangluolianjie];
     [self anniupanduan];
 }
+
 -(void)anniupanduan{
     //需要在接口返回时判断
     if (dao==0) {
