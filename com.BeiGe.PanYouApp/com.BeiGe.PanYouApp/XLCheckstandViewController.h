@@ -18,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *price;//价格
 
 @property (weak, nonatomic) IBOutlet UILabel *number;//数量
+@property (weak, nonatomic) IBOutlet UIButton *subtract;
+@property (weak, nonatomic) IBOutlet UIButton *sum;
 
 @property (weak, nonatomic) IBOutlet UIButton *queding;//确定按钮
 

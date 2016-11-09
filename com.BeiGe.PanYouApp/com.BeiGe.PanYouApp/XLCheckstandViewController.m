@@ -28,7 +28,7 @@
     _queding.layer.borderColor = [[UIColor colorWithHexString:@"32CC96"] CGColor];
   
     [self navagation];
-    [self xianshi];
+    [self clear];
     [self shujuku];
     // Do any additional setup after loading the view.
 }
@@ -48,11 +48,13 @@
 }
 */
 -(void)xianshi{
-  _ypname.text = @"测试药品测试测试";
-  _sccomp.text = @"这里是测试生产厂家";
-  _scday.text = @"2016年10月20日";
+  _ypname.text =[NSString stringWithFormat:@"测试药品测试测试"] ;
+  _sccomp.text = [NSString stringWithFormat:@"这里是测试生产厂家"];
+  _scday.text = [NSString stringWithFormat:@"2016年10月20日"];
   _price.text =[NSString stringWithFormat:@"￥25.53元/个"];
   _number.text =[NSString stringWithFormat:@"0"];
+    _subtract.hidden = NO;
+    _sum.hidden = NO;
     
 }
 -(void)clear{
@@ -61,6 +63,8 @@
     _scday.text = @"";
     _price.text =[NSString stringWithFormat:@""];
     _number.text =[NSString stringWithFormat:@""];
+    _subtract.hidden = YES;
+    _sum.hidden = YES;
 }
 -(void)navagation{
     self.title = @"收银台";
@@ -79,8 +83,12 @@
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:_checkyp.text,@"product_code",_checkyp.text,@"bar_code",_checkyp.text,@"pycode", nil];
     NSArray *arr =[XL DataBase:db selectKeyTypes:ChaXunShiTiLei fromTable:ChaXunBiaoMing whereConditionz:dic];
     NSLog(@"%@",arr);
+    [self xianshi];
 }
-
+- (IBAction)Sure:(id)sender {
+    [self clear];
+    
+}
 - (IBAction)Sum:(id)sender {
     int num =[_number.text intValue];
     _number.text = [NSString stringWithFormat:@"%d",num+1];
@@ -94,8 +102,7 @@
     }
 }
 
-- (IBAction)Sure:(id)sender {
-}
+
 
 - (IBAction)Shopping:(id)sender {
     XLShopCarViewController *shop = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"shopcar"];
@@ -110,6 +117,8 @@
     [XL DataBase:db createTable:ChaXunBiaoMing keyTypes:ChaXunShiTiLei];
    
 }
-
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
 
 @end

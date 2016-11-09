@@ -69,6 +69,9 @@
      namete.text = @"测试名称";
      pricete.text = [NSString stringWithFormat:@"￥1235.0"];
      number.text = [NSString stringWithFormat:@"12"];
+    [sum addTarget:self action:@selector(sum:) forControlEvents:UIControlEventTouchUpInside];
+    [subtrace addTarget:self action:@selector(subtrace:) forControlEvents:UIControlEventTouchUpInside];
+
     //    [cell.contentView addSubview:titl];
     //    [cell.contentView addSubview:mess];
     //    [cell.contentView addSubview:time];
@@ -82,8 +85,12 @@
 }
 
 
-
-
+-(void)sum:(UIButton*)btm{
+    NSLog(@"加");
+}
+-(void)subtrace:(UIButton*)btm{
+    NSLog(@"减");
+}
 
 - (IBAction)SetAccounts:(id)sender {
     XLSetAccountViewController *shop = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"setacc"];

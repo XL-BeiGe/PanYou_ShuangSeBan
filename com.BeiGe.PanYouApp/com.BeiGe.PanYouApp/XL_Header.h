@@ -74,6 +74,6 @@
 #define ShangChuanBiaoMing @"shangchuan"
 
 
-#define ChaXunShiTiLei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"cost_price",@"text",@"sale_price",@"text",@"vip_price",@"text",@"pycode",@"text",@"bar_code",@"text",@"manufacturer",@"text",@"product_name",@"text",@"product_code",@"text",@"specification", nil]
+#define ChaXunShiTiLei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"costPrice",@"text",@"salePrice",@"text",@"vipPrice",@"text",@"pyCode",@"text",@"barCode",@"text",@"manufacturer",@"text",@"productName",@"text",@"productCode",@"text",@"specification", nil]
 
 #define ChaXunBiaoMing @"chaxun"
