@@ -13,15 +13,18 @@
 #import "Color+Hex.h"
 #import <CoreLocation/CoreLocation.h>
 
-@interface XLAttendanceViewController ()<CLLocationManagerDelegate>
+@interface XLAttendanceViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate,CLLocationManagerDelegate>
 {
-    //签到标识
+    //签到显示标识
     int dao;
-    //签退标识
+    //签退显示标识
     int tui;
+    //点击签到／签退判断
+    int nage;
     //经纬度
-    NSString*jing;NSString*wei;
+    NSString*jing,*wei;
 }
+@property(strong,nonatomic) UIImage *image1;
 @property (nonatomic, strong) CLLocationManager* locationManager;
 @end
 /*
@@ -35,8 +38,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    dao=0;
+    dao=1;
     tui=0;
+    nage=99;
     [self riqixianshi];
     [self wangluolianjie];
     [self anniupanduan];
@@ -64,35 +68,18 @@
     }
 
 }
--(void)riqixianshi{
-    NSArray * arrWeek=[NSArray arrayWithObjects:@"星期日",@"星期一",@"星期二",@"星期三",@"星期四",@"星期五",@"星期六", nil];
-    NSDate *date = [NSDate date];
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *comps = [[NSDateComponents alloc] init];
-    NSInteger unitFlags = NSYearCalendarUnit |
-    NSMonthCalendarUnit |
-    NSDayCalendarUnit |
-    NSWeekdayCalendarUnit |
-    NSHourCalendarUnit |
-    NSMinuteCalendarUnit |
-    NSSecondCalendarUnit;
-    comps = [calendar components:unitFlags fromDate:date];
-    NSInteger weeks = [comps weekday];
-    NSInteger year=[comps year];
-    NSInteger month = [comps month];
-    NSInteger days = [comps day];
-    _day.text=[NSString stringWithFormat:@"%ld年%ld月%ld日",(long)year,month,days];
-    _week.text=[NSString stringWithFormat:@"%@",[arrWeek objectAtIndex:(weeks-1)]];
-}
+
 -(void)wangluolianjie{
     
 }
 - (IBAction)QianDao:(id)sender {
-    [self qiandao_tui:1];
+    [self xiangji];
+    nage=1;
 }
 
 - (IBAction)QianTui:(id)sender {
-    [self qiandao_tui:2];
+    [self xiangji];
+    nage=2;
 }
 
 - (IBAction)WaiQin:(id)sender {
@@ -115,9 +102,13 @@
     [self.navigationController pushViewController:controller animated:YES];
 }
 //签到签退接口；
--(void)qiandao_tui:(int)nage{
+-(void)qiandao_tui:(int)haha{
+//    方法名：attendance/sign
+//入参为：(用户ID):@"userId" (jing,wei):@"Lonlat"(_image):@"backgroundImage"(haha):@"type"
+    NSLog(@"%d",haha);
     
 }
+
 -(void)dingwei{
     [self initializeLocationService];
 }
@@ -179,5 +170,69 @@
     [manager stopUpdatingLocation];
     
 }
+-(void)riqixianshi{
+    NSArray * arrWeek=[NSArray arrayWithObjects:@"星期日",@"星期一",@"星期二",@"星期三",@"星期四",@"星期五",@"星期六", nil];
+    NSDate *date = [NSDate date];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    NSInteger unitFlags = NSYearCalendarUnit |
+    NSMonthCalendarUnit |
+    NSDayCalendarUnit |
+    NSWeekdayCalendarUnit |
+    NSHourCalendarUnit |
+    NSMinuteCalendarUnit |
+    NSSecondCalendarUnit;
+    comps = [calendar components:unitFlags fromDate:date];
+    NSInteger weeks = [comps weekday];
+    NSInteger year=[comps year];
+    NSInteger month = [comps month];
+    NSInteger days = [comps day];
+    _day.text=[NSString stringWithFormat:@"%ld年%ld月%ld日",(long)year,month,days];
+    _week.text=[NSString stringWithFormat:@"%@",[arrWeek objectAtIndex:(weeks-1)]];
+}
+//直接打开相机
+-(void)xiangji{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    //设置拍照后的图片可被编辑
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    [self presentViewController:picker animated:YES completion:^{
+        
+    }];
+}
+-(void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 
+{
+    
+    [picker dismissViewControllerAnimated:NO completion:^{}];
+    
+    _image1 = [info objectForKey:UIImagePickerControllerOriginalImage];
+    
+    // 保存图片至本地，方法见下文
+    
+    //按时间为图片命名
+    NSDateFormatter *forr=[[NSDateFormatter alloc] init];
+    
+    [forr setDateFormat:@"yyyyMMddHHmmss"];
+    
+    NSString *name=[NSString stringWithFormat:@"qian.png"];
+    
+    [self saveImage:_image1 withName:name];
+    
+}
+- (void) saveImage:(UIImage *)currentImage withName:(NSString *)imageName
+{
+    NSData *imageData = UIImageJPEGRepresentation(currentImage, 0.5);
+    // 获取沙盒目录
+    NSFileManager *fm=[NSFileManager defaultManager];
+    NSString *dicpath=[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/images"];
+    
+    [fm createDirectoryAtPath:dicpath withIntermediateDirectories:NO attributes:nil error:nil];
+    
+    NSString *picpath=[NSString stringWithFormat:@"%@/%@",dicpath,imageName];
+    [fm createFileAtPath:picpath contents:imageData attributes:nil];
+    _image1=[UIImage imageWithData:imageData];
+    [self qiandao_tui:nage];
+}
 @end

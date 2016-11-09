@@ -8,7 +8,11 @@
 
 #import "XLOutsideViewController.h"
 
-@interface XLOutsideViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+@interface XLOutsideViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate>{
+    UIView *backview;//时间选择器背景;
+    UIButton*but;//时间选择器的确定按钮;
+    int waifan;//外出返回时间选择器判断;
+}
 
 @property(strong,nonatomic) UIImage *image1;
 @property(strong,nonatomic) UIDatePicker *picker;
@@ -22,19 +26,26 @@
     _imagev.userInteractionEnabled=YES;
     UITapGestureRecognizer *ss =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dianji)];
     [_imagev addGestureRecognizer:ss];
-    [self shijianxuanze];
+    
 }
 -(void)shijianxuanze{
+    
     float height=[[UIScreen mainScreen] bounds].size.height;
     float width =[[UIScreen mainScreen] bounds].size.width;
+    backview=[[UIView alloc] initWithFrame:CGRectMake(0, 0, width, height-200)];
+    backview.backgroundColor=[UIColor blackColor];
+    backview.alpha=0.5;
+    UITapGestureRecognizer *ss =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(xiaoshi)];
+    [backview addGestureRecognizer:ss];
+    [self.view addSubview:backview];
     _picker=[[UIDatePicker alloc] initWithFrame:CGRectMake(0, height-200, width, 200)];
     _picker.contentMode=UIViewContentModeCenter;
     _picker.datePickerMode=UIDatePickerModeDateAndTime;
     
-    UIButton*but=[[UIButton alloc] initWithFrame:CGRectMake(width-60, height-205, 55, 40)];
+    but=[[UIButton alloc] initWithFrame:CGRectMake(width-60, height-240, 55, 40)];
     [but addTarget:self action:@selector(buttt) forControlEvents:UIControlEventTouchUpInside];
-    but.backgroundColor=[UIColor blueColor];
-    but.titleLabel.text=@"确定";
+    [but setTitle:@"确定" forState:UIControlStateNormal];
+    
     [self.view addSubview:_picker];
     [self.view addSubview:but];
 }
@@ -48,8 +59,20 @@
     // 使用日期格式器格式化日期、时间
     NSString *destDateString = [dateFormatter stringFromDate:selected];
     NSString *message =  [NSString stringWithFormat:
-                          @"您选择的日期和时间是：%@", destDateString];
+                          @"%@", destDateString];
     NSLog(@"%@",message);
+    if (waifan==1) {
+        _outTime.text=message;
+    }else{
+        _backTime.text=message;
+    }
+    [backview removeFromSuperview];
+    [but removeFromSuperview];
+    [_picker removeFromSuperview];
+}
+-(void)xiaoshi{
+    [backview removeFromSuperview];
+    [but removeFromSuperview];
     [_picker removeFromSuperview];
 }
 - (void)didReceiveMemoryWarning {
@@ -108,10 +131,12 @@
 }
 
 - (IBAction)OutTim:(id)sender {
-//    [self shijianxuanze];
+    waifan=1;
+    [self shijianxuanze];
 }
 
 - (IBAction)BackTim:(id)sender {
+    waifan=0;
     [self shijianxuanze];
 }
 
@@ -119,6 +144,7 @@
     [self tijiaojiekou];
 }
 -(void)tijiaojiekou{
+    
     
 }
 @end
