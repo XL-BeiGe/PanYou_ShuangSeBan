@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface XLOutsideViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UILabel *outTime;//外出时间
-@property (weak, nonatomic) IBOutlet UILabel *backTime;//回来时间
+@property (weak, nonatomic) IBOutlet UITextField *outTime;
+
+@property (weak, nonatomic) IBOutlet UITextField *backTime;
+
 @property (weak, nonatomic) IBOutlet UITextView *textview;//原因
 @property (weak, nonatomic) IBOutlet UIImageView *imagev;//图片
 - (IBAction)OutTim:(id)sender;

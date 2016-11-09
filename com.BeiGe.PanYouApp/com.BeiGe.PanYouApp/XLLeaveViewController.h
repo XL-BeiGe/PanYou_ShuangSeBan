@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface XLLeaveViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UILabel *beginTime;//开始时间
-@property (weak, nonatomic) IBOutlet UILabel *endTime;//结束时间
+@property (weak, nonatomic) IBOutlet UITextField *beginTime;
+@property (weak, nonatomic) IBOutlet UITextField *endTime;
+
+
 @property (weak, nonatomic) IBOutlet UILabel *leaveType;//请假类型
 @property (weak, nonatomic) IBOutlet UITextView *reason;//原因
 - (IBAction)BeginTim:(id)sender;
