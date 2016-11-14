@@ -13,9 +13,8 @@
 #import "XL_Header.h"
 #import "DSKyeboard.h"
 #import "WarningBox/WarningBox.h"
-#import "ZYCustomKeyboardTypeNumberView.h"
 
-@interface XL_SearchViewController ()<ZYCustomKeyboardTypeNumberViewDelegate>{
+@interface XL_SearchViewController (){
     NSArray *  arr;
     XL_FMDB *   XL;
     FMDatabase *db;
@@ -61,6 +60,7 @@
     [self tabledelegate];
     [self shujuku];
     [self navigation];
+    [self registerForKeyboardNotifications];
 }
 -(void)shujuku{
     XL = [XL_FMDB tool];
@@ -127,9 +127,6 @@
     text.layer.borderColor=[[UIColor grayColor] CGColor];
     text.placeholder=tishi[indexPath.row];
     text.adjustsFontSizeToFitWidth=YES;
-    if (text.tag==101) {
-         [ZYCustomKeyboardTypeNumberView customKeyboardViewWithServiceTextField:text Delegate:self];
-    }
     UILabel *text1=[[UILabel alloc] initWithFrame:CGRectMake(100, 7, CGRectGetWidth(self.view.frame)-110,30)];
     text1.textColor=[UIColor colorWithHexString:@"767676"];
     if (indexPath.section==0) {
@@ -242,7 +239,6 @@
         [tf resignFirstResponder];
     }];
 }
-
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 5;
 }
@@ -268,17 +264,21 @@
 #pragma mark-----text
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     if (arr.count!=0) {
-        if (textField.tag==103) {
-            [self setupCustomedKeyboard:textField];
+        if (textField.tag==101) {
+            textField.keyboardType=UIKeyboardTypeNumberPad;
             [self navigationyou];
-        
+        }else if (textField.tag==103){
+            [self setupCustomedKeyboard:textField];
         }else
             return NO;
     }else{
         if (textField.tag==101) {
+            textField.keyboardType=UIKeyboardTypeNumberPad;
             
-        }else
+
+        }else if (textField.tag==103||textField.tag==102||textField.tag==104||textField.tag==107){
             [self setupCustomedKeyboard:textField];
+        }
     }
     return YES;
 }
@@ -287,15 +287,15 @@
     NSIndexPath *indexPath=[_table indexPathForCell:cell];
     NSArray*guiding=[self duiying];
     [dic11 setObject:textField.text forKey:[NSString stringWithFormat:@"%@",guiding[indexPath.row]]];
+   
+   
 }
-
-
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
-//    if(textField.tag == 100||textField.tag == 101||textField.tag==105||textField.tag==106){
-//        textField.inputView = nil;
-//        [textField reloadInputViews];
-//        [textField becomeFirstResponder];
-//    }
+    if(textField.tag == 100||textField.tag == 101||textField.tag==105||textField.tag==106){
+        textField.inputView = nil;
+        [textField reloadInputViews];
+        [textField becomeFirstResponder];
+    }
 }
 -(void)passdicValue:(PassdicValueBlock)block{
     self.passdicValueBlock = block;
@@ -352,6 +352,30 @@
         [WarningBox warningBoxModeText:@"请填写完整信息!" andView:self.view];
     }
 }
+#pragma  mark ---注册通知
+- (void) registerForKeyboardNotifications
+{
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(qkeyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
+}
+#pragma mark ----通知实现
+- (void) qkeyboardWasShown:(NSNotification *) notif
+{
+        NSDictionary *info = [notif userInfo];
+        NSValue *value = [info objectForKey:UIKeyboardFrameBeginUserInfoKey];
+        CGSize keyboardSize = [value CGRectValue].size;
+    CGPoint haha=[value CGRectValue].origin;
+    NSLog(@"%f\n%f\n%f\n%f",keyboardSize.height,keyboardSize.width,haha.x,haha.y);
+}
+
+/*
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

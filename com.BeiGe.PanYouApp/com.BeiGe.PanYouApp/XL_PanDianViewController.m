@@ -38,13 +38,6 @@
     NSArray *scarr;//上传表查找到的数组
     NSDictionary*tianjiade;
     
-    //------
-    UITextField *yuliu1;
-    UITextField *hehebiao;
-    int yuliupan;
-    UIView * yuliubeijing;
-    UIView * yuliumian;
-    UILabel * xinxixi;
     
     
     UITextField * txt;
@@ -80,7 +73,7 @@
     }
     else if(tianjiapanduan==1){
         arr=[[NSMutableArray alloc] initWithObjects:tianjiade, nil];
-//        NSLog(@"传过来的arr  ------   %@",arr);
+NSLog(@"传过来的arr  ------   %@",arr);
         [self xianshi:arr];
         if (NULL==[arr[0] objectForKey:@"checkNum"]){
             _onelabel.text = @"";
@@ -97,13 +90,13 @@
     }else{
         [self firstResponderInSubView];
     }
-    
+
     if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
         _Search.textColor=[UIColor lightGrayColor];
     }else{
         _Search.textColor=[UIColor colorWithHexString:@"34C083"];
     }
-    
+
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -112,8 +105,6 @@
     buyaoFuyong=[[NSMutableDictionary alloc] init];
     shularr = [[NSMutableArray alloc]init];
     tianpihao=0;
-    UITapGestureRecognizer*pinle=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hehexianshi)];
-    [_oneview addGestureRecognizer:pinle];
     iii=0;
     [self shujuku];
     [self tabledelegate];
@@ -170,7 +161,7 @@
     [self.view addSubview:goodstxt];
     
     UILabel*la =(UILabel *)lableField.self.view;
-//    NSLog(@"%@",la);
+    NSLog(@"%@",la);
     [self setupCustomedKeyboard:goodstxt :la];
     [goodstxt becomeFirstResponder];
 }
@@ -600,10 +591,10 @@
             }else{
                 _ypgoods.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"oldpos"]];//货位
             }
-            if (NULL==[arr[0]objectForKey:@"approvalNumber"]) {
+            if (NULL==[arr[0]objectForKey:@"pycode"]) {
                 _ypwenhao.text =@"";
             }else{
-                _ypwenhao.text = [NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"approvalNumber"]];//批准文号
+                _ypwenhao.text = [NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"pycode"]];//助记码
             }
             if (NULL==[arr[0]objectForKey:@"specification"]) {
                 _ypetalon.text =@"";
@@ -682,7 +673,7 @@
             }
             
             for (int i=0; i<[arr count]; i++){
-                int heheda=0;
+               int heheda=0;
                 for (NSDictionary*dd in scarr) {
                     if ([[dd objectForKey:@"prodBatchNo"] isEqualToString:[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"prodBatchNo"]]]) {
                         heheda=1;
@@ -712,24 +703,16 @@
         shularr[i]=@"0";
     }
     [XL DataBase:db updateTable:XiaZaiBiaoMing setKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:shularr[i],@"checkNum",_ypgoods.text,@"oldpos", nil] whereConditions:[NSDictionary dictionaryWithObjectsAndKeys:[arr[i] objectForKey:@"prodBatchNo"],@"prodBatchNo",[arr[i] objectForKey:@"barCode"],@"barCode", nil]];
-//    NSLog(@"批号修改下载表数量***** %@--------%@",[arr[i] objectForKey:@"prodBatchNo"],shularr[i]);
+    NSLog(@"批号修改下载表数量***** %@--------%@",[arr[i] objectForKey:@"prodBatchNo"],shularr[i]);
     
 }
 //修改上传表
 -(void)scxiugai:(int)i{
-    NSDate *currentDate = [NSDate date];//获取当前时间，日期
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"YYYY/MM/dd hh:mm:ss"];
-    NSString *dateString = [dateFormatter stringFromDate:currentDate];
     if ([shularr[i] isEqual:@""]) {
         shularr[i]=@"0";
     }
-    NSDictionary*tiao1=[NSDictionary dictionaryWithObjectsAndKeys:[arr[i] objectForKey:@"prodBatchNo"],@"prodBatchNo",[arr[i] objectForKey:@"barCode"],@"barCode", nil];
-    NSArray*nbh=[ XL DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereConditions:tiao1];
-    NSDictionary*val1=[NSDictionary dictionaryWithObjectsAndKeys:[nbh[0] objectForKey:@"f1"],@"f1",shularr[i],@"checkNum",_ypgoods.text,@"newpos",dateString,@"checktime", nil];
-//    NSLog(@"%@",[nbh[0] objectForKey:@"f1"]);
-    [XL DataBase:db updateTable:ShangChuanBiaoMing setKeyValues:val1 whereConditions:tiao1];
-//    NSLog(@"批号修改上传表数量***** %@--------%@",[arr[i] objectForKey:@"prodBatchNo"],shularr[i]);
+    [XL DataBase:db updateTable:ShangChuanBiaoMing setKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:shularr[i],@"checkNum",_ypgoods.text,@"newpos", nil] whereConditions:[NSDictionary dictionaryWithObjectsAndKeys:[arr[i] objectForKey:@"prodBatchNo"],@"prodBatchNo",[arr[i] objectForKey:@"barCode"],@"barCode", nil]];
+    NSLog(@"批号修改上传表数量***** %@--------%@",[arr[i] objectForKey:@"prodBatchNo"],shularr[i]);
 }
 
 //插入下载表
@@ -820,20 +803,8 @@
         }else{
             oldpos= [tianjiade objectForKey:@"oldpos"];
         }
-        NSString*yuliuziduan1;
-        if(NULL==[tianjiade objectForKey:@"f1"]){
-            yuliuziduan1= @"";
-        }else{
-            yuliuziduan1= [tianjiade objectForKey:@"f1"];
-        }
-        NSString*yuliuziduan2;
-        if(NULL==[tianjiade objectForKey:@"f2"]){
-            yuliuziduan2= @"";
-        }else{
-            yuliuziduan2= [tianjiade objectForKey:@"f2"];
-        }
         
-        dic =[NSDictionary dictionaryWithObjectsAndKeys:approvalNumber,@"approvalNumber",vipPrice,@"vipPrice",specification,@"specification",salePrice,@"salePrice",pycode,@"pycode",productName,@"productName",productCode,@"productCode",manufacturer,@"manufacturer",Id,@"id",costPrice,@"costPrice",barCode,@"barCode",prodBatchNo,@"prodBatchNo",checkNum,@"checkNum",oldpos,@"oldpos",@"",@"stockNum",@"1",@"status",@"",@"purchaseBatchNo",[[NSUserDefaults standardUserDefaults] objectForKey:@"checkId"],@"checkId",yuliuziduan1,@"f1",yuliuziduan2,@"f2", nil];
+        dic =[NSDictionary dictionaryWithObjectsAndKeys:approvalNumber,@"approvalNumber",vipPrice,@"vipPrice",specification,@"specification",salePrice,@"salePrice",pycode,@"pycode",productName,@"productName",productCode,@"productCode",manufacturer,@"manufacturer",Id,@"id",costPrice,@"costPrice",barCode,@"barCode",prodBatchNo,@"prodBatchNo",checkNum,@"checkNum",oldpos,@"oldpos",@"",@"stockNum",@"1",@"status",@"",@"purchaseBatchNo",[[NSUserDefaults standardUserDefaults] objectForKey:@"checkId"],@"checkId", nil];
         
         arr=[NSArray arrayWithObject:dic];
     }else{
@@ -905,24 +876,12 @@
         if (NULL ==specification) {
             specification=@"";
         }
-        NSString*yuliuziduan1;
-        if(NULL==[arr[i] objectForKey:@"f1"]){
-            yuliuziduan1= @"";
-        }else{
-            yuliuziduan1= [arr[i] objectForKey:@"f1"];
-        }
-        NSString*yuliuziduan2;
-        if(NULL==[arr[i] objectForKey:@"f2"]){
-            yuliuziduan2= @"";
-        }else{
-            yuliuziduan2= [arr[i] objectForKey:@"f2"];
-        }
         
         if (tjphpanduan==1){
-            dic =[NSDictionary dictionaryWithObjectsAndKeys:approvalNumber,@"approvalNumber",vipPrice,@"vipPrice",salePrice,@"salePrice",pycode,@"pycode",purchaseBatchNo,@"purchaseBatchNo",productName,@"productName",productCode,@"productCode",oldpos,@"oldpos",manufacturer,@"manufacturer",Id,@"id",costPrice,@"costPrice",checkId,@"checkId",barCode,@"barCode",pi1.text,@"prodBatchNo",shu1.text,@"checkNum", stockNum,@"stockNum",@"2",@"status",specification,@"specification",yuliuziduan1,@"f1",yuliuziduan2,@"f2",nil];
+            dic =[NSDictionary dictionaryWithObjectsAndKeys:approvalNumber,@"approvalNumber",vipPrice,@"vipPrice",salePrice,@"salePrice",pycode,@"pycode",purchaseBatchNo,@"purchaseBatchNo",productName,@"productName",productCode,@"productCode",oldpos,@"oldpos",manufacturer,@"manufacturer",Id,@"id",costPrice,@"costPrice",checkId,@"checkId",barCode,@"barCode",pi1.text,@"prodBatchNo",shu1.text,@"checkNum", stockNum,@"stockNum",@"2",@"status",specification,@"specification",nil];
         }
     }
-//    NSLog(@"插入到下载表的数据 -*-*-*-*-*-*-*-*-*-*%@",dic);
+    NSLog(@"插入到下载表的数据 -*-*-*-*-*-*-*-*-*-*%@",dic);
     [XL DataBase:db insertKeyValues:dic intoTable:XiaZaiBiaoMing];
 }
 //插入上传表
@@ -987,22 +946,8 @@
         }else{
             specification = [tianjiade objectForKey:@"specification"];
         }
-        NSDictionary*tiao1=[NSDictionary dictionaryWithObjectsAndKeys:[arr[i] objectForKey:@"prodBatchNo"],@"prodBatchNo",[arr[i] objectForKey:@"barCode"],@"barCode", nil];
-        NSArray*nbh=[ XL DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereConditions:tiao1];
-        NSString*yuliuziduan1;
-        if(NULL==[nbh[0] objectForKey:@"f1"]){
-            yuliuziduan1= @"";
-        }else{
-            yuliuziduan1= [nbh[0] objectForKey:@"f1"];
-        }
-        NSString*yuliuziduan2;
-        if(NULL==[nbh[0] objectForKey:@"f2"]){
-            yuliuziduan2= @"";
-        }else{
-            yuliuziduan2= [nbh[0] objectForKey:@"f2"];
-        }
-//        NSLog(@"上传插入1-－－－－%@,%@",yuliuziduan1,yuliuziduan2);
-        scdic =[NSDictionary dictionaryWithObjectsAndKeys:barCode,@"barCode",manufacturer,@"manufacturer",pycode,@"pycode",prodBatchNo,@"prodBatchNo",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",huoweihao,@"newpos",dateString,@"checktime",_onelabel.text,@"checkNum",@"1",@"status",[[NSUserDefaults standardUserDefaults] objectForKey:@"checkId"],@"checkId",yuliuziduan1,@"f1",yuliuziduan2,@"f2", nil];
+        
+        scdic =[NSDictionary dictionaryWithObjectsAndKeys:barCode,@"barCode",manufacturer,@"manufacturer",pycode,@"pycode",prodBatchNo,@"prodBatchNo",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",huoweihao,@"newpos",dateString,@"checktime",_onelabel.text,@"checkNum",@"1",@"status",[[NSUserDefaults standardUserDefaults] objectForKey:@"checkId"],@"checkId", nil];
         
     }
     else{
@@ -1046,23 +991,6 @@
         if (NULL ==prodBatchNo){
             prodBatchNo =@"";
         }
-        
-        NSDictionary*tiao1=[NSDictionary dictionaryWithObjectsAndKeys:[arr[i] objectForKey:@"prodBatchNo"],@"prodBatchNo",[arr[i] objectForKey:@"barCode"],@"barCode", nil];
-        NSArray*nbh=[ XL DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereConditions:tiao1];
-        NSString*yuliuziduan1;
-        if(NULL==[nbh[0] objectForKey:@"f1"]){
-            yuliuziduan1= @"";
-        }else{
-            yuliuziduan1= [nbh[0] objectForKey:@"f1"];
-        }
-        NSString*yuliuziduan2;
-        
-        if(NULL==[arr[i] objectForKey:@"f2"]){
-            yuliuziduan2= @"";
-        }else{
-            yuliuziduan2= [arr[i] objectForKey:@"f2"];
-        }
-//        NSLog(@"上传插入2-－－－－%@,%@",yuliuziduan1,yuliuziduan2);
         if (tjphpanduan==1){
             int kkkk=0;
             for (NSDictionary*dd in arr) {
@@ -1073,19 +1001,19 @@
             if (kkkk!=0) {
                 status=@"1";
             }
-            //            else{
-            //                status=@"1";
-            //            }
+//            else{
+//                status=@"1";
+//            }
             
-//            NSLog(@"添加批号时的status＝＝＝＝  %@",status);
-            scdic =[NSDictionary dictionaryWithObjectsAndKeys:status,@"status",barCode,@"barCode",checkId,@"checkId",manufacturer,@"manufacturer",pycode,@"pycode",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",_ypgoods.text,@"newpos",dateString,@"checktime",shularr[i],@"checkNum",prodBatchNo,@"prodBatchNo",yuliuziduan1,@"f1",yuliuziduan2,@"f2", nil];
+NSLog(@"添加批号时的status＝＝＝＝  %@",status);
+            scdic =[NSDictionary dictionaryWithObjectsAndKeys:status,@"status",barCode,@"barCode",checkId,@"checkId",manufacturer,@"manufacturer",pycode,@"pycode",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",_ypgoods.text,@"newpos",dateString,@"checktime",shularr[i],@"checkNum",prodBatchNo,@"prodBatchNo", nil];
         }else{
-//            NSLog(@"不添加时候的  status   ＝＝＝＝＝   %@",status);
-            scdic =[NSDictionary dictionaryWithObjectsAndKeys:status,@"status",barCode,@"barCode",checkId,@"checkId",manufacturer,@"manufacturer",pycode,@"pycode",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",_ypgoods.text,@"newpos",dateString,@"checktime",shularr[i],@"checkNum",prodBatchNo,@"prodBatchNo",yuliuziduan1,@"f1",yuliuziduan2,@"f2", nil];
+NSLog(@"不添加时候的  status   ＝＝＝＝＝   %@",status);
+            scdic =[NSDictionary dictionaryWithObjectsAndKeys:status,@"status",barCode,@"barCode",checkId,@"checkId",manufacturer,@"manufacturer",pycode,@"pycode",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",_ypgoods.text,@"newpos",dateString,@"checktime",shularr[i],@"checkNum",prodBatchNo,@"prodBatchNo", nil];
             
         }
     }
-//    NSLog(@"插入到上传表的数据--*-*-*-*-*-*-*-%@",scdic);
+NSLog(@"插入到上传表的数据--*-*-*-*-*-*-*-%@",scdic);
     [XL DataBase:db insertKeyValues:scdic intoTable:ShangChuanBiaoMing];
     
 }
@@ -1107,7 +1035,7 @@
             }
         }
         scarr =[NSArray arrayWithArray:arr2];
-//        NSLog(@"上传表中的条数****** %lu",(unsigned long)scarr.count);
+        NSLog(@"上传表中的条数****** %lu",(unsigned long)scarr.count);
     }
     
 }
@@ -1196,124 +1124,6 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-//    NSLog(@"%ld",(long)indexPath.section);
-//    NSLog(@"%@",arr[indexPath.section]);
-    //跳出预留字段：
-    if (yuliupan==0) {
-        [self yuliuziduanview:arr[indexPath.section]];
-    }
-    
-    
-}
--(void)hehexianshi{
-    if (arr.count==0) {
-        
-    }else
-    [self yuliuziduanview:arr[0]];
-}
--(void)yuliuziduanview:(NSDictionary*)dd{
-    yuliupan=1;
-    
-//    NSLog(@"%@",[dd objectForKey:@"productCode"]);
-    hehebiao=[[UITextField alloc] init];
-    hehebiao.text=[dd objectForKey:@"productCode"];
-    CGFloat width = [[UIScreen mainScreen] bounds].size.width;
-    CGFloat height= [[UIScreen mainScreen] bounds].size.height;
-    yuliubeijing=[[UIView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
-    yuliubeijing.backgroundColor=[UIColor blackColor];
-    yuliubeijing.alpha=0.7;
-    [self.view addSubview:yuliubeijing];
-    yuliubeijing.hidden=NO;
-    
-    //－－－－
-    yuliumian=[[UIView alloc] initWithFrame:CGRectMake(5, 150, width-10, 200)];
-    [yuliumian.layer setCornerRadius:5];
-    yuliumian.backgroundColor=[UIColor whiteColor];
-    yuliumian.alpha=1;
-    [self.view addSubview:yuliumian];
-    yuliumian.hidden=NO;
- 
-    //-----
-    UILabel*xinxi=[[UILabel alloc] initWithFrame:CGRectMake(5, 2,50, 40)];
-    xinxi.font=[UIFont systemFontOfSize:20 weight:1.5];
-    xinxi.text=@"批号:";
-    xinxixi=[[UILabel alloc] initWithFrame:CGRectMake(60, 2, 200, 40)];
-    xinxixi.text=[dd objectForKey:@"prodBatchNo"];
-    [yuliumian addSubview:xinxi];
-    [yuliumian addSubview:xinxixi];
-    UIView * xianhe=[[UIView alloc] initWithFrame:CGRectMake(0, 40, jiemian.bounds.size.width, 1)];
-    xianhe.backgroundColor=[UIColor  blackColor];
-    [yuliumian addSubview:xianhe];
-    UILabel * yuliu1ming=[[UILabel alloc] initWithFrame:CGRectMake(10, 84, 100, 40)];
-    UILabel * yuliu2ming=[[UILabel alloc] initWithFrame:CGRectMake(10, 43, 100, 40)];
-    yuliu1ming.text=@"预留字段一:";
-    yuliu2ming.text=@"预留字段二:";
-    [yuliumian addSubview:yuliu1ming];
-    [yuliumian addSubview:yuliu2ming];
-    //-----
-    UIView *baoqu=[[UIView alloc] initWithFrame:CGRectMake(20, 150, yuliumian.bounds.size.width-40, 40)];
-    UIButton *baocun=[[UIButton alloc] initWithFrame:CGRectMake(0, 0, width/3, 30)];
-    UIButton *quxiao=[[UIButton alloc] initWithFrame:CGRectMake(baoqu.bounds.size.width-width/3, 0, width/3, 30)];
-    baocun.tintColor=[UIColor blackColor];
-    baocun.backgroundColor=[UIColor colorWithHexString:@"34c083"];
-    quxiao.backgroundColor=[UIColor colorWithHexString:@"34c083"];
-    [baocun addTarget:self action:@selector(hehebao) forControlEvents:UIControlEventTouchUpInside];
-    [quxiao addTarget:self action:@selector(hehexiao) forControlEvents:UIControlEventTouchUpInside];
-    [baocun setTitle:@"保存" forState:UIControlStateNormal];
-    [quxiao setTitle:@"取消" forState:UIControlStateNormal];
-    [baocun.layer setCornerRadius:5];
-    [quxiao.layer setCornerRadius:5];
-    [baoqu addSubview:baocun];
-    [baoqu addSubview:quxiao];
-    [yuliumian addSubview:baoqu];
-    //--------
-    yuliu1=[[UITextField alloc] initWithFrame:CGRectMake(110, 85, yuliumian.bounds.size.width-110-20, 30)];
-    UILabel*yuliu2=[[UILabel alloc] initWithFrame:CGRectMake(110, 48, yuliumian.bounds.size.width-110-20, 30)];
-    yuliu1.delegate=self;
-    yuliu1.layer.borderColor=[[UIColor grayColor] CGColor];
-    [yuliu1.layer setBorderWidth:1];
-    [yuliu1.layer setCornerRadius:5];
-    if (NULL == [dd objectForKey:@"f2"]) {
-        yuliu2.text=@"";
-    }else
-        yuliu2.text=[dd objectForKey:@"f2"];
-//    NSLog(@"%@,%@",xinxixi.text,hehebiao.text);
-    NSDictionary*tiaa=[NSDictionary dictionaryWithObjectsAndKeys:xinxixi.text,@"prodBatchNo",hehebiao.text,@"productCode", nil];
-   NSArray*nbh=[ XL DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereConditions:tiaa];
-    
-    if (NULL == [nbh[0] objectForKey:@"f1"]) {
-        yuliu1.text=@"";
-    }else
-        yuliu1.text=[nbh[0] objectForKey:@"f1"];
-    [yuliumian addSubview:yuliu1];
-    [yuliumian addSubview:yuliu2];
-    
-//    NSLog(@"%@",dd);
-    
-    
-}
--(void)hehebao{
-//    NSLog(@"保存预留信息");
-    NSDictionary*keyv=[NSDictionary dictionaryWithObjectsAndKeys:yuliu1.text,@"f1", nil];
-    NSDictionary*tiaojianhaha=[NSDictionary dictionaryWithObjectsAndKeys:hehebiao.text,@"productCode",xinxixi.text,@"prodBatchNo", nil];
-//    NSLog(@"%@",tiaojianhaha);
-    [XL DataBase:db updateTable:XiaZaiBiaoMing setKeyValues:keyv whereConditions:tiaojianhaha];
-    [self hehexiao];
-    
-}
--(void)hehexiao{
-    yuliupan=0;
-    [self.view endEditing:YES];
-    yuliubeijing.hidden=YES;
-    yuliumian.hidden=YES;
-    for (UIView*vv  in yuliumian.subviews) {
-        [vv removeFromSuperview];
-    }
-    
-}
-
 #pragma  mark ---- tableview中的点击事件
 -(void)shulClick:(UITapGestureRecognizer *)lableField {
     onepand=4;
@@ -1369,12 +1179,12 @@
 #pragma  mark ----边框变色
 - (void)firstResponderInSubView{
     if (onepand==1) {
-        //        _Search.text=@"🔍扫描或输入药品条形码";
+//        _Search.text=@"🔍扫描或输入药品条形码";
         //_Search.textColor=[UIColor lightGrayColor];
         if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
-            _Search.textColor=[UIColor lightGrayColor];
+        _Search.textColor=[UIColor lightGrayColor];
         }else{
-            _Search.textColor=[UIColor colorWithHexString:@"34C083"];
+        _Search.textColor=[UIColor colorWithHexString:@"34C083"];
         }
         
         [_surebtn setBackgroundImage:[UIImage imageNamed:@"jianpan_chaxun.png"] forState:UIControlStateNormal];
@@ -1444,12 +1254,6 @@
         if (tianpihao==0) {
             [WarningBox warningBoxModeText:@"请先查询药品!" andView:self.view];
         }else{
-            if (NULL == [arr[0] objectForKey:@"f1"]) {
-                
-            }else{
-            [arr[0] removeObjectForKey:@"f1"];
-            [arr[0] removeObjectForKey:@"f2"];
-            }
             abcdefg=1;
             ming1.text =@"";
             NSString* aaa;
@@ -1485,7 +1289,7 @@
             [self.view bringSubviewToFront:dabeijing];
             [self.view bringSubviewToFront:jiemian];
             
-//            NSLog(@"添加批号的数据  = %@",arr);
+            NSLog(@"添加批号的数据  = %@",arr);
             if (arr.count==1&&[_onelabel.text isEqual:@""]){
                 [WarningBox warningBoxModeText:@"请输入当前药品的数量" andView:self.view];
             }else{
@@ -1576,6 +1380,7 @@
     [jiemian addSubview:wei1];
 }
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    
     if (textField != goodstxt && textField != txt) {
         [self setupCustomedKeyboard:textField :nil];
     }
@@ -1598,7 +1403,7 @@
     }else{
         tjphpanduan=1;
         [self xztianjia:0];
-        //        [self sccharu:0];
+//        [self sccharu:0];
         
         if(arr.count==1){
             shularr=[[NSMutableArray alloc] init];

@@ -126,6 +126,10 @@
  *  @return 查询得到数据 限制数据条数10
  */
 
+
+
+
+
 -(NSArray *)DataBase:(FMDatabase *)db deleteKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName whereCondition:(NSDictionary *)condition;
 
 
@@ -139,17 +143,5 @@
  */
 
 -(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName whereConditionz:(NSDictionary *)conditions;
-/**
-*  多个条件查询数据库中的数据 限制数据条数10
-*  @param db        数据库名称
-*  @param keysTypes 查询字段以及对应字段类型 字典
-*  @param tableName 表名称
-*  @param condition 条件
-*  @return 查询得到数据 限制数据条数10
-*/
-
--(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName whereConditions:(NSDictionary *)conditions;
-
-
 
 @end

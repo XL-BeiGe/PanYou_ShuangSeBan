@@ -49,11 +49,13 @@
 #pragma mark ------textfield
 -(void)textdelegate{
     _mytf.delegate=self;
+    _mytf.keyboardType=UIKeyboardTypeDefault;
 }
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
     textField.layer.borderColor=[[UIColor colorWithHexString:@"34C083"] CGColor];
     textField.layer.cornerRadius=5;
     textField.layer.borderWidth=1.0;
+    textField.keyboardType=UIKeyboardTypeNamePhonePad;
     [self setupCustomedKeyboard:textField];
 }
 - (void)setupCustomedKeyboard:(UITextField*)tf {

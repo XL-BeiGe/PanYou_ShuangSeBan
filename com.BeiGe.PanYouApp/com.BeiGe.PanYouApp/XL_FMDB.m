@@ -192,15 +192,7 @@ static XL_FMDB *fmdb =nil;
     }else
         return nil;
 }
-#pragma mark --多个条件查询数据库中的数据
 
--(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName whereConditions:(NSDictionary *)conditions;{
-    if ([self isOpenDatabese:db]) {
-        FMResultSet *result =  [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@ = ? AND %@ = ? ",tableName, [conditions allKeys][0],[conditions allKeys][1]],[conditions valueForKey:[conditions allKeys][0]],[conditions valueForKey:[conditions allKeys][1]]];
-        return [self getArrWithFMResultSet:result keyTypes:keyTypes];
-    }else
-        return nil;
-}
 #pragma mark --模糊查询 某字段以指定字符串开头的数据
 
 -(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName whereKey:(NSString *)key beginWithStr:(NSString *)str{
