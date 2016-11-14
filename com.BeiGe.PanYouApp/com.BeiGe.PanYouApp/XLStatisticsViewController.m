@@ -8,7 +8,7 @@
 
 #import "XLStatisticsViewController.h"
 
-@interface XLStatisticsViewController ()
+@interface XLStatisticsViewController ()//<UICollectionViewDelegate,UICollectionViewDataSource>
 
 @end
 
@@ -22,8 +22,12 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    [self jiekou:@"今天"];
+    _collection.delegate=self;
 }
-
+-(NSArray *)collectionAtIndexes:(NSIndexSet *)indexes{
+    return [NSArray arrayWithObjects:@"", nil];
+}
 /*
 #pragma mark - Navigation
 
@@ -33,10 +37,15 @@
     // Pass the selected object to the new view controller.
 }
 */
+-(void)jiekou:(NSString*)date{
+    
+}
 
 - (IBAction)Left:(id)sender {
+    [self jiekou:@"今天－1"];
 }
 
 - (IBAction)Right:(id)sender {
+    [self jiekou:@"今天＋1"];
 }
 @end

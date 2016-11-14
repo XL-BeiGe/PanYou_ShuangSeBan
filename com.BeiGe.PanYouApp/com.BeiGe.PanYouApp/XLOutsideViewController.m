@@ -8,9 +8,8 @@
 
 #import "XLOutsideViewController.h"
 
-@interface XLOutsideViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate>{
+@interface XLOutsideViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextFieldDelegate>{
     UIView *backview;//时间选择器背景;
-    UIButton*but;//时间选择器的确定按钮;
     int waifan;//外出返回时间选择器判断;
 }
 
@@ -22,32 +21,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self beijing];
+    [self tupianfangfa];
+    [self delegate];
+}
+-(void)tupianfangfa{
     _imagev.userInteractionEnabled=YES;
     UITapGestureRecognizer *ss =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dianji)];
     [_imagev addGestureRecognizer:ss];
     
 }
+#pragma  mark------时间选择器
 -(void)shijianxuanze{
-    
-    float height=[[UIScreen mainScreen] bounds].size.height;
-    float width =[[UIScreen mainScreen] bounds].size.width;
-    backview=[[UIView alloc] initWithFrame:CGRectMake(0, 0, width, height-200)];
-    backview.backgroundColor=[UIColor blackColor];
-    backview.alpha=0.5;
-    UITapGestureRecognizer *ss =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(xiaoshi)];
-    [backview addGestureRecognizer:ss];
-    [self.view addSubview:backview];
-    _picker=[[UIDatePicker alloc] initWithFrame:CGRectMake(0, height-200, width, 200)];
+        //时间选择器
+    _picker=[[UIDatePicker alloc] init];
     _picker.contentMode=UIViewContentModeCenter;
     _picker.datePickerMode=UIDatePickerModeDateAndTime;
-    
-    but=[[UIButton alloc] initWithFrame:CGRectMake(width-60, height-240, 55, 40)];
-    [but addTarget:self action:@selector(buttt) forControlEvents:UIControlEventTouchUpInside];
-    [but setTitle:@"确定" forState:UIControlStateNormal];
-    
-    [self.view addSubview:_picker];
-    [self.view addSubview:but];
 }
 -(void)buttt{
     // 获取用户通过UIDatePicker设置的日期和时间
@@ -60,29 +49,56 @@
     NSString *destDateString = [dateFormatter stringFromDate:selected];
     NSString *message =  [NSString stringWithFormat:
                           @"%@", destDateString];
-    NSLog(@"%@",message);
+    
     if (waifan==1) {
         _outTime.text=message;
     }else{
         _backTime.text=message;
     }
-    [backview removeFromSuperview];
-    [but removeFromSuperview];
-    [_picker removeFromSuperview];
+    [self xiaoshi];
 }
 -(void)xiaoshi{
-    [backview removeFromSuperview];
-    [but removeFromSuperview];
-    [_picker removeFromSuperview];
+    [self.view endEditing:YES];
+    backview.hidden=YES;
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    backview.hidden=NO;
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    UIToolbar *bar = [[UIToolbar alloc] initWithFrame:CGRectMake(0,0,width ,44)];
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(width - 60, 7,60, 30)];
+    [button addTarget:self action:@selector(buttt) forControlEvents:UIControlEventTouchUpInside];
+    [button setTitle:@"确定"forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [bar addSubview:button];
+    textField.inputAccessoryView = bar;
+    [self shijianxuanze];
+    textField.inputView=_picker;
+    textField.tintColor=[UIColor clearColor];
+    return YES;
+}
+-(void)delegate{
+    _outTime.delegate=self;
+    _backTime.delegate=self;
 }
 -(void)dianji{
-    NSLog(@"hahah ");
     [self xiangji];
 }
+-(void)beijing{
+    //背景
+    float height=[[UIScreen mainScreen] bounds].size.height;
+    float width =[[UIScreen mainScreen] bounds].size.width;
+    backview=[[UIView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
+    backview.backgroundColor=[UIColor clearColor];
+    UITapGestureRecognizer *ss =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(xiaoshi)];
+    [backview addGestureRecognizer:ss];
+    backview.hidden=YES;
+    [self.view addSubview:backview];
+
+}
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
+#pragma  mark---相机－－－－－－－
 //直接打开相机
 -(void)xiangji{
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
@@ -91,7 +107,7 @@
     picker.allowsEditing = YES;
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     [self presentViewController:picker animated:YES completion:^{
-    
+        
     }];
 }
 -(void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
@@ -127,24 +143,30 @@
     [fm createFileAtPath:picpath contents:imageData attributes:nil];
     
     _imagev.image=[UIImage imageWithData:imageData];
-    
 }
-
+#pragma mark------按键
 - (IBAction)OutTim:(id)sender {
     waifan=1;
-    [self shijianxuanze];
+    [_outTime becomeFirstResponder];
 }
 
 - (IBAction)BackTim:(id)sender {
     waifan=0;
-    [self shijianxuanze];
+    [_backTime becomeFirstResponder];
 }
 
 - (IBAction)TiJiao:(id)sender {
     [self tijiaojiekou];
 }
 -(void)tijiaojiekou{
-    
-    
+    //方法：attendance/field
+    /*入参:
+     userId(long):用户ID,
+     beginTime (String):开始时间,_outTime.text
+     endTime (String):结束时间,_backTime.text
+     fieldReason(String)：外勤原因,_textview.text
+     backgroundImage (File):背景_image1
+
+    */
 }
 @end

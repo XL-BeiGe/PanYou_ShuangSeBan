@@ -1576,6 +1576,7 @@
 				CODE_SIGN_ENTITLEMENTS = com.BeiGe.PanYouApp/com.BeiGe.PanYouApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Yulan Zhao (4RSNZMG5V8)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yulan Zhao (4RSNZMG5V8)";
+				COMPRESS_PNG_FILES = NO;
 				DEVELOPMENT_TEAM = GP8BUACAG4;
 				INFOPLIST_FILE = com.BeiGe.PanYouApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -1595,6 +1596,7 @@
 				CODE_SIGN_ENTITLEMENTS = com.BeiGe.PanYouApp/com.BeiGe.PanYouApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Yulan Zhao (4RSNZMG5V8)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yulan Zhao (4RSNZMG5V8)";
+				COMPRESS_PNG_FILES = NO;
 				DEVELOPMENT_TEAM = GP8BUACAG4;
 				INFOPLIST_FILE = com.BeiGe.PanYouApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
