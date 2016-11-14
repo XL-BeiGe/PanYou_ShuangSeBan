@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XLShopCarViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
+@interface XLShopCarViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *coupon;//优惠券
 @property (weak, nonatomic) IBOutlet UITextField *couprice;//优惠金额
 @property (weak, nonatomic) IBOutlet UITableView *tabel;

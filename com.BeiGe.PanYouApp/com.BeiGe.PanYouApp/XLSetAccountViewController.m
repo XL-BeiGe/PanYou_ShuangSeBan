@@ -17,9 +17,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"结账";
+    _fumoney.delegate = self;
+    
     _accmoney.text = [NSString stringWithFormat:@"￥15643.00"];
     //_fumoney.text;//用户输入textfield
-    _zlmoney.text =[NSString stringWithFormat:@"￥13687.50元"];
+    //_zlmoney.text =[NSString stringWithFormat:@"￥13687.50元"];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -39,7 +42,23 @@
 */
 
 - (IBAction)Sure:(id)sender {
+    //网络请求
     XLAccSuccessViewController *shop = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"accsuc"];
     [self.navigationController pushViewController:shop animated:YES];
+}
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    NSString *zc = [_accmoney.text substringFromIndex:1];
+    float zong = [zc floatValue];
+    float fu = [_fumoney.text floatValue];
+    if (fu-zong<0){
+        NSLog(@"不对劲 重新输入");
+    }else{
+    _zlmoney.text = [NSString stringWithFormat:@"￥%.2f",fu-zong];
+    }
+    
+    //NSLog(@"%@===%@==%@",zc,_fumoney.text,_zlmoney.text);
 }
 @end

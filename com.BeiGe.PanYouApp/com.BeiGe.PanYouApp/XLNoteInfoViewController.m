@@ -74,5 +74,14 @@
     }
 }
 - (IBAction)victory:(id)sender {
+    if(sender){
+        _wancheng.hidden = YES;
+    }else if (sender){
+     _wancheng.hidden = YES;
+    }else{
+     _wancheng.hidden = YES;
+    }
+    
+    
 }
 @end

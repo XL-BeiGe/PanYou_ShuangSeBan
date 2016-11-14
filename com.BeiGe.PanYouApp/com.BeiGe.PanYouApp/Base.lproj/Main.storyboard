@@ -280,6 +280,7 @@
                         <outlet property="shij" destination="qcg-Wt-230" id="6dv-az-h2F"/>
                         <outlet property="textview" destination="liJ-B6-kRl" id="7yk-cH-Ylp"/>
                         <outlet property="titlle" destination="n4j-dZ-L3s" id="Jbw-YI-vcB"/>
+                        <outlet property="wancheng" destination="OAF-ic-tX9" id="eQI-DX-jXJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="faI-Zl-A2n" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -313,7 +314,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dui.png" translatesAutoresizingMaskIntoConstraints="NO" id="Oq2-no-XHL">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Oq2-no-XHL">
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="8KG-H1-yGr"/>
                                             <constraint firstAttribute="height" constant="30" id="BtO-AB-ZsT"/>
@@ -404,7 +405,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="生产日期:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1QF-EW-u3l">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="批准文号:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1QF-EW-u3l">
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -442,7 +443,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ume-o0-y8a">
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="fIg-5C-uuL"/>
-                                            <constraint firstAttribute="width" constant="21" id="xm8-ox-FxV"/>
+                                            <constraint firstAttribute="width" constant="30" id="xm8-ox-FxV"/>
                                         </constraints>
                                         <state key="normal" title="-"/>
                                         <connections>
@@ -451,7 +452,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LTw-I0-oxT">
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="21" id="tDV-wu-Ybj"/>
+                                            <constraint firstAttribute="width" constant="30" id="tDV-wu-Ybj"/>
                                             <constraint firstAttribute="height" constant="21" id="umB-XJ-50I"/>
                                         </constraints>
                                         <state key="normal" title="+"/>
@@ -608,7 +609,7 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -683,14 +684,6 @@
                                                     </constraints>
                                                     <state key="normal" title="+"/>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="600" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YZg-Nn-gmB">
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="40" id="uOv-Ww-BGR"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <button opaque="NO" tag="500" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rde-YU-aNT">
                                                     <color key="backgroundColor" red="0.94107431173324585" green="0.94123536348342896" blue="0.94106405973434448" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
@@ -699,21 +692,28 @@
                                                     </constraints>
                                                     <state key="normal" title="-"/>
                                                 </button>
+                                                <textField opaque="NO" clipsSubviews="YES" tag="600" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QvO-kQ-ghN">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="40" id="wn1-Lv-Jq2"/>
+                                                    </constraints>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="aA0-eg-gPI" firstAttribute="leading" secondItem="YZg-Nn-gmB" secondAttribute="trailing" id="11p-nI-jG6"/>
                                                 <constraint firstAttribute="trailing" secondItem="aA0-eg-gPI" secondAttribute="trailing" constant="15" id="6tO-i4-hOm"/>
-                                                <constraint firstItem="YZg-Nn-gmB" firstAttribute="leading" secondItem="rde-YU-aNT" secondAttribute="trailing" id="8Xc-xS-838"/>
                                                 <constraint firstItem="evf-kl-xMY" firstAttribute="top" secondItem="UQu-yE-BHa" secondAttribute="top" constant="15" id="Awd-qX-7hz"/>
                                                 <constraint firstAttribute="bottom" secondItem="rde-YU-aNT" secondAttribute="bottom" constant="15" id="BWm-rw-Vyi"/>
                                                 <constraint firstAttribute="bottom" secondItem="aA0-eg-gPI" secondAttribute="bottom" constant="15" id="CIr-rP-qG0"/>
-                                                <constraint firstItem="YZg-Nn-gmB" firstAttribute="leading" secondItem="rde-YU-aNT" secondAttribute="trailing" id="Pim-Yz-3Gf"/>
+                                                <constraint firstItem="QvO-kQ-ghN" firstAttribute="leading" secondItem="rde-YU-aNT" secondAttribute="trailing" id="EAE-M9-JHM"/>
+                                                <constraint firstAttribute="bottom" secondItem="QvO-kQ-ghN" secondAttribute="bottom" constant="15" id="XCe-ab-21i"/>
                                                 <constraint firstAttribute="bottom" secondItem="RN7-ZW-Yiw" secondAttribute="bottom" constant="15" id="ajw-dN-5Ot"/>
                                                 <constraint firstItem="evf-kl-xMY" firstAttribute="leading" secondItem="bu6-1n-kfn" secondAttribute="trailing" constant="7" id="cOE-OX-VqO"/>
                                                 <constraint firstItem="bu6-1n-kfn" firstAttribute="top" secondItem="UQu-yE-BHa" secondAttribute="top" constant="15" id="cn1-GR-qSO"/>
                                                 <constraint firstItem="bu6-1n-kfn" firstAttribute="leading" secondItem="UQu-yE-BHa" secondAttribute="leading" constant="15" id="dBz-I8-CM4"/>
                                                 <constraint firstAttribute="bottom" secondItem="yol-8X-Dcn" secondAttribute="bottom" constant="15" id="eII-o2-FLx"/>
-                                                <constraint firstAttribute="bottom" secondItem="YZg-Nn-gmB" secondAttribute="bottom" constant="15" id="mtJ-Gq-Uji"/>
+                                                <constraint firstItem="aA0-eg-gPI" firstAttribute="leading" secondItem="QvO-kQ-ghN" secondAttribute="trailing" id="lG6-ZL-jvZ"/>
                                                 <constraint firstItem="RN7-ZW-Yiw" firstAttribute="leading" secondItem="yol-8X-Dcn" secondAttribute="trailing" constant="7" id="rE9-yI-GVM"/>
                                                 <constraint firstItem="yol-8X-Dcn" firstAttribute="leading" secondItem="UQu-yE-BHa" secondAttribute="leading" constant="15" id="x02-Ep-G3m"/>
                                             </constraints>
@@ -744,7 +744,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ISg-l2-7dN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1429.5999999999999" y="-723.68815592203907"/>
+            <point key="canvasLocation" x="1428.985507246377" y="-723.91304347826087"/>
         </scene>
         <!--Set Account View Controller-->
         <scene sceneID="UnW-Vt-YRV">
@@ -814,7 +814,7 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -4070,7 +4070,6 @@
         <image name="change2.png" width="30" height="42"/>
         <image name="dot.png" width="194" height="156"/>
         <image name="dots.png" width="190" height="151"/>
-        <image name="dui.png" width="32" height="32"/>
         <image name="ic_kefu.png" width="244" height="244"/>
         <image name="ic_qq.png" width="268" height="268"/>
         <image name="ic_weixin.png" width="228" height="228"/>

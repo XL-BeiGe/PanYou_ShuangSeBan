@@ -63,13 +63,13 @@
 - (IBAction)ChangeV:(UISegmentedControl *)sender {
 
     if (sender.selectedSegmentIndex==0){
-        NSLog(@"0");
+        NSLog(@"未接受");
 
     }else if (sender.selectedSegmentIndex==1){
-        NSLog(@"1");
+        NSLog(@"执行中");
 
     }else{
-        NSLog(@"2");
+        NSLog(@"已完成");
 
     }
 }

@@ -15,6 +15,7 @@
 {
     XL_FMDB  *XL;//数据库调用者
     FMDatabase *db;//数据库
+    NSArray *findarr;
 }
 @end
 
@@ -23,7 +24,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    
-    
+    _vipnum.delegate = self;
+    _checkyp.delegate = self;
     _queding.layer.borderWidth = 1;
     _queding.layer.borderColor = [[UIColor colorWithHexString:@"32CC96"] CGColor];
   
@@ -69,8 +71,8 @@
 -(void)navagation{
     self.title = @"收银台";
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    UIButton *btn =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 20)];
-    [btn setImage:[UIImage imageNamed:@"download.png"] forState:UIControlStateNormal];
+    UIButton *btn =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, 20)];
+    [btn setImage:[UIImage imageNamed:@"downloads.png"] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(Download:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *right = [[UIBarButtonItem alloc]initWithCustomView:btn];
     self.navigationItem.rightBarButtonItem = right;
@@ -80,12 +82,31 @@
 }
 
 - (IBAction)Finding:(id)sender {
+  
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:_checkyp.text,@"product_code",_checkyp.text,@"bar_code",_checkyp.text,@"pycode", nil];
-    NSArray *arr =[XL DataBase:db selectKeyTypes:ChaXunShiTiLei fromTable:ChaXunBiaoMing whereConditionz:dic];
-    NSLog(@"%@",arr);
+    //findarr =[XL DataBase:db selectKeyTypes:ChaXunShiTiLei fromTable:ChaXunBiaoMing whereConditionz:dic];
+    
+    NSLog(@"findarr---------%@",findarr);
     [self xianshi];
 }
 - (IBAction)Sure:(id)sender {
+    int typ;
+    if(sender){
+        typ=2;
+        //会员价
+    }else if (sender) {
+        typ=1;
+        //非会员价
+    }else{
+        typ=3;
+        //促销价
+    }
+    
+    NSString *ss= [NSString stringWithFormat:@"%@",[findarr[0]objectForKey:@"price"]];
+    float sss = [ss floatValue];
+    float sumpri= [_number.text floatValue]*sss;
+    NSDictionary *dd = [NSDictionary dictionaryWithObjectsAndKeys: [findarr[0] objectForKey:@"id"],@"id",typ,@"type",_number.text,@"num",sumpri,@"price", nil];
+   // [XL DataBase:db insertKeyValues:dd intoTable:@"gouwu"];
     [self clear];
     
 }
@@ -115,10 +136,21 @@
     db = [XL getDBWithDBName:@"pandian.sqlite"];
     //新建查询表，里边是收银台药品数据信息
     [XL DataBase:db createTable:ChaXunBiaoMing keyTypes:ChaXunShiTiLei];
+    
+    [XL DataBase:db createTable:@"gouwu" keyTypes:[NSDictionary dictionaryWithObjectsAndKeys:@"text",@"id",@"text",@"num",@"text",@"type",@"text",@"price", nil]];
    
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }
-
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    if(textField==_vipnum){
+        NSLog(@"网络请求一下呦");
+        _checkimg.image = [UIImage imageNamed:@"dui.png"];
+        
+    }else{
+        _checkimg.image = [UIImage imageNamed:@"cuo.png"];
+        NSLog(@"n");
+    }
+}
 @end

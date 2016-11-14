@@ -10,7 +10,7 @@
 #import "XLAttendanceViewController.h"
 #import "XLLogin_ViewController.h"
 #import "XLCheckstandViewController.h"
-
+#import "XLNoteViewController.h"
 @interface XLMainViewController ()
 
 @end
@@ -19,6 +19,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title  =@"盘优";
+    
+    [self tongzhi];
     // Do any additional setup after loading the view.
     
     
@@ -30,9 +33,16 @@
 }
 //通知
 -(void)tongzhi{
-    
+    UIButton *btn =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, 20)];
+    [btn setImage:[UIImage imageNamed:@"downloads.png"] forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(Download:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *right = [[UIBarButtonItem alloc]initWithCustomView:btn];
+    self.navigationItem.rightBarButtonItem = right;
 }
-
+-(void)Download:(UIButton *)button{
+    XLNoteViewController *xl = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"note"];
+    [self.navigationController pushViewController:xl animated:YES];
+}
 //出勤
 - (IBAction)Attend:(id)sender {
     

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XLSetAccountViewController : UIViewController
+@interface XLSetAccountViewController : UIViewController<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *accmoney;//消费总额
 @property (weak, nonatomic) IBOutlet UITextField *fumoney;//付款金额
 @property (weak, nonatomic) IBOutlet UILabel *zlmoney;//找零金额

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XLCheckstandViewController : UIViewController
+@interface XLCheckstandViewController : UIViewController<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *vipnum;//会员
 @property (weak, nonatomic) IBOutlet UITextField *checkyp;//查药品
 @property (weak, nonatomic) IBOutlet UIImageView *checkimg;//对错图片

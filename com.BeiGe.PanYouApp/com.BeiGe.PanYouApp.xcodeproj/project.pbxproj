@@ -26,7 +26,7 @@
 		D730F8AD1DCB108600F07053 /* XLCheckstandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D730F8AC1DCB108600F07053 /* XLCheckstandViewController.m */; };
 		D730F8B01DCB1DDB00F07053 /* cuo.png in Resources */ = {isa = PBXBuildFile; fileRef = D730F8AE1DCB1DDB00F07053 /* cuo.png */; };
 		D730F8B11DCB1DDB00F07053 /* dui.png in Resources */ = {isa = PBXBuildFile; fileRef = D730F8AF1DCB1DDB00F07053 /* dui.png */; };
-		D730F8B31DCB1DEF00F07053 /* download.png in Resources */ = {isa = PBXBuildFile; fileRef = D730F8B21DCB1DEF00F07053 /* download.png */; };
+		D730F8B31DCB1DEF00F07053 /* downloads.png in Resources */ = {isa = PBXBuildFile; fileRef = D730F8B21DCB1DEF00F07053 /* downloads.png */; };
 		D730F8B91DCB245400F07053 /* XLShopCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D730F8B81DCB245400F07053 /* XLShopCarViewController.m */; };
 		D730F8BC1DCB31C200F07053 /* XLSetAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D730F8BB1DCB31C200F07053 /* XLSetAccountViewController.m */; };
 		D730F8BF1DCB31DC00F07053 /* XLAccSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D730F8BE1DCB31DC00F07053 /* XLAccSuccessViewController.m */; };
@@ -269,7 +269,7 @@
 		D730F8AC1DCB108600F07053 /* XLCheckstandViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLCheckstandViewController.m; sourceTree = "<group>"; };
 		D730F8AE1DCB1DDB00F07053 /* cuo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cuo.png; sourceTree = "<group>"; };
 		D730F8AF1DCB1DDB00F07053 /* dui.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dui.png; sourceTree = "<group>"; };
-		D730F8B21DCB1DEF00F07053 /* download.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = download.png; sourceTree = "<group>"; };
+		D730F8B21DCB1DEF00F07053 /* downloads.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downloads.png; sourceTree = "<group>"; };
 		D730F8B71DCB245400F07053 /* XLShopCarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLShopCarViewController.h; sourceTree = "<group>"; };
 		D730F8B81DCB245400F07053 /* XLShopCarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLShopCarViewController.m; sourceTree = "<group>"; };
 		D730F8BA1DCB31C200F07053 /* XLSetAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLSetAccountViewController.h; sourceTree = "<group>"; };
@@ -1022,7 +1022,7 @@
 		D772CCB81DC9BE1C00BB28D9 /* Image */ = {
 			isa = PBXGroup;
 			children = (
-				D730F8B21DCB1DEF00F07053 /* download.png */,
+				D730F8B21DCB1DEF00F07053 /* downloads.png */,
 				D730F8AE1DCB1DDB00F07053 /* cuo.png */,
 				D72F30C31DD1BD13007F754F /* camera.png */,
 				D730F8AF1DCB1DDB00F07053 /* dui.png */,
@@ -1213,7 +1213,7 @@
 				D772CCF21DC9BE3100BB28D9 /* 首页-考勤.png in Resources */,
 				D76B35E61DC9932C00E285AB /* jianpan_mr_23.png in Resources */,
 				D772CCEE1DC9BE3100BB28D9 /* 考勤-05.png in Resources */,
-				D730F8B31DCB1DEF00F07053 /* download.png in Resources */,
+				D730F8B31DCB1DEF00F07053 /* downloads.png in Resources */,
 				D76B35AA1DC9932C00E285AB /* epx.png in Resources */,
 				D76B35D81DC9932C00E285AB /* jianpan_mr_21.png in Resources */,
 				D76B35CC1DC9932C00E285AB /* jianpan_dk_02_03.png in Resources */,
