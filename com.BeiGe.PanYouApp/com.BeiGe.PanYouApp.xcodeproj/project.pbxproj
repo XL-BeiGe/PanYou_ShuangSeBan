@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		D23B407A1DCC792B00CDACCB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23B40791DCC792B00CDACCB /* CoreLocation.framework */; };
+		D24EC0801DDAA4BF00A043A8 /* XLquestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D24EC07F1DDAA4BF00A043A8 /* XLquestionViewController.m */; };
+		D24EC0841DDAA50000A043A8 /* XLanswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D24EC0831DDAA50000A043A8 /* XLanswerViewController.m */; };
 		D2C1AC841DC97D8C00092F44 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C1AC831DC97D8C00092F44 /* main.m */; };
 		D2C1AC871DC97D8C00092F44 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C1AC861DC97D8C00092F44 /* AppDelegate.m */; };
 		D2C1AC8A1DC97D8C00092F44 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C1AC891DC97D8C00092F44 /* ViewController.m */; };
@@ -242,6 +244,10 @@
 
 /* Begin PBXFileReference section */
 		D23B40791DCC792B00CDACCB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		D24EC07E1DDAA4BF00A043A8 /* XLquestionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLquestionViewController.h; sourceTree = "<group>"; };
+		D24EC07F1DDAA4BF00A043A8 /* XLquestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLquestionViewController.m; sourceTree = "<group>"; };
+		D24EC0821DDAA50000A043A8 /* XLanswerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLanswerViewController.h; sourceTree = "<group>"; };
+		D24EC0831DDAA50000A043A8 /* XLanswerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLanswerViewController.m; sourceTree = "<group>"; };
 		D2C1AC7F1DC97D8C00092F44 /* com.BeiGe.PanYouApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = com.BeiGe.PanYouApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2C1AC831DC97D8C00092F44 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D2C1AC851DC97D8C00092F44 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -554,6 +560,51 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D24EC07B1DDAA3EB00A043A8 /* 答题 */ = {
+			isa = PBXGroup;
+			children = (
+				D24EC0811DDAA4D400A043A8 /* 答题主页面 */,
+				D24EC0851DDAA50600A043A8 /* 回答页面 */,
+			);
+			name = "答题";
+			sourceTree = "<group>";
+		};
+		D24EC07C1DDAA40700A043A8 /* 主页 */ = {
+			isa = PBXGroup;
+			children = (
+				D772CCB51DC9B52B00BB28D9 /* XLMainViewController.h */,
+				D772CCB61DC9B52B00BB28D9 /* XLMainViewController.m */,
+			);
+			name = "主页";
+			sourceTree = "<group>";
+		};
+		D24EC07D1DDAA41200A043A8 /* 设置 */ = {
+			isa = PBXGroup;
+			children = (
+				D730F8A71DCB0CCA00F07053 /* XLEditAttViewController.h */,
+				D730F8A81DCB0CCA00F07053 /* XLEditAttViewController.m */,
+			);
+			name = "设置";
+			sourceTree = "<group>";
+		};
+		D24EC0811DDAA4D400A043A8 /* 答题主页面 */ = {
+			isa = PBXGroup;
+			children = (
+				D24EC07E1DDAA4BF00A043A8 /* XLquestionViewController.h */,
+				D24EC07F1DDAA4BF00A043A8 /* XLquestionViewController.m */,
+			);
+			name = "答题主页面";
+			sourceTree = "<group>";
+		};
+		D24EC0851DDAA50600A043A8 /* 回答页面 */ = {
+			isa = PBXGroup;
+			children = (
+				D24EC0821DDAA50000A043A8 /* XLanswerViewController.h */,
+				D24EC0831DDAA50000A043A8 /* XLanswerViewController.m */,
+			);
+			name = "回答页面";
+			sourceTree = "<group>";
+		};
 		D2C1AC761DC97D8C00092F44 = {
 			isa = PBXGroup;
 			children = (
@@ -647,12 +698,11 @@
 		D2C1ACB71DC97E1E00092F44 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				D772CCB51DC9B52B00BB28D9 /* XLMainViewController.h */,
-				D772CCB61DC9B52B00BB28D9 /* XLMainViewController.m */,
+				D24EC07C1DDAA40700A043A8 /* 主页 */,
+				D24EC07B1DDAA3EB00A043A8 /* 答题 */,
 				D7959B701DCC59FA00985309 /* 通知 */,
 				D730F8A01DCAD93900F07053 /* 考勤 */,
-				D730F8A71DCB0CCA00F07053 /* XLEditAttViewController.h */,
-				D730F8A81DCB0CCA00F07053 /* XLEditAttViewController.m */,
+				D24EC07D1DDAA41200A043A8 /* 设置 */,
 				D730F8AA1DCB105C00F07053 /* 收银 */,
 			);
 			name = Controller;
@@ -1418,6 +1468,7 @@
 				D76B353D1DC9930800E285AB /* AFURLResponseSerialization.m in Sources */,
 				D77487381DD964B0007A92E3 /* XL_PanDianViewController.m in Sources */,
 				D774873A1DD964B0007A92E3 /* XLLogin_ViewController.m in Sources */,
+				D24EC0801DDAA4BF00A043A8 /* XLquestionViewController.m in Sources */,
 				D730F89C1DCACFB100F07053 /* XLLeaveViewController.m in Sources */,
 				D76B35151DC992F400E285AB /* SBJsonTokeniser.m in Sources */,
 				D76B35161DC992F400E285AB /* SBJsonUTF8Stream.m in Sources */,
@@ -1442,6 +1493,7 @@
 				D76B35391DC9930800E285AB /* AFHTTPSessionManager.m in Sources */,
 				D2C1AC841DC97D8C00092F44 /* main.m in Sources */,
 				D76B353E1DC9930800E285AB /* AFURLSessionManager.m in Sources */,
+				D24EC0841DDAA50000A043A8 /* XLanswerViewController.m in Sources */,
 				D774873F1DD964B0007A92E3 /* XLRelationViewController.m in Sources */,
 				D76B35101DC992F400E285AB /* SBJsonStreamParserAdapter.m in Sources */,
 				D76B35291DC992FE00E285AB /* FMResultSet.m in Sources */,
