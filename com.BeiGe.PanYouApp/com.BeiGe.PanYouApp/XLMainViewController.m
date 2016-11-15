@@ -11,6 +11,8 @@
 #import "XLLogin_ViewController.h"
 #import "XLCheckstandViewController.h"
 #import "XLNoteViewController.h"
+#import "XLquestionViewController.h"
+#import "XLSettingViewController.h"
 @interface XLMainViewController ()
 
 @end
@@ -40,31 +42,40 @@
     self.navigationItem.rightBarButtonItem = right;
 }
 -(void)Download:(UIButton *)button{
-    XLNoteViewController *xl = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"note"];
-    [self.navigationController pushViewController:xl animated:YES];
+    
+    XLNoteViewController*xx;
+    [self tiaoye:xx mingzi:@"note"];
 }
 //出勤
 - (IBAction)Attend:(id)sender {
-    
-    XLAttendanceViewController *xl = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"attendance"];
-    [self.navigationController pushViewController:xl animated:YES];
+    XLAttendanceViewController*xx;
+    [self tiaoye:xx mingzi:@"attendance"];
+   
 }
 //答题
 - (IBAction)Answer:(id)sender {
-    
+    XLquestionViewController*xx;
+    [self tiaoye:xx mingzi:@"question"];
 }
 
 - (IBAction)PanDian:(id)sender {
-    XLLogin_ViewController *xll=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"login"];
-    [self.navigationController pushViewController:xll animated:YES];
-}
+    
+    XLLogin_ViewController*xx;
+    [self tiaoye:xx mingzi:@"login"];
+    }
 //设置
 - (IBAction)Set:(id)sender {
-    
+    XLSettingViewController*xx;
+    [self tiaoye:xx mingzi:@"setting"];
 }
 //收银
 - (IBAction)CashierDesk:(id)sender {
-    XLCheckstandViewController *xxll=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"checkstand"];
-    [self.navigationController pushViewController:xxll animated:YES];
+    XLCheckstandViewController*xx;
+    [self tiaoye:xx mingzi:@"checkstand"];
+}
+
+-(void)tiaoye:(UIViewController*)controller mingzi:(NSString*)ming{
+    controller=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:ming];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 @end
