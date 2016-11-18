@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface XLanswerViewController : UIViewController
-
+@property (strong ,nonatomic) NSArray*timuarr;
 @end

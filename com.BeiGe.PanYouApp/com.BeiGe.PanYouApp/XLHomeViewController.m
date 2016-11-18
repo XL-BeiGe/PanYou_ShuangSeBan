@@ -206,11 +206,12 @@
 }
 -(void)xiazaishuju:(NSString *)str :(NSString *)ss{
     [WarningBox warningBoxModeIndeterminate:[NSString stringWithFormat:@"正在同步%@",str] andView:self.view];
-    NSString *fangshi=@"/sys/download";
-    NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"",@"checkId",ss,@"status", nil];
+    NSString *fangshi=@"/cashier/drug/drugDataSync";
+    NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"2",@"userId", nil];
     //自己写的网络请求    请求外网地址
     [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
+        NSLog(@"%@",responseObject);
         @try {
             
             if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
@@ -245,6 +246,7 @@
     } failure:^(NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
+        NSLog(@"%@",error);
     }];
 }
 -(void)shangchuan:(NSDictionary*)rucan{

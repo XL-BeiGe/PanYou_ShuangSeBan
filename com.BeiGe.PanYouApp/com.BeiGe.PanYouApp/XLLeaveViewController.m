@@ -7,10 +7,15 @@
 //
 
 #import "XLLeaveViewController.h"
+#import "WarningBox.h"
+#import "XL_WangLuo.h"
 
 @interface XLLeaveViewController ()<UITextFieldDelegate,UIActionSheetDelegate>{
     int kaijie;//开始结束判断;
     UIView *backview;//透明的
+    NSString*kaishi;
+    NSString*jieshi;
+    NSString*chuannima;
 }
 @property(strong,nonatomic) UIDatePicker *picker;
 @end
@@ -34,17 +39,23 @@
     NSDate *selected = [_picker date];
     // 创建一个日期格式器
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSDateFormatter *datefffff=[[NSDateFormatter alloc] init];
     // 为日期格式器设置格式字符串
     [dateFormatter setDateFormat:@"yyyy年MM月dd日 HH:mm"];
+    [datefffff setDateFormat:@"yyyy-MM-dd HH:mm"];
     // 使用日期格式器格式化日期、时间
     NSString *destDateString = [dateFormatter stringFromDate:selected];
     NSString *message =  [NSString stringWithFormat:
                           @"%@", destDateString];
+    NSString *daterr=[datefffff stringFromDate:selected];
+    NSString *msg=[NSString stringWithFormat:@"%@",daterr];
     
     if (kaijie==1) {
         _beginTime.text=message;
+        kaishi=msg;
     }else{
         _endTime.text=message;
+        jieshi=msg;
     }
     [self xiaoshi];
 }
@@ -118,6 +129,7 @@
 }
 
 - (IBAction)Present:(id)sender {
+    [self.view endEditing:YES];
     [self tijiaojiekou];
 }
 -(NSArray*)jiaming{
@@ -134,6 +146,8 @@
     if(buttonIndex<9){
         NSArray *jiaming = [self jiaming];
         _leaveType.text=[NSString stringWithFormat:@"%@",jiaming[buttonIndex]];
+        chuannima=[NSString stringWithFormat:@"%ld",(long)buttonIndex+1];
+        
     }
 }
 -(void)tijiaojiekou{
@@ -144,6 +158,22 @@
     _endTime.text;   结束时间
     _beginTime.text; 开始时间
     _leaveType.text; 请假类型
+     _reason.text;
     */
+    NSString *fangshi=@"/attendance/leave";
+    NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"2",@"userId",kaishi,@"beginTime",jieshi,@"endTime",chuannima,@"leaveType",_reason.text,@"leaveReason", nil];
+    [WarningBox warningBoxModeIndeterminate:@"正在请假..." andView:self.view];
+    [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
+        NSLog(@"%@",responseObject);
+        [WarningBox warningBoxHide:YES andView:self.view];
+        if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
+            [WarningBox warningBoxModeText:@"请假成功!" andView:self.view];
+        }
+    } failure:^(NSError *error) {
+        [WarningBox warningBoxHide:YES andView:self.view];
+        [WarningBox warningBoxModeText:@"网络错误,请重试!" andView:self.view];
+        NSLog(@"%@",error);
+    }];
+    
 }
 @end

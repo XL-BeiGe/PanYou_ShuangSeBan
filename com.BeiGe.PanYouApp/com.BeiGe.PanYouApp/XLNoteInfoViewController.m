@@ -7,33 +7,36 @@
 //
 
 #import "XLNoteInfoViewController.h"
+#import "WarningBox.h"
+#import "XL_WangLuo.h"
 
 @interface XLNoteInfoViewController ()<UITextViewDelegate>
 {
     UILabel *placeor;
+    NSDictionary*pushTemplate;
 }
+@property (weak, nonatomic) IBOutlet UIButton *renwuanniu;
 @end
 
 @implementation XLNoteInfoViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    NSLog(@"%@",_zhT);
     
-    // _titlle.text=[NSString stringWithFormat:@"%@",];//标题
-    //_Image.image = [sdwebimage];//图片
-    //_neror.text =[NSString stringWithFormat:@"%@",]//内容
-    //_neror.numberOfLines=0;
-    // _shij.text = [NSString stringWithFormat:@"%@",]//时间
-    //_compary.text =[NSString stringWithFormat:@"来源:%@",];//来源
-    //_textview.text = [NSString stringWithFormat:@"%@",];//备注
-    
+    [self xiangqingjiekou];
+ 
+    self.title = @"通知详情";
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+}
+-(void)jiemian{
     _Image.image =[UIImage imageNamed:@"icon_02_07.png"];
-    _titlle.text = @"这是一个标题";
-    _neror.text = @"这是个测试测试";
-    _compary.text = @"来源:药店总部";
-    _shij.text = @"时间2016/10/15";
-
+    _titlle.text = [pushTemplate objectForKey:@"title"];
+    _neror.text = [pushTemplate objectForKey:@"context"];
+    _compary.text = [NSString stringWithFormat:@"来源:%@",[pushTemplate objectForKey:@"pushSrc"]];
+    _shij.text = [NSString stringWithFormat:@"时间:%@",[pushTemplate objectForKey:@"createTime"]];
+    
     _textview.delegate = self;
     _textview.textContainerInset = UIEdgeInsetsMake(0, 0, 5, 15);
     placeor = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 150, 20)];
@@ -42,16 +45,33 @@
     placeor.font =[UIFont systemFontOfSize:14];
     placeor.backgroundColor = [UIColor clearColor];
     [_textview addSubview:placeor];
-    self.title = @"通知详情";
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    self.automaticallyAdjustsScrollViewInsets = NO;
+    if ([_zhT isEqualToString:@"1"]) {
+        _renwuanniu.titleLabel.text=@"执行任务";
+    }else if ([_zhT isEqualToString:@"2"]){
+        _renwuanniu.titleLabel.text=@"完成任务";
+    }else{
+        _renwuanniu.hidden=YES;
+    }
 }
+-(void)xiangqingjiekou{
+    NSString *fangshi=@"/push/pushDetail";
+    NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:_pushInfoId,@"pushInfoId", nil];
+    [WarningBox warningBoxModeIndeterminate:@"加载界面..." andView:self.view];
+    [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
+        NSLog(@"%@",responseObject);
+        [WarningBox warningBoxHide:YES andView:self.view];
+        if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
+            pushTemplate=[[responseObject objectForKey:@"data"] objectForKey:@"pushTemplate"];
+            [self jiemian];
+            
+        }
+    } failure:^(NSError *error) {
+        [WarningBox warningBoxHide:YES andView:self.view];
+        [WarningBox warningBoxModeText:@"网络错误,请重试!" andView:self.view];
+        NSLog(@"%@",error);
+    }];
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
-
 /*
 #pragma mark - Navigation
 
@@ -74,14 +94,28 @@
     }
 }
 - (IBAction)victory:(id)sender {
-    if(sender){
-        _wancheng.hidden = YES;
-    }else if (sender){
-     _wancheng.hidden = YES;
-    }else{
-     _wancheng.hidden = YES;
+    NSString*str;
+    if ([_zhT isEqualToString:@"1"]) {
+        str=@"2";
+    }else if ([_zhT isEqualToString:@"2"]){
+       str=@"3";
     }
+
+    [self anniujiekou:str];
     
-    
+}
+-(void)anniujiekou:(NSString*)str{
+    NSString *fangshi=@"/push/progress";
+    NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:_pushInfoId,@"pushId",@"2",@"userId",str,@"progressStatus", nil];
+    [WarningBox warningBoxModeIndeterminate:@"加载界面..." andView:self.view];
+    [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
+        NSLog(@"%@",responseObject);
+        [WarningBox warningBoxHide:YES andView:self.view];
+        
+    } failure:^(NSError *error) {
+        [WarningBox warningBoxHide:YES andView:self.view];
+        [WarningBox warningBoxModeText:@"网络错误,请重试!" andView:self.view];
+        NSLog(@"%@",error);
+    }];
 }
 @end

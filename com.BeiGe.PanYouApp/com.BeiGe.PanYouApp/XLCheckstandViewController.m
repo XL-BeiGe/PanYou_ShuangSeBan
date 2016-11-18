@@ -8,6 +8,8 @@
 
 #import "XLCheckstandViewController.h"
 #import "XLShopCarViewController.h"
+#import "XL_WangLuo.h"
+#import "WarningBox.h"
 #import "Color+Hex.h"
 #import "XL_Header.h"
 #import "XL_FMDB.h"
@@ -16,6 +18,7 @@
     XL_FMDB  *XL;//数据库调用者
     FMDatabase *db;//数据库
     NSArray *findarr;
+    NSString*type;
 }
 @end
 
@@ -28,7 +31,7 @@
     _checkyp.delegate = self;
     _queding.layer.borderWidth = 1;
     _queding.layer.borderColor = [[UIColor colorWithHexString:@"32CC96"] CGColor];
-  
+  type=@"3";
     [self navagation];
     [self clear];
     [self shujuku];
@@ -78,7 +81,22 @@
     self.navigationItem.rightBarButtonItem = right;
 }
 -(void)Download:(UIButton *)button{
-    NSLog(@"下载药品信息");
+    [self xiazaijiekou];
+}
+-(void)xiazaijiekou{
+    NSString *fangshi=@"/drug/drugDataSync";
+    NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"315",@"userid", nil];
+    [WarningBox warningBoxModeIndeterminate:@"数据下载中..." andView:self.view];
+    [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
+        NSLog(@"%@",responseObject);
+        [WarningBox warningBoxHide:YES andView:self.view];
+        [WarningBox warningBoxModeText:@"数据已下载!" andView:self.view];
+    } failure:^(NSError *error) {
+        [WarningBox warningBoxHide:YES andView:self.view];
+        [WarningBox warningBoxModeText:@"网络错误,请重试!" andView:self.view];
+        NSLog(@"%@",error);
+    }];
+
 }
 
 - (IBAction)Finding:(id)sender {
@@ -126,7 +144,11 @@
 
 
 - (IBAction)Shopping:(id)sender {
+    [self.view endEditing:YES];
     XLShopCarViewController *shop = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"shopcar"];
+    shop.scno=_vipnum.text;
+    
+    shop.sctype=type;
     [self.navigationController pushViewController:shop animated:YES];
     
 }
@@ -146,11 +168,47 @@
 -(void)textFieldDidEndEditing:(UITextField *)textField{
     if(textField==_vipnum){
         NSLog(@"网络请求一下呦");
-        _checkimg.image = [UIImage imageNamed:@"dui.png"];
-        
-    }else{
-        _checkimg.image = [UIImage imageNamed:@"cuo.png"];
-        NSLog(@"n");
+        [self huiyuanchaxun];
     }
+}
+-(void)huiyuanchaxun{
+    NSString *fangshi=@"/drug/vipQuery";
+    type=[self isMobileNumber:_vipnum.text]?@"2":@"1";
+    NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:_vipnum.text,@"no",type,@"type", nil];
+    
+    [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
+        NSLog(@"%@",responseObject);
+          [WarningBox warningBoxHide:YES andView:self.view];
+        if ([[responseObject objectForKey:@"code"]isEqualToString:@"0000"]) {
+             NSDictionary*data=[responseObject objectForKey:@"data"];
+            NSString*isvip=[data objectForKey:@"isvip"];
+            if ([isvip intValue]==1) {
+               
+                _checkimg.image = [UIImage imageNamed:@"dui.png"];
+            }else if ([isvip intValue]==2){
+                _checkimg.image = [UIImage imageNamed:@"cuo.png"];
+                type = @"3";
+            }
+        }
+    } failure:^(NSError *error) {
+        [WarningBox warningBoxHide:YES andView:self.view];
+        [WarningBox warningBoxModeText:@"网络错误,请重试!" andView:self.view];
+        NSLog(@"%@",error);
+    }];
+    
+}
+// 正则判断手机号码地址格式
+- (BOOL)isMobileNumber:(NSString *)mobileNum {
+    
+    //    电信号段:133/153/180/181/189/177
+    //    联通号段:130/131/132/155/156/185/186/145/176
+    //    移动号段:134/135/136/137/138/139/150/151/152/157/158/159/182/183/184/187/188/147/178
+    //    虚拟运营商:170
+    
+    NSString *MOBILE = @"^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[06-8])\\d{8}$";
+    
+    NSPredicate *regextestmobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", MOBILE];
+    
+    return [regextestmobile evaluateWithObject:mobileNum];
 }
 @end

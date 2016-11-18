@@ -10,11 +10,13 @@
 #import "XLSetAccountViewController.h"
 #import "XL_Header.h"
 #import "XL_FMDB.h"
+#import "XL_WangLuo.h"
+#import "WarningBox.h"
 @interface XLShopCarViewController ()
 {
     XL_FMDB  *XL;//数据库调用者
     FMDatabase *db;//数据库
-    UITextField *number;
+    
     NSArray  *shoparr;
 }
 @end
@@ -29,25 +31,38 @@
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 -(void)wangluo{
 //网络请求
+    NSDictionary*d1=[NSDictionary dictionaryWithObjectsAndKeys:@"1003",@"drugId",@"1086",@"drugCount",@"2",@"drugPriceType", nil];
+    NSArray*arr=[NSArray arrayWithObjects:d1, nil];
+    
+    
+    NSString *fangshi=@"/drug/shoppingCart";
+    
+    NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"315",@"operateUserId",_scno,@"no",_sctype,@"type",_coupon.text,@"coupon",_couprice.text,@"couponPrice",arr,@"drugList", nil];
+    NSLog(@"%@",rucan);
+    [WarningBox warningBoxModeIndeterminate:@"正在计算总价..." andView:self.view];
+    [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
+        NSLog(@"%@",responseObject);
+        [WarningBox warningBoxHide:YES andView:self.view];
+        if([[responseObject objectForKey:@"code"]isEqualToString:@"0000"]){
+            NSString *drugAmount=[[responseObject objectForKey:@"data"] objectForKey:@"drugAmount"];
+            NSString *consumptionInfoId=[[responseObject objectForKey:@"data"] objectForKey:@"consumptionInfoId"];
+        XLSetAccountViewController *shop = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"setacc"];
+            shop.drugAmount=drugAmount;
+            shop.consumptionInfoId=consumptionInfoId;
+        [self.navigationController pushViewController:shop animated:YES];
+        }
+    } failure:^(NSError *error) {
+        [WarningBox warningBoxHide:YES andView:self.view];
+        [WarningBox warningBoxModeText:@"网络错误,请重试!" andView:self.view];
+        NSLog(@"%@",error);
+    }];
+    
+    
+    
+   
 }
-
 
 -(void)tableviewdelegate{
     _tabel.dataSource = self;
@@ -73,12 +88,12 @@
     UILabel *price =(UILabel*)[cell viewWithTag:300];
     UILabel *namete =(UILabel*)[cell viewWithTag:200];
     UILabel *pricete =(UILabel*)[cell viewWithTag:400];
-   number =(UITextField*)[cell viewWithTag:600];
+    UITextField* number =(UITextField*)[cell viewWithTag:600];
     UIButton *subtrace = (UIButton*)[cell viewWithTag:500];
     UIButton *sum = (UIButton*)[cell viewWithTag:700];
      name.text = @"药品名称:";
      price.text = @"药品价格:";
-     namete.text = @"测试名称";
+     namete.text = [NSString stringWithFormat:@"%ld",indexPath.row+600];
      pricete.text = [NSString stringWithFormat:@"￥1235.0"];
     number.delegate = self;
    
@@ -120,7 +135,12 @@
   shoparr  =[XL DataBase:db deleteKeyTypes:dic fromTable:@"gouwu" whereCondition:ddic];
     [_tabel reloadData];
 }
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"*-*-*-*-*%ld",(long)indexPath.row);
+}
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [self.view endEditing:YES];
+}
 //限制数量长度
 -(void)NumberLength:(UITextField *)theTextField
 {
@@ -130,7 +150,7 @@
     
     UILabel*oo=[cell viewWithTag:index.row+600];
     
-   NSLog(@"%lu",oo.tag);
+   
     int MaxLen = 4;
     NSString* szText = [oo text];
     if ([oo.text length]> MaxLen)
@@ -163,7 +183,8 @@
     NSIndexPath *index=[self.tabel indexPathForCell:cell];
     
     UILabel*oo=[cell viewWithTag:index.row+600];
-    
+    NSLog(@"------%ld",(long)index.row);
+    NSLog(@"******%lu",oo.tag);
     NSString*qw=oo.text;
     
     int wq=[qw intValue];
@@ -184,7 +205,8 @@
     NSIndexPath *index=[self.tabel indexPathForCell:cell];
     
     UILabel*oo=[cell viewWithTag:index.row+600];
-    
+    NSLog(@"------%ld",(long)index.row);
+    NSLog(@"******%lu",oo.tag);
     NSString*qw=oo.text;
     
     int wq=[qw intValue];
@@ -227,15 +249,14 @@
 [self animateTextField:-150.0 up:NO];
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    [number resignFirstResponder];
     [self.view endEditing:YES];
 }
 
 
 - (IBAction)SetAccounts:(id)sender {
     //网络请求
-    XLSetAccountViewController *shop = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"setacc"];
-    [self.navigationController pushViewController:shop animated:YES];
+    [self wangluo];
+   
 }
 
 

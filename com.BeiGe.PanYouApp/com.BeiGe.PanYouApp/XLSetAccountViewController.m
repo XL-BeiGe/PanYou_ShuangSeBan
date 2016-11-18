@@ -8,6 +8,8 @@
 
 #import "XLSetAccountViewController.h"
 #import "XLAccSuccessViewController.h"
+#import "WarningBox.h"
+#import "XL_WangLuo.h"
 @interface XLSetAccountViewController ()
 
 @end
@@ -19,46 +21,73 @@
     self.title = @"结账";
     _fumoney.delegate = self;
     
-    _accmoney.text = [NSString stringWithFormat:@"￥15643.00"];
-    //_fumoney.text;//用户输入textfield
-    //_zlmoney.text =[NSString stringWithFormat:@"￥13687.50元"];
-    
-    // Do any additional setup after loading the view.
+    _accmoney.text = [NSString stringWithFormat:@"￥%@",_drugAmount];
+  
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (IBAction)Sure:(id)sender {
     //网络请求
-    XLAccSuccessViewController *shop = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"accsuc"];
-    [self.navigationController pushViewController:shop animated:YES];
+    [self quedingwangluo];
+   
+}
+-(void)quedingwangluo{
+    NSString *fangshi=@"/drug/postDrug";
+    NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:_consumptionInfoId,@"consumptionInfoId",_fumoney.text,@"drugAmountReceive",@"1",@"drugAmountType",_zlmoney.text,@"drugAmountBack", nil];
+    [WarningBox warningBoxModeIndeterminate:@"正在结账..." andView:self.view];
+    [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
+        NSLog(@"%@",responseObject);
+        
+        
+        [WarningBox warningBoxHide:YES andView:self.view];
+        
+        if ( [[responseObject objectForKey:@"code"]isEqualToString:@"0000"]) {
+            
+            NSDate*date=[NSDate date];
+            NSDateFormatter*dateFormatter=[[NSDateFormatter alloc] init];
+            // 为日期格式器设置格式字符串
+            [dateFormatter setDateFormat:@"yyyy年MM月dd日 HH:mm"];
+            // 使用日期格式器格式化日期、时间
+            NSString *destDateString = [dateFormatter stringFromDate:date];
+            NSString *message =  [NSString stringWithFormat:
+                                  @"%@", destDateString];
+           
+            
+            XLAccSuccessViewController *shop = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"accsuc"];
+            shop.zonge=_drugAmount;
+            shop.shijian=message;
+            [self.navigationController pushViewController:shop animated:YES];
+        }
+        
+        
+        
+    } failure:^(NSError *error) {
+        [WarningBox warningBoxHide:YES andView:self.view];
+        [WarningBox warningBoxModeText:@"网络错误,请重试!" andView:self.view];
+        NSLog(@"%@",error);
+    }];
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }
--(void)textFieldDidEndEditing:(UITextField *)textField{
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     NSString *zc = [_accmoney.text substringFromIndex:1];
     float zong = [zc floatValue];
-    float fu = [_fumoney.text floatValue];
-    if (fu-zong<0){
-        NSLog(@"不对劲 重新输入");
-    }else{
-    _zlmoney.text = [NSString stringWithFormat:@"￥%.2f",fu-zong];
-    }
+    NSLog(@"%@",string);
+    float fu;
+   
+    if (string.length ==0 ) {
+        fu= [[textField.text substringFromIndex:textField.text.length-1]  floatValue];
+    }else
+    fu= [[textField.text stringByAppendingString:string]  floatValue];
     
-    //NSLog(@"%@===%@==%@",zc,_fumoney.text,_zlmoney.text);
+    if (fu-zong<0){
+        _zlmoney.text =@"还不够哟";
+    }else{
+        _zlmoney.text = [NSString stringWithFormat:@"￥%.2f",fu-zong];
+    }
+
+    
+    return YES;
 }
+
 @end

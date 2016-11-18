@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *fumoney;//付款金额
 @property (weak, nonatomic) IBOutlet UILabel *zlmoney;//找零金额
 - (IBAction)Sure:(id)sender;
-
+@property (strong, nonatomic) NSString*drugAmount;
+@property (strong, nonatomic) NSString*consumptionInfoId;
 @end

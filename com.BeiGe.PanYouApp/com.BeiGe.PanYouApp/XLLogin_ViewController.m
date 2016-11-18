@@ -22,7 +22,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     if (NULL == JuyuwangIP) {
-        [[NSUserDefaults standardUserDefaults]setObject:@"www.yaopandian.com" forKey:@"JuYuWang"];
+        [[NSUserDefaults standardUserDefaults]setObject:@"192.168.1.103:8080" forKey:@"JuYuWang"];
     }
     if (NULL !=[[NSUserDefaults standardUserDefaults] objectForKey:@"Name"]) {
         _Name.text=[[NSUserDefaults standardUserDefaults] objectForKey:@"Name"];
@@ -98,18 +98,20 @@
 
 #pragma mark ----Login_Action
 - (IBAction)Login:(UIButton *)sender {
+    //[self ceshi];
     if ([_Name.text isEqual:@""]||[_Password.text isEqual:@""]) {
         [WarningBox warningBoxModeText:@"请填写好账号信息哟~" andView:self.view];
     }else if (NULL ==JuyuwangIP){
         [WarningBox warningBoxModeText:@"请先设置网络连接" andView:self.view];
     }else{
-       
+    
         [WarningBox warningBoxModeIndeterminate:@"登录中..." andView:self.view];
         NSString *fangshi=@"/sys/login";
         NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:[_Name.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],@"loginName",[_Password.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],@"password", nil];
 //自己写的网络请求    请求外网地址
-        [XL_WangLuo WaiwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
+            [XL_WangLuo WaiwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
             [WarningBox warningBoxHide:YES andView:self.view];
+                NSLog(@"%@",responseObject);
             @try {
                 if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
                     NSUserDefaults *user=[NSUserDefaults standardUserDefaults];
@@ -118,7 +120,7 @@
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data" ] objectForKey:@"accessToken"]] forKey:@"accessToken"];
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"mac"]] forKey:@"Mac"];
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"userId"]] forKey:@"UserID"];
-                    
+    
                    [self jumpHome];
                 }
                 else{
@@ -130,10 +132,15 @@
         } failure:^(NSError *error) {
             [WarningBox warningBoxHide:YES andView:self.view];
             [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
-            NSLog(@"%@",error);
+    NSLog(@"%@",error);
         }];
    }
 }
+
+
+
+
+
 //拖拽  传值方法
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"tuozhuai"/*与拖拽出来的线的定义*/]) {

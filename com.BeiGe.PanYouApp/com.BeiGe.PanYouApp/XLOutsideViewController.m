@@ -7,10 +7,14 @@
 //
 
 #import "XLOutsideViewController.h"
+#import "WarningBox.h"
+#import "XL_WangLuo.h"
 
 @interface XLOutsideViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextFieldDelegate>{
     UIView *backview;//时间选择器背景;
     int waifan;//外出返回时间选择器判断;
+    NSString* chuankai;
+    NSString* chuanjie;
 }
 
 @property(strong,nonatomic) UIImage *image1;
@@ -42,18 +46,25 @@
     // 获取用户通过UIDatePicker设置的日期和时间
     NSDate *selected = [_picker date];
     // 创建一个日期格式器
+    NSDateFormatter*datefff=[[NSDateFormatter alloc] init];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     // 为日期格式器设置格式字符串
     [dateFormatter setDateFormat:@"yyyy年MM月dd日 HH:mm"];
+    
+    [datefff setDateFormat:@"yyyy-MM-dd HH:mm"];
     // 使用日期格式器格式化日期、时间
     NSString *destDateString = [dateFormatter stringFromDate:selected];
     NSString *message =  [NSString stringWithFormat:
                           @"%@", destDateString];
+    NSString*darr=[datefff stringFromDate:selected];
+    NSString*msg=[NSString stringWithFormat:@"%@",darr];
     
     if (waifan==1) {
         _outTime.text=message;
+        chuankai=msg;
     }else{
         _backTime.text=message;
+        chuanjie=msg;
     }
     [self xiaoshi];
 }
@@ -168,5 +179,24 @@
      backgroundImage (File):背景_image1
 
     */
+    NSString *fangshi=@"/attendance/field";
+    NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"2",@"userId",chuankai,@"beginTime",chuanjie,@"endTime",_textview.text,@"fieldReason", nil];
+    NSLog(@"%@",rucan);
+    //自己写的网络请求    请求外网地址
+   
+    [WarningBox warningBoxModeIndeterminate:[NSString stringWithFormat:@"正在打卡..."] andView:self.view];
+    [XL_WangLuo ShangChuanTuPianwithBizMethod:fangshi Rucan:rucan type:Post image:_image1 key:@"backgroundImage" success:^(id responseObject) {
+        [WarningBox warningBoxHide:YES andView:self.view];
+        if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
+            [WarningBox warningBoxModeText:[NSString stringWithFormat:@"打卡成功!"] andView:self.view];
+        }
+        
+        NSLog(@"%@",responseObject);
+    } failure:^(NSError *error) {
+        [WarningBox warningBoxHide:YES andView:self.view];
+        [WarningBox warningBoxModeText:@"网络错误，请重试!" andView:self.view];
+        NSLog(@"%@",error);
+    }];
+
 }
 @end

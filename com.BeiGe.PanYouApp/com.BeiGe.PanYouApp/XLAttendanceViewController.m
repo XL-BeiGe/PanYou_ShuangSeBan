@@ -12,6 +12,8 @@
 #import "XLStatisticsViewController.h"
 #import "Color+Hex.h"
 #import <CoreLocation/CoreLocation.h>
+#import "XL_WangLuo.h"
+#import "WarningBox.h"
 
 @interface XLAttendanceViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate,CLLocationManagerDelegate>
 {
@@ -27,10 +29,7 @@
 @property(strong,nonatomic) UIImage *image1;
 @property (nonatomic, strong) CLLocationManager* locationManager;
 @end
-/*
-    现缺少两个网络接口
- 
- */
+
 @implementation XLAttendanceViewController
 -(void)viewWillAppear:(BOOL)animated{
     [self dingwei];
@@ -38,8 +37,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    dao=1;
-    tui=0;
+    dao=2;
+    tui=2;
     nage=99;
     [self riqixianshi];
     [self wangluolianjie];
@@ -48,16 +47,16 @@
 
 -(void)anniupanduan{
     //需要在接口返回时判断
-    if (dao==0) {
+    if (dao==2) {
         //灰色图标＋不可点击；ff9900
         _qiandao.backgroundColor=[UIColor lightGrayColor];
         _qiandao.userInteractionEnabled=NO;
     }else{
         //橙色图标＋可点击 black
         _qiandao.backgroundColor=[UIColor colorWithHexString:@"ff9900"];
-        _qiantui.userInteractionEnabled=YES;
+        _qiandao.userInteractionEnabled=YES;
     }
-    if (tui==0) {
+    if (tui==2) {
         //灰色图标＋不可点击；
         _qiantui.backgroundColor=[UIColor lightGrayColor];
         _qiantui.userInteractionEnabled=NO;
@@ -70,7 +69,30 @@
 }
 
 -(void)wangluolianjie{
+    [WarningBox warningBoxModeIndeterminate:[NSString stringWithFormat:@""] andView:self.view];
+    NSString *fangshi=@"/attendance/index";
+    NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"2",@"userId", nil];
+    //自己写的网络请求    请求外网地址
     
+    [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
+        NSLog(@"%@",responseObject);
+        [WarningBox warningBoxHide:YES andView:self.view];
+        if (![[responseObject objectForKey:@"code"]isEqual:@"9999"]) {
+            NSDictionary* data=[responseObject objectForKey:@"data"];
+            dao=[[data objectForKey:@"isSign"] intValue];
+            tui=[[data objectForKey:@"isSignOut"] intValue];
+            NSLog(@"%d----%d",dao,tui);
+            [self anniupanduan];
+        }
+        else{
+//            [WarningBox warningBoxModeText:@"请重新进入该页面！" andView:self.view];
+        }
+        
+    } failure:^(NSError *error) {
+        [WarningBox warningBoxHide:YES andView:self.view];
+        NSLog(@"%@",error);
+    }];
+
 }
 - (IBAction)QianDao:(id)sender {
     [self xiangji];
@@ -105,8 +127,29 @@
 -(void)qiandao_tui:(int)haha{
 //    方法名：attendance/sign
 //入参为：(用户ID):@"userId" (jing,wei):@"Lonlat"(_image):@"backgroundImage"(haha):@"type"
-    NSLog(@"%d",haha);
     
+    NSString *fangshi=@"/attendance/sign";
+    NSString *jingwei=[NSString stringWithFormat:@"%@,%@",jing,wei];
+    NSString *type=[NSString stringWithFormat:@"%d",haha];
+    NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"2",@"userId",jingwei,@"Lonlat",type,@"type", nil];
+    NSLog(@"%@",rucan);
+    //自己写的网络请求    请求外网地址
+    NSString *str;
+    if (haha==1) {
+        str=@"到";
+    }else{
+        str=@"退";
+    }
+    [WarningBox warningBoxModeIndeterminate:[NSString stringWithFormat:@"正在签%@...",str] andView:self.view];
+    [XL_WangLuo ShangChuanTuPianwithBizMethod:fangshi Rucan:rucan type:Post image:_image1 key:@"backgroundImage" success:^(id responseObject) {
+        [WarningBox warningBoxHide:YES andView:self.view];
+        [WarningBox warningBoxModeText:[NSString stringWithFormat:@"签%@成功!",str] andView:self.view];
+        NSLog(@"%@",responseObject);
+    } failure:^(NSError *error) {
+        [WarningBox warningBoxHide:YES andView:self.view];
+        [WarningBox warningBoxModeText:@"网络错误，请重试!" andView:self.view];
+        NSLog(@"%@",error);
+    }];
 }
 
 -(void)dingwei{

@@ -13,5 +13,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *couprice;//优惠金额
 @property (weak, nonatomic) IBOutlet UITableView *tabel;
 - (IBAction)SetAccounts:(id)sender;
+@property (strong, nonatomic) NSString*sctype;
+@property (strong, nonatomic) NSString*scno;
 
 @end
