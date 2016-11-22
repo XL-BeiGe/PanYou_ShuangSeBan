@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface XLanswerViewController : UIViewController
-@property (strong ,nonatomic) NSArray*timuarr;
+@property (strong, nonatomic) NSArray*timuarr;
+@property (strong, nonatomic) NSString*str;
+@property (strong, nonatomic) NSString*mobanID;
 @end

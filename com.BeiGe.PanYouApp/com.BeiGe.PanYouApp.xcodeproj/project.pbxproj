@@ -10,6 +10,7 @@
 		D23B407A1DCC792B00CDACCB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23B40791DCC792B00CDACCB /* CoreLocation.framework */; };
 		D24EC0801DDAA4BF00A043A8 /* XLquestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D24EC07F1DDAA4BF00A043A8 /* XLquestionViewController.m */; };
 		D24EC0841DDAA50000A043A8 /* XLanswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D24EC0831DDAA50000A043A8 /* XLanswerViewController.m */; };
+		D291DD2C1DE42C490044805B /* 答题-背景.png in Resources */ = {isa = PBXBuildFile; fileRef = D291DD2B1DE42C490044805B /* 答题-背景.png */; };
 		D2C1AC841DC97D8C00092F44 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C1AC831DC97D8C00092F44 /* main.m */; };
 		D2C1AC871DC97D8C00092F44 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C1AC861DC97D8C00092F44 /* AppDelegate.m */; };
 		D2C1AC8A1DC97D8C00092F44 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C1AC891DC97D8C00092F44 /* ViewController.m */; };
@@ -73,7 +74,6 @@
 		D772CCB71DC9B52B00BB28D9 /* XLMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D772CCB61DC9B52B00BB28D9 /* XLMainViewController.m */; };
 		D772CCE31DC9BE3100BB28D9 /* 按钮.png in Resources */ = {isa = PBXBuildFile; fileRef = D772CCB91DC9BE3100BB28D9 /* 按钮.png */; };
 		D772CCE41DC9BE3100BB28D9 /* 按钮2.png in Resources */ = {isa = PBXBuildFile; fileRef = D772CCBA1DC9BE3100BB28D9 /* 按钮2.png */; };
-		D772CCE51DC9BE3100BB28D9 /* 答题-背景.png in Resources */ = {isa = PBXBuildFile; fileRef = D772CCBB1DC9BE3100BB28D9 /* 答题-背景.png */; };
 		D772CCE61DC9BE3100BB28D9 /* 对号.png in Resources */ = {isa = PBXBuildFile; fileRef = D772CCBC1DC9BE3100BB28D9 /* 对号.png */; };
 		D772CCE71DC9BE3100BB28D9 /* 回答错误.png in Resources */ = {isa = PBXBuildFile; fileRef = D772CCBD1DC9BE3100BB28D9 /* 回答错误.png */; };
 		D772CCE81DC9BE3100BB28D9 /* 回答正确.png in Resources */ = {isa = PBXBuildFile; fileRef = D772CCBE1DC9BE3100BB28D9 /* 回答正确.png */; };
@@ -248,6 +248,7 @@
 		D24EC07F1DDAA4BF00A043A8 /* XLquestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLquestionViewController.m; sourceTree = "<group>"; };
 		D24EC0821DDAA50000A043A8 /* XLanswerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLanswerViewController.h; sourceTree = "<group>"; };
 		D24EC0831DDAA50000A043A8 /* XLanswerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLanswerViewController.m; sourceTree = "<group>"; };
+		D291DD2B1DE42C490044805B /* 答题-背景.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "答题-背景.png"; sourceTree = "<group>"; };
 		D2C1AC7F1DC97D8C00092F44 /* com.BeiGe.PanYouApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = com.BeiGe.PanYouApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2C1AC831DC97D8C00092F44 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D2C1AC851DC97D8C00092F44 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -368,7 +369,6 @@
 		D772CCB61DC9B52B00BB28D9 /* XLMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLMainViewController.m; sourceTree = "<group>"; };
 		D772CCB91DC9BE3100BB28D9 /* 按钮.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "按钮.png"; sourceTree = "<group>"; };
 		D772CCBA1DC9BE3100BB28D9 /* 按钮2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "按钮2.png"; sourceTree = "<group>"; };
-		D772CCBB1DC9BE3100BB28D9 /* 答题-背景.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "答题-背景.png"; sourceTree = "<group>"; };
 		D772CCBC1DC9BE3100BB28D9 /* 对号.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "对号.png"; sourceTree = "<group>"; };
 		D772CCBD1DC9BE3100BB28D9 /* 回答错误.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "回答错误.png"; sourceTree = "<group>"; };
 		D772CCBE1DC9BE3100BB28D9 /* 回答正确.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "回答正确.png"; sourceTree = "<group>"; };
@@ -629,7 +629,6 @@
 		D2C1AC811DC97D8C00092F44 /* com.BeiGe.PanYouApp */ = {
 			isa = PBXGroup;
 			children = (
-				D75D8FB01DC9DC1000CC3355 /* jinru_03.png */,
 				D772CCB81DC9BE1C00BB28D9 /* Image */,
 				D2C1ACBA1DC97E2400092F44 /* Basis */,
 				D2C1ACB91DC97E2200092F44 /* Farmework */,
@@ -960,13 +959,14 @@
 		D772CCB81DC9BE1C00BB28D9 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				D75D8FB01DC9DC1000CC3355 /* jinru_03.png */,
 				D730F8B21DCB1DEF00F07053 /* downloads.png */,
 				D730F8AE1DCB1DDB00F07053 /* cuo.png */,
 				D72F30C31DD1BD13007F754F /* camera.png */,
+				D291DD2B1DE42C490044805B /* 答题-背景.png */,
 				D730F8AF1DCB1DDB00F07053 /* dui.png */,
 				D772CCB91DC9BE3100BB28D9 /* 按钮.png */,
 				D772CCBA1DC9BE3100BB28D9 /* 按钮2.png */,
-				D772CCBB1DC9BE3100BB28D9 /* 答题-背景.png */,
 				D772CCBC1DC9BE3100BB28D9 /* 对号.png */,
 				D772CCBD1DC9BE3100BB28D9 /* 回答错误.png */,
 				D772CCBE1DC9BE3100BB28D9 /* 回答正确.png */,
@@ -1219,7 +1219,7 @@
 					D2C1AC7E1DC97D8C00092F44 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = GP8BUACAG4;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -1279,6 +1279,7 @@
 				D77487AF1DD9652B007A92E3 /* bg.png in Resources */,
 				D772CD0B1DC9BE3100BB28D9 /* E2.png in Resources */,
 				D77487BB1DD9652B007A92E3 /* ic_launcher.png in Resources */,
+				D291DD2C1DE42C490044805B /* 答题-背景.png in Resources */,
 				D77487D21DD9652B007A92E3 /* icon_02_14.png in Resources */,
 				D772CCF91DC9BE3100BB28D9 /* 统计-工作天数.png in Resources */,
 				D72F30C41DD1BD13007F754F /* camera.png in Resources */,
@@ -1298,7 +1299,6 @@
 				D730F8B31DCB1DEF00F07053 /* downloads.png in Resources */,
 				D77487E21DD9652B007A92E3 /* jianpan_dk_04_03.png in Resources */,
 				D77488051DD9652B007A92E3 /* verson.png in Resources */,
-				D772CCE51DC9BE3100BB28D9 /* 答题-背景.png in Resources */,
 				D772CD061DC9BE3100BB28D9 /* C3.png in Resources */,
 				D772CD0A1DC9BE3100BB28D9 /* E1.png in Resources */,
 				D77487CE1DD9652B007A92E3 /* bg.png in Resources */,
@@ -1649,7 +1649,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = com.BeiGe.PanYouApp/com.BeiGe.PanYouApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Yulan Zhao (4RSNZMG5V8)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yulan Zhao (4RSNZMG5V8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				DEVELOPMENT_TEAM = GP8BUACAG4;
 				INFOPLIST_FILE = com.BeiGe.PanYouApp/Info.plist;
@@ -1657,8 +1657,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.BeiGe.PanYouApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e4c5d6ff-4a4c-43fa-bc85-855c7a30be44";
-				PROVISIONING_PROFILE_SPECIFIER = ceshi_PanYou;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1669,7 +1669,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = com.BeiGe.PanYouApp/com.BeiGe.PanYouApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Yulan Zhao (4RSNZMG5V8)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yulan Zhao (4RSNZMG5V8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				DEVELOPMENT_TEAM = GP8BUACAG4;
 				INFOPLIST_FILE = com.BeiGe.PanYouApp/Info.plist;
@@ -1677,8 +1677,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.BeiGe.PanYouApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e4c5d6ff-4a4c-43fa-bc85-855c7a30be44";
-				PROVISIONING_PROFILE_SPECIFIER = ceshi_PanYou;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
