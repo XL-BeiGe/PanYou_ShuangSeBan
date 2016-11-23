@@ -24,8 +24,23 @@
     [super viewDidLoad];
     self.title =@"通知";
     [self tableviewdelegate];
+    [self refrish];
+    
     [self tongzhijiekou:@"1"];
     zhT=@"1";
+}
+-(void)viewWillAppear:(BOOL)animated{
+    if ([_typ isEqualToString:@"2"]){
+        _segment.selectedSegmentIndex = 1;
+
+    }else if ([_typ isEqualToString:@"3"]){
+        _segment.selectedSegmentIndex = 2;
+
+    }else{
+        _segment.selectedSegmentIndex = 0;
+
+    }
+    
 }
 
 -(void)tongzhijiekou:(NSString*)zhuangtai{
@@ -67,7 +82,22 @@
 
     }
 }
-
+#pragma mark--刷新方法
+-(void)refrish{
+      NSLog(@"setupRefresh -- 下拉刷新");
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(refreshClick:) forControlEvents:UIControlEventValueChanged];
+    [self.table addSubview:refreshControl];
+    [refreshControl beginRefreshing];
+    [self refreshClick:refreshControl];
+}
+- (void)refreshClick:(UIRefreshControl *)refreshControl {
+    NSLog(@"refreshClick: -- 刷新触发");
+    // 此处添加刷新tableView数据的代码
+    [refreshControl endRefreshing];
+    //[self.table reloadData];// 刷新tableView即可
+}
+#pragma mark---tableview
 -(void)tableviewdelegate{
     _table.dataSource = self;
     _table.delegate = self;

@@ -12,12 +12,17 @@
 #import "XL_FMDB.h"
 #import "XL_WangLuo.h"
 #import "WarningBox.h"
-@interface XLShopCarViewController ()
+#import "Color+Hex.h"
+#import "ZYCustomKeyboardTypeNumberView.h"
+#import "DSKyeboard.h"
+
+@interface XLShopCarViewController ()<ZYCustomKeyboardTypeNumberViewDelegate>
 {
     XL_FMDB  *XL;//数据库调用者
     FMDatabase *db;//数据库
     
     NSArray  *shoparr;
+
 }
 @end
 
@@ -28,6 +33,8 @@
     self.title = @"购物车";
     [self shujuku];
     [self tableviewdelegate];
+   
+
     // Do any additional setup after loading the view.
 }
 
@@ -59,7 +66,9 @@
         NSLog(@"%@",error);
     }];
     
-    
+//    XLSetAccountViewController *shop = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"setacc"];
+//    
+//    [self.navigationController pushViewController:shop animated:YES];
     
    
 }
@@ -70,47 +79,67 @@
     _tabel.tableFooterView =[[UIView alloc]initWithFrame:CGRectZero];
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 15;
+    //return shoparr.count;
+    return 10;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 80;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *aa=@"shopcell";
-    UITableViewCell *cell=[self.tabel dequeueReusableCellWithIdentifier:aa];
-    if (cell==nil) {
-        cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:aa];
+    static NSString *id1 =@"cell1";
+    UITableViewCell *cell;
+    cell = [tableView cellForRowAtIndexPath:indexPath];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:id1];
     }
     //    for (UIView *v in [cell.contentView subviews]) {
     //        [v removeFromSuperview];
     //    }
-    UILabel *name =(UILabel*)[cell viewWithTag:100];
-    UILabel *price =(UILabel*)[cell viewWithTag:300];
-    UILabel *namete =(UILabel*)[cell viewWithTag:200];
-    UILabel *pricete =(UILabel*)[cell viewWithTag:400];
-    UITextField* number =(UITextField*)[cell viewWithTag:600];
-    UIButton *subtrace = (UIButton*)[cell viewWithTag:500];
-    UIButton *sum = (UIButton*)[cell viewWithTag:700];
+    
+    UILabel *name =[[UILabel alloc]initWithFrame:CGRectMake(15,12,80,25)];
+    UILabel *price =[[UILabel alloc]initWithFrame:CGRectMake(15,45,80,25)];
+    UILabel *namete =[[UILabel alloc]initWithFrame:CGRectMake(100,12,self.view.frame.size.width-120,25)];
+    UILabel *pricete =[[UILabel alloc]initWithFrame:CGRectMake(100,45,100,25)];
+    
+    UIButton *sum =[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width-50,45,25,25)];
+    UITextField* number =[[UITextField alloc]initWithFrame:CGRectMake(sum.frame.origin.x-40,45,40,25)];
+     UIButton *subtrace = [[UIButton alloc]initWithFrame:CGRectMake(number.frame.origin.x-25,45,25,25)];
      name.text = @"药品名称:";
      price.text = @"药品价格:";
+     pricete.textColor = [UIColor colorWithHexString:@"FF6534" alpha:1];
      namete.text = [NSString stringWithFormat:@"%ld",indexPath.row+600];
-     pricete.text = [NSString stringWithFormat:@"￥1235.0"];
-    number.delegate = self;
-   
-    sum.tag =700+indexPath.row;
-    number.tag = 600+indexPath.row;
-    subtrace.tag = 500+indexPath.row;
-     number.text = [NSString stringWithFormat:@"12"];
+     pricete.text = [NSString stringWithFormat:@"￥%ld",indexPath.row+600];
+    
+    // number.delegate = self;
+     number.textAlignment = NSTextAlignmentCenter;
+     number.adjustsFontSizeToFitWidth = YES;
+    // number.keyboardType = UIKeyboardTypeNumberPad;
+     number.tag = 600+indexPath.row;
+    
+ 
+    
+     number.text = [NSString stringWithFormat:@"%ld",indexPath.row+10];
+    [subtrace setTitle:@"-" forState:UIControlStateNormal];
+    [sum setTitle:@"+" forState:UIControlStateNormal];
+    [sum setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    [subtrace setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+
+    
+    
     [number addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [number addTarget:self action:@selector(NumberLength:) forControlEvents:UIControlEventEditingChanged];
     [sum addTarget:self action:@selector(sum:) forControlEvents:UIControlEventTouchUpInside];
     [subtrace addTarget:self action:@selector(subtrace:) forControlEvents:UIControlEventTouchUpInside];
-
-    //    [cell.contentView addSubview:titl];
-    //    [cell.contentView addSubview:mess];
-    //    [cell.contentView addSubview:time];
-    //    [cell.contentView addSubview:icoimg];
-    //    [cell.contentView addSubview:img];
+  [ZYCustomKeyboardTypeNumberView customKeyboardViewWithServiceTextField:number Delegate:self];
+    
+        [cell.contentView addSubview:name];
+        [cell.contentView addSubview:price];
+        [cell.contentView addSubview:namete];
+        [cell.contentView addSubview:sum];
+        [cell.contentView addSubview:number];
+        [cell.contentView addSubview:subtrace];
+        [cell.contentView addSubview:pricete];
+    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
@@ -136,7 +165,7 @@
     [_tabel reloadData];
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"*-*-*-*-*%ld",(long)indexPath.row);
+    //NSLog(@"*-*-*-*-*%ld",(long)indexPath.row);
 }
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [self.view endEditing:YES];
@@ -157,6 +186,7 @@
     {
     oo.text = [szText substringToIndex:MaxLen];
     }
+       NSLog(@"限制长度");
     
 }
 //修改数量
@@ -171,7 +201,7 @@
     oo.text=[NSString stringWithFormat:@"%d",[oo.text intValue]];
     
     NSString*qw=oo.text;
-    
+    NSLog(@"修改数量");
     //[yikaishi[index.row] setObject:qw forKey:@"shuliang"];
     
 }
@@ -192,7 +222,7 @@
     qw =[NSString stringWithFormat:@"%d", wq+1];
     
     oo.text=qw;
-    
+ 
     //  存入jieshou数组中
    // [yikaishi[index.row] setObject:qw forKey:@"shuliang"];
     NSLog(@"加");
@@ -217,10 +247,15 @@
         qw =[NSString stringWithFormat:@"%d", wq-1];
     
     oo.text=qw;
+    
+  
     //  存入jieshou数组中
     //[yikaishi[index.row] setObject:qw forKey:@"shuliang"];
     NSLog(@"减");
 }
+
+
+
 //视图上移的方法
 - (void) animateTextField: (CGFloat) textField up: (BOOL) up
 {
@@ -241,6 +276,8 @@
     [UIView commitAnimations];
     
 }
+
+
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     [self animateTextField:-150.0 up:YES];
     return YES;

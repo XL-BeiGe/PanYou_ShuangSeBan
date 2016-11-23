@@ -52,16 +52,7 @@
     // Pass the selected object to the new view controller.
 }
 */
--(void)xianshi{
-  _ypname.text =[NSString stringWithFormat:@"测试药品测试测试"] ;
-  _sccomp.text = [NSString stringWithFormat:@"这里是测试生产厂家"];
-  _scday.text = [NSString stringWithFormat:@"2016年10月20日"];
-  _price.text =[NSString stringWithFormat:@"￥25.53元/个"];
-  _number.text =[NSString stringWithFormat:@"0"];
-    _subtract.hidden = NO;
-    _sum.hidden = NO;
-    
-}
+
 -(void)clear{
     _ypname.text = @"";
     _sccomp.text = @"";
@@ -73,23 +64,31 @@
 }
 -(void)navagation{
     self.title = @"收银台";
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[UIColor whiteColor]}];
+//    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[UIColor whiteColor]}];
     UIButton *btn =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, 20)];
     [btn setImage:[UIImage imageNamed:@"downloads.png"] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(Download:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *right = [[UIBarButtonItem alloc]initWithCustomView:btn];
     self.navigationItem.rightBarButtonItem = right;
 }
+//下载药品
 -(void)Download:(UIButton *)button{
     [self xiazaijiekou];
 }
+
 -(void)xiazaijiekou{
+    [XL clearDatabase:db from:ChaXunBiaoMing];
     NSString *fangshi=@"/drug/drugDataSync";
     NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"315",@"userid", nil];
     [WarningBox warningBoxModeIndeterminate:@"数据下载中..." andView:self.view];
     [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         NSLog(@"%@",responseObject);
         [WarningBox warningBoxHide:YES andView:self.view];
+        
+//        NSArray *list=[[responseObject objectForKey:@"data"] objectForKey:@"list"];
+//        NSMutableDictionary * dd=[NSMutableDictionary dictionaryWithDictionary:list];
+       // [XL  DataBase:db insertKeyValues:dd intoTable:ChaXunBiaoMing];
+        
         [WarningBox warningBoxModeText:@"数据已下载!" andView:self.view];
     } failure:^(NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
@@ -100,39 +99,79 @@
 }
 
 - (IBAction)Finding:(id)sender {
-  
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:_checkyp.text,@"product_code",_checkyp.text,@"bar_code",_checkyp.text,@"pycode", nil];
-    //findarr =[XL DataBase:db selectKeyTypes:ChaXunShiTiLei fromTable:ChaXunBiaoMing whereConditionz:dic];
-    
-    NSLog(@"findarr---------%@",findarr);
-    [self xianshi];
+ 
+    NSArray *arr = [XL DataBase:db selectKeyTypes:ChaXunShiTiLei fromTable:ChaXunBiaoMing];
+    if (arr.count==0){
+    [WarningBox warningBoxModeText:@"请同步药品信息" andView:self.view];
+    }else{
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:_checkyp.text,@"product_code",_checkyp.text,@"bar_code",_checkyp.text,@"pycode", nil];
+        findarr =[XL DataBase:db selectKeyTypes:ChaXunShiTiLei fromTable:ChaXunBiaoMing whereConditionz:dic];
+        NSLog(@"findarr---------%@",findarr);
+        
+        if (findarr.count==0){
+            [WarningBox warningBoxModeText:@"未找到药品" andView:self.view];
+        }else{
+            [self xianshi];
+        }
+    }
+ 
 }
+-(void)xianshi{
+    _ypname.text =[NSString stringWithFormat:@"%@",[findarr[0] objectForKey:@"productName"]] ;
+    _sccomp.text = [NSString stringWithFormat:@"%@",[findarr[0] objectForKey:@"manufacturer"]];
+    _scday.text = [NSString stringWithFormat:@"%@",[findarr[0] objectForKey:@"approvalNumber"]];
+    
+    _number.text =[NSString stringWithFormat:@"0"];
+    _subtract.hidden = NO;
+    _sum.hidden = NO;
+    
+    
+    if([type isEqualToString:@"1"]){
+    _price.text =[NSString stringWithFormat:@"%@",[findarr[0] objectForKey:@"vipPrice"]];//价格
+    }else{
+    _price.text =[NSString stringWithFormat:@"%@",[findarr[0] objectForKey:@"salePrice"]];//价格
+    }
+    
+    
+    
+}
+
+
 - (IBAction)Sure:(id)sender {
     int typ;
+    NSString *Ss;
     if(sender){
-        typ=2;
-        //会员价
-    }else if (sender) {
         typ=1;
         //非会员价
+        Ss = [NSString stringWithFormat:@"%@",[findarr[0]objectForKey:@"salePrice"]];
+    }else if (sender) {
+        typ=2;
+        //会员价
+        Ss = [NSString stringWithFormat:@"%@",[findarr[0]objectForKey:@"vipPrice"]];
     }else{
         typ=3;
         //促销价
+        Ss = [NSString stringWithFormat:@"%@",[findarr[0]objectForKey:@"costPrice"]];
     }
-    
-    NSString *ss= [NSString stringWithFormat:@"%@",[findarr[0]objectForKey:@"price"]];
-    float sss = [ss floatValue];
-    float sumpri= [_number.text floatValue]*sss;
-    NSDictionary *dd = [NSDictionary dictionaryWithObjectsAndKeys: [findarr[0] objectForKey:@"id"],@"id",typ,@"type",_number.text,@"num",sumpri,@"price", nil];
+   
+//    NSString *ss= [NSString stringWithFormat:@"%@",[findarr[0]objectForKey:@"price"]];
+//    float sss = [ss floatValue];
+//    float sumpri= [_number.text floatValue]*sss;
+   NSString *sss= [NSString stringWithFormat:@"%@",[findarr[0] objectForKey:@"id"]];
+   NSString *ssr= [NSString stringWithFormat:@"%@",_number.text];
+  
+  // NSDictionary *dd = [NSDictionary dictionaryWithObjectsAndKeys:sss,@"id",typ,@"type",ssr,@"num",Ss,@"price", nil];
    // [XL DataBase:db insertKeyValues:dd intoTable:@"gouwu"];
     [self clear];
     
 }
+
+//加
 - (IBAction)Sum:(id)sender {
     int num =[_number.text intValue];
     _number.text = [NSString stringWithFormat:@"%d",num+1];
 }
-
+//减
 - (IBAction)Subtract:(id)sender {
     int num =[_number.text intValue];
     _number.text = [NSString stringWithFormat:@"%d",num-1];
@@ -142,16 +181,25 @@
 }
 
 
-
+//跳转购物车页面
 - (IBAction)Shopping:(id)sender {
     [self.view endEditing:YES];
+//    
+//    NSArray *cis = [XL DataBase:db selectKeyTypes:[NSDictionary dictionaryWithObjectsAndKeys:@"text",@"id",@"text",@"num",@"text",@"type",@"text",@"price", nil] fromTable:@"gouwu"];
+//    
+//    if (cis.count==0){
+//     [WarningBox warningBoxModeText:@"请添加药品" andView:self.view];
+//    }else{
+    
     XLShopCarViewController *shop = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"shopcar"];
     shop.scno=_vipnum.text;
     
     shop.sctype=type;
     [self.navigationController pushViewController:shop animated:YES];
-    
+   // }
 }
+
+
 -(void)shujuku{
     XL = [XL_FMDB tool];
     [XL_FMDB allocWithZone:NULL];
@@ -165,9 +213,13 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }
+
+
+
+
+#pragma mark----会员查询
 -(void)textFieldDidEndEditing:(UITextField *)textField{
     if(textField==_vipnum){
-        NSLog(@"网络请求一下呦");
         [self huiyuanchaxun];
     }
 }
