@@ -334,7 +334,26 @@
     NSLog(@"我是确定按钮");
     NSString*zhengda= [[NSString stringWithFormat:@"%@",[_timuarr[iii] objectForKey:@"answer"]] uppercaseString];
     if (duodaan.length == zhengda.length) {
-        
+        NSMutableArray *array = [[NSMutableArray alloc] init];
+        NSString *str = duodaan;
+        NSUInteger len = [str length];
+        for(NSUInteger i=0; i<len; i++)
+        {
+            [array addObject:[NSNumber numberWithChar:[str characterAtIndex:i]]];
+        }
+        int q=0;
+        for (NSString*ss in array) {
+            if (![zhengda containsString:ss]) {
+                q=1;
+            }
+        }
+        if (q==1) {
+            //答错了   爆红  哭脸
+            
+        }else{
+            //答对了   爆绿  笑脸
+            
+        }
     }else{
         //答错了   爆红  哭脸
     }
