@@ -59,8 +59,12 @@
 -(void)chuangjiantable{
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
+    
     button=[[UIButton alloc] initWithFrame:CGRectMake(80, height-100, width-160, 44)];
+    button.backgroundColor=[UIColor colorWithHexString:@"2fb870"];
+    button.layer.cornerRadius=10;
     [button setTitle:@"确定" forState:UIControlStateNormal];
+    button.tintColor=[UIColor whiteColor];
     [button addTarget:self action:@selector(queding) forControlEvents:UIControlEventTouchUpInside];
     button.hidden=YES;
     [self.view addSubview:button];
@@ -103,8 +107,10 @@
         }
     }
     if ([[_timuarr[iii] objectForKey:@"quesionType"]isEqualToString:@"2"]) {
+        button.hidden=NO;
         _wenti.text=@"(多选)问题:";
     }else{
+        button.hidden=YES;
         _wenti.text=@"问题:";
     }
     _wentizhuti.text=[_timuarr[iii] objectForKey:@"quesion"];
@@ -325,7 +331,13 @@
 }
 //判断多选题的答案是否正确
 -(void)queding{
-    
+    NSLog(@"我是确定按钮");
+    NSString*zhengda= [[NSString stringWithFormat:@"%@",[_timuarr[iii] objectForKey:@"answer"]] uppercaseString];
+    if (duodaan.length == zhengda.length) {
+        
+    }else{
+        //答错了   爆红  哭脸
+    }
     
 }
 -(void)tijiaodaan{
