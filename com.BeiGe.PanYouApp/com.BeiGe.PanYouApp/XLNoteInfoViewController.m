@@ -9,7 +9,7 @@
 #import "XLNoteInfoViewController.h"
 #import "WarningBox.h"
 #import "XL_WangLuo.h"
-#import "XLNoteViewController.h"
+
 @interface XLNoteInfoViewController ()<UITextViewDelegate>
 {
     UILabel *placeor;
@@ -27,7 +27,7 @@
     [self xiangqingjiekou];
  
     self.title = @"通知详情";
-//    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[UIColor whiteColor]}];
     self.automaticallyAdjustsScrollViewInsets = NO;
 }
 -(void)jiemian{
@@ -110,15 +110,6 @@
     [WarningBox warningBoxModeIndeterminate:@"加载界面..." andView:self.view];
     [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         NSLog(@"%@",responseObject);
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-            XLNoteViewController *xln = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"note"];
-            xln.typ=str;
-            [self.navigationController pushViewController:xln animated:YES];
-            
-        });
-       
         [WarningBox warningBoxHide:YES andView:self.view];
         
     } failure:^(NSError *error) {

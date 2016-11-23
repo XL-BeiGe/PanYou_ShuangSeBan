@@ -14,5 +14,5 @@
 //- (IBAction)Changed:(id)sender;
 
 - (IBAction)ChangeV:(UISegmentedControl *)sender;
-@property (strong, nonatomic) NSString *typ;
+
 @end

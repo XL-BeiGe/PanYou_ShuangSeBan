@@ -11,9 +11,7 @@
 #import "WarningBox.h"
 #import "XL_WangLuo.h"
 @interface XLSetAccountViewController ()
-{
-  NSString  *chuannima;
-}
+
 @end
 
 @implementation XLSetAccountViewController
@@ -27,24 +25,6 @@
   
 }
 
-- (IBAction)FuTyp:(id)sender {
-    UIActionSheet *sheet=[[UIActionSheet alloc] initWithTitle:@"付款类型：" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"现金",@"刷卡", nil];
-    
-    [sheet showInView:self.view];
-}
--(NSArray*)jiaming{
-    NSArray*arr=[NSArray arrayWithObjects:@"现金",@"刷卡", nil];
-    return arr;
-}
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if(buttonIndex<2){
-        NSArray *jiaming = [self jiaming];
-        _futype.text=[NSString stringWithFormat:@"%@",jiaming[buttonIndex]];
-        chuannima=[NSString stringWithFormat:@"%ld",(long)buttonIndex+1];
-    }
-}
-
-
 - (IBAction)Sure:(id)sender {
     //网络请求
     [self quedingwangluo];
@@ -52,7 +32,7 @@
 }
 -(void)quedingwangluo{
     NSString *fangshi=@"/drug/postDrug";
-    NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:_consumptionInfoId,@"consumptionInfoId",_fumoney.text,@"drugAmountReceive",chuannima,@"drugAmountType",_zlmoney.text,@"drugAmountBack", nil];
+    NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:_consumptionInfoId,@"consumptionInfoId",_fumoney.text,@"drugAmountReceive",@"1",@"drugAmountType",_zlmoney.text,@"drugAmountBack", nil];
     [WarningBox warningBoxModeIndeterminate:@"正在结账..." andView:self.view];
     [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         NSLog(@"%@",responseObject);
