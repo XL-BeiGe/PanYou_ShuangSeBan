@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D20954B31DE580EF0091790C /* A5.png in Resources */ = {isa = PBXBuildFile; fileRef = D20954AE1DE580EF0091790C /* A5.png */; };
+		D20954B41DE580EF0091790C /* B5.png in Resources */ = {isa = PBXBuildFile; fileRef = D20954AF1DE580EF0091790C /* B5.png */; };
+		D20954B51DE580EF0091790C /* C5.png in Resources */ = {isa = PBXBuildFile; fileRef = D20954B01DE580EF0091790C /* C5.png */; };
+		D20954B61DE580EF0091790C /* D5.png in Resources */ = {isa = PBXBuildFile; fileRef = D20954B11DE580EF0091790C /* D5.png */; };
+		D20954B71DE580EF0091790C /* E5.png in Resources */ = {isa = PBXBuildFile; fileRef = D20954B21DE580EF0091790C /* E5.png */; };
 		D23B407A1DCC792B00CDACCB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23B40791DCC792B00CDACCB /* CoreLocation.framework */; };
 		D24EC0801DDAA4BF00A043A8 /* XLquestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D24EC07F1DDAA4BF00A043A8 /* XLquestionViewController.m */; };
 		D24EC0841DDAA50000A043A8 /* XLanswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D24EC0831DDAA50000A043A8 /* XLanswerViewController.m */; };
@@ -243,6 +248,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D20954AE1DE580EF0091790C /* A5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = A5.png; sourceTree = "<group>"; };
+		D20954AF1DE580EF0091790C /* B5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = B5.png; sourceTree = "<group>"; };
+		D20954B01DE580EF0091790C /* C5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = C5.png; sourceTree = "<group>"; };
+		D20954B11DE580EF0091790C /* D5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = D5.png; sourceTree = "<group>"; };
+		D20954B21DE580EF0091790C /* E5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = E5.png; sourceTree = "<group>"; };
 		D23B40791DCC792B00CDACCB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		D24EC07E1DDAA4BF00A043A8 /* XLquestionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLquestionViewController.h; sourceTree = "<group>"; };
 		D24EC07F1DDAA4BF00A043A8 /* XLquestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLquestionViewController.m; sourceTree = "<group>"; };
@@ -959,6 +969,11 @@
 		D772CCB81DC9BE1C00BB28D9 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				D20954AE1DE580EF0091790C /* A5.png */,
+				D20954AF1DE580EF0091790C /* B5.png */,
+				D20954B01DE580EF0091790C /* C5.png */,
+				D20954B11DE580EF0091790C /* D5.png */,
+				D20954B21DE580EF0091790C /* E5.png */,
 				D75D8FB01DC9DC1000CC3355 /* jinru_03.png */,
 				D730F8B21DCB1DEF00F07053 /* downloads.png */,
 				D730F8AE1DCB1DDB00F07053 /* cuo.png */,
@@ -1263,7 +1278,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D20954B41DE580EF0091790C /* B5.png in Resources */,
 				D772CD031DC9BE3100BB28D9 /* B3.png in Resources */,
+				D20954B61DE580EF0091790C /* D5.png in Resources */,
 				D77487CD1DD9652B007A92E3 /* icon_progress_bar.png in Resources */,
 				D77487E01DD9652B007A92E3 /* jianpan_dk_02_03_03.png in Resources */,
 				D77487FA1DD9652B007A92E3 /* jianpan_mr_23.png in Resources */,
@@ -1291,6 +1308,7 @@
 				D772CCEE1DC9BE3100BB28D9 /* 考勤-05.png in Resources */,
 				D77487F71DD9652B007A92E3 /* jianpan_mr_08.png in Resources */,
 				D77487DF1DD9652B007A92E3 /* jianpan_dk_02_03.png in Resources */,
+				D20954B71DE580EF0091790C /* E5.png in Resources */,
 				D77487D01DD9652B007A92E3 /* icon_01_14.png in Resources */,
 				D77487EE1DD9652B007A92E3 /* jianpan_mr_33.png in Resources */,
 				D77487B31DD9652B007A92E3 /* change2.png in Resources */,
@@ -1337,6 +1355,7 @@
 				D772CCFA1DC9BE3100BB28D9 /* 统计-漏打卡.png in Resources */,
 				D77488041DD9652B007A92E3 /* toolbar_color.png in Resources */,
 				D77487B81DD9652B007A92E3 /* download.png in Resources */,
+				D20954B31DE580EF0091790C /* A5.png in Resources */,
 				D76B34BF1DC9925F00E285AB /* DSLetterKeyboard.xib in Resources */,
 				D772CCFC1DC9BE3100BB28D9 /* 统计-外出天数.png in Resources */,
 				D77487C71DD9652B007A92E3 /* icon_02_18.png in Resources */,
@@ -1405,6 +1424,7 @@
 				D77487DC1DD9652B007A92E3 /* 盘点助手_主页.jpg in Resources */,
 				D77487D91DD9652B007A92E3 /* 登录.jpg in Resources */,
 				D772CCFF1DC9BE3100BB28D9 /* A2.png in Resources */,
+				D20954B51DE580EF0091790C /* C5.png in Resources */,
 				D772CCEA1DC9BE3100BB28D9 /* 考勤-01.png in Resources */,
 				D77488011DD9652B007A92E3 /* next.png in Resources */,
 				D772CCF61DC9BE3100BB28D9 /* 通知列表小标.png in Resources */,

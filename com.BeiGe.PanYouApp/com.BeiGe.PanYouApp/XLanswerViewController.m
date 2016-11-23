@@ -11,12 +11,26 @@
 #import "XL_WangLuo.h"
 #import "Color+Hex.h"
 @interface XLanswerViewController ()<UITableViewDelegate,UITableViewDataSource>{
+    //答案的个数
     NSMutableArray*muarr;
+    //题目的个数
     NSArray*_timuarr;
+    //第几个题目
     int iii;
+    //答对了还是打错了
     int duicuo;
+    //需要提交的数组
     NSMutableArray*tijiaodaan;
+    //单选题不能点击多个答案
     int dianjicishu;
+    
+    //多选题选项判断；
+    int panA,panB,panC,panD,panE;
+    //多选题答案
+    NSString*duodaan;
+    //多选题的确定按钮
+    UIButton *button;
+    
 }
 @property (weak, nonatomic) IBOutlet UIImageView *beijing;
 @property (weak, nonatomic) IBOutlet UILabel *wenti;
@@ -34,9 +48,10 @@
     iii=0;
     duicuo=1;
     dianjicishu=0;
-    //    NSDictionary *d1=[NSDictionary dictionaryWithObjectsAndKeys:@"a",@"answer",@"1",@"id",@"你说我选啥",@"optionA",@"选啥就撒的空间哈哈哈哈哈哈哈",@"optionB",@"么么哒",@"optionC",@"",@"optionD",@"",@"optionE",@"问点啥呢",@"quesion",@"1",@"quesionType", nil];
-    //    NSDictionary *d2=[NSDictionary dictionaryWithObjectsAndKeys:@"c",@"answer",@"3",@"id",@"go come",@"optionA",@"我是错的",@"optionB",@"我对",@"optionC",@"这是单选？",@"optionD",@"嗯，是",@"optionE",@"狗不理包子",@"quesion",@"1",@"quesionType", nil];
-    //    _timuarr=[NSArray arrayWithObjects:d1,d2, nil];
+    NSDictionary *d1=[NSDictionary dictionaryWithObjectsAndKeys:@"a",@"answer",@"1",@"id",@"你说我选啥",@"optionA",@"选啥就撒的空间哈哈哈哈哈哈哈",@"optionB",@"么么哒",@"optionC",@"",@"optionD",@"",@"optionE",@"问点啥呢",@"quesion",@"1",@"quesionType", nil];
+    NSDictionary *d2=[NSDictionary dictionaryWithObjectsAndKeys:@"c",@"answer",@"3",@"id",@"go come",@"optionA",@"我是错的",@"optionB",@"我对",@"optionC",@"这是单选？",@"optionD",@"嗯，是",@"optionE",@"狗不理包子",@"quesion",@"1",@"quesionType", nil];
+    NSDictionary *d3=[NSDictionary dictionaryWithObjectsAndKeys:@"ac",@"answer",@"3",@"id",@"go come",@"optionA",@"我是错的",@"optionB",@"我对",@"optionC",@"这是单选？",@"optionD",@"嗯，是",@"optionE",@"我是一个多选题吗？",@"quesion",@"2",@"quesionType", nil];
+    _timuarr=[NSArray arrayWithObjects:d1,d2,d3, nil];
     [self quxuanxiang:_timuarr[iii]];
     [self chuangjiantable];
     
@@ -44,6 +59,12 @@
 -(void)chuangjiantable{
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
+    button=[[UIButton alloc] initWithFrame:CGRectMake(80, height-100, width-160, 44)];
+    [button setTitle:@"确定" forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(queding) forControlEvents:UIControlEventTouchUpInside];
+    button.hidden=YES;
+    [self.view addSubview:button];
+    
     _beijing.frame=CGRectMake(0, 64, width, height/3);
     _beijing.backgroundColor=[UIColor blackColor];
     _wenti.frame=CGRectMake(20, CGRectGetMaxY(_beijing.frame), 200, 30);
@@ -223,8 +244,89 @@
     //多选题的判断
     else{
         
-        
+        if (indexPath.row==0) {
+            if (panA==0) {
+                panA=1;
+                duicuo=4;
+                if (duodaan.length==0) {
+                    duodaan=@"A";
+                }else{
+                    duodaan=[duodaan stringByAppendingString:@"A"];
+                }
+            }else{
+                duicuo=5;
+                panA=0;
+                duodaan=[duodaan stringByReplacingOccurrencesOfString:@"A" withString:@""];
+            }
+            
+            
+        }else if (indexPath.row==1){
+            if (panB==0) {
+                panB=1;
+                duicuo=4;
+                if (duodaan.length==0) {
+                    duodaan=@"B";
+                }else{
+                    duodaan=[duodaan stringByAppendingString:@"B"];
+                }
+            }else{
+                duicuo=5;
+                panB=0;
+                duodaan=[duodaan stringByReplacingOccurrencesOfString:@"B" withString:@""];
+            }
+        }else if (indexPath.row==2){
+            if (panC==0) {
+                panC=1;
+                duicuo=4;
+                if (duodaan.length==0) {
+                    duodaan=@"C";
+                }else{
+                    duodaan=[duodaan stringByAppendingString:@"C"];
+                }
+            }else{
+                panC=0;
+                duicuo=5;
+                duodaan=[duodaan stringByReplacingOccurrencesOfString:@"C" withString:@""];
+            }
+        }else if (indexPath.row==3){
+            if (panD==0) {
+                panD=1;
+                duicuo=4;
+                if (duodaan.length==0) {
+                    duodaan=@"D";
+                }else{
+                    duodaan=[duodaan stringByAppendingString:@"D"];
+                }
+            }else{
+                panD=0;
+                duicuo=5;
+                duodaan=[duodaan stringByReplacingOccurrencesOfString:@"D" withString:@""];
+            }
+        }else if (indexPath.row==4){
+            if (panE==0) {
+                panE=1;
+                duicuo=4;
+                if (duodaan.length==0) {
+                    duodaan=@"E";
+                }else{
+                    duodaan=[duodaan stringByAppendingString:@"E"];
+                }
+            }else{
+                panE=0;
+                duicuo=5;
+                duodaan=[duodaan stringByReplacingOccurrencesOfString:@"E" withString:@""];
+            }
+        }
+        NSLog(@"%@",duodaan);
+        int ui=(int)indexPath.row;
+        NSIndexPath *indexPath=[NSIndexPath indexPathForRow:ui inSection:0];
+        [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
     }
+}
+//判断多选题的答案是否正确
+-(void)queding{
+    
+    
 }
 -(void)tijiaodaan{
     if([_str isEqualToString:@"1"]){
