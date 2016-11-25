@@ -12,4 +12,5 @@
 @property (strong, nonatomic) NSArray*timuarr;
 @property (strong, nonatomic) NSString*str;
 @property (strong, nonatomic) NSString*mobanID;
+@property (strong, nonatomic) NSString*xunhuan;
 @end

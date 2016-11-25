@@ -30,12 +30,17 @@
     NSString*duodaan;
     //多选题的确定按钮
     UIButton *button;
+    //当前错题循环次数
+    int qqq;
     
 }
 @property (weak, nonatomic) IBOutlet UIImageView *beijing;
 @property (weak, nonatomic) IBOutlet UILabel *wenti;
 @property (weak, nonatomic) IBOutlet UILabel *wentizhuti;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
+@property (weak, nonatomic) IBOutlet UILabel *tishi;
+@property (weak, nonatomic) IBOutlet UIView *tishiview;
+@property (weak, nonatomic) IBOutlet UIImageView *tishiimage;
 
 @end
 
@@ -44,6 +49,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    qqq=0;
     tijiaodaan=[[NSMutableArray alloc] init];
     iii=0;
     duicuo=1;
@@ -51,7 +57,8 @@
     NSDictionary *d1=[NSDictionary dictionaryWithObjectsAndKeys:@"a",@"answer",@"1",@"id",@"你说我选啥",@"optionA",@"选啥就撒的空间哈哈哈哈哈哈哈",@"optionB",@"么么哒",@"optionC",@"",@"optionD",@"",@"optionE",@"问点啥呢",@"quesion",@"1",@"quesionType", nil];
     NSDictionary *d2=[NSDictionary dictionaryWithObjectsAndKeys:@"c",@"answer",@"3",@"id",@"go come",@"optionA",@"我是错的",@"optionB",@"我对",@"optionC",@"这是单选？",@"optionD",@"嗯，是",@"optionE",@"狗不理包子",@"quesion",@"1",@"quesionType", nil];
     NSDictionary *d3=[NSDictionary dictionaryWithObjectsAndKeys:@"ac",@"answer",@"3",@"id",@"go come",@"optionA",@"我是错的",@"optionB",@"我对",@"optionC",@"这是单选？",@"optionD",@"嗯，是",@"optionE",@"我是一个多选题吗？",@"quesion",@"2",@"quesionType", nil];
-    _timuarr=[NSArray arrayWithObjects:d1,d2,d3, nil];
+    NSDictionary *d4=[NSDictionary dictionaryWithObjectsAndKeys:@"a",@"answer",@"3",@"id",@"go come",@"optionA",@"sadsad",@"optionB",@"dsf",@"optionC",@"dsfdsx",@"optionD",@"fghgf",@"optionE",@"我是一个单选题吗？",@"quesion",@"1",@"quesionType", nil];
+//    _timuarr=[NSArray arrayWithObjects:d1,d2,d3,d4, nil];
     [self quxuanxiang:_timuarr[iii]];
     [self chuangjiantable];
     
@@ -79,14 +86,23 @@
     _tableview.scrollEnabled =NO;
     _tableview.backgroundColor=[UIColor colorWithHexString:@"ededed"];
     _tableview.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    [_tishiimage bringSubviewToFront:_tableview];
+    [_tishiimage bringSubviewToFront:_tishiview];
+    _tishi.hidden=YES;
+    _tishiview.hidden=YES;
+    _tishiimage.hidden=YES;
 }
 
 -(void)quxuanxiang :(NSDictionary*)a1{
     if ([_str isEqual:@"1"]) {
-        self.navigationItem.title=[NSString stringWithFormat:@"%d/%lu",iii+1,(unsigned long)_timuarr.count];
+        self.navigationItem.title=[NSString stringWithFormat:@"当前答题进度:%d/%lu",iii+1,(unsigned long)_timuarr.count];
     }else{
-        self.navigationItem.title=[NSString stringWithFormat:@"%d/%lu",iii+1,(unsigned long)_timuarr.count];
+        self.navigationItem.title=[NSString stringWithFormat:@"循环进度:%d/%@  答题进度:%d/%lu",qqq+1,_xunhuan,iii+1,(unsigned long)_timuarr.count];
     }
+    _tishi.hidden=YES;
+    _tishiview.hidden=YES;
+    _tishiimage.hidden=YES;
+    button.hidden=YES;
     dianjicishu=0;
     muarr=[[NSMutableArray alloc] init];
     for (int i=0; i<5; i++) {
@@ -157,7 +173,7 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     // －20    左右距两边各为10;
-    CGFloat labelWidth = self.tableview.bounds.size.width - 20;
+    CGFloat labelWidth = self.tableview.bounds.size.width - 40;
     
     NSAttributedString *test = [self attributedBodyTextAtIndexPath:indexPath];
     
@@ -220,23 +236,48 @@
                 dada=@"E";
             }
             NSString*zhengda= [[NSString stringWithFormat:@"%@",[_timuarr[iii] objectForKey:@"answer"]] uppercaseString];
+            
             if ([dada isEqualToString:zhengda]) {
                 duicuo=2;
+               
                 NSDictionary*dd=[NSDictionary dictionaryWithObjectsAndKeys:[_timuarr[iii] objectForKey:@"id"],@"examId",@"1",@"quesionType",@"1",@"isRight", nil];
-                [tijiaodaan addObject:dd];
+                if ([_str isEqualToString:@"1"]) {
+                    [tijiaodaan addObject:dd];
+                }else{
+                    if (qqq+1 == [_xunhuan intValue]) {
+                        [tijiaodaan addObject:dd];
+                    }
+                }
+                [self huidaduicuo:1];
             }else{
-                NSDictionary*dd=[NSDictionary dictionaryWithObjectsAndKeys:[_timuarr[iii] objectForKey:@"id"],@"examId",@"1",@"quesionType",@"2",@"isRight", nil];
-                [tijiaodaan addObject:dd];
+            NSDictionary*dd=[NSDictionary dictionaryWithObjectsAndKeys:[_timuarr[iii] objectForKey:@"id"],@"examId",@"1",@"quesionType",@"2",@"isRight", nil];
+                if ([_str isEqualToString:@"1"]) {
+                    [tijiaodaan addObject:dd];
+                }else{
+                    if (qqq+1 == [_xunhuan intValue]) {
+                        [tijiaodaan addObject:dd];
+                    }
+                }
                 duicuo=3;
+                [self huidaduicuo:2];
             }
-            
-            
             int ui=(int)indexPath.row;
             NSIndexPath *indexPath=[NSIndexPath indexPathForRow:ui inSection:0];
             [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 if (_timuarr.count==iii+1) {
-                    NSLog(@"提交答题结果");
+                    if ([_str isEqual:@"1"]) {
+                        [self tankuang];
+                    }else{
+                        if (qqq+1 == [_xunhuan intValue]) {
+                            [self tankuang];
+                        }else{
+                            qqq++;
+                            iii=0;
+                            duicuo=1;
+                            [self quxuanxiang:_timuarr[iii]];
+                        }
+                    }
                 }else{
                     iii++;
                     duicuo=1;
@@ -244,7 +285,6 @@
                 }
             });
         }
-        NSLog(@"\n已选的答案:%@",tijiaodaan);
     }
     
     //多选题的判断
@@ -323,40 +363,136 @@
                 duodaan=[duodaan stringByReplacingOccurrencesOfString:@"E" withString:@""];
             }
         }
-        NSLog(@"%@",duodaan);
         int ui=(int)indexPath.row;
         NSIndexPath *indexPath=[NSIndexPath indexPathForRow:ui inSection:0];
         [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
     }
 }
+-(void)huidaduicuo:(int)it{
+    UIImage*image=[[UIImage alloc] init];
+    NSString*tishiyu=[[NSString alloc] init];
+    NSString*yanse=[[NSString alloc] init];
+    if (it==1) {
+        image=[UIImage imageNamed:@"回答正确.png"];
+        tishiyu=@"恭喜!回答正确";
+        yanse=@"45b7fe";
+    }else{
+        image=[UIImage imageNamed:@"回答错误.png"];
+        tishiyu=@"哎呀!回答错啦";
+        yanse=@"ff4d67";
+
+    }
+    
+    _tishi.text=tishiyu;
+    _tishiimage.image=image;
+    _tishiview.backgroundColor=[UIColor colorWithHexString:yanse];
+    _tishiview.hidden=NO;
+    _tishiimage.hidden=NO;
+    _tishi.hidden=NO;
+}
 //判断多选题的答案是否正确
 -(void)queding{
+    
+    if (duodaan.length!=0)
+    {
+        button.hidden=YES;
     NSLog(@"我是确定按钮");
     NSString*zhengda= [[NSString stringWithFormat:@"%@",[_timuarr[iii] objectForKey:@"answer"]] uppercaseString];
     if (duodaan.length == zhengda.length) {
-        NSMutableArray *array = [[NSMutableArray alloc] init];
-        NSString *str = duodaan;
-        NSUInteger len = [str length];
-        for(NSUInteger i=0; i<len; i++)
-        {
-            [array addObject:[NSNumber numberWithChar:[str characterAtIndex:i]]];
-        }
-        int q=0;
-        for (NSString*ss in array) {
-            if (![zhengda containsString:ss]) {
+        NSMutableArray *stringArray = [[NSMutableArray alloc] init];
+        for (int i = 0; i < duodaan.length; i ++) {
+            NSRange range;
+            range.location = i;
+            range.length = 1;
+            NSString *tempString = [duodaan substringWithRange:range];
+            [stringArray addObject:tempString];
+        }        int q=0;
+        for (NSString*ss in stringArray) {
+            NSLog(@"%@-----%@",zhengda,ss);
+            if (![zhengda containsString:[NSString stringWithFormat:@"%@",ss]]) {
+                
                 q=1;
             }
         }
         if (q==1) {
             //答错了   爆红  哭脸
             
+            [self huidaduicuo:2];
+            
+            NSDictionary*dd=[NSDictionary dictionaryWithObjectsAndKeys:[_timuarr[iii] objectForKey:@"id"],@"examId",@"2",@"quesionType",@"2",@"isRight", nil];
+            if ([_str isEqualToString:@"1"]) {
+                [tijiaodaan addObject:dd];
+            }else{
+                if (qqq+1 == [_xunhuan intValue]) {
+                    [tijiaodaan addObject:dd];
+                }
+            }
         }else{
             //答对了   爆绿  笑脸
+            [self huidaduicuo:1];
             
+            
+            NSDictionary*dd=[NSDictionary dictionaryWithObjectsAndKeys:[_timuarr[iii] objectForKey:@"id"],@"examId",@"2",@"quesionType",@"1",@"isRight", nil];
+            if ([_str isEqualToString:@"1"]) {
+                [tijiaodaan addObject:dd];
+            }else{
+                if (qqq+1 == [_xunhuan intValue]) {
+                    [tijiaodaan addObject:dd];
+                }
+            }
         }
     }else{
         //答错了   爆红  哭脸
+        [self huidaduicuo:2];
+        
+        NSDictionary*dd=[NSDictionary dictionaryWithObjectsAndKeys:[_timuarr[iii] objectForKey:@"id"],@"examId",@"2",@"quesionType",@"2",@"isRight", nil];
+        if ([_str isEqualToString:@"1"]) {
+            [tijiaodaan addObject:dd];
+        }else{
+            if (qqq+1 == [_xunhuan intValue]) {
+                [tijiaodaan addObject:dd];
+            }
+        }
     }
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if (_timuarr.count==iii+1) {
+            if ([_str isEqual:@"1"]) {
+                [self tankuang];
+            }else{
+                if (qqq+1 == [_xunhuan intValue]) {
+                    [self tankuang];
+                }else{
+                    qqq++;
+                    iii=0;
+                    duicuo=1;
+                    [self quxuanxiang:_timuarr[iii]];
+                }
+            }
+        }else{
+            iii++;
+            duicuo=1;
+            [self quxuanxiang:_timuarr[iii]];
+        }
+    });
+    }
+    else
+    {
+        [WarningBox warningBoxModeText:@"请先选择答案" andView:self.view];
+    }
+}
+-(void)tankuang{
+    UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"提交提示" message:@"本次题目已全部答完，是否提交成绩?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction*action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self tijiaodaan];
+    
+    }];
+    UIAlertAction*action2=[UIAlertAction actionWithTitle:@"放弃" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [self fanhui];
+    }];
+    [alert addAction:action1];
+    [alert addAction:action2];
+    [self presentViewController:alert animated:YES completion:^{
+    }];
     
 }
 -(void)tijiaodaan{
@@ -377,7 +513,7 @@
     //    NSArray*examList=[NSArray arrayWithObjects:d1,d2,d3,d4,d5, nil];
     //
     
-    
+    NSLog(@"%@",_mobanID);
     NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"1",@"userId",_mobanID,@"templateId",tijiaodaan,@"examList", nil];
     NSLog(@"%@",rucan);
     //自己写的网络请求    请求外网地址
@@ -388,6 +524,9 @@
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
             [WarningBox warningBoxModeText:@"提交答案成功" andView:self.view];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self fanhui];
+            });
         }
         else{
             
@@ -421,6 +560,10 @@
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
             [WarningBox warningBoxModeText:@"提交重做答案成功" andView:self.view];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self fanhui];
+            });
+            
         }
         else{
             
@@ -432,5 +575,8 @@
         NSLog(@"%@",error);
     }];
     
+}
+-(void)fanhui{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 @end
