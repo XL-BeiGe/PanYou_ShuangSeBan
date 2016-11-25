@@ -41,6 +41,9 @@
 		D730F8B91DCB245400F07053 /* XLShopCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D730F8B81DCB245400F07053 /* XLShopCarViewController.m */; };
 		D730F8BC1DCB31C200F07053 /* XLSetAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D730F8BB1DCB31C200F07053 /* XLSetAccountViewController.m */; };
 		D730F8BF1DCB31DC00F07053 /* XLAccSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D730F8BE1DCB31DC00F07053 /* XLAccSuccessViewController.m */; };
+		D739C8EA1DE7CF3800942CD6 /* XLShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D739C8E91DE7CF3800942CD6 /* XLShowViewController.m */; };
+		D739C8EF1DE7D00200942CD6 /* XLChangepassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D739C8EE1DE7D00200942CD6 /* XLChangepassViewController.m */; };
+		D739C8F21DE7D01200942CD6 /* XLSettViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D739C8F11DE7D01200942CD6 /* XLSettViewController.m */; };
 		D75D8FAF1DC9D16E00CC3355 /* XLAttendanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D75D8FAE1DC9D16E00CC3355 /* XLAttendanceViewController.m */; };
 		D75D8FB11DC9DC1000CC3355 /* jinru_03.png in Resources */ = {isa = PBXBuildFile; fileRef = D75D8FB01DC9DC1000CC3355 /* jinru_03.png */; };
 		D76B34AC1DC9923500E285AB /* XL_WangLuo.m in Sources */ = {isa = PBXBuildFile; fileRef = D76B34AB1DC9923500E285AB /* XL_WangLuo.m */; };
@@ -306,6 +309,12 @@
 		D730F8BB1DCB31C200F07053 /* XLSetAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLSetAccountViewController.m; sourceTree = "<group>"; };
 		D730F8BD1DCB31DC00F07053 /* XLAccSuccessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLAccSuccessViewController.h; sourceTree = "<group>"; };
 		D730F8BE1DCB31DC00F07053 /* XLAccSuccessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLAccSuccessViewController.m; sourceTree = "<group>"; };
+		D739C8E81DE7CF3800942CD6 /* XLShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLShowViewController.h; sourceTree = "<group>"; };
+		D739C8E91DE7CF3800942CD6 /* XLShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLShowViewController.m; sourceTree = "<group>"; };
+		D739C8ED1DE7D00200942CD6 /* XLChangepassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLChangepassViewController.h; sourceTree = "<group>"; };
+		D739C8EE1DE7D00200942CD6 /* XLChangepassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLChangepassViewController.m; sourceTree = "<group>"; };
+		D739C8F01DE7D01200942CD6 /* XLSettViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLSettViewController.h; sourceTree = "<group>"; };
+		D739C8F11DE7D01200942CD6 /* XLSettViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLSettViewController.m; sourceTree = "<group>"; };
 		D75D8FAD1DC9D16E00CC3355 /* XLAttendanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLAttendanceViewController.h; sourceTree = "<group>"; };
 		D75D8FAE1DC9D16E00CC3355 /* XLAttendanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLAttendanceViewController.m; sourceTree = "<group>"; };
 		D75D8FB01DC9DC1000CC3355 /* jinru_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jinru_03.png; sourceTree = "<group>"; };
@@ -601,6 +610,10 @@
 		D24EC07D1DDAA41200A043A8 /* 设置 */ = {
 			isa = PBXGroup;
 			children = (
+				D739C8F01DE7D01200942CD6 /* XLSettViewController.h */,
+				D739C8F11DE7D01200942CD6 /* XLSettViewController.m */,
+				D739C8EB1DE7CF7900942CD6 /* 修改密码 */,
+				D739C8E41DE7CE2D00942CD6 /* 说明 */,
 				D730F8A71DCB0CCA00F07053 /* XLEditAttViewController.h */,
 				D730F8A81DCB0CCA00F07053 /* XLEditAttViewController.m */,
 			);
@@ -717,11 +730,12 @@
 		D2C1ACB71DC97E1E00092F44 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D24EC07D1DDAA41200A043A8 /* 设置 */,
+				D739C8E31DE7CD4C00942CD6 /* 登录 */,
 				D24EC07C1DDAA40700A043A8 /* 主页 */,
 				D24EC07B1DDAA3EB00A043A8 /* 答题 */,
 				D7959B701DCC59FA00985309 /* 通知 */,
 				D730F8A01DCAD93900F07053 /* 考勤 */,
-				D24EC07D1DDAA41200A043A8 /* 设置 */,
 				D730F8AA1DCB105C00F07053 /* 收银 */,
 			);
 			name = Controller;
@@ -755,8 +769,6 @@
 				D2C1AC851DC97D8C00092F44 /* AppDelegate.h */,
 				D2C1AC861DC97D8C00092F44 /* AppDelegate.m */,
 				D2C1ACB51DC97DDA00092F44 /* com.BeiGe.PanYouApp.entitlements */,
-				D2C1AC881DC97D8C00092F44 /* ViewController.h */,
-				D2C1AC891DC97D8C00092F44 /* ViewController.m */,
 				D2C1AC8B1DC97D8C00092F44 /* Main.storyboard */,
 				D2C1AC8E1DC97D8C00092F44 /* Assets.xcassets */,
 				D2C1AC901DC97D8C00092F44 /* LaunchScreen.storyboard */,
@@ -841,6 +853,33 @@
 				D730F8B81DCB245400F07053 /* XLShopCarViewController.m */,
 			);
 			name = "购物车";
+			sourceTree = "<group>";
+		};
+		D739C8E31DE7CD4C00942CD6 /* 登录 */ = {
+			isa = PBXGroup;
+			children = (
+				D2C1AC881DC97D8C00092F44 /* ViewController.h */,
+				D2C1AC891DC97D8C00092F44 /* ViewController.m */,
+			);
+			name = "登录";
+			sourceTree = "<group>";
+		};
+		D739C8E41DE7CE2D00942CD6 /* 说明 */ = {
+			isa = PBXGroup;
+			children = (
+				D739C8E81DE7CF3800942CD6 /* XLShowViewController.h */,
+				D739C8E91DE7CF3800942CD6 /* XLShowViewController.m */,
+			);
+			name = "说明";
+			sourceTree = "<group>";
+		};
+		D739C8EB1DE7CF7900942CD6 /* 修改密码 */ = {
+			isa = PBXGroup;
+			children = (
+				D739C8ED1DE7D00200942CD6 /* XLChangepassViewController.h */,
+				D739C8EE1DE7D00200942CD6 /* XLChangepassViewController.m */,
+			);
+			name = "修改密码";
 			sourceTree = "<group>";
 		};
 		D76B34E81DC9928600E285AB /* 自定义键盘 */ = {
@@ -1492,6 +1531,7 @@
 				D774873B1DD964B0007A92E3 /* XLNetworkViewController.m in Sources */,
 				D774873E1DD964B0007A92E3 /* XLChangeViewController.m in Sources */,
 				D730F8AD1DCB108600F07053 /* XLCheckstandViewController.m in Sources */,
+				D739C8EA1DE7CF3800942CD6 /* XLShowViewController.m in Sources */,
 				D730F8A61DCADFBC00F07053 /* XLOutsideViewController.m in Sources */,
 				D76B353A1DC9930800E285AB /* AFNetworkReachabilityManager.m in Sources */,
 				D7959B761DCC5A4200985309 /* XLNoteInfoViewController.m in Sources */,
@@ -1499,6 +1539,7 @@
 				D76B35171DC992F400E285AB /* SBJsonWriter.m in Sources */,
 				D76B35261DC992FE00E285AB /* FMDatabaseAdditions.m in Sources */,
 				D774873D1DD964B0007A92E3 /* XLSettingViewController.m in Sources */,
+				D739C8EF1DE7D00200942CD6 /* XLChangepassViewController.m in Sources */,
 				D76B35251DC992FE00E285AB /* FMDatabase.m in Sources */,
 				D76B35141DC992F400E285AB /* SBJsonStreamWriterState.m in Sources */,
 				D76B353B1DC9930800E285AB /* AFSecurityPolicy.m in Sources */,
@@ -1516,6 +1557,7 @@
 				D730F8BF1DCB31DC00F07053 /* XLAccSuccessViewController.m in Sources */,
 				D76B34C11DC9925F00E285AB /* DSSymbolKeyboard.m in Sources */,
 				D77487401DD964B0007A92E3 /* XLExplainViewController.m in Sources */,
+				D739C8F21DE7D01200942CD6 /* XLSettViewController.m in Sources */,
 				D76B35131DC992F400E285AB /* SBJsonStreamWriterAccumulator.m in Sources */,
 				D730F8B91DCB245400F07053 /* XLShopCarViewController.m in Sources */,
 				D77487411DD964B0007A92E3 /* XL_SearchViewController.m in Sources */,
