@@ -9,10 +9,12 @@
 #import "XLStatisticsViewController.h"
 #import "XL_WangLuo.h"
 #import "WarningBox.h"
-@interface XLStatisticsViewController ()//<UICollectionViewDelegate,UICollectionViewDataSource>
+@interface XLStatisticsViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     NSString*nian,*yue;
     NSString*ynian,*yyue;
+    
+    NSMutableArray*qiandaotuilist,*qingjialist,*waiqinlist;
 }
 @end
 
@@ -21,6 +23,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    qingjialist=[[NSMutableArray alloc] init];
+    qiandaotuilist=[[NSMutableArray alloc] init];
+    waiqinlist=[[NSMutableArray alloc] init];
+    
+}
+-(void)delegate{
+    _tableview.delegate=self;
+    _tableview.dataSource=self;
     
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -46,15 +56,7 @@
     //右侧按钮变色，且不可点；
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-    
-    // _collection.delegate=self;
-}
--(NSArray *)collectionAtIndexes:(NSIndexSet *)indexes{
-    return [NSArray arrayWithObjects:@"", nil];
-}
+
 
 -(void)jiekou:(NSString*)date{
     NSString *fangshi=@"/attendance/Statistics";
@@ -64,7 +66,17 @@
         NSLog(@"%@",responseObject);
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
-            
+            NSDictionary*data=[responseObject objectForKey:@"data"];
+            qiandaotuilist=[data objectForKey:@"attendanceInfoList"];
+            NSArray*waijia=[data objectForKey:@"fieldInfoList"];
+            for (NSDictionary*dd in waijia) {
+                if ([[dd objectForKey:@"type"]isEqual:@"1"]) {
+                    [qingjialist addObject:dd];
+                }else{
+                    [waiqinlist addObject:dd];
+                }
+            }
+            [_tableview reloadData];
         }
     } failure:^(NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];

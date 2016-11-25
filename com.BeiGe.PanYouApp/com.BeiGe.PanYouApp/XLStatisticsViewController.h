@@ -12,6 +12,7 @@
 - (IBAction)Left:(id)sender;
 - (IBAction)Right:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *month;//月份
-@property (weak, nonatomic) IBOutlet UICollectionView *collection;
+@property (weak, nonatomic) IBOutlet UITableView *tableview;
+
 
 @end
