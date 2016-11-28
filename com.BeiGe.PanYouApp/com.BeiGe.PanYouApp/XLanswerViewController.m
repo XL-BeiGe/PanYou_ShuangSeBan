@@ -54,14 +54,8 @@
     iii=0;
     duicuo=1;
     dianjicishu=0;
-    NSDictionary *d1=[NSDictionary dictionaryWithObjectsAndKeys:@"a",@"answer",@"1",@"id",@"你说我选啥",@"optionA",@"选啥就撒的空间哈哈哈哈哈哈哈",@"optionB",@"么么哒",@"optionC",@"",@"optionD",@"",@"optionE",@"问点啥呢",@"quesion",@"1",@"quesionType", nil];
-    NSDictionary *d2=[NSDictionary dictionaryWithObjectsAndKeys:@"c",@"answer",@"3",@"id",@"go come",@"optionA",@"我是错的",@"optionB",@"我对",@"optionC",@"这是单选？",@"optionD",@"嗯，是",@"optionE",@"狗不理包子",@"quesion",@"1",@"quesionType", nil];
-    NSDictionary *d3=[NSDictionary dictionaryWithObjectsAndKeys:@"ac",@"answer",@"3",@"id",@"go come",@"optionA",@"我是错的",@"optionB",@"我对",@"optionC",@"这是单选？",@"optionD",@"嗯，是",@"optionE",@"我是一个多选题吗？",@"quesion",@"2",@"quesionType", nil];
-    NSDictionary *d4=[NSDictionary dictionaryWithObjectsAndKeys:@"a",@"answer",@"3",@"id",@"go come",@"optionA",@"sadsad",@"optionB",@"dsf",@"optionC",@"dsfdsx",@"optionD",@"fghgf",@"optionE",@"我是一个单选题吗？",@"quesion",@"1",@"quesionType", nil];
-//    _timuarr=[NSArray arrayWithObjects:d1,d2,d3,d4, nil];
     [self quxuanxiang:_timuarr[iii]];
     [self chuangjiantable];
-    
 }
 -(void)chuangjiantable{
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
@@ -192,7 +186,6 @@
     NSString *text = muarr[indexPath.row];
     
     UIFont *font = [UIFont systemFontOfSize:17];
-    //[UIFont fontWithName:@"Arial-BoldItalicMT" size:17];
     
     NSDictionary *testDic = [NSDictionary dictionaryWithObject:font forKey:NSFontAttributeName];
     
@@ -505,15 +498,6 @@
 -(void)tijiaoquanbu{
     [WarningBox warningBoxModeIndeterminate:[NSString stringWithFormat:@"正在提交答案..."] andView:self.view];
     NSString *fangshi=@"/exam/answerAll";
-    //    NSDictionary*d1=[NSDictionary dictionaryWithObjectsAndKeys:@"1",@"examId",@"1",@"quesionType",@"1",@"isRight",nil];
-    //    NSDictionary*d2=[NSDictionary dictionaryWithObjectsAndKeys:@"9",@"examId",@"1",@"quesionType",  @"2",@"isRight",nil];
-    //    NSDictionary*d3=[NSDictionary dictionaryWithObjectsAndKeys:@"3",@"examId",@"1",@"quesionType",@"1",@"isRight",nil];
-    //    NSDictionary*d4=[NSDictionary dictionaryWithObjectsAndKeys:@"4",@"examId",@"1",@"quesionType",@"2",@"isRight",nil];
-    //    NSDictionary*d5=[NSDictionary dictionaryWithObjectsAndKeys:@"5",@"examId",@"1",@"quesionType",@"1",@"isRight",nil];
-    //    NSArray*examList=[NSArray arrayWithObjects:d1,d2,d3,d4,d5, nil];
-    //
-    
-    NSLog(@"%@",_mobanID);
     NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"1",@"userId",_mobanID,@"templateId",tijiaodaan,@"examList", nil];
     NSLog(@"%@",rucan);
     //自己写的网络请求    请求外网地址
@@ -543,14 +527,7 @@
     [WarningBox warningBoxModeIndeterminate:[NSString stringWithFormat:@"正在提交重做答案..."] andView:self.view];
     NSString *fangshi=@"/exam/answerError";
     
-    
-    NSDictionary*d2=[NSDictionary dictionaryWithObjectsAndKeys:@"2",@"examId",@"1",@"isRight",nil];
-    
-    NSDictionary*d4=[NSDictionary dictionaryWithObjectsAndKeys:@"4",@"examId",@"1",@"isRight",nil];
-    
-    NSArray*examList=[NSArray arrayWithObjects:d2,d4, nil];
-    
-    NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"1",@"userId",_mobanID,@"templateId",examList,@"examList", nil];
+    NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"1",@"userId",_mobanID,@"templateId",tijiaodaan,@"examList", nil];
     NSLog(@"%@",rucan);
     
     //自己写的网络请求    请求外网地址
@@ -566,12 +543,12 @@
             
         }
         else{
-            
+            [WarningBox warningBoxModeText:@"提交重做答案失败，请重试!" andView:self.view];
         }
         
     } failure:^(NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
-        [WarningBox warningBoxModeText:@"错了吧～  哈哈哈哈" andView:self.view];
+        [WarningBox warningBoxModeText:@"网络连接失败!" andView:self.view];
         NSLog(@"%@",error);
     }];
     

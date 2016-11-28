@@ -9,11 +9,11 @@
 #import "XLStatisticsViewController.h"
 #import "XL_WangLuo.h"
 #import "WarningBox.h"
+#import "XLtongxiangqingViewController.h"
 @interface XLStatisticsViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     NSString*nian,*yue;
     NSString*ynian,*yyue;
-    
     NSMutableArray*qiandaotuilist,*qingjialist,*waiqinlist;
 }
 @end
@@ -31,7 +31,8 @@
 -(void)delegate{
     _tableview.delegate=self;
     _tableview.dataSource=self;
-    
+    self.automaticallyAdjustsScrollViewInsets = NO;;
+    self.tableview.showsVerticalScrollIndicator = NO;
 }
 -(void)viewWillAppear:(BOOL)animated{
     NSDate *selected = [NSDate date];
@@ -84,7 +85,42 @@
         NSLog(@"%@",error);
     }];
 }
-
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 3;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 64;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *aa=@"tongji";
+    UITableViewCell *cell=[self.tableview dequeueReusableCellWithIdentifier:aa];
+    if (cell==nil) {
+        cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:aa];
+    }
+    UIImageView *beijing    =[cell viewWithTag:100];
+    UILabel*biaoti    =[cell viewWithTag:101];
+    UILabel*tianshu    =[cell viewWithTag:102];
+    UIImage*image=[[UIImage alloc] init];
+    NSString*biao=[[NSString alloc] init];
+    NSString*tian=[[NSString alloc] init];
+    if (indexPath.row==0) {
+        image=[UIImage imageNamed:@"统计-工作天数.png"];
+        biao=@"工作天数";
+        tian=[NSString stringWithFormat:@"%lu",(unsigned long)qiandaotuilist.count];
+    }else if (indexPath.row==1){
+        image=[UIImage imageNamed:@"统计-外出天数.png"];
+        biao=@"外出天数";
+        tian=[NSString stringWithFormat:@"%lu",(unsigned long)waiqinlist.count];
+    }else if (indexPath.row==2){
+        image=[UIImage imageNamed:@"统计-请假次数.png"];
+        biao=@"请假次数";
+        tian=[NSString stringWithFormat:@"%lu",(unsigned long)qingjialist.count];
+    }
+    beijing.image=image;
+    biaoti.text=biao;
+    tianshu.text=tian;
+    return cell;
+}
 - (IBAction)Left:(id)sender {
     yue=[NSString stringWithFormat:@"%d",[yue intValue]-1];
     if ([yue isEqualToString:@"0"]) {
@@ -108,5 +144,20 @@
         _month.text=[NSString stringWithFormat:@"%@年%@月",nian,yue];
         [self jiekou:[NSString stringWithFormat:@"%@-%@",nian,yue]];
     }
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    XLtongxiangqingViewController*xltjxq=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"tongxiangqing"];
+    if (indexPath.row==0) {
+        xltjxq.ll=@"0";
+        xltjxq.arr=qiandaotuilist;
+    }else if (indexPath.row==1){
+        xltjxq.ll=@"1";
+        xltjxq.arr=waiqinlist;
+    }else if (indexPath.row==2){
+        xltjxq.ll=@"2";
+        xltjxq.arr=qingjialist;
+    }
+    [self.navigationController pushViewController:xltjxq animated:YES];
+    
 }
 @end

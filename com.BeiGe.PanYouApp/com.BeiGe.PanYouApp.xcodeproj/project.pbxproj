@@ -29,6 +29,7 @@
 		D2C1AC921DC97D8C00092F44 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2C1AC901DC97D8C00092F44 /* LaunchScreen.storyboard */; };
 		D2C1AC9D1DC97D8C00092F44 /* com_BeiGe_PanYouAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C1AC9C1DC97D8C00092F44 /* com_BeiGe_PanYouAppTests.m */; };
 		D2C1ACA81DC97D8C00092F44 /* com_BeiGe_PanYouAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C1ACA71DC97D8C00092F44 /* com_BeiGe_PanYouAppUITests.m */; };
+		D2CF97FA1DEBFC21002782F9 /* XLtongxiangqingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2CF97F91DEBFC21002782F9 /* XLtongxiangqingViewController.m */; };
 		D72F30C41DD1BD13007F754F /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = D72F30C31DD1BD13007F754F /* camera.png */; };
 		D730F89C1DCACFB100F07053 /* XLLeaveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D730F89B1DCACFB000F07053 /* XLLeaveViewController.m */; };
 		D730F89F1DCAD93200F07053 /* XLStatisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D730F89E1DCAD93200F07053 /* XLStatisticsViewController.m */; };
@@ -289,6 +290,8 @@
 		D2C1ACA71DC97D8C00092F44 /* com_BeiGe_PanYouAppUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = com_BeiGe_PanYouAppUITests.m; sourceTree = "<group>"; };
 		D2C1ACA91DC97D8C00092F44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2C1ACB51DC97DDA00092F44 /* com.BeiGe.PanYouApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = com.BeiGe.PanYouApp.entitlements; sourceTree = "<group>"; };
+		D2CF97F81DEBFC21002782F9 /* XLtongxiangqingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLtongxiangqingViewController.h; sourceTree = "<group>"; };
+		D2CF97F91DEBFC21002782F9 /* XLtongxiangqingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLtongxiangqingViewController.m; sourceTree = "<group>"; };
 		D72F30C31DD1BD13007F754F /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
 		D730F89A1DCACFB000F07053 /* XLLeaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLLeaveViewController.h; sourceTree = "<group>"; };
 		D730F89B1DCACFB000F07053 /* XLLeaveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLLeaveViewController.m; sourceTree = "<group>"; };
@@ -777,6 +780,15 @@
 			name = Basis;
 			sourceTree = "<group>";
 		};
+		D2CF97F71DEBFBFC002782F9 /* 统计详情 */ = {
+			isa = PBXGroup;
+			children = (
+				D2CF97F81DEBFC21002782F9 /* XLtongxiangqingViewController.h */,
+				D2CF97F91DEBFC21002782F9 /* XLtongxiangqingViewController.m */,
+			);
+			name = "统计详情";
+			sourceTree = "<group>";
+		};
 		D730F8A01DCAD93900F07053 /* 考勤 */ = {
 			isa = PBXGroup;
 			children = (
@@ -794,6 +806,7 @@
 			children = (
 				D730F89D1DCAD93200F07053 /* XLStatisticsViewController.h */,
 				D730F89E1DCAD93200F07053 /* XLStatisticsViewController.m */,
+				D2CF97F71DEBFBFC002782F9 /* 统计详情 */,
 			);
 			name = "统计";
 			sourceTree = "<group>";
@@ -1581,6 +1594,7 @@
 				D76B35291DC992FE00E285AB /* FMResultSet.m in Sources */,
 				D76B350F1DC992F400E285AB /* SBJsonStreamParserAccumulator.m in Sources */,
 				D76B34AC1DC9923500E285AB /* XL_WangLuo.m in Sources */,
+				D2CF97FA1DEBFC21002782F9 /* XLtongxiangqingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
