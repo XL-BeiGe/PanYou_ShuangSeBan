@@ -12,7 +12,7 @@
 #import "XLCheckstandViewController.h"
 #import "XLNoteViewController.h"
 #import "XLquestionViewController.h"
-#import "XLSettingViewController.h"
+#import "XLSettViewController.h"
 @interface XLMainViewController ()
 
 @end
@@ -65,8 +65,8 @@
     }
 //设置
 - (IBAction)Set:(id)sender {
-    XLSettingViewController*xx;
-    [self tiaoye:xx mingzi:@"setting"];
+    XLSettViewController*xx;
+    [self tiaoye:xx mingzi:@"sett"];
 }
 //收银
 - (IBAction)CashierDesk:(id)sender {
