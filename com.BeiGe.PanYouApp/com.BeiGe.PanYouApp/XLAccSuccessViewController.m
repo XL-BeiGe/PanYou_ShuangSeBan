@@ -7,7 +7,7 @@
 //
 
 #import "XLAccSuccessViewController.h"
-
+#import "XLMainViewController.h"
 @interface XLAccSuccessViewController ()
 
 @end

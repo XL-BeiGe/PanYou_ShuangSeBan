@@ -25,7 +25,7 @@
     NSLog(@"%@",_zhT);
     
     [self xiangqingjiekou];
- 
+    [self navigation];
     self.title = @"通知详情";
 //    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[UIColor whiteColor]}];
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -53,6 +53,26 @@
         _renwuanniu.hidden=YES;
     }
 }
+
+-(void)navigation{
+    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
+    UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self  action:@selector(fanhui)];
+    [self.navigationItem setLeftBarButtonItem:left];
+}
+-(void)fanhui{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+//    XL_PanDianViewController*pan=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"pandian"];
+//    for (UIViewController *controller in self.navigationController.viewControllers) {
+//        if ([controller isKindOfClass:[pan class]]) {
+//            [self.navigationController popToViewController:controller animated:YES];
+//        }
+//    }
+}
+
+
+
+
+
 -(void)xiangqingjiekou{
     NSString *fangshi=@"/push/pushDetail";
     NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:_pushInfoId,@"pushInfoId", nil];

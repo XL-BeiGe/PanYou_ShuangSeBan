@@ -13,6 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *someone;//收银姓名
 @property (weak, nonatomic) IBOutlet UILabel *sytime;//收银时间
 - (IBAction)ComeBack:(id)sender;
-@property (strong, nonatomic) NSString*zonge;
-@property (strong, nonatomic) NSString*shijian;
+@property (strong, nonatomic) NSString *zonge;
+@property (strong, nonatomic) NSString *shijian;
 @end

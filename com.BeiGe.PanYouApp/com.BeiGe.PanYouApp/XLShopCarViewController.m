@@ -40,8 +40,13 @@
 
 -(void)wangluo{
 //网络请求
-    NSDictionary*d1=[NSDictionary dictionaryWithObjectsAndKeys:@"1003",@"drugId",@"1086",@"drugCount",@"2",@"drugPriceType", nil];
-    NSArray*arr=[NSArray arrayWithObjects:d1, nil];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"id",@"text",@"num",@"text",@"type",@"text",@"price", nil];
+    shoparr = [XL DataBase:db selectKeyTypes:dic fromTable:@"gouwu"];
+
+    
+    
+    //NSDictionary*d1=[NSDictionary dictionaryWithObjectsAndKeys:@"1003",@"drugId",@"1086",@"drugCount",@"2",@"drugPriceType", nil];
+    NSArray*arr=[NSArray arrayWithObjects:shoparr, nil];
     
     
     NSString *fangshi=@"/drug/shoppingCart";
@@ -107,7 +112,9 @@
      name.text = @"药品名称:";
      price.text = @"药品价格:";
      pricete.textColor = [UIColor colorWithHexString:@"FF6534" alpha:1];
+    // 药品名称
      namete.text = [NSString stringWithFormat:@"%ld",indexPath.row+600];
+    //药品价格
      pricete.text = [NSString stringWithFormat:@"￥%ld",indexPath.row+600];
     
     // number.delegate = self;
@@ -117,8 +124,9 @@
      number.tag = 600+indexPath.row;
     
  
-    
+    //药品数量
      number.text = [NSString stringWithFormat:@"%ld",indexPath.row+10];
+    
     [subtrace setTitle:@"-" forState:UIControlStateNormal];
     [sum setTitle:@"+" forState:UIControlStateNormal];
     [sum setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
@@ -153,23 +161,25 @@
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
  //删除方法
    
-    //将数组里的都更新到数据库中
-    NSDictionary *updic = [NSDictionary dictionaryWithObjectsAndKeys:[shoparr[indexPath.row] objectForKey:@"num"],@"num", nil];
-    NSDictionary *udic = [NSDictionary dictionaryWithObjectsAndKeys:[shoparr[indexPath.row] objectForKey:@"id"],@"id", nil];
-    [XL DataBase:db updateTable:@"gouwu" setKeyValues:updic whereCondition:udic];
+  
+    [self updatefmdb];
     
     //删除某一条数据
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"id",@"text",@"num",@"text",@"type",@"text",@"price", nil];
-    NSDictionary *ddic = [NSDictionary dictionaryWithObjectsAndKeys:[shoparr[indexPath.row] objectForKey:@"id"],@"id", nil];
-  shoparr  =[XL DataBase:db deleteKeyTypes:dic fromTable:@"gouwu" whereCondition:ddic];
-    [_tabel reloadData];
+   // NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"id",@"text",@"num",@"text",@"type",@"text",@"price", nil];
+   // NSDictionary *ddic = [NSDictionary dictionaryWithObjectsAndKeys:[shoparr[indexPath.row] objectForKey:@"id"],@"id", nil];
+  //shoparr  =[XL DataBase:db deleteKeyTypes:dic fromTable:@"gouwu" whereCondition:ddic];
+    //[_tabel reloadData];
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     //NSLog(@"*-*-*-*-*%ld",(long)indexPath.row);
 }
+
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [self.view endEditing:YES];
 }
+
+
+
 //限制数量长度
 -(void)NumberLength:(UITextField *)theTextField
 {
@@ -254,13 +264,19 @@
     NSLog(@"减");
 }
 
-
+//键盘退下
+-(void)customKeyboardTypeNumberView_shrinkKeyClicked{
+}
+//键盘确定按钮
+-(void)customKeyboardTypeNumberView_confirmKeyClicked{
+}
 
 //视图上移的方法
 - (void) animateTextField: (CGFloat) textField up: (BOOL) up
 {
     
     //设置视图上移的距离，单位像素
+    
     const int movementDistance = textField; // tweak as needed
     //三目运算，判定是否需要上移视图或者不变
     int movement = (up ? movementDistance : -movementDistance);
@@ -283,7 +299,7 @@
     return YES;
 }
 -(void)textFieldDidEndEditing:(UITextField *)textField{
-[self animateTextField:-150.0 up:NO];
+    [self animateTextField:-150.0 up:NO];
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
@@ -295,8 +311,15 @@
     [self wangluo];
    
 }
-
-
+#pragma mark--修改数据库
+-(void)updatefmdb{
+    UITableViewCell *cell=(UITableViewCell*)[[self.view superview] superview ];
+    NSIndexPath *index=[self.tabel indexPathForCell:cell];
+    //将数组里的都更新到数据库中
+    NSDictionary *updic = [NSDictionary dictionaryWithObjectsAndKeys:[shoparr[index.row] objectForKey:@"num"],@"num", nil];
+    NSDictionary *udic = [NSDictionary dictionaryWithObjectsAndKeys:[shoparr[index.row] objectForKey:@"id"],@"id", nil];
+    [XL DataBase:db updateTable:@"gouwu" setKeyValues:updic whereCondition:udic];
+}
 -(void)shujuku{
     XL = [XL_FMDB tool];
     [XL_FMDB allocWithZone:NULL];
