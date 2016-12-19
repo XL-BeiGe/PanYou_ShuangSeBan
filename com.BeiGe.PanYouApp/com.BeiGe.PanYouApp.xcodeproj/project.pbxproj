@@ -20,6 +20,20 @@
 		D23B407A1DCC792B00CDACCB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23B40791DCC792B00CDACCB /* CoreLocation.framework */; };
 		D24EC0801DDAA4BF00A043A8 /* XLquestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D24EC07F1DDAA4BF00A043A8 /* XLquestionViewController.m */; };
 		D24EC0841DDAA50000A043A8 /* XLanswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D24EC0831DDAA50000A043A8 /* XLanswerViewController.m */; };
+		D26310021E07945400154955 /* jcore-ios-1.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2630FFF1E07945400154955 /* jcore-ios-1.0.0.a */; };
+		D26310031E07945400154955 /* jpush-ios-3.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D26310001E07945400154955 /* jpush-ios-3.0.0.a */; };
+		D26310051E07947200154955 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D26310041E07947200154955 /* CFNetwork.framework */; };
+		D26310071E07947B00154955 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D26310061E07947B00154955 /* CoreFoundation.framework */; };
+		D26310091E07948900154955 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D26310081E07948900154955 /* CoreTelephony.framework */; };
+		D263100B1E07949000154955 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D263100A1E07949000154955 /* SystemConfiguration.framework */; };
+		D263100D1E07949A00154955 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D263100C1E07949A00154955 /* CoreGraphics.framework */; };
+		D263100F1E0794A000154955 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D263100E1E0794A000154955 /* Foundation.framework */; };
+		D26310111E0794A900154955 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D26310101E0794A900154955 /* UIKit.framework */; };
+		D26310131E0794AF00154955 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D26310121E0794AF00154955 /* Security.framework */; };
+		D26310151E0794BB00154955 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D26310141E0794BB00154955 /* libz.tbd */; };
+		D26310171E0794C600154955 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D26310161E0794C600154955 /* AdSupport.framework */; };
+		D26310191E0794D100154955 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D26310181E0794D100154955 /* UserNotifications.framework */; };
+		D263101B1E0794E100154955 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D263101A1E0794E100154955 /* libresolv.tbd */; };
 		D291DD2C1DE42C490044805B /* 答题-背景.png in Resources */ = {isa = PBXBuildFile; fileRef = D291DD2B1DE42C490044805B /* 答题-背景.png */; };
 		D2C1AC841DC97D8C00092F44 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C1AC831DC97D8C00092F44 /* main.m */; };
 		D2C1AC871DC97D8C00092F44 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C1AC861DC97D8C00092F44 /* AppDelegate.m */; };
@@ -272,6 +286,21 @@
 		D24EC07F1DDAA4BF00A043A8 /* XLquestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLquestionViewController.m; sourceTree = "<group>"; };
 		D24EC0821DDAA50000A043A8 /* XLanswerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLanswerViewController.h; sourceTree = "<group>"; };
 		D24EC0831DDAA50000A043A8 /* XLanswerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLanswerViewController.m; sourceTree = "<group>"; };
+		D2630FFF1E07945400154955 /* jcore-ios-1.0.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-1.0.0.a"; sourceTree = "<group>"; };
+		D26310001E07945400154955 /* jpush-ios-3.0.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-3.0.0.a"; sourceTree = "<group>"; };
+		D26310011E07945400154955 /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
+		D26310041E07947200154955 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		D26310061E07947B00154955 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		D26310081E07948900154955 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		D263100A1E07949000154955 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		D263100C1E07949A00154955 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		D263100E1E0794A000154955 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D26310101E0794A900154955 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		D26310121E0794AF00154955 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		D26310141E0794BB00154955 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		D26310161E0794C600154955 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		D26310181E0794D100154955 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		D263101A1E0794E100154955 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		D291DD2B1DE42C490044805B /* 答题-背景.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "答题-背景.png"; sourceTree = "<group>"; };
 		D2C1AC7F1DC97D8C00092F44 /* com.BeiGe.PanYouApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = com.BeiGe.PanYouApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2C1AC831DC97D8C00092F44 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -570,7 +599,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D263101B1E0794E100154955 /* libresolv.tbd in Frameworks */,
+				D26310191E0794D100154955 /* UserNotifications.framework in Frameworks */,
+				D26310171E0794C600154955 /* AdSupport.framework in Frameworks */,
+				D26310151E0794BB00154955 /* libz.tbd in Frameworks */,
+				D26310131E0794AF00154955 /* Security.framework in Frameworks */,
+				D26310111E0794A900154955 /* UIKit.framework in Frameworks */,
+				D263100F1E0794A000154955 /* Foundation.framework in Frameworks */,
+				D263100D1E07949A00154955 /* CoreGraphics.framework in Frameworks */,
+				D263100B1E07949000154955 /* SystemConfiguration.framework in Frameworks */,
+				D26310091E07948900154955 /* CoreTelephony.framework in Frameworks */,
+				D26310071E07947B00154955 /* CoreFoundation.framework in Frameworks */,
+				D26310051E07947200154955 /* CFNetwork.framework in Frameworks */,
 				D23B407A1DCC792B00CDACCB /* CoreLocation.framework in Frameworks */,
+				D26310021E07945400154955 /* jcore-ios-1.0.0.a in Frameworks */,
+				D26310031E07945400154955 /* jpush-ios-3.0.0.a in Frameworks */,
 				D76B35FA1DC9935D00E285AB /* libsqlite3.0.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -641,9 +684,20 @@
 			name = "回答页面";
 			sourceTree = "<group>";
 		};
+		D2630FFE1E07945400154955 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				D2630FFF1E07945400154955 /* jcore-ios-1.0.0.a */,
+				D26310001E07945400154955 /* jpush-ios-3.0.0.a */,
+				D26310011E07945400154955 /* JPUSHService.h */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
 		D2C1AC761DC97D8C00092F44 = {
 			isa = PBXGroup;
 			children = (
+				D2630FFE1E07945400154955 /* Lib */,
 				D2C1AC811DC97D8C00092F44 /* com.BeiGe.PanYouApp */,
 				D2C1AC9B1DC97D8C00092F44 /* com.BeiGe.PanYouAppTests */,
 				D2C1ACA61DC97D8C00092F44 /* com.BeiGe.PanYouAppUITests */,
@@ -1022,6 +1076,18 @@
 		D76B35F81DC9935D00E285AB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D263101A1E0794E100154955 /* libresolv.tbd */,
+				D26310181E0794D100154955 /* UserNotifications.framework */,
+				D26310161E0794C600154955 /* AdSupport.framework */,
+				D26310141E0794BB00154955 /* libz.tbd */,
+				D26310121E0794AF00154955 /* Security.framework */,
+				D26310101E0794A900154955 /* UIKit.framework */,
+				D263100E1E0794A000154955 /* Foundation.framework */,
+				D263100C1E07949A00154955 /* CoreGraphics.framework */,
+				D263100A1E07949000154955 /* SystemConfiguration.framework */,
+				D26310081E07948900154955 /* CoreTelephony.framework */,
+				D26310061E07947B00154955 /* CoreFoundation.framework */,
+				D26310041E07947200154955 /* CFNetwork.framework */,
 				D23B40791DCC792B00CDACCB /* CoreLocation.framework */,
 				D76B35F91DC9935D00E285AB /* libsqlite3.0.tbd */,
 			);
@@ -1751,11 +1817,16 @@
 				INFOPLIST_FILE = com.BeiGe.PanYouApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Lib",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.BeiGe.PanYouApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Lib";
 			};
 			name = Debug;
 		};
@@ -1771,11 +1842,16 @@
 				INFOPLIST_FILE = com.BeiGe.PanYouApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Lib",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.BeiGe.PanYouApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Lib";
 			};
 			name = Release;
 		};

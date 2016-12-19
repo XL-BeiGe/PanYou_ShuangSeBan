@@ -41,6 +41,8 @@
 
     }
     
+    
+    
 }
 
 -(void)tongzhijiekou:(NSString*)zhuangtai{
