@@ -185,19 +185,19 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZaA-O6-jsw">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZaA-O6-jsw">
                                         <constraints>
                                             <constraint firstAttribute="height" constant="18" id="pbF-pK-5IL"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.99997490644454956" green="0.62643963098526001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qcg-Wt-230">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qcg-Wt-230">
                                         <constraints>
                                             <constraint firstAttribute="height" constant="18" id="6Jh-8V-FTJ"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.99997490639999997" green="0.626439631" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -208,15 +208,16 @@
                                     <constraint firstItem="n4j-dZ-L3s" firstAttribute="centerX" secondItem="VGs-Hi-1F2" secondAttribute="centerX" id="2rH-IS-PYX"/>
                                     <constraint firstAttribute="bottom" secondItem="ZaA-O6-jsw" secondAttribute="bottom" constant="15" id="Byt-7Z-dJA"/>
                                     <constraint firstAttribute="bottom" secondItem="qcg-Wt-230" secondAttribute="bottom" constant="15" id="Ce7-so-zZy"/>
-                                    <constraint firstAttribute="trailing" secondItem="qcg-Wt-230" secondAttribute="trailing" constant="25" id="Jcf-Oa-A4g"/>
                                     <constraint firstItem="n4j-dZ-L3s" firstAttribute="top" secondItem="VGs-Hi-1F2" secondAttribute="top" constant="30" id="K5X-Ne-Q2Z"/>
-                                    <constraint firstAttribute="trailing" secondItem="Dp7-vG-0Gh" secondAttribute="trailing" constant="25" id="Ni5-03-InE"/>
+                                    <constraint firstAttribute="trailing" secondItem="Dp7-vG-0Gh" secondAttribute="trailing" constant="15" id="Ni5-03-InE"/>
                                     <constraint firstItem="a5a-0Y-q2Y" firstAttribute="top" secondItem="n4j-dZ-L3s" secondAttribute="bottom" constant="15" id="Yg0-Os-jhq"/>
                                     <constraint firstItem="Dp7-vG-0Gh" firstAttribute="top" secondItem="a5a-0Y-q2Y" secondAttribute="bottom" constant="15" id="axO-pL-QwT"/>
                                     <constraint firstItem="ZaA-O6-jsw" firstAttribute="top" secondItem="Dp7-vG-0Gh" secondAttribute="bottom" constant="5" id="cZR-Q2-Qq2"/>
-                                    <constraint firstItem="ZaA-O6-jsw" firstAttribute="leading" secondItem="VGs-Hi-1F2" secondAttribute="leading" constant="25" id="heo-L9-tlc"/>
+                                    <constraint firstItem="ZaA-O6-jsw" firstAttribute="leading" secondItem="VGs-Hi-1F2" secondAttribute="leading" constant="15" id="heo-L9-tlc"/>
                                     <constraint firstItem="qcg-Wt-230" firstAttribute="top" secondItem="Dp7-vG-0Gh" secondAttribute="bottom" constant="5" id="ixn-16-j0i"/>
-                                    <constraint firstItem="Dp7-vG-0Gh" firstAttribute="leading" secondItem="VGs-Hi-1F2" secondAttribute="leading" constant="25" id="kpJ-IV-3fG"/>
+                                    <constraint firstItem="Dp7-vG-0Gh" firstAttribute="leading" secondItem="VGs-Hi-1F2" secondAttribute="leading" constant="15" id="kpJ-IV-3fG"/>
+                                    <constraint firstAttribute="trailing" secondItem="qcg-Wt-230" secondAttribute="trailing" constant="15" id="oD0-Op-IXk"/>
+                                    <constraint firstItem="qcg-Wt-230" firstAttribute="leading" secondItem="ZaA-O6-jsw" secondAttribute="trailing" constant="10" id="ueH-qE-dgQ"/>
                                     <constraint firstItem="a5a-0Y-q2Y" firstAttribute="leading" secondItem="VGs-Hi-1F2" secondAttribute="leading" constant="40" id="xBS-TT-YQz"/>
                                 </constraints>
                             </view>

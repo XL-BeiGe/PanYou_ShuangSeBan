@@ -10,7 +10,7 @@
 #import "WarningBox.h"
 #import "XL_WangLuo.h"
 
-@interface XLLeaveViewController ()<UITextFieldDelegate,UIActionSheetDelegate>{
+@interface XLLeaveViewController ()<UITextFieldDelegate,UIActionSheetDelegate,UITextViewDelegate>{
     int kaijie;//开始结束判断;
     UIView *backview;//透明的
     NSString*kaishi;
@@ -27,6 +27,31 @@
     // Do any additional setup after loading the view.
     [self beijing];
     [self delegate];
+    _reason.delegate = self;
+    [self tobar];
+}
+-(void)tobar{
+    
+    
+    UIToolbar * topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0,self.view.frame.size.width, 30)];
+    topView.backgroundColor = [UIColor clearColor];
+    [topView setBarStyle:UIBarStyleDefault];
+    UIBarButtonItem * btnSpace = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(4, 5, 40, 25);
+    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(wancheng) forControlEvents:UIControlEventTouchUpInside];
+    [btn setTitle:@"完成" forState:UIControlStateNormal];
+    UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc]initWithCustomView:btn];
+    NSArray * buttonsArray = [NSArray arrayWithObjects:btnSpace,doneBtn,nil];
+    [topView setItems:buttonsArray];
+    [self.reason setInputAccessoryView:topView];
+    
+    
+}
+-(void)wancheng {
+    [_reason resignFirstResponder];
 }
 -(void)shijianxuanze{
     //时间选择器

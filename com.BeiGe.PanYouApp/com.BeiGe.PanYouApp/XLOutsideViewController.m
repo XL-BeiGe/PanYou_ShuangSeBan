@@ -10,7 +10,7 @@
 #import "WarningBox.h"
 #import "XL_WangLuo.h"
 
-@interface XLOutsideViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextFieldDelegate>{
+@interface XLOutsideViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextFieldDelegate,UITextViewDelegate>{
     UIView *backview;//时间选择器背景;
     int waifan;//外出返回时间选择器判断;
     NSString* chuankai;
@@ -28,7 +28,35 @@
     [self beijing];
     [self tupianfangfa];
     [self delegate];
+    _textview.delegate =self;
+    [self tobar];
 }
+
+-(void)tobar{
+
+    
+    UIToolbar * topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0,self.view.frame.size.width, 30)];
+    topView.backgroundColor = [UIColor clearColor];
+    [topView setBarStyle:UIBarStyleDefault];
+    UIBarButtonItem * btnSpace = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(4, 5, 40, 25);
+    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(wancheng) forControlEvents:UIControlEventTouchUpInside];
+    [btn setTitle:@"完成" forState:UIControlStateNormal];
+    UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc]initWithCustomView:btn];
+    NSArray * buttonsArray = [NSArray arrayWithObjects:btnSpace,doneBtn,nil];
+    [topView setItems:buttonsArray];
+    [self.textview setInputAccessoryView:topView];
+    
+    
+}
+-(void)wancheng{
+    [_textview resignFirstResponder];
+}
+
+
 -(void)tupianfangfa{
     _imagev.userInteractionEnabled=YES;
     UITapGestureRecognizer *ss =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dianji)];
@@ -167,7 +195,18 @@
 }
 
 - (IBAction)TiJiao:(id)sender {
+    
+    if(nil!=_image1){
     [self tijiaojiekou];
+    }
+    else{
+     [WarningBox warningBoxModeText:[NSString stringWithFormat:@"请添加照片!"] andView:self.view];
+    }
+    
+    
+    
+    
+    
 }
 -(void)tijiaojiekou{
     //方法：attendance/field

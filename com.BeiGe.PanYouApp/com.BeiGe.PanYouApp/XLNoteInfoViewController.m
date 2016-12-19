@@ -30,6 +30,31 @@
 //    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[UIColor whiteColor]}];
     self.automaticallyAdjustsScrollViewInsets = NO;
 }
+
+-(void)tobar{
+    
+    
+    UIToolbar * topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0,self.view.frame.size.width, 30)];
+    topView.backgroundColor = [UIColor clearColor];
+    [topView setBarStyle:UIBarStyleDefault];
+    UIBarButtonItem * btnSpace = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(4, 5, 40, 25);
+    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(wancheng) forControlEvents:UIControlEventTouchUpInside];
+    [btn setTitle:@"完成" forState:UIControlStateNormal];
+    UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc]initWithCustomView:btn];
+    NSArray * buttonsArray = [NSArray arrayWithObjects:btnSpace,doneBtn,nil];
+    [topView setItems:buttonsArray];
+    [self.textview setInputAccessoryView:topView];
+    
+    
+}
+-(void)wancheng{
+    [_textview resignFirstResponder];
+}
+
 -(void)jiemian{
     _Image.image =[UIImage imageNamed:@"icon_02_07.png"];
     _titlle.text = [pushTemplate objectForKey:@"title"];
@@ -38,6 +63,7 @@
     _shij.text = [NSString stringWithFormat:@"时间:%@",[pushTemplate objectForKey:@"createTime"]];
     
     _textview.delegate = self;
+    [self tobar];
     _textview.textContainerInset = UIEdgeInsetsMake(0, 0, 5, 15);
     placeor = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 150, 20)];
     placeor.text = @"请输入您的建议...";
