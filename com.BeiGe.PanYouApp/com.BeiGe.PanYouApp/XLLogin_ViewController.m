@@ -20,7 +20,7 @@
 
 @implementation XLLogin_ViewController
 -(void)viewWillAppear:(BOOL)animated{
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+   // [self.navigationController setNavigationBarHidden:YES animated:YES];
     if (NULL == JuyuwangIP) {
         [[NSUserDefaults standardUserDefaults]setObject:@"192.168.1.103:8080" forKey:@"JuYuWang"];
     }

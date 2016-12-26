@@ -35,6 +35,20 @@
     [self navagation];
     [self clear];
     [self shujuku];
+    
+//    [XL  DataBase:db insertKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:@"1",@"id",@"10",@"num",@"1",@"type",@"13",@"price",@"测试1",@"name", nil] intoTable:@"gouwu"];
+//    [XL  DataBase:db insertKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:@"2",@"id",@"11",@"num",@"3",@"type",@"12",@"price",@"测试2",@"name", nil] intoTable:@"gouwu"];
+//    [XL  DataBase:db insertKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:@"3",@"id",@"12",@"num",@"2",@"type",@"11",@"price",@"测试3",@"name", nil] intoTable:@"gouwu"];
+//    [XL  DataBase:db insertKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:@"4",@"id",@"13",@"num",@"1",@"type",@"10",@"price",@"测试4",@"name", nil] intoTable:@"gouwu"];
+//    [XL  DataBase:db insertKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:@"5",@"id",@"14",@"num",@"3",@"type",@"9",@"price",@"测试5",@"name", nil] intoTable:@"gouwu"];
+//    [XL  DataBase:db insertKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:@"6",@"id",@"15",@"num",@"2",@"type",@"8",@"price",@"测试6",@"name", nil] intoTable:@"gouwu"];
+//    [XL  DataBase:db insertKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:@"7",@"id",@"16",@"num",@"1",@"type",@"7",@"price",@"测试7",@"name", nil] intoTable:@"gouwu"];
+//    [XL  DataBase:db insertKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:@"8",@"id",@"17",@"num",@"3",@"type",@"6",@"price",@"测试8",@"name", nil] intoTable:@"gouwu"];
+//    [XL  DataBase:db insertKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:@"9",@"id",@"18",@"num",@"2",@"type",@"5",@"price",@"测试9",@"name", nil] intoTable:@"gouwu"];
+//    [XL  DataBase:db insertKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:@"10",@"id",@"19",@"num",@"1",@"type",@"4",@"price",@"测试0",@"name", nil] intoTable:@"gouwu"];
+    
+    
+    
     // Do any additional setup after loading the view.
 }
 
@@ -208,7 +222,7 @@
     //新建查询表，里边是收银台药品数据信息
     [XL DataBase:db createTable:ChaXunBiaoMing keyTypes:ChaXunShiTiLei];
     
-    [XL DataBase:db createTable:@"gouwu" keyTypes:[NSDictionary dictionaryWithObjectsAndKeys:@"text",@"id",@"text",@"num",@"text",@"type",@"text",@"price", nil]];
+    [XL DataBase:db createTable:@"gouwu" keyTypes:[NSDictionary dictionaryWithObjectsAndKeys:@"text",@"id",@"text",@"num",@"text",@"type",@"text",@"price",@"text",@"name", nil]];
    
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{

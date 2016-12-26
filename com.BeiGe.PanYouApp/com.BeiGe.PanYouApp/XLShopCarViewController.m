@@ -16,13 +16,14 @@
 #import "ZYCustomKeyboardTypeNumberView.h"
 #import "DSKyeboard.h"
 
+#define gouwulei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"id",@"text",@"num",@"text",@"type",@"text",@"price",@"text",@"name", nil]
 @interface XLShopCarViewController ()<ZYCustomKeyboardTypeNumberViewDelegate>
 {
     XL_FMDB  *XL;//数据库调用者
     FMDatabase *db;//数据库
     
     NSArray  *shoparr;
-
+    UITextField* number ;
 }
 @end
 
@@ -34,20 +35,26 @@
     [self shujuku];
     [self tableviewdelegate];
    
-
+    _coupon.delegate = self;
+    _couprice.delegate = self;
     // Do any additional setup after loading the view.
 }
 
 -(void)wangluo{
 //网络请求
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"id",@"text",@"num",@"text",@"type",@"text",@"price", nil];
-    shoparr = [XL DataBase:db selectKeyTypes:dic fromTable:@"gouwu"];
+    
+     [self updatefmdb];
+    
+    shoparr = [XL DataBase:db selectKeyTypes:gouwulei fromTable:@"gouwu"];
+    NSLog(@"####%@",shoparr);
+    for (int i=0;i<shoparr.count;i++) {
+        [shoparr[i]removeObjectForKey:@"price"];
+        [shoparr[i]removeObjectForKey:@"name"];
+    }
 
-    
-    
     //NSDictionary*d1=[NSDictionary dictionaryWithObjectsAndKeys:@"1003",@"drugId",@"1086",@"drugCount",@"2",@"drugPriceType", nil];
     NSArray*arr=[NSArray arrayWithObjects:shoparr, nil];
-    
+   
     
     NSString *fangshi=@"/drug/shoppingCart";
     NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"];
@@ -84,8 +91,8 @@
     _tabel.tableFooterView =[[UIView alloc]initWithFrame:CGRectZero];
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    //return shoparr.count;
-    return 10;
+    return shoparr.count;
+    //return 10;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 80;
@@ -107,17 +114,20 @@
     UILabel *pricete =[[UILabel alloc]initWithFrame:CGRectMake(100,45,100,25)];
     
     UIButton *sum =[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width-50,45,25,25)];
-    UITextField* number =[[UITextField alloc]initWithFrame:CGRectMake(sum.frame.origin.x-40,45,40,25)];
+    number =[[UITextField alloc]initWithFrame:CGRectMake(sum.frame.origin.x-40,45,40,25)];
      UIButton *subtrace = [[UIButton alloc]initWithFrame:CGRectMake(number.frame.origin.x-25,45,25,25)];
      name.text = @"药品名称:";
      price.text = @"药品价格:";
      pricete.textColor = [UIColor colorWithHexString:@"FF6534" alpha:1];
     // 药品名称
-     namete.text = [NSString stringWithFormat:@"%ld",indexPath.row+600];
+   
+     namete.text = [NSString stringWithFormat:@"%@",[shoparr[indexPath.row]objectForKey:@"name"]];
     //药品价格
-     pricete.text = [NSString stringWithFormat:@"￥%ld",indexPath.row+600];
+     pricete.text = [NSString stringWithFormat:@"%@",[shoparr[indexPath.row]objectForKey:@"price"]];
     
-    // number.delegate = self;
+     number.delegate = self;
+   
+     [ZYCustomKeyboardTypeNumberView customKeyboardViewWithServiceTextField:number Delegate:self];
      number.textAlignment = NSTextAlignmentCenter;
      number.adjustsFontSizeToFitWidth = YES;
     // number.keyboardType = UIKeyboardTypeNumberPad;
@@ -125,7 +135,7 @@
     
  
     //药品数量
-     number.text = [NSString stringWithFormat:@"%ld",indexPath.row+10];
+     number.text = [NSString stringWithFormat:@"%@",[shoparr[indexPath.row]objectForKey:@"num"]];
     
     [subtrace setTitle:@"-" forState:UIControlStateNormal];
     [sum setTitle:@"+" forState:UIControlStateNormal];
@@ -138,7 +148,7 @@
     [number addTarget:self action:@selector(NumberLength:) forControlEvents:UIControlEventEditingChanged];
     [sum addTarget:self action:@selector(sum:) forControlEvents:UIControlEventTouchUpInside];
     [subtrace addTarget:self action:@selector(subtrace:) forControlEvents:UIControlEventTouchUpInside];
-  [ZYCustomKeyboardTypeNumberView customKeyboardViewWithServiceTextField:number Delegate:self];
+ 
     
         [cell.contentView addSubview:name];
         [cell.contentView addSubview:price];
@@ -161,14 +171,12 @@
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
  //删除方法
    
-  
     [self updatefmdb];
-    
     //删除某一条数据
-   // NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"id",@"text",@"num",@"text",@"type",@"text",@"price", nil];
-   // NSDictionary *ddic = [NSDictionary dictionaryWithObjectsAndKeys:[shoparr[indexPath.row] objectForKey:@"id"],@"id", nil];
-  //shoparr  =[XL DataBase:db deleteKeyTypes:dic fromTable:@"gouwu" whereCondition:ddic];
-    //[_tabel reloadData];
+    NSDictionary *ddic = [NSDictionary dictionaryWithObjectsAndKeys:[shoparr[indexPath.row] objectForKey:@"id"],@"id", nil];
+    shoparr  =[XL DataBase:db deleteKeyTypes:gouwulei fromTable:@"gouwu" whereCondition:ddic];
+    shoparr = [XL DataBase:db selectKeyTypes:gouwulei fromTable:@"gouwu"];
+    [_tabel reloadData];
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     //NSLog(@"*-*-*-*-*%ld",(long)indexPath.row);
@@ -212,7 +220,7 @@
     
     NSString*qw=oo.text;
     NSLog(@"修改数量");
-    //[yikaishi[index.row] setObject:qw forKey:@"shuliang"];
+    [shoparr[index.row] setObject:qw forKey:@"num"];
     
 }
 
@@ -223,8 +231,7 @@
     NSIndexPath *index=[self.tabel indexPathForCell:cell];
     
     UILabel*oo=[cell viewWithTag:index.row+600];
-    NSLog(@"------%ld",(long)index.row);
-    NSLog(@"******%lu",oo.tag);
+   
     NSString*qw=oo.text;
     
     int wq=[qw intValue];
@@ -234,8 +241,9 @@
     oo.text=qw;
  
     //  存入jieshou数组中
-   // [yikaishi[index.row] setObject:qw forKey:@"shuliang"];
-    NSLog(@"加");
+   [shoparr[index.row] setObject:qw forKey:@"num"];
+
+  
 }
 
 -(void)subtrace:(UIButton*)btn{
@@ -245,8 +253,7 @@
     NSIndexPath *index=[self.tabel indexPathForCell:cell];
     
     UILabel*oo=[cell viewWithTag:index.row+600];
-    NSLog(@"------%ld",(long)index.row);
-    NSLog(@"******%lu",oo.tag);
+   
     NSString*qw=oo.text;
     
     int wq=[qw intValue];
@@ -258,10 +265,9 @@
     
     oo.text=qw;
     
-  
     //  存入jieshou数组中
-    //[yikaishi[index.row] setObject:qw forKey:@"shuliang"];
-    NSLog(@"减");
+    [shoparr[index.row] setObject:qw forKey:@"num"];
+  
 }
 
 //键盘退下
@@ -295,11 +301,25 @@
 
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    [self animateTextField:-150.0 up:YES];
+    if (textField==number){
+        [self textFieldDidChange:textField];
+        [self NumberLength:textField];
+        [self animateTextField:-160 up:YES];
+    }else{
+    
+    }
+    
     return YES;
 }
 -(void)textFieldDidEndEditing:(UITextField *)textField{
-    [self animateTextField:-150.0 up:NO];
+    if (textField==number){
+        [self textFieldDidChange:textField];
+        [self NumberLength:textField];
+        [self animateTextField:-160 up:NO];
+    }else{
+    
+    }
+   
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
@@ -313,18 +333,23 @@
 }
 #pragma mark--修改数据库
 -(void)updatefmdb{
-    UITableViewCell *cell=(UITableViewCell*)[[self.view superview] superview ];
-    NSIndexPath *index=[self.tabel indexPathForCell:cell];
+
     //将数组里的都更新到数据库中
-    NSDictionary *updic = [NSDictionary dictionaryWithObjectsAndKeys:[shoparr[index.row] objectForKey:@"num"],@"num", nil];
-    NSDictionary *udic = [NSDictionary dictionaryWithObjectsAndKeys:[shoparr[index.row] objectForKey:@"id"],@"id", nil];
-    [XL DataBase:db updateTable:@"gouwu" setKeyValues:updic whereCondition:udic];
+    NSDictionary *updic;
+    NSDictionary *udic;
+    for (int i=0; i<shoparr.count; i++) {
+        updic = [NSDictionary dictionaryWithObjectsAndKeys:[shoparr[i] objectForKey:@"num"],@"num", nil];
+        udic = [NSDictionary dictionaryWithObjectsAndKeys:[shoparr[i] objectForKey:@"id"],@"id", nil];
+        [XL DataBase:db updateTable:@"gouwu" setKeyValues:updic whereCondition:udic];
+    }
+ 
 }
 -(void)shujuku{
     XL = [XL_FMDB tool];
     [XL_FMDB allocWithZone:NULL];
     db = [XL getDBWithDBName:@"pandian.sqlite"];
-   
+    
+    shoparr =[XL DataBase:db selectKeyTypes:gouwulei fromTable:@"gouwu"];
 }
 
 
