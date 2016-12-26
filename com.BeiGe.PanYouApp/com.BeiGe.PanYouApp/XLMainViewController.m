@@ -34,7 +34,7 @@
         NSString *fangshi=@"/sys/login";
         NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"test004",@"loginName",@"admin",@"password", nil];
         //自己写的网络请求    请求外网地址
-        [XL_WangLuo WaiwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
+        [XL_WangLuo QianWaiwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
             [WarningBox warningBoxHide:YES andView:self.view];
             NSLog(@"%@",responseObject);
             @try {
@@ -67,6 +67,7 @@
     self.title  =@"盘优";
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[UIColor whiteColor]}];
     [self tongzhi];
+    [self denglu];
     // Do any additional setup after loading the view.
     
     

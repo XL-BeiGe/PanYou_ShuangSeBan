@@ -73,6 +73,64 @@
     
 }
 
++(void)QianWaiwangQingqiuwithBizMethod:(NSString*)BizMetho Rucan:(NSDictionary*)BizParamSt type:(Post_or_Get)type success:(void (^)(id responseObject))success
+                           failure:(void (^)(NSError *error))failure{
+    
+    NSString *Waiwang=QianWaiWang;
+    NSString *BizMethod=BizMetho;
+    
+    NSString *Url=[NSString stringWithFormat:@"%@%@",Waiwang,BizMethod];
+    
+    NSString *UserID=@"";
+    NSString *vaildToken=@"1";//传空或非空
+    NSString *accessToken=@"";//登陆不用传
+    SBJsonWriter *writer=[[SBJsonWriter alloc] init];
+    
+    NSDictionary*BizParamStr=BizParamSt;
+    
+    NSString *Rucan=[writer stringWithObject:BizParamStr];
+    NSDictionary *ChuanCan=[NSDictionary dictionaryWithObjectsAndKeys:Appkey,@"appkey",UserID,@"userid",vaildToken,@"vaildToken",accessToken,@"accessToken",Rucan,@"params", nil];
+    NSLog(@"-*-*-*-*-%@",Url);
+    NSLog(@"\n－－－－－请求－－－－－\n%@",ChuanCan);
+    AFHTTPSessionManager *manager=[AFHTTPSessionManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
+    
+    switch (type) {
+        case Get:{
+            [manager GET:Url parameters:ChuanCan progress:^(NSProgress * _Nonnull uploadProgress) {
+                
+            } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                if (success) {
+                    success(responseObject);
+                }
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                if (failure) {
+                    failure(error);
+                }
+            }];
+            
+        }
+            
+            break;
+        case Post:{
+            [manager POST:Url parameters:ChuanCan progress:^(NSProgress * _Nonnull uploadProgress) {
+                
+            } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                if (success) {
+                    success(responseObject);
+                }
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                if (failure) {
+                    failure(error);
+                }
+            }];
+            
+        }
+            
+            break;
+    }
+    
+}
 
 +(void)JuYuwangQingqiuwithBizMethod:(NSString*)BizMetho Rucan:(NSDictionary*)BizParamSt type:(Post_or_Get)type success:(void (^)(id responseObject))success
                             failure:(void (^)(NSError *error))failure{
@@ -203,7 +261,7 @@
 +(void)ShangChuanTuPianwithBizMethod:(NSString*)BizMetho Rucan:(NSDictionary*)BizParamSt type:(Post_or_Get)type image:(UIImage*)image key:(NSString*)key success:(void (^)(id responseObject))success
                             failure:(void (^)(NSError *error))failure{
     NSUserDefaults * shuju=[NSUserDefaults standardUserDefaults];//非登录接口用
-    NSString *JuYuwang=JuYuWang;//登录接口不用
+    NSString *JuYuwang=QianWaiWang;//登录接口不用
     NSString *BizMethod=BizMetho;
     
     NSString *Url=[NSString stringWithFormat:@"%@%@",JuYuwang,BizMethod];
