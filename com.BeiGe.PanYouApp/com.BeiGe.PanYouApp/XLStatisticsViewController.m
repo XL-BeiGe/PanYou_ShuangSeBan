@@ -64,7 +64,7 @@
     NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"];
     NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userId",date,@"currentDate", nil];
     [WarningBox warningBoxModeIndeterminate:@"加载界面..." andView:self.view];
-    [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
+    [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         NSLog(@"%@",responseObject);
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {

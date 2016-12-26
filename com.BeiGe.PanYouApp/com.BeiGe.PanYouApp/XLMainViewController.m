@@ -23,7 +23,7 @@
 @implementation XLMainViewController
 -(void)viewWillAppear:(BOOL)animated{
    
-    [[NSUserDefaults standardUserDefaults] setObject:@"192.168.1.110:8090" forKey:@"JuYuWang"];
+   // [[NSUserDefaults standardUserDefaults] setObject:@"192.168.1.110:8090" forKey:@"JuYuWang"];
     
 }
 

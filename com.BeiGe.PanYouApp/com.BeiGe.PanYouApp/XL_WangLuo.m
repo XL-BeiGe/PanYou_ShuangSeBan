@@ -208,9 +208,9 @@
     
     NSString *Url=[NSString stringWithFormat:@"%@%@",JuYuwang,BizMethod];
     NSLog(@"\n\n*********\n\n%@",Url);
-    NSString *UserID=[shuju objectForKey:@"UserID"];//登陆不用传
+    NSString *UserID=[shuju objectForKey:@"userId"];//登陆不用传
     NSString *vaildToken=@"";//传空或非空
-    NSString *accessToken=[shuju objectForKey:@"accessToken"];//登陆不用传
+    NSString *accessToken=[shuju objectForKey:@"accesstoken"];//登陆不用传
     SBJsonWriter *writer=[[SBJsonWriter alloc] init];
     
     NSDictionary*BizParamStr=BizParamSt;

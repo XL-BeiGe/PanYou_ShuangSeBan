@@ -51,7 +51,7 @@
     NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"];
     NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userId",zhuangtai,@"progressStatus", nil];
     [WarningBox warningBoxModeIndeterminate:@"加载界面..." andView:self.view];
-    [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
+    [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         NSLog(@"%@",responseObject);
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
@@ -72,17 +72,17 @@
         [self tongzhijiekou:@"1"];
         zhT=@"1";
         NSLog(@"未接受");
-
+        [_table reloadData];
     }else if (sender.selectedSegmentIndex==1){
         [self tongzhijiekou:@"2"];
         zhT=@"2";
         NSLog(@"执行中");
-
+        [_table reloadData];
     }else{
         [self tongzhijiekou:@"3"];
         zhT=@"3";
         NSLog(@"已完成");
-
+        [_table reloadData];
     }
 }
 #pragma mark--刷新方法

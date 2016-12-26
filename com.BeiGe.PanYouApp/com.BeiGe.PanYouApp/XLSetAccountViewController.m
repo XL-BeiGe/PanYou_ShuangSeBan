@@ -54,7 +54,7 @@
     NSString *fangshi=@"/drug/postDrug";
     NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:_consumptionInfoId,@"consumptionInfoId",_fumoney.text,@"drugAmountReceive",chuannima,@"drugAmountType",_zlmoney.text,@"drugAmountBack", nil];
     [WarningBox warningBoxModeIndeterminate:@"正在结账..." andView:self.view];
-    [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
+    [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         NSLog(@"%@",responseObject);
         
         

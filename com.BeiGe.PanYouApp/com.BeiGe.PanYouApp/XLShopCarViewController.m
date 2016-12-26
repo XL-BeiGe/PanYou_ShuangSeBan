@@ -61,7 +61,7 @@
     NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"operateUserId",_scno,@"no",_sctype,@"type",_coupon.text,@"coupon",_couprice.text,@"couponPrice",arr,@"drugList", nil];
     NSLog(@"%@",rucan);
     [WarningBox warningBoxModeIndeterminate:@"正在计算总价..." andView:self.view];
-    [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
+    [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         NSLog(@"%@",responseObject);
         [WarningBox warningBoxHide:YES andView:self.view];
         if([[responseObject objectForKey:@"code"]isEqualToString:@"0000"]){

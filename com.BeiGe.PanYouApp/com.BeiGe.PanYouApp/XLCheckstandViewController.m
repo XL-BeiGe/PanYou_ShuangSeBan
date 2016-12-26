@@ -96,7 +96,7 @@
     NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"];
     NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userid", nil];
     [WarningBox warningBoxModeIndeterminate:@"数据下载中..." andView:self.view];
-    [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
+    [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         NSLog(@"%@",responseObject);
         [WarningBox warningBoxHide:YES andView:self.view];
         
@@ -200,18 +200,18 @@
 - (IBAction)Shopping:(id)sender {
     [self.view endEditing:YES];
 //    
-//    NSArray *cis = [XL DataBase:db selectKeyTypes:[NSDictionary dictionaryWithObjectsAndKeys:@"text",@"id",@"text",@"num",@"text",@"type",@"text",@"price", nil] fromTable:@"gouwu"];
-//    
-//    if (cis.count==0){
-//     [WarningBox warningBoxModeText:@"请添加药品" andView:self.view];
-//    }else{
+    NSArray *cis = [XL DataBase:db selectKeyTypes:[NSDictionary dictionaryWithObjectsAndKeys:@"text",@"id",@"text",@"num",@"text",@"type",@"text",@"price", nil] fromTable:@"gouwu"];
+    
+    if (cis.count==0){
+     [WarningBox warningBoxModeText:@"请添加药品" andView:self.view];
+    }else{
     
     XLShopCarViewController *shop = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"shopcar"];
     shop.scno=_vipnum.text;
     
     shop.sctype=type;
     [self.navigationController pushViewController:shop animated:YES];
-   // }
+    }
 }
 
 
@@ -243,7 +243,7 @@
     type=[self isMobileNumber:_vipnum.text]?@"2":@"1";
     NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:_vipnum.text,@"no",type,@"type", nil];
     
-    [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
+    [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         NSLog(@"%@",responseObject);
           [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"]isEqualToString:@"0000"]) {
