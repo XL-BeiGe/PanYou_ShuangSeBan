@@ -107,6 +107,10 @@
         NSLog(@"%@",[tempLateList[indexPath.section] objectForKey:@"examTempLateId"]);
         xla.str=[NSString stringWithFormat:@"%@",[tempLateList[indexPath.section] objectForKey:@"isNormal"]];
         xla.xunhuan=[NSString stringWithFormat:@"%@",[tempLateList[indexPath.section] objectForKey:@"errorAnswerTimes"]];
+        xla.templateAssignId=[NSString stringWithFormat:@"%@",[tempLateList[indexPath.section] objectForKey:@"templateAssignId"]];
+        if (xla.timuarr.count==0) {
+            [WarningBox warningBoxModeText:@"现在还没有题哟～" andView:self.view];
+        }else
         [self.navigationController pushViewController:xla animated:YES];
     }else{
         [WarningBox warningBoxModeText:@"挖哈哈哈哈fsfsdfdsfdsfsdfsdfsdfdsfsdfsdfdsfdsfdsfdsfdsfdsfdssdsadsadasdihfiguhfdnvidhhvisnfvjdsuihfdcj nzkchsiuhdijnajfbhsjkdbfhdsghfui哈哈" andView:self.view];
@@ -118,7 +122,8 @@
 -(void)jiekou{
     [WarningBox warningBoxModeIndeterminate:[NSString stringWithFormat:@"页面加载中..."] andView:self.view];
     NSString *fangshi=@"/exam/getExamList";
-    NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"1",@"userId", nil];
+    NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"];
+    NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userId", nil];
     //自己写的网络请求    请求外网地址
     
     [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {

@@ -61,7 +61,8 @@
 
 -(void)jiekou:(NSString*)date{
     NSString *fangshi=@"/attendance/Statistics";
-    NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"2",@"userId",date,@"currentDate", nil];
+    NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"];
+    NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userId",date,@"currentDate", nil];
     [WarningBox warningBoxModeIndeterminate:@"加载界面..." andView:self.view];
     [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         NSLog(@"%@",responseObject);

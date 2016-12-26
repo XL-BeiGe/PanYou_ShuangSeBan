@@ -219,7 +219,8 @@
 
     */
     NSString *fangshi=@"/attendance/field";
-    NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"2",@"userId",chuankai,@"beginTime",chuanjie,@"endTime",_textview.text,@"fieldReason", nil];
+    NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"];
+    NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userId",chuankai,@"beginTime",chuanjie,@"endTime",_textview.text,@"fieldReason", nil];
     NSLog(@"%@",rucan);
     //自己写的网络请求    请求外网地址
    

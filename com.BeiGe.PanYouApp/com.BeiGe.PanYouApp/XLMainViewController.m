@@ -18,9 +18,15 @@
 @end
 
 @implementation XLMainViewController
+-(void)viewWillAppear:(BOOL)animated{
+   
+    [[NSUserDefaults standardUserDefaults] setObject:@"192.168.1.110:8090" forKey:@"JuYuWang"];
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.title  =@"盘优";
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[UIColor whiteColor]}];
     [self tongzhi];

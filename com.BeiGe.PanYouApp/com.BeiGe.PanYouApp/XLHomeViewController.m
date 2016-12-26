@@ -206,17 +206,24 @@
 }
 -(void)xiazaishuju:(NSString *)str :(NSString *)ss{
     [WarningBox warningBoxModeIndeterminate:[NSString stringWithFormat:@"正在同步%@",str] andView:self.view];
-    NSString *fangshi=@"/cashier/drug/drugDataSync";
-    NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"2",@"userId", nil];
+    NSString *fangshi=@"/sys/download";
+    NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"",@"checkId",ss,@"status", nil];
     //自己写的网络请求    请求外网地址
     [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
-        NSLog(@"%@",responseObject);
         @try {
-            
+            NSLog(@"%@",responseObject);
             if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
+                NSDictionary*dataa=[responseObject objectForKey:@"data"];
                 
-                NSMutableArray *list=[[responseObject objectForKey:@"data"] objectForKey:@"list"];
+                if (NULL == [dataa objectForKey:@"megBatchNoFlag"]||[[dataa objectForKey:@"megBatchNoFlag"] isEqual:[NSNull null]]) {
+                    [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"megBatchNoFlag"];
+                }else{
+                    NSString*hebing=[dataa objectForKey:@"megBatchNoFlag"];
+                    [[NSUserDefaults standardUserDefaults] setObject:hebing forKey:@"megBatchNoFlag"];
+                }
+                
+                NSMutableArray *list=[dataa objectForKey:@"list"];
                 NSLog(@"\n\n下载数据*******\n\n%lu",(unsigned long)list.count);
                 NSLog(@"\n\n下载数据*******\n\n%@",list);
                 if(list.count == 0){
@@ -226,15 +233,21 @@
                     [[NSUserDefaults standardUserDefaults] setObject:[list[0] objectForKey:@"checkId"] forKey:@"checkId"];
                     [XL clearDatabase:db from:ShangChuanBiaoMing];
                     [XL clearDatabase:db from:XiaZaiBiaoMing];
+                    NSArray*akl=[[NSArray alloc] init];
+                    NSMutableDictionary*dict=[[NSMutableDictionary alloc] init];
+                    for (NSDictionary*dd in list) {
+                        [dict setObject:dd forKey:[NSString stringWithFormat:@"%@%@",[dd objectForKey:@"productCode"],[dd objectForKey:@"prodBatchNo"]]];
+                    }
+                    akl = [dict allValues];
                     
-                    for (int i=0; i<list.count; i++) {
+                    for (int i=0; i<akl.count; i++) {
                         //向下载表中插入数据
-                        NSString *barcode =[list[i]objectForKey:@"barCode"];
+                        NSString *barcode =[akl[i]objectForKey:@"barCode"];
                         if (NULL==barcode){
                             barcode = @"";
                         }
-                        NSString  *code = [NSString stringWithFormat:@"%@,%@",barcode,[list[i]objectForKey:@"productCode"]];
-                        NSMutableDictionary * dd=[NSMutableDictionary dictionaryWithDictionary:list[i]];
+                        NSString  *code = [NSString stringWithFormat:@"%@,%@",barcode,[akl[i]objectForKey:@"productCode"]];
+                        NSMutableDictionary * dd=[NSMutableDictionary dictionaryWithDictionary:akl[i]];
                         [dd setObject:[NSString stringWithFormat:@"%@", code ] forKey:@"barCode"];
                         [XL DataBase:db insertKeyValues:dd intoTable:XiaZaiBiaoMing];
                     }
@@ -246,7 +259,6 @@
     } failure:^(NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
-        NSLog(@"%@",error);
     }];
 }
 -(void)shangchuan:(NSDictionary*)rucan{
@@ -265,4 +277,5 @@
     }];
     
 }
+
 @end

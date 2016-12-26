@@ -162,8 +162,7 @@
     return arr;
 }
 -(void)tan{
-    
-    UIActionSheet *sheet=[[UIActionSheet alloc] initWithTitle:@"请假原因：" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"病假",@"产假",@"婚假",@"工伤假",@"事假",@"丧假",@"调休",@"年假",@"其他", nil];
+       UIActionSheet *sheet=[[UIActionSheet alloc] initWithTitle:@"请假原因：" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"病假",@"产假",@"婚假",@"工伤假",@"事假",@"丧假",@"调休",@"年假",@"其他", nil];
     
     [sheet showInView:self.view];
 }
@@ -186,7 +185,8 @@
      _reason.text;
     */
     NSString *fangshi=@"/attendance/leave";
-    NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"2",@"userId",kaishi,@"beginTime",jieshi,@"endTime",chuannima,@"leaveType",_reason.text,@"leaveReason", nil];
+    NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"];
+    NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userId",kaishi,@"beginTime",jieshi,@"endTime",chuannima,@"leaveType",_reason.text,@"leaveReason", nil];
     [WarningBox warningBoxModeIndeterminate:@"正在请假..." andView:self.view];
     [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         NSLog(@"%@",responseObject);

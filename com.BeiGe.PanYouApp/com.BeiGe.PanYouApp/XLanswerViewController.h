@@ -13,4 +13,5 @@
 @property (strong, nonatomic) NSString*str;
 @property (strong, nonatomic) NSString*mobanID;
 @property (strong, nonatomic) NSString*xunhuan;
+@property (strong, nonatomic) NSString*templateAssignId;
 @end

@@ -719,8 +719,9 @@
 -(void)scxiugai:(int)i{
     NSDate *currentDate = [NSDate date];//获取当前时间，日期
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"YYYY/MM/dd hh:mm:ss"];
+    [dateFormatter setDateFormat:@"YYYY/MM/dd HH:mm:ss"];
     NSString *dateString = [dateFormatter stringFromDate:currentDate];
+    NSLog(@"修改上传%@",dateString);
     if ([shularr[i] isEqual:@""]) {
         shularr[i]=@"0";
     }
@@ -929,8 +930,9 @@
 -(void)sccharu:(int)i{
     NSDate *currentDate = [NSDate date];//获取当前时间，日期
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"YYYY/MM/dd hh:mm:ss"];
+    [dateFormatter setDateFormat:@"YYYY/MM/dd HH:mm:ss"];
     NSString *dateString = [dateFormatter stringFromDate:currentDate];
+    NSLog(@"%@",dateString);
     NSDictionary  *scdic;
     if (tianjiapanduan==1) {
         NSString *huoweihao;

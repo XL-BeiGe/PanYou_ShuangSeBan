@@ -54,7 +54,9 @@
     iii=0;
     duicuo=1;
     dianjicishu=0;
+    NSLog(@"%@",_timuarr);
     [self quxuanxiang:_timuarr[iii]];
+    
     [self chuangjiantable];
 }
 -(void)chuangjiantable{
@@ -476,7 +478,7 @@
 -(void)tankuang{
     UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"提交提示" message:@"本次题目已全部答完，是否提交成绩?" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction*action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self tijiaodaan];
+        [self tijiaodaananniu];
     
     }];
     UIAlertAction*action2=[UIAlertAction actionWithTitle:@"放弃" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -488,7 +490,7 @@
     }];
     
 }
--(void)tijiaodaan{
+-(void)tijiaodaananniu{
     if([_str isEqualToString:@"1"]){
         [self tijiaoquanbu];
     }else if([_str isEqualToString:@"2"]){
@@ -498,7 +500,8 @@
 -(void)tijiaoquanbu{
     [WarningBox warningBoxModeIndeterminate:[NSString stringWithFormat:@"正在提交答案..."] andView:self.view];
     NSString *fangshi=@"/exam/answerAll";
-    NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"1",@"userId",_mobanID,@"templateId",tijiaodaan,@"examList", nil];
+    NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"];
+    NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userId",_mobanID,@"templateId",tijiaodaan,@"examList",_templateAssignId,@"templateAssignId",  nil];
     NSLog(@"%@",rucan);
     //自己写的网络请求    请求外网地址
     
@@ -526,8 +529,8 @@
 -(void)tijiaocuowu{
     [WarningBox warningBoxModeIndeterminate:[NSString stringWithFormat:@"正在提交重做答案..."] andView:self.view];
     NSString *fangshi=@"/exam/answerError";
-    
-    NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"1",@"userId",_mobanID,@"templateId",tijiaodaan,@"examList", nil];
+    NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"];
+    NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userId",_mobanID,@"templateId",tijiaodaan,@"examList",_templateAssignId,@"templateAssignId", nil];
     NSLog(@"%@",rucan);
     
     //自己写的网络请求    请求外网地址
