@@ -200,6 +200,7 @@
             
         }
     } failure:^(NSError *error) {
+        [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
     }];
     
