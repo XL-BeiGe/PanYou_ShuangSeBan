@@ -47,12 +47,12 @@
     [JPUSHService registrationIDCompletionHandler:^(int resCode, NSString *registrationID) {
         if(resCode == 0){
             NSLog(@"registrationID获取成功：%@",registrationID);
-//            [[NSUserDefaults standardUserDefaults] setObject:@"2" forKey:@"UserID"];
+
             
             NSString*tag=@"2";
             NSSet *tags=[NSSet setWithObjects:tag, nil];
             
-            NSString*alias=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"]];
+            NSString*alias=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]];
             NSLog(@"%@",alias);
             
             [JPUSHService setTags:tags alias:alias fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias){

@@ -71,7 +71,7 @@
 -(void)wangluolianjie{
     [WarningBox warningBoxModeIndeterminate:[NSString stringWithFormat:@""] andView:self.view];
     NSString *fangshi=@"/attendance/index";
-    NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"];
+    NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"];
     NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userId", nil];
     //自己写的网络请求    请求外网地址
     
@@ -132,7 +132,7 @@
     NSString *fangshi=@"/attendance/sign";
     NSString *jingwei=[NSString stringWithFormat:@"%@,%@",jing,wei];
     NSString *type=[NSString stringWithFormat:@"%d",haha];
-    NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"];
+    NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"];
     NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userId",jingwei,@"Lonlat",type,@"type", nil];
     NSLog(@"%@",rucan);
     //自己写的网络请求    请求外网地址

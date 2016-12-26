@@ -500,7 +500,7 @@
 -(void)tijiaoquanbu{
     [WarningBox warningBoxModeIndeterminate:[NSString stringWithFormat:@"正在提交答案..."] andView:self.view];
     NSString *fangshi=@"/exam/answerAll";
-    NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"];
+    NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"];
     NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userId",_mobanID,@"templateId",tijiaodaan,@"examList",_templateAssignId,@"templateAssignId",  nil];
     NSLog(@"%@",rucan);
     //自己写的网络请求    请求外网地址
@@ -529,7 +529,7 @@
 -(void)tijiaocuowu{
     [WarningBox warningBoxModeIndeterminate:[NSString stringWithFormat:@"正在提交重做答案..."] andView:self.view];
     NSString *fangshi=@"/exam/answerError";
-    NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"];
+    NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"];
     NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userId",_mobanID,@"templateId",tijiaodaan,@"examList",_templateAssignId,@"templateAssignId", nil];
     NSLog(@"%@",rucan);
     

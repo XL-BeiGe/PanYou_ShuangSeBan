@@ -93,7 +93,7 @@
 -(void)xiazaijiekou{
     [XL clearDatabase:db from:ChaXunBiaoMing];
     NSString *fangshi=@"/drug/drugDataSync";
-    NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"];
+    NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"];
     NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userid", nil];
     [WarningBox warningBoxModeIndeterminate:@"数据下载中..." andView:self.view];
     [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
