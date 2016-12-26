@@ -122,7 +122,7 @@
 -(void)jiekou{
     [WarningBox warningBoxModeIndeterminate:[NSString stringWithFormat:@"页面加载中..."] andView:self.view];
     NSString *fangshi=@"/exam/getExamList";
-    NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"];
+    NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"];
     NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userId", nil];
     //自己写的网络请求    请求外网地址
     

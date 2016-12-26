@@ -57,7 +57,7 @@
    
     
     NSString *fangshi=@"/drug/shoppingCart";
-    NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"];
+    NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"];
     NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"operateUserId",_scno,@"no",_sctype,@"type",_coupon.text,@"coupon",_couprice.text,@"couponPrice",arr,@"drugList", nil];
     NSLog(@"%@",rucan);
     [WarningBox warningBoxModeIndeterminate:@"正在计算总价..." andView:self.view];

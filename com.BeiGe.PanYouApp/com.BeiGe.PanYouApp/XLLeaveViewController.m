@@ -185,7 +185,7 @@
      _reason.text;
     */
     NSString *fangshi=@"/attendance/leave";
-    NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"];
+    NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"];
     NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userId",kaishi,@"beginTime",jieshi,@"endTime",chuannima,@"leaveType",_reason.text,@"leaveReason", nil];
     [WarningBox warningBoxModeIndeterminate:@"正在请假..." andView:self.view];
     [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
