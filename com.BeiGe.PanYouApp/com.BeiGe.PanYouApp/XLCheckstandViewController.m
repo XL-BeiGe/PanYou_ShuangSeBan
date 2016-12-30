@@ -13,6 +13,9 @@
 #import "Color+Hex.h"
 #import "XL_Header.h"
 #import "XL_FMDB.h"
+
+#define gouwulei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"id",@"text",@"num",@"text",@"type",@"text",@"price",@"text",@"name", nil]
+
 @interface XLCheckstandViewController ()
 {
     XL_FMDB  *XL;//数据库调用者
@@ -35,20 +38,7 @@
     [self navagation];
     [self clear];
     [self shujuku];
-    
-//    [XL  DataBase:db insertKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:@"1",@"id",@"10",@"num",@"1",@"type",@"13",@"price",@"测试1",@"name", nil] intoTable:@"gouwu"];
-//    [XL  DataBase:db insertKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:@"2",@"id",@"11",@"num",@"3",@"type",@"12",@"price",@"测试2",@"name", nil] intoTable:@"gouwu"];
-//    [XL  DataBase:db insertKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:@"3",@"id",@"12",@"num",@"2",@"type",@"11",@"price",@"测试3",@"name", nil] intoTable:@"gouwu"];
-//    [XL  DataBase:db insertKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:@"4",@"id",@"13",@"num",@"1",@"type",@"10",@"price",@"测试4",@"name", nil] intoTable:@"gouwu"];
-//    [XL  DataBase:db insertKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:@"5",@"id",@"14",@"num",@"3",@"type",@"9",@"price",@"测试5",@"name", nil] intoTable:@"gouwu"];
-//    [XL  DataBase:db insertKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:@"6",@"id",@"15",@"num",@"2",@"type",@"8",@"price",@"测试6",@"name", nil] intoTable:@"gouwu"];
-//    [XL  DataBase:db insertKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:@"7",@"id",@"16",@"num",@"1",@"type",@"7",@"price",@"测试7",@"name", nil] intoTable:@"gouwu"];
-//    [XL  DataBase:db insertKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:@"8",@"id",@"17",@"num",@"3",@"type",@"6",@"price",@"测试8",@"name", nil] intoTable:@"gouwu"];
-//    [XL  DataBase:db insertKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:@"9",@"id",@"18",@"num",@"2",@"type",@"5",@"price",@"测试9",@"name", nil] intoTable:@"gouwu"];
-//    [XL  DataBase:db insertKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:@"10",@"id",@"19",@"num",@"1",@"type",@"4",@"price",@"测试0",@"name", nil] intoTable:@"gouwu"];
-    
-    
-    
+ 
     // Do any additional setup after loading the view.
 }
 
@@ -100,9 +90,16 @@
         NSLog(@"%@",responseObject);
         [WarningBox warningBoxHide:YES andView:self.view];
         
-//        NSArray *list=[[responseObject objectForKey:@"data"] objectForKey:@"list"];
-//        NSMutableDictionary * dd=[NSMutableDictionary dictionaryWithDictionary:list];
-       // [XL  DataBase:db insertKeyValues:dd intoTable:ChaXunBiaoMing];
+        [XL clearDatabase:db from:ChaXunBiaoMing];
+        NSArray *list=[[responseObject objectForKey:@"data"] objectForKey:@"drugList"];
+        
+        for(int i=0;i<list.count;i++){
+            
+          NSMutableDictionary * dd=[NSMutableDictionary dictionaryWithDictionary:list[i]];
+             [XL  DataBase:db insertKeyValues:dd intoTable:ChaXunBiaoMing];
+        }
+
+       
         
         [WarningBox warningBoxModeText:@"数据已下载!" andView:self.view];
     } failure:^(NSError *error) {
@@ -114,12 +111,12 @@
 }
 
 - (IBAction)Finding:(id)sender {
- 
+    [_checkyp resignFirstResponder];
     NSArray *arr = [XL DataBase:db selectKeyTypes:ChaXunShiTiLei fromTable:ChaXunBiaoMing];
     if (arr.count==0){
     [WarningBox warningBoxModeText:@"请同步药品信息" andView:self.view];
     }else{
-        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:_checkyp.text,@"product_code",_checkyp.text,@"bar_code",_checkyp.text,@"pycode", nil];
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:_checkyp.text,@"productCode",_checkyp.text,@"barCode",_checkyp.text,@"pycode", nil];
         findarr =[XL DataBase:db selectKeyTypes:ChaXunShiTiLei fromTable:ChaXunBiaoMing whereConditionz:dic];
         NSLog(@"findarr---------%@",findarr);
         
@@ -153,6 +150,10 @@
 
 
 - (IBAction)Sure:(id)sender {
+    
+  if([_number.text isEqualToString:@"0"]){
+     [WarningBox warningBoxModeText:@"请添加药品数量" andView:self.view];
+  }else{
     int typ;
     NSString *Ss;
     if(sender){
@@ -173,12 +174,18 @@
 //    float sss = [ss floatValue];
 //    float sumpri= [_number.text floatValue]*sss;
    NSString *sss= [NSString stringWithFormat:@"%@",[findarr[0] objectForKey:@"id"]];
+   NSString *ssq= [NSString stringWithFormat:@"%@",[findarr[0] objectForKey:@"productName"]];
+    NSString *tt=  [NSString stringWithFormat:@"%d",typ];
    NSString *ssr= [NSString stringWithFormat:@"%@",_number.text];
   
-  // NSDictionary *dd = [NSDictionary dictionaryWithObjectsAndKeys:sss,@"id",typ,@"type",ssr,@"num",Ss,@"price", nil];
-   // [XL DataBase:db insertKeyValues:dd intoTable:@"gouwu"];
-    [self clear];
     
+   NSDictionary *dat = [NSDictionary dictionaryWithObjectsAndKeys:sss,@"id",tt,@"type",ssr,@"num",Ss,@"price",ssq,@"name", nil];
+  
+   
+   [XL DataBase:db insertKeyValues:dat intoTable:@"gouwu"];
+   
+    [self clear];
+    }
 }
 
 //加
@@ -200,7 +207,7 @@
 - (IBAction)Shopping:(id)sender {
     [self.view endEditing:YES];
 //    
-    NSArray *cis = [XL DataBase:db selectKeyTypes:[NSDictionary dictionaryWithObjectsAndKeys:@"text",@"id",@"text",@"num",@"text",@"type",@"text",@"price", nil] fromTable:@"gouwu"];
+    NSArray *cis = [XL DataBase:db selectKeyTypes:gouwulei fromTable:@"gouwu"];
     
     if (cis.count==0){
      [WarningBox warningBoxModeText:@"请添加药品" andView:self.view];
@@ -222,7 +229,7 @@
     //新建查询表，里边是收银台药品数据信息
     [XL DataBase:db createTable:ChaXunBiaoMing keyTypes:ChaXunShiTiLei];
     
-    [XL DataBase:db createTable:@"gouwu" keyTypes:[NSDictionary dictionaryWithObjectsAndKeys:@"text",@"id",@"text",@"num",@"text",@"type",@"text",@"price",@"text",@"name", nil]];
+    [XL DataBase:db createTable:@"gouwu" keyTypes:gouwulei];
    
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{

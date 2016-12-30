@@ -24,7 +24,7 @@
 #define JuYuWang [NSString stringWithFormat:@"%@%@%@%@",Scheme,JuyuwangIP,AppName,apath]
 
 
-#define QianWaiWangIP @"192.168.1.106:8080"
+#define QianWaiWangIP @"192.168.1.112:8080"
 
 #define QianWaiWang [NSString stringWithFormat:@"%@%@%@%@",Scheme,QianWaiWangIP,AppName,apath]
 
@@ -83,6 +83,6 @@
 #define ShangChuanBiaoMing @"shangchuan"
 
 
-#define ChaXunShiTiLei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"costPrice",@"text",@"salePrice",@"text",@"vipPrice",@"text",@"pycode",@"text",@"barCode",@"text",@"manufacturer",@"text",@"productName",@"text",@"productCode",@"text",@"specification",@"text",@"approvalNumber",@"text",@"id", nil]
+#define ChaXunShiTiLei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"costPrice",@"text",@"salePrice",@"text",@"vipPrice",@"text",@"pycode",@"text",@"barCode",@"text",@"manufacturer",@"text",@"productName",@"text",@"productCode",@"text",@"specification",@"text",@"approvalNumber",@"text",@"id",@"text",@"isNewRecord", nil]
 
 #define ChaXunBiaoMing @"chaxun"

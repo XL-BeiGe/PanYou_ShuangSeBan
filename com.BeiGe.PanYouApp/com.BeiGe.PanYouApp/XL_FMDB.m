@@ -185,9 +185,9 @@ static XL_FMDB *fmdb =nil;
         return nil;
 }
 #pragma mark --OR多个条件查询数据库中的数据
--(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName whereConditionz:(NSDictionary *)conditions{
+-(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName whereConditionz:(NSDictionary *)conditions;{
     if ([self isOpenDatabese:db]) {
-        FMResultSet *result =  [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@ = ? OR %@ = ？OR %@ = ?",tableName, [conditions allKeys][0],[conditions allKeys][1],[conditions allKeys][2]], [conditions valueForKey:[conditions allKeys][0]],[conditions allKeys][1],[conditions allKeys][2]];
+        FMResultSet *result =  [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@ = ? OR %@ =? OR %@ = ?",tableName,[conditions allKeys][0],[conditions allKeys][1],[conditions allKeys][2]],[conditions valueForKey:[conditions allKeys][0]],[conditions valueForKey:[conditions allKeys][1]],[conditions valueForKey:[conditions allKeys][2]]];
         return [self getArrWithFMResultSet:result keyTypes:keyTypes];
     }else
         return nil;
@@ -196,7 +196,7 @@ static XL_FMDB *fmdb =nil;
 
 -(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName whereConditions:(NSDictionary *)conditions;{
     if ([self isOpenDatabese:db]) {
-        FMResultSet *result =  [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@ = ? AND %@ = ? ",tableName, [conditions allKeys][0],[conditions allKeys][1]],[conditions valueForKey:[conditions allKeys][0]],[conditions valueForKey:[conditions allKeys][1]]];
+        FMResultSet *result =  [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@ = ? AND %@ = ? ",tableName,[conditions allKeys][0],[conditions allKeys][1]],[conditions valueForKey:[conditions allKeys][0]],[conditions valueForKey:[conditions allKeys][1]]];
         return [self getArrWithFMResultSet:result keyTypes:keyTypes];
     }else
         return nil;

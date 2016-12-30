@@ -46,7 +46,7 @@
      [self updatefmdb];
     
     shoparr = [XL DataBase:db selectKeyTypes:gouwulei fromTable:@"gouwu"];
-    NSLog(@"####%@",shoparr);
+    
     for (int i=0;i<shoparr.count;i++) {
         [shoparr[i]removeObjectForKey:@"price"];
         [shoparr[i]removeObjectForKey:@"name"];
@@ -67,6 +67,9 @@
         if([[responseObject objectForKey:@"code"]isEqualToString:@"0000"]){
             NSString *drugAmount=[[responseObject objectForKey:@"data"] objectForKey:@"drugAmount"];
             NSString *consumptionInfoId=[[responseObject objectForKey:@"data"] objectForKey:@"consumptionInfoId"];
+            
+            [XL clearDatabase:db from:@"gouwu"];
+            
         XLSetAccountViewController *shop = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"setacc"];
             shop.drugAmount=drugAmount;
             shop.consumptionInfoId=consumptionInfoId;
