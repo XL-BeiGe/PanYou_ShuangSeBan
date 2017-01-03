@@ -10,6 +10,7 @@
 #import "WarningBox.h"
 #import "XL_WangLuo.h"
 #import "XLNoteViewController.h"
+#import "SDWebImage/UIImageView+WebCache.h"
 @interface XLNoteInfoViewController ()<UITextViewDelegate>
 {
     UILabel *placeor;
@@ -23,6 +24,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"%@",_zhT);
+    
+    if([_zhT isEqualToString:@"1"]){
+        _zhT=@"2";
+    [self anniujiekou:_zhT];
+    }
+    
     
     [self xiangqingjiekou];
     [self navigation];
@@ -57,6 +64,15 @@
 
 -(void)jiemian{
     _Image.image =[UIImage imageNamed:@"icon_02_07.png"];
+    
+    
+    
+//    if([pushTemplate objectForKey:@"image"]!=nil){
+//    NSURL*url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/hyb/%@",service_host,[pushTemplate objectForKey:@"image"]];
+//        [_Image sd_setImageWithURL:url  placeholderImage:[UIImage imageNamed:@"小人@2x.png"]];
+    //[_Image sd_setImageWithURL:<#(NSURL *)#> placeholderImage:<#(UIImage *)#>]
+//    }
+    
     _titlle.text = [pushTemplate objectForKey:@"title"];
     _neror.text = [pushTemplate objectForKey:@"context"];
     _compary.text = [NSString stringWithFormat:@"来源:%@",[pushTemplate objectForKey:@"pushSrc"]];
@@ -71,9 +87,9 @@
     placeor.font =[UIFont systemFontOfSize:14];
     placeor.backgroundColor = [UIColor clearColor];
     [_textview addSubview:placeor];
-    if ([_zhT isEqualToString:@"1"]) {
+    if ([_zhT isEqualToString:@"2"]) {
         _renwuanniu.titleLabel.text=@"执行任务";
-    }else if ([_zhT isEqualToString:@"2"]){
+    }else if ([_zhT isEqualToString:@"3"]){
         _renwuanniu.titleLabel.text=@"完成任务";
     }else{
         _renwuanniu.hidden=YES;
@@ -86,17 +102,16 @@
     [self.navigationItem setLeftBarButtonItem:left];
 }
 -(void)fanhui{
+
     [self.navigationController popToRootViewControllerAnimated:YES];
-//    XL_PanDianViewController*pan=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"pandian"];
+//    XLNoteViewController *xln=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"note"];
 //    for (UIViewController *controller in self.navigationController.viewControllers) {
-//        if ([controller isKindOfClass:[pan class]]) {
+//        if ([controller isKindOfClass:[xln class]]) {
 //            [self.navigationController popToViewController:controller animated:YES];
 //        }
 //    }
+    
 }
-
-
-
 
 
 -(void)xiangqingjiekou{
@@ -141,15 +156,18 @@
 }
 - (IBAction)victory:(id)sender {
     NSString*str;
-    if ([_zhT isEqualToString:@"1"]) {
-        str=@"2";
-    }else if ([_zhT isEqualToString:@"2"]){
-       str=@"3";
+    if ([_zhT isEqualToString:@"2"]) {
+        str=@"3";
+    }else if ([_zhT isEqualToString:@"3"]){
+       str=@"4";
     }
 
     [self anniujiekou:str];
     
 }
+
+
+
 -(void)anniujiekou:(NSString*)str{
     NSString *fangshi=@"/push/progress";
     NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"];
@@ -159,11 +177,16 @@
         NSLog(@"%@",responseObject);
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+         
+            if([str isEqualToString:@"2"]){
+                [WarningBox warningBoxHide:YES andView:self.view];
+            }else{
             
             XLNoteViewController *xln = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"note"];
+         
             xln.typ=str;
             [self.navigationController pushViewController:xln animated:YES];
-            
+            }
         });
        
         [WarningBox warningBoxHide:YES andView:self.view];

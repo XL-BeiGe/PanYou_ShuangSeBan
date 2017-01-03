@@ -13,7 +13,7 @@
 @interface XLNoteViewController ()
 {
     
-    NSArray *pushList;
+    NSMutableArray *pushList;
     NSString* zhT;
 }
 @end
@@ -25,24 +25,22 @@
     self.title =@"通知";
     [self tableviewdelegate];
     [self refrish];
-    
-    [self tongzhijiekou:@"1"];
-    zhT=@"1";
+  
+    //[self tongzhijiekou:@""];
+    //zhT=@"1";
 }
 -(void)viewWillAppear:(BOOL)animated{
-    if ([_typ isEqualToString:@"2"]){
+    if ([_typ isEqualToString:@"3"]){
         _segment.selectedSegmentIndex = 1;
-
-    }else if ([_typ isEqualToString:@"3"]){
+       [self tongzhijiekou:@"3"];
+    }else if ([_typ isEqualToString:@"4"]){
         _segment.selectedSegmentIndex = 2;
-
+       [self tongzhijiekou:@"4"];
     }else{
         _segment.selectedSegmentIndex = 0;
-
+      [self tongzhijiekou:@""];
     }
-    
-    
-    
+  
 }
 
 -(void)tongzhijiekou:(NSString*)zhuangtai{
@@ -55,7 +53,29 @@
         NSLog(@"%@",responseObject);
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
-            pushList=[[responseObject objectForKey:@"data"] objectForKey:@"pushList"];
+             pushList = [NSMutableArray array];
+            if(![zhuangtai isEqualToString:@""]){
+                pushList=[[responseObject objectForKey:@"data"] objectForKey:@"pushList"];
+              
+
+            }else{
+                NSArray *ssa = [NSArray array];
+                
+                ssa =[[responseObject objectForKey:@"data"] objectForKey:@"pushList"];
+                
+                for (int i=0; i<ssa.count; i++) {
+                    if([[ssa[i]objectForKey:@"progressStatus"]isEqualToString:@"1"]||[[ssa[i]objectForKey:@"progressStatus"]isEqualToString:@"2"]){
+                        
+                        [pushList addObject:ssa[i]];
+                    }else{
+                    
+                    }
+                }
+               
+            }
+    
+           
+            
             
             [_table reloadData];
         }
@@ -69,18 +89,18 @@
 - (IBAction)ChangeV:(UISegmentedControl *)sender {
 
     if (sender.selectedSegmentIndex==0){
-        [self tongzhijiekou:@"1"];
-        zhT=@"1";
+        [self tongzhijiekou:@""];
+       // zhT=@"1";
         NSLog(@"未接受");
         [_table reloadData];
     }else if (sender.selectedSegmentIndex==1){
-        [self tongzhijiekou:@"2"];
-        zhT=@"2";
+        [self tongzhijiekou:@"3"];
+        //zhT=@"3";
         NSLog(@"执行中");
         [_table reloadData];
-    }else{
-        [self tongzhijiekou:@"3"];
-        zhT=@"3";
+    }else if(sender.selectedSegmentIndex==2){
+        [self tongzhijiekou:@"4"];
+        //zhT=@"4";
         NSLog(@"已完成");
         [_table reloadData];
     }
@@ -137,7 +157,8 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     XLNoteInfoViewController *xl = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"noteinfo"];
     xl.pushInfoId=[NSString stringWithFormat:@"%@",[pushList[indexPath.row] objectForKey:@"pushInfoId"]];
-    xl.zhT=zhT;
+    xl.zhT= [NSString stringWithFormat:@"%@",[pushList[indexPath.row] objectForKey:@"progressStatus"]];
+    //xl.zhT=zhT;
     [self.navigationController pushViewController:xl animated:YES];
 }
 @end
