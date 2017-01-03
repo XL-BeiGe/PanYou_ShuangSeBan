@@ -17,8 +17,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"结账结果";
+    
+    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
     _fkmoney.text = [NSString stringWithFormat:@"￥%@",_zonge];
-    _someone.text = [NSString stringWithFormat:@"测试人员"];
+    _someone.text = [NSString stringWithFormat:@"%@",[def objectForKey:@"CZname"]];
     _sytime.text = [NSString stringWithFormat:@"%@",_shijian];
     
     // Do any additional setup after loading the view.

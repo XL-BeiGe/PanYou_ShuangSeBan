@@ -16,7 +16,7 @@
 #import "ZYCustomKeyboardTypeNumberView.h"
 #import "DSKyeboard.h"
 
-#define gouwulei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"id",@"text",@"num",@"text",@"type",@"text",@"price",@"text",@"name", nil]
+#define gouwulei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"drugId",@"text",@"drugCount",@"text",@"drugPriceType",@"text",@"price",@"text",@"name", nil]
 @interface XLShopCarViewController ()<ZYCustomKeyboardTypeNumberViewDelegate>
 {
     XL_FMDB  *XL;//数据库调用者
@@ -46,20 +46,26 @@
      [self updatefmdb];
     
     shoparr = [XL DataBase:db selectKeyTypes:gouwulei fromTable:@"gouwu"];
-    
-    for (int i=0;i<shoparr.count;i++) {
+         for (int i=0;i<shoparr.count;i++) {
         [shoparr[i]removeObjectForKey:@"price"];
         [shoparr[i]removeObjectForKey:@"name"];
     }
+  
 
+   
+    
     //NSDictionary*d1=[NSDictionary dictionaryWithObjectsAndKeys:@"1003",@"drugId",@"1086",@"drugCount",@"2",@"drugPriceType", nil];
-    NSArray*arr=[NSArray arrayWithObjects:shoparr, nil];
+    //NSArray*arr=[NSArray arrayWithObjects:shoparr, nil];
    
     
     NSString *fangshi=@"/drug/shoppingCart";
     NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"];
-    NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"operateUserId",_scno,@"no",_sctype,@"type",_coupon.text,@"coupon",_couprice.text,@"couponPrice",arr,@"drugList", nil];
-    NSLog(@"%@",rucan);
+    NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"operateUserId",_scno,@"no",_sctype,@"type",_coupon.text,@"coupon",_couprice.text,@"couponPrice",shoparr,@"drugList", nil];
+    NSLog(@"------------------------%@",rucan);
+    
+    
+    
+    
     [WarningBox warningBoxModeIndeterminate:@"正在计算总价..." andView:self.view];
     [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         NSLog(@"%@",responseObject);
@@ -138,7 +144,7 @@
     
  
     //药品数量
-     number.text = [NSString stringWithFormat:@"%@",[shoparr[indexPath.row]objectForKey:@"num"]];
+     number.text = [NSString stringWithFormat:@"%@",[shoparr[indexPath.row]objectForKey:@"drugCount"]];
     
     [subtrace setTitle:@"-" forState:UIControlStateNormal];
     [sum setTitle:@"+" forState:UIControlStateNormal];
@@ -176,7 +182,7 @@
    
     [self updatefmdb];
     //删除某一条数据
-    NSDictionary *ddic = [NSDictionary dictionaryWithObjectsAndKeys:[shoparr[indexPath.row] objectForKey:@"id"],@"id", nil];
+    NSDictionary *ddic = [NSDictionary dictionaryWithObjectsAndKeys:[shoparr[indexPath.row] objectForKey:@"drugId"],@"drugId", nil];
     shoparr  =[XL DataBase:db deleteKeyTypes:gouwulei fromTable:@"gouwu" whereCondition:ddic];
     shoparr = [XL DataBase:db selectKeyTypes:gouwulei fromTable:@"gouwu"];
     [_tabel reloadData];
@@ -223,7 +229,7 @@
     
     NSString*qw=oo.text;
     NSLog(@"修改数量");
-    [shoparr[index.row] setObject:qw forKey:@"num"];
+    [shoparr[index.row] setObject:qw forKey:@"drugCount"];
     
 }
 
@@ -244,7 +250,7 @@
     oo.text=qw;
  
     //  存入jieshou数组中
-   [shoparr[index.row] setObject:qw forKey:@"num"];
+   [shoparr[index.row] setObject:qw forKey:@"drugCount"];
 
   
 }
@@ -269,7 +275,7 @@
     oo.text=qw;
     
     //  存入jieshou数组中
-    [shoparr[index.row] setObject:qw forKey:@"num"];
+    [shoparr[index.row] setObject:qw forKey:@"drugCount"];
   
 }
 
@@ -341,11 +347,13 @@
     NSDictionary *updic;
     NSDictionary *udic;
     for (int i=0; i<shoparr.count; i++) {
-        updic = [NSDictionary dictionaryWithObjectsAndKeys:[shoparr[i] objectForKey:@"num"],@"num", nil];
-        udic = [NSDictionary dictionaryWithObjectsAndKeys:[shoparr[i] objectForKey:@"id"],@"id", nil];
+        updic = [NSDictionary dictionaryWithObjectsAndKeys:[shoparr[i] objectForKey:@"drugCount"],@"drugCount", nil];
+        udic = [NSDictionary dictionaryWithObjectsAndKeys:[shoparr[i] objectForKey:@"drugId"],@"drugId", nil];
         [XL DataBase:db updateTable:@"gouwu" setKeyValues:updic whereCondition:udic];
     }
- 
+
+    
+    
 }
 -(void)shujuku{
     XL = [XL_FMDB tool];

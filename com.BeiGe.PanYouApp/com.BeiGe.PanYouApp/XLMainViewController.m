@@ -32,8 +32,8 @@
         
         [WarningBox warningBoxModeIndeterminate:@"登录中..." andView:self.view];
         NSString *fangshi=@"/sys/login";
-       // NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"test004",@"loginName",@"admin",@"password", nil];
-    NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"feiziping",@"loginName",@"admin",@"password", nil];
+       NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"DD000101",@"loginName",@"admin",@"password", nil];
+   // NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"feiziping",@"loginName",@"admin",@"password", nil];
         //自己写的网络请求    请求外网地址
         [XL_WangLuo QianWaiwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
             [WarningBox warningBoxHide:YES andView:self.view];
@@ -47,7 +47,7 @@
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"mac"]] forKey:@"Mac"];
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"userId"]] forKey:@"userId"];
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"userId"]] forKey:@"UserID"];
-                    
+                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"name"]] forKey:@"CZname"];
                 }
                 else{
                     [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.view];
