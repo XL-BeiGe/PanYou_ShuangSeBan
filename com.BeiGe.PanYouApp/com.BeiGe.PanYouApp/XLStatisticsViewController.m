@@ -34,6 +34,7 @@
     _tableview.dataSource=self;
     self.automaticallyAdjustsScrollViewInsets = NO;;
     self.tableview.showsVerticalScrollIndicator = NO;
+    self.tableview.tableFooterView=[[UIView alloc] init];
 }
 -(void)viewWillAppear:(BOOL)animated{
     NSDate *selected = [NSDate date];

@@ -28,6 +28,8 @@
 -(void)delegate{
     _tableview.delegate=self;
     _tableview.dataSource=self;
+    self.tableview.tableFooterView=[[UIView alloc] init];
+
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return _arr.count;
