@@ -14,7 +14,7 @@
 #import "XL_Header.h"
 #import "XL_FMDB.h"
 
-#define gouwulei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"drugId",@"text",@"drugCount",@"text",@"drugPriceType",@"text",@"price",@"text",@"name", nil]
+#define gouwulei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"drugId",@"text",@"drugCount",@"text",@"drugPriceType",@"text",@"price",@"text",@"name",@"text",@"qtmd", nil]
 
 @interface XLCheckstandViewController ()
 {
@@ -59,6 +59,7 @@
 */
 
 -(void)clear{
+    _checkyp.text= @"";
     _ypname.text = @"";
     _sccomp.text = @"";
     _scday.text = @"";
@@ -69,7 +70,6 @@
 }
 -(void)navagation{
     self.title = @"收银台";
-//    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[UIColor whiteColor]}];
     UIButton *btn =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, 20)];
     [btn setImage:[UIImage imageNamed:@"downloads.png"] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(Download:) forControlEvents:UIControlEventTouchUpInside];
@@ -106,7 +106,7 @@
           [WarningBox warningBoxModeText:@"数据已下载!" andView:self.view];
         }
        
-       
+     
     } failure:^(NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"网络错误,请重试!" andView:self.view];
@@ -116,23 +116,26 @@
 }
 
 - (IBAction)Finding:(id)sender {
+    [self chazhao];
+ 
+}
+-(void)chazhao{
     [_checkyp resignFirstResponder];
     NSArray *arr = [XL DataBase:db selectKeyTypes:ChaXunShiTiLei fromTable:ChaXunBiaoMing];
     if (arr.count==0){
-    [WarningBox warningBoxModeText:@"请同步药品信息" andView:self.view];
+        [WarningBox warningBoxModeText:@"请同步药品信息" andView:self.view];
     }else{
         NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:_checkyp.text,@"productCode",_checkyp.text,@"barCode",_checkyp.text,@"pycode", nil];
         findarr =[XL DataBase:db selectKeyTypes:ChaXunShiTiLei fromTable:ChaXunBiaoMing whereConditionz:dic];
-       // NSLog(@"findarr---------%@",findarr);
-        
+    
         if (findarr.count==0){
             [WarningBox warningBoxModeText:@"未找到药品" andView:self.view];
         }else{
             [self xianshi];
         }
     }
- 
 }
+
 -(void)xianshi{
     _ypname.text =[NSString stringWithFormat:@"%@",[findarr[0] objectForKey:@"productName"]] ;
     _sccomp.text = [NSString stringWithFormat:@"%@",[findarr[0] objectForKey:@"manufacturer"]];
@@ -143,14 +146,13 @@
     _sum.hidden = NO;
     
     
-    if([type isEqualToString:@"1"]){
+    if([type isEqualToString:@"1"]||[type isEqualToString:@"2"]){
        
     _price.text =[NSString stringWithFormat:@"%@",[findarr[0] objectForKey:@"vipPrice"]];//价格
-    }else{
+    }else if([type isEqualToString:@"3"]){
       
     _price.text =[NSString stringWithFormat:@"%@",[findarr[0] objectForKey:@"salePrice"]];//价格
     }
-    
     
     
 }
@@ -167,17 +169,12 @@
     NSString *Ss;
      
     if([type isEqualToString:@"3"]){
-        typ=1;
-        //非会员价
+        typ=1;//非会员
         Ss = [NSString stringWithFormat:@"%@",[findarr[0]objectForKey:@"salePrice"]];
-    }else if ([type isEqualToString:@"1"]) {
-        typ=2;
-        //会员价
+    }else if ([type isEqualToString:@"1"]||[type isEqualToString:@"2"]) {
+        typ=2; //会员
+      
         Ss = [NSString stringWithFormat:@"%@",[findarr[0]objectForKey:@"vipPrice"]];
-    }else{
-        typ=3;
-        //促销价
-        Ss = [NSString stringWithFormat:@"%@",[findarr[0]objectForKey:@"costPrice"]];
     }
    
 
@@ -185,14 +182,14 @@
    NSString *ssq= [NSString stringWithFormat:@"%@",[findarr[0] objectForKey:@"productName"]];
     NSString *tt=  [NSString stringWithFormat:@"%d",typ];
    NSString *ssr= [NSString stringWithFormat:@"%@",_number.text];
-     
-    
-  
-    
-   NSDictionary *dat = [NSDictionary dictionaryWithObjectsAndKeys:sss,@"drugId",tt,@"drugPriceType",ssr,@"drugCount",Ss,@"price",ssq,@"name", nil];
-//      NSDictionary *ddddd = [NSDictionary dictionaryWithObjectsAndKeys:sss,@"drugId", nil];
-//      NSArray *dif =[XL DataBase:db selectKeyTypes:gouwulei fromTable:@"gouwu" whereCondition:ddddd];
-//      NSLog(@"238338----%@",dif);
+      
+    NSDate *senddate = [NSDate date];
+  NSString *date2 = [NSString stringWithFormat:@"%ld", (long)[senddate timeIntervalSince1970]];
+ 
+
+      
+   NSDictionary *dat = [NSDictionary dictionaryWithObjectsAndKeys:sss,@"drugId",tt,@"drugPriceType",ssr,@"drugCount",Ss,@"price",ssq,@"name",date2,@"qtmd", nil];
+
       
    [XL DataBase:db insertKeyValues:dat intoTable:@"gouwu"];
    
@@ -251,6 +248,21 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+  
+    if(textField==_vipnum){
+        [_checkyp becomeFirstResponder];
+    }
+    
+    if (textField==_checkyp){
+        [self chazhao];
+    }
+    
+    
+    return YES;
+}
+
 
 
 

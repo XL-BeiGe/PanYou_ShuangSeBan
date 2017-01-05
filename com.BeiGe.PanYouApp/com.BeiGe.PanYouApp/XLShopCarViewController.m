@@ -16,7 +16,7 @@
 #import "ZYCustomKeyboardTypeNumberView.h"
 #import "DSKyeboard.h"
 
-#define gouwulei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"drugId",@"text",@"drugCount",@"text",@"drugPriceType",@"text",@"price",@"text",@"name", nil]
+#define gouwulei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"drugId",@"text",@"drugCount",@"text",@"drugPriceType",@"text",@"price",@"text",@"name",@"text",@"qtmd", nil]
 @interface XLShopCarViewController ()<ZYCustomKeyboardTypeNumberViewDelegate>
 {
     XL_FMDB  *XL;//数据库调用者
@@ -49,13 +49,9 @@
          for (int i=0;i<shoparr.count;i++) {
         [shoparr[i]removeObjectForKey:@"price"];
         [shoparr[i]removeObjectForKey:@"name"];
+        [shoparr[i]removeObjectForKey:@"qtmd"];
     }
   
-
-   
-    
-    //NSDictionary*d1=[NSDictionary dictionaryWithObjectsAndKeys:@"1003",@"drugId",@"1086",@"drugCount",@"2",@"drugPriceType", nil];
-    //NSArray*arr=[NSArray arrayWithObjects:shoparr, nil];
    
     
     NSString *fangshi=@"/drug/shoppingCart";
@@ -86,10 +82,7 @@
         [WarningBox warningBoxModeText:@"网络错误,请重试!" andView:self.view];
         NSLog(@"%@",error);
     }];
-    
-//    XLSetAccountViewController *shop = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"setacc"];
-//    
-//    [self.navigationController pushViewController:shop animated:YES];
+
     
    
 }
@@ -340,6 +333,27 @@
     [self wangluo];
    
 }
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    
+    if(textField==_coupon){
+        [_couprice becomeFirstResponder];
+    }else{
+    [textField resignFirstResponder];
+    }
+    return YES;
+}
+-(void)navigation{
+  
+    UIBarButtonItem*right=[[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self  action:@selector(fanhui)];
+    [self.navigationItem setRightBarButtonItem:right];
+}
+-(void)fanhui{
+    [_couprice resignFirstResponder];
+}
+
+
+
 #pragma mark--修改数据库
 -(void)updatefmdb{
 
@@ -348,7 +362,7 @@
     NSDictionary *udic;
     for (int i=0; i<shoparr.count; i++) {
         updic = [NSDictionary dictionaryWithObjectsAndKeys:[shoparr[i] objectForKey:@"drugCount"],@"drugCount", nil];
-        udic = [NSDictionary dictionaryWithObjectsAndKeys:[shoparr[i] objectForKey:@"drugId"],@"drugId", nil];
+        udic = [NSDictionary dictionaryWithObjectsAndKeys:[shoparr[i] objectForKey:@"qtmd"],@"qtmd", nil];
         [XL DataBase:db updateTable:@"gouwu" setKeyValues:updic whereCondition:udic];
     }
 
