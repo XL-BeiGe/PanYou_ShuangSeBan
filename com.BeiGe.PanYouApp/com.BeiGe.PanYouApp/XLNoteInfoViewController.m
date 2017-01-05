@@ -9,6 +9,7 @@
 #import "XLNoteInfoViewController.h"
 #import "WarningBox.h"
 #import "XL_WangLuo.h"
+#import "XL_Header.h"
 #import "XLNoteViewController.h"
 #import "SDWebImage/UIImageView+WebCache.h"
 @interface XLNoteInfoViewController ()<UITextViewDelegate>
@@ -67,11 +68,11 @@
     
     
     
-//    if([pushTemplate objectForKey:@"image"]!=nil){
-//    NSURL*url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/hyb/%@",service_host,[pushTemplate objectForKey:@"image"]];
-//        [_Image sd_setImageWithURL:url  placeholderImage:[UIImage imageNamed:@"小人@2x.png"]];
-    //[_Image sd_setImageWithURL:<#(NSURL *)#> placeholderImage:<#(UIImage *)#>]
-//    }
+    if([pushTemplate objectForKey:@"image"]!=nil){
+    NSURL*url=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",Scheme,QianWaiWangIP,[pushTemplate objectForKey:@"image"]]];
+        [_Image sd_setImageWithURL:url  placeholderImage:[UIImage imageNamed:@"icon_02_07.png"]];
+    
+    }
     
     _titlle.text = [pushTemplate objectForKey:@"title"];
     _neror.text = [pushTemplate objectForKey:@"context"];
