@@ -23,6 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self delegate];
 }
 -(void)delegate{
     _tableview.delegate=self;
@@ -57,7 +58,7 @@
         lable.text=[_arr[indexPath.section] objectForKey:@"beginTime"];
         if ([_ll isEqualToString:@"0"]) {
             image=[UIImage imageNamed:@"统计-工作天数.png"];
-            shuxian.backgroundColor=[UIColor colorWithHexString:@""];
+            shuxian.backgroundColor=[UIColor colorWithHexString:@"3c94ff"];
         }else if ([_ll isEqualToString:@"1"]){
             image=[UIImage imageNamed:@"统计-外出天数.png"];
             shuxian.backgroundColor=[UIColor colorWithHexString:@"3d94ff"];
@@ -66,12 +67,15 @@
             shuxian.backgroundColor=[UIColor colorWithHexString:@"fd8f30"];
         }
         imageview.image=image;
+        [cell addSubview:shuxian];
+        [cell addSubview:lable];
         [cell addSubview:imageview];
     }else{
         UILabel*llable=[[UILabel alloc] initWithFrame:CGRectMake(40, 8, 150, 30)];
         UILabel*shijian=[[UILabel alloc] initWithFrame:CGRectMake(self.tableview.frame.size.width-200, 8, 180, 30)];
         shijian.textAlignment=NSTextAlignmentRight;
         if ([_ll isEqualToString:@"0"]) {
+            shuxian.backgroundColor=[UIColor colorWithHexString:@"3c94ff"];
             llable.textColor=[UIColor colorWithHexString:@"3c94ff"];
             if (indexPath.row==1) {
                 llable.text=@"已签到";
@@ -81,15 +85,20 @@
                 shijian.text=[_arr[indexPath.section] objectForKey:@"endTime"];
             }
         }else if ([_ll isEqualToString:@"1"]){
+            shuxian.backgroundColor=[UIColor colorWithHexString:@"3c94ff"];
             llable.textColor=[UIColor colorWithHexString:@"3c94ff"];
             llable.text=@"外勤";
         }else{
+            shuxian.backgroundColor=[UIColor colorWithHexString:@"fd8f30"];
             llable.textColor=[UIColor colorWithHexString:@"fd8f30"];
             llable.text=@"请假";
             shijian.text=[_arr[indexPath.section] objectForKey:@"fieldReason"];
         }
+        [cell addSubview:shuxian];
+        [cell addSubview:llable];
+        [cell addSubview:shijian];
     }
-    [cell addSubview:shuxian];
+    
     return cell;
 }
 @end

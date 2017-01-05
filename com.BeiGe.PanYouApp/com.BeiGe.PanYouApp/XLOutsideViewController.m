@@ -228,7 +228,8 @@
     [XL_WangLuo ShangChuanTuPianwithBizMethod:fangshi Rucan:rucan type:Post image:_image1 key:@"backgroundImage" success:^(id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
-            [WarningBox warningBoxModeText:[NSString stringWithFormat:@"打卡成功!"] andView:self.view];
+            [WarningBox warningBoxModeText:[NSString stringWithFormat:@"打卡成功!"] andView:self.navigationController.view];
+            [self.navigationController popViewControllerAnimated:YES];
         }
         
         NSLog(@"%@",responseObject);

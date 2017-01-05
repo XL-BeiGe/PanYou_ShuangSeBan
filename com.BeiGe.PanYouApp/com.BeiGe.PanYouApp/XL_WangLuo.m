@@ -260,26 +260,27 @@
 
 +(void)ShangChuanTuPianwithBizMethod:(NSString*)BizMetho Rucan:(NSDictionary*)BizParamSt type:(Post_or_Get)type image:(UIImage*)image key:(NSString*)key success:(void (^)(id responseObject))success
                             failure:(void (^)(NSError *error))failure{
-    NSUserDefaults * shuju=[NSUserDefaults standardUserDefaults];//非登录接口用
+//    NSUserDefaults * shuju=[NSUserDefaults standardUserDefaults];//非登录接口用
     NSString *JuYuwang=QianWaiWang;//登录接口不用
     NSString *BizMethod=BizMetho;
     
     NSString *Url=[NSString stringWithFormat:@"%@%@",JuYuwang,BizMethod];
     NSLog(@"\n\n*********\n\n%@",Url);
-    NSString *UserID=[shuju objectForKey:@"userId"];//登陆不用传
-    NSString *vaildToken=@"";//传空或非空
-    NSString *accessToken=[shuju objectForKey:@"accesstoken"];//登陆不用传
-    SBJsonWriter *writer=[[SBJsonWriter alloc] init];
+//    NSString *UserID=[shuju objectForKey:@"userId"];//登陆不用传
+//    NSString *vaildToken=@"";//传空或非空
+//    NSString *accessToken=[shuju objectForKey:@"accesstoken"];//登陆不用传
+//    SBJsonWriter *writer=[[SBJsonWriter alloc] init];
     
     NSDictionary*BizParamStr=BizParamSt;
     
-    NSString *Rucan=[writer stringWithObject:BizParamStr];
-    NSDictionary *ChuanCan=[NSDictionary dictionaryWithObjectsAndKeys:Appkey,@"appkey",vaildToken,@"vaildToken",UserID,@"userid",accessToken,@"accessToken",Rucan,@"params", nil];
-    NSLog(@"%@",ChuanCan);
+//    NSString *Rucan=[writer stringWithObject:BizParamStr];
+    
+//    NSDictionary *ChuanCan=[NSDictionary dictionaryWithObjectsAndKeys:Appkey,@"appkey",vaildToken,@"vaildToken",UserID,@"userid",accessToken,@"accessToken",Rucan,@"params", nil];
+//    NSLog(@"%@",ChuanCan);
     AFHTTPSessionManager *manager=[AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
     
-    [manager POST:Url parameters:ChuanCan constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    [manager POST:Url parameters:BizParamStr constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         NSData *data= UIImageJPEGRepresentation(image, 0.5); //如果用jpg方法需添加jpg压缩方法
         NSDateFormatter *fm = [[NSDateFormatter alloc] init];
         // 设置时间格式

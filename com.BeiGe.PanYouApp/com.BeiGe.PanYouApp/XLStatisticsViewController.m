@@ -26,6 +26,7 @@
     qingjialist=[[NSMutableArray alloc] init];
     qiandaotuilist=[[NSMutableArray alloc] init];
     waiqinlist=[[NSMutableArray alloc] init];
+    [self delegate];
     
 }
 -(void)delegate{
@@ -60,6 +61,8 @@
 
 
 -(void)jiekou:(NSString*)date{
+    qingjialist=[[NSMutableArray alloc] init];
+    waiqinlist =[[NSMutableArray alloc] init];
     NSString *fangshi=@"/attendance/Statistics";
     NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"];
     NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userId",date,@"currentDate", nil];
@@ -78,6 +81,8 @@
                     [waiqinlist addObject:dd];
                 }
             }
+            [_tableview reloadData];
+        }else{
             [_tableview reloadData];
         }
     } failure:^(NSError *error) {
@@ -110,7 +115,7 @@
         tian=[NSString stringWithFormat:@"%lu",(unsigned long)qiandaotuilist.count];
     }else if (indexPath.row==1){
         image=[UIImage imageNamed:@"统计-外出天数.png"];
-        biao=@"外出天数";
+        biao=@"外出次数";
         tian=[NSString stringWithFormat:@"%lu",(unsigned long)waiqinlist.count];
     }else if (indexPath.row==2){
         image=[UIImage imageNamed:@"统计-请假次数.png"];

@@ -192,7 +192,8 @@
         NSLog(@"%@",responseObject);
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
-            [WarningBox warningBoxModeText:@"请假成功!" andView:self.view];
+            [WarningBox warningBoxModeText:@"请假成功!" andView:self.navigationController.view];
+            [self.navigationController popViewControllerAnimated:YES];
         }
     } failure:^(NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];

@@ -41,7 +41,7 @@
             @try {
                 if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
                     NSUserDefaults *user=[NSUserDefaults standardUserDefaults];
-                    [user setObject:@"test004" forKey:@"Name"];
+                    [user setObject:@"DD000101" forKey:@"Name"];
                     [user setObject:@"admin" forKey:@"Password"];
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data" ] objectForKey:@"accessToken"]] forKey:@"accesstoken"];
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"mac"]] forKey:@"Mac"];
