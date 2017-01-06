@@ -60,7 +60,7 @@
 }
 -(void)anniupanduan{
     //需要在接口返回时判断
-    if (dao==2) {
+    if (dao!=2) {
         //灰色图标＋不可点击；ff9900
         _qiandao.backgroundColor=[UIColor lightGrayColor];
         _qiandao.userInteractionEnabled=NO;
@@ -69,7 +69,7 @@
         _qiandao.backgroundColor=[UIColor colorWithHexString:@"ff9900"];
         _qiandao.userInteractionEnabled=YES;
     }
-    if (tui==2) {
+    if (tui!=2) {
         //灰色图标＋不可点击；
         _qiantui.backgroundColor=[UIColor lightGrayColor];
         _qiantui.userInteractionEnabled=NO;
