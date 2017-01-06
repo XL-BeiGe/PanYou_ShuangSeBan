@@ -16,6 +16,7 @@
 #import "WarningBox.h"
 #import "XL_WangLuo.h"
 #import "XLHomeViewController.h"
+#import "AppDelegate.h"
 @interface XLMainViewController ()
 
 @end
@@ -40,13 +41,22 @@
             @try {//DD000101    admin
                 if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
                     NSUserDefaults *user=[NSUserDefaults standardUserDefaults];
+                    //账号密码
                     [user setObject:@"fd002" forKey:@"Name"];
                     [user setObject:@"111111" forKey:@"Password"];
+                    //其他接口必须用
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data" ] objectForKey:@"accessToken"]] forKey:@"accesstoken"];
+                    //平台机器码
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"mac"]] forKey:@"Mac"];
+                    //给两个平台的userId 赋值
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"userId"]] forKey:@"userId"];
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"userId"]] forKey:@"UserID"];
+                    //给推送用的门店Id 赋值
+                    [user setObject:[NSString stringWithFormat:@"%@",[[[responseObject objectForKey:@"data"] objectForKey:@"office"] objectForKey:@"id"]] forKey:@"mendian"];
+                    //收银台需要显示的名称
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"name"]] forKey:@"CZname"];
+                    //登陆成功后重新注册一次极光的标签和别名
+                    [[AppDelegate appDelegate] method];
                 }
                 else{
                     [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.view];

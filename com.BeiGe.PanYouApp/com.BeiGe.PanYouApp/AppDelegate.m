@@ -21,8 +21,9 @@
 
 @end
 @implementation AppDelegate
+static AppDelegate *_appDelegate;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    _appDelegate = self;
     
     //获取通知中心单例对象
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
@@ -47,18 +48,7 @@
     [JPUSHService registrationIDCompletionHandler:^(int resCode, NSString *registrationID) {
         if(resCode == 0){
             NSLog(@"registrationID获取成功：%@",registrationID);
-
-            
-            NSString*tag=@"2";
-            NSSet *tags=[NSSet setWithObjects:tag, nil];
-            
-            NSString*alias=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]];
-            NSLog(@"%@",alias);
-            
-            [JPUSHService setTags:tags alias:alias fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias){
-                NSLog(@"rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, iTags, iAlias);
-            }];
-            
+            [self method];
         }
         else{
             NSLog(@"registrationID获取失败，code：%d",resCode);
@@ -67,13 +57,25 @@
     
     return YES;
 }
+
++ (AppDelegate *)appDelegate {
+    return _appDelegate;
+}
+-(void)method{
+    NSString*tag=[[NSUserDefaults standardUserDefaults] objectForKey:@"mendian"];
+    NSSet *tags=[NSSet setWithObjects:tag, nil];
+    
+    NSString*alias=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]];
+    
+    [JPUSHService setTags:tags alias:alias fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias){
+        NSLog(@"\nrescode: %d, \ntags: %@, \nalias: %@\n", iResCode, iTags, iAlias);
+    }];
+
+}
 - (void)application:(UIApplication *)application
 didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    
     /// Required - 注册 DeviceToken
     [JPUSHService registerDeviceToken:deviceToken];
-    NSLog(@"%@", [NSString stringWithFormat:@"Device Token: %@", deviceToken]);
-    
 }
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     //Optional
