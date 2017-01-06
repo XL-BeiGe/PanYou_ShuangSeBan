@@ -27,6 +27,9 @@
     [self tableviewdelegate];
     [self refrish];
     [self comeback];
+    _segment.layer.cornerRadius = 0;
+    _segment.layer.masksToBounds = NO;
+    
     //[self tongzhijiekou:@""];
     //zhT=@"1";
 }
@@ -83,6 +86,7 @@
                     if([[ssa[i]objectForKey:@"progressStatus"]isEqualToString:@"1"]||[[ssa[i]objectForKey:@"progressStatus"]isEqualToString:@"2"]){
                         
                         [pushList addObject:ssa[i]];
+                        NSLog(@"-------------------%@",pushList);
                     }else{
                     
                     }
@@ -90,7 +94,11 @@
                
             }
     
-           
+            if(pushList.count==0){
+                _table.hidden=YES;
+            }else{
+                _table.hidden=NO;
+            }
             
             
             [_table reloadData];
@@ -162,11 +170,26 @@
     UILabel *time =(UILabel*)[cell viewWithTag:203];
     UIImageView *icoimg = (UIImageView*)[cell viewWithTag:200];
     UIImageView *img = (UIImageView*)[cell viewWithTag:204];
-    titl.text = [pushList[indexPath.row] objectForKey:@"title"];
-    mess.text = [pushList[indexPath.row] objectForKey:@"context"];
-    time.text = [pushList[indexPath.row] objectForKey:@"createTime"];
+    titl.text = [NSString stringWithFormat:@"%@",[pushList[indexPath.row] objectForKey:@"title"]];
+    mess.text = [NSString stringWithFormat:@"%@",[pushList[indexPath.row] objectForKey:@"context"] ];
+    
+    
+  NSString *ss =[NSString stringWithFormat:@"%@",[pushList[indexPath.row] objectForKey:@"tcreateTime"]];
+    NSTimeInterval ti=[ss doubleValue]/ 1000;
+    NSDate*detaildate=[NSDate dateWithTimeIntervalSince1970:ti];
+    NSDateFormatter*dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    time.text = [dateFormatter stringFromDate:detaildate];
+    
     icoimg.image = [UIImage imageNamed:@"通知列表小标.png"];
-    img.image = [UIImage imageNamed:@"通知列表小标.png"];
+    
+    
+    if([[pushList[indexPath.row]objectForKey:@"progressStatus"]isEqualToString:@"1"]){
+    img.image = [UIImage imageNamed:@"未读红点.png"];
+    }else{
+    img.image = [UIImage imageNamed:@""];
+    }
+    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }

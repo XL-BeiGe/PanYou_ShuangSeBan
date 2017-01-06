@@ -47,7 +47,7 @@
 }
 //通知
 -(void)tongzhi{
-    UIButton *btn =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, 20)];
+    UIButton *btn =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 25)];
     [btn setImage:[UIImage imageNamed:@"icon_xiaoxi.png"] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(Download:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *right = [[UIBarButtonItem alloc]initWithCustomView:btn];

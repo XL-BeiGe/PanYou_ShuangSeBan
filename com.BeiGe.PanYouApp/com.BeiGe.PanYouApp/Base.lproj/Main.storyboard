@@ -132,11 +132,12 @@
                                     <segment title="执行中"/>
                                     <segment title="已完成"/>
                                 </segments>
-                                <color key="tintColor" red="0.20392156862745098" green="0.75294117647058822" blue="0.51372549019607838" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.32156862749999998" green="0.78823529410000004" blue="0.58431372550000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="ChangeV:" destination="PBa-6I-cPy" eventType="valueChanged" id="zHB-rZ-eOe"/>
                                 </connections>
                             </segmentedControl>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="消息背景.png" translatesAutoresizingMaskIntoConstraints="NO" id="oo5-iX-1yv"/>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SgL-X6-rxP">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -195,10 +196,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="oo5-iX-1yv" firstAttribute="leading" secondItem="otV-Pu-OKf" secondAttribute="leading" id="2Gb-tG-7Ca"/>
+                            <constraint firstItem="oo5-iX-1yv" firstAttribute="top" secondItem="bPE-pc-SEs" secondAttribute="bottom" id="59C-FO-1Mo"/>
                             <constraint firstItem="bPE-pc-SEs" firstAttribute="top" secondItem="wE9-1C-MMn" secondAttribute="bottom" id="6b6-Ip-zNN"/>
+                            <constraint firstItem="pAV-bm-gvv" firstAttribute="top" secondItem="oo5-iX-1yv" secondAttribute="bottom" id="IXf-Zu-Xqb"/>
                             <constraint firstItem="SgL-X6-rxP" firstAttribute="leading" secondItem="otV-Pu-OKf" secondAttribute="leading" id="Jqf-G8-DZl"/>
                             <constraint firstAttribute="trailing" secondItem="SgL-X6-rxP" secondAttribute="trailing" id="fe7-dh-7g1"/>
                             <constraint firstItem="SgL-X6-rxP" firstAttribute="top" secondItem="bPE-pc-SEs" secondAttribute="bottom" constant="1" id="iu7-cd-CVP"/>
+                            <constraint firstAttribute="trailing" secondItem="oo5-iX-1yv" secondAttribute="trailing" id="l4X-Qn-gEM"/>
                             <constraint firstItem="bPE-pc-SEs" firstAttribute="leading" secondItem="otV-Pu-OKf" secondAttribute="leading" id="mak-B8-jXD"/>
                             <constraint firstItem="pAV-bm-gvv" firstAttribute="top" secondItem="SgL-X6-rxP" secondAttribute="bottom" id="nZd-Gt-tJN"/>
                             <constraint firstAttribute="trailing" secondItem="bPE-pc-SEs" secondAttribute="trailing" id="yN2-WS-UzH"/>
@@ -512,22 +517,26 @@
                                         <color key="textColor" red="0.92574626207351685" green="0.5076744556427002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ume-o0-y8a">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ume-o0-y8a">
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="fIg-5C-uuL"/>
                                             <constraint firstAttribute="width" constant="30" id="xm8-ox-FxV"/>
                                         </constraints>
-                                        <state key="normal" title="-"/>
+                                        <state key="normal" title="-">
+                                            <color key="titleColor" red="0.2056943178" green="0.753698647" blue="0.51509863140000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="Subtract:" destination="r5b-gY-R25" eventType="touchUpInside" id="ePK-Bg-AaS"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LTw-I0-oxT">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LTw-I0-oxT">
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="tDV-wu-Ybj"/>
                                             <constraint firstAttribute="height" constant="21" id="umB-XJ-50I"/>
                                         </constraints>
-                                        <state key="normal" title="+"/>
+                                        <state key="normal" title="+">
+                                            <color key="titleColor" red="0.20392156862745098" green="0.75294117647058822" blue="0.51372549019607838" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="Sum:" destination="r5b-gY-R25" eventType="touchUpInside" id="EXm-WB-Ffd"/>
                                         </connections>
@@ -1544,6 +1553,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="试题背景.png" translatesAutoresizingMaskIntoConstraints="NO" id="N9A-g8-2zJ"/>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="308" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5QC-gP-rHL">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1691,8 +1701,12 @@
                         <color key="backgroundColor" red="0.98420697450637817" green="0.98437517881393433" blue="0.98419648408889771" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="5QC-gP-rHL" firstAttribute="top" secondItem="5bE-7q-pDe" secondAttribute="bottom" constant="10" id="A3T-iH-OAO"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="N9A-g8-2zJ" secondAttribute="trailing" id="EVD-A5-Zj4"/>
+                            <constraint firstItem="N9A-g8-2zJ" firstAttribute="top" secondItem="5bE-7q-pDe" secondAttribute="bottom" id="HCv-k7-RBJ"/>
+                            <constraint firstItem="N9A-g8-2zJ" firstAttribute="leading" secondItem="ur1-Hw-TFB" secondAttribute="leadingMargin" id="IpP-bf-K9J"/>
                             <constraint firstItem="eaQ-r7-BGz" firstAttribute="top" secondItem="5QC-gP-rHL" secondAttribute="bottom" id="QZQ-mw-ZoK"/>
                             <constraint firstItem="5QC-gP-rHL" firstAttribute="leading" secondItem="ur1-Hw-TFB" secondAttribute="leading" constant="25" id="eIu-hg-f1t"/>
+                            <constraint firstItem="eaQ-r7-BGz" firstAttribute="top" secondItem="N9A-g8-2zJ" secondAttribute="bottom" id="f1x-KM-Ud1"/>
                             <constraint firstAttribute="trailing" secondItem="5QC-gP-rHL" secondAttribute="trailing" constant="25" id="qnN-Yn-brC"/>
                         </constraints>
                     </view>
@@ -4386,6 +4400,7 @@
         <image name="助记码2.png" width="190" height="151"/>
         <image name="按钮.png" width="82" height="46"/>
         <image name="收银台-图标.png" width="65" height="65"/>
+        <image name="消息背景.png" width="576" height="524"/>
         <image name="答题-背景.png" width="640" height="310"/>
         <image name="结账成功.png" width="123" height="123"/>
         <image name="统计-工作天数.png" width="39" height="39"/>
@@ -4395,6 +4410,7 @@
         <image name="考勤-04.png" width="71" height="71"/>
         <image name="考勤-05.png" width="71" height="71"/>
         <image name="考勤-背景.png" width="640" height="389"/>
+        <image name="试题背景.png" width="576" height="524"/>
         <image name="通知详情.png" width="85" height="86"/>
         <image name="首页-收银台.png" width="195" height="149"/>
         <image name="首页-盘点.png" width="199" height="169"/>

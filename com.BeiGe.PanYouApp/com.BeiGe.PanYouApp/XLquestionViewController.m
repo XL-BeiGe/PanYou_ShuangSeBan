@@ -149,6 +149,13 @@
             NSDictionary* data=[responseObject objectForKey:@"data"];
             tempLateList=[data objectForKey:@"tempLateList"];
             
+            
+            if(tempLateList.count==0){
+                _tableview.hidden = YES;
+            }else{
+                _tableview.hidden=NO;
+            }
+            
             [_tableview reloadData];
         }
         else{
