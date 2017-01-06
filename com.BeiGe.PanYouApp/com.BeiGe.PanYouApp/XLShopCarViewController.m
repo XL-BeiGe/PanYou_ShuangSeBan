@@ -15,7 +15,7 @@
 #import "Color+Hex.h"
 #import "ZYCustomKeyboardTypeNumberView.h"
 #import "DSKyeboard.h"
-
+#import "XLCheckstandViewController.h"
 #define gouwulei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"drugId",@"text",@"drugCount",@"text",@"drugPriceType",@"text",@"price",@"text",@"name",@"text",@"qtmd", nil]
 @interface XLShopCarViewController ()<ZYCustomKeyboardTypeNumberViewDelegate>
 {
@@ -37,8 +37,24 @@
    
     _coupon.delegate = self;
     _couprice.delegate = self;
+    [self comeback];
     // Do any additional setup after loading the view.
 }
+
+-(void)comeback{
+    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
+    UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self  action:@selector(fanhuii)];
+    [self.navigationItem setLeftBarButtonItem:left];
+}
+-(void)fanhuii{
+    XLCheckstandViewController *xln=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"checkstand"];
+    for (UIViewController *controller in self.navigationController.viewControllers) {
+        if ([controller isKindOfClass:[xln class]]) {
+            [self.navigationController popToViewController:controller animated:YES];
+        }
+    }
+}
+
 
 -(void)wangluo{
 //网络请求

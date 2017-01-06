@@ -13,7 +13,7 @@
 #import "Color+Hex.h"
 #import "XL_Header.h"
 #import "XL_FMDB.h"
-
+#import "XLMainViewController.h"
 #define gouwulei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"drugId",@"text",@"drugCount",@"text",@"drugPriceType",@"text",@"price",@"text",@"name",@"text",@"qtmd", nil]
 
 @interface XLCheckstandViewController ()
@@ -35,13 +35,37 @@
     _checkyp.delegate = self;
     _queding.layer.borderWidth = 1;
     _queding.layer.borderColor = [[UIColor colorWithHexString:@"32CC96"] CGColor];
+    
+    _sum.layer.borderWidth = 1;
+    _sum.layer.borderColor = [[UIColor colorWithHexString:@"32CC96"] CGColor];
+    _sum.layer.cornerRadius = 5.0;
+    _subtract.layer.borderWidth = 1;
+    _subtract.layer.borderColor = [[UIColor colorWithHexString:@"32CC96"] CGColor];
+    _subtract.layer.cornerRadius = 5.0;
+    
+    
     type=@"3";
     [self navagation];
-    //[self clear];
+    [self clear];
     [self shujuku];
- 
+    [self comeback];
     // Do any additional setup after loading the view.
 }
+
+-(void)comeback{
+    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
+    UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self  action:@selector(fanhui)];
+    [self.navigationItem setLeftBarButtonItem:left];
+}
+-(void)fanhui{
+    XLMainViewController *xln=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xlmain"];
+    for (UIViewController *controller in self.navigationController.viewControllers) {
+        if ([controller isKindOfClass:[xln class]]) {
+            [self.navigationController popToViewController:controller animated:YES];
+        }
+    }
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -123,7 +147,7 @@
     [_checkyp resignFirstResponder];
     NSArray *arr = [XL DataBase:db selectKeyTypes:ChaXunShiTiLei fromTable:ChaXunBiaoMing];
     if (arr.count==0){
-        [WarningBox warningBoxModeText:@"请同步药品信息" andView:self.view];
+        [WarningBox warningBoxModeText:@"请重新输入" andView:self.view];
     }else{
         NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:_checkyp.text,@"productCode",_checkyp.text,@"barCode",_checkyp.text,@"pycode", nil];
         findarr =[XL DataBase:db selectKeyTypes:ChaXunShiTiLei fromTable:ChaXunBiaoMing whereConditionz:dic];

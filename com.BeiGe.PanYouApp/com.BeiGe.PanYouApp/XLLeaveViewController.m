@@ -9,7 +9,7 @@
 #import "XLLeaveViewController.h"
 #import "WarningBox.h"
 #import "XL_WangLuo.h"
-
+#import "XLAttendanceViewController.h"
 @interface XLLeaveViewController ()<UITextFieldDelegate,UIActionSheetDelegate,UITextViewDelegate>{
     int kaijie;//开始结束判断;
     UIView *backview;//透明的
@@ -29,7 +29,24 @@
     [self delegate];
     _reason.delegate = self;
     [self tobar];
+    [self comeback];
 }
+
+-(void)comeback{
+    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
+    UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self  action:@selector(fanhui)];
+    [self.navigationItem setLeftBarButtonItem:left];
+}
+-(void)fanhui{
+    XLAttendanceViewController *xln=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"attendance"];
+    for (UIViewController *controller in self.navigationController.viewControllers) {
+        if ([controller isKindOfClass:[xln class]]) {
+            [self.navigationController popToViewController:controller animated:YES];
+        }
+    }
+}
+
+
 -(void)tobar{
     
     

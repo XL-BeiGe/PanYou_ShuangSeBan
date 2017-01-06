@@ -10,6 +10,7 @@
 #import "XL_WangLuo.h"
 #import "WarningBox.h"
 #import "XLtongxiangqingViewController.h"
+#import "XLAttendanceViewController.h"
 @interface XLStatisticsViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     NSString*nian,*yue;
@@ -27,8 +28,24 @@
     qiandaotuilist=[[NSMutableArray alloc] init];
     waiqinlist=[[NSMutableArray alloc] init];
     [self delegate];
-    
+    [self comeback];
 }
+
+-(void)comeback{
+    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
+    UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self  action:@selector(fanhui)];
+    [self.navigationItem setLeftBarButtonItem:left];
+}
+-(void)fanhui{
+    XLAttendanceViewController *xln=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"attendance"];
+    for (UIViewController *controller in self.navigationController.viewControllers) {
+        if ([controller isKindOfClass:[xln class]]) {
+            [self.navigationController popToViewController:controller animated:YES];
+        }
+    }
+}
+
+
 -(void)delegate{
     _tableview.delegate=self;
     _tableview.dataSource=self;

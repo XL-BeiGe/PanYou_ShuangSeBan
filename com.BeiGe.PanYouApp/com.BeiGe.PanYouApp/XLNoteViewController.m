@@ -10,6 +10,7 @@
 #import "XLNoteInfoViewController.h"
 #import "WarningBox.h"
 #import "XL_WangLuo.h"
+#import "XLMainViewController.h"
 @interface XLNoteViewController ()
 {
     
@@ -25,10 +26,25 @@
     self.title =@"通知";
     [self tableviewdelegate];
     [self refrish];
-  
+    [self comeback];
     //[self tongzhijiekou:@""];
     //zhT=@"1";
 }
+
+-(void)comeback{
+    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
+    UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self  action:@selector(fanhui)];
+    [self.navigationItem setLeftBarButtonItem:left];
+}
+-(void)fanhui{
+    XLMainViewController *xln=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xlmain"];
+    for (UIViewController *controller in self.navigationController.viewControllers) {
+        if ([controller isKindOfClass:[xln class]]) {
+            [self.navigationController popToViewController:controller animated:YES];
+        }
+    }
+}
+
 -(void)viewWillAppear:(BOOL)animated{
     if ([_typ isEqualToString:@"3"]){
         _segment.selectedSegmentIndex = 1;

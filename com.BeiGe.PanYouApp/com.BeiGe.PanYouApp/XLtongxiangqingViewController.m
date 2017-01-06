@@ -8,6 +8,7 @@
 
 #import "XLtongxiangqingViewController.h"
 #import "Color+Hex.h"
+#import "XLStatisticsViewController.h"
 @interface XLtongxiangqingViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
@@ -24,7 +25,24 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self delegate];
+    [self comeback];
 }
+-(void)comeback{
+    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
+    UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self  action:@selector(fanhui)];
+    [self.navigationItem setLeftBarButtonItem:left];
+}
+-(void)fanhui{
+    XLStatisticsViewController *xln=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"statistics"];
+    for (UIViewController *controller in self.navigationController.viewControllers) {
+        if ([controller isKindOfClass:[xln class]]) {
+            [self.navigationController popToViewController:controller animated:YES];
+        }
+    }
+}
+
+
+
 -(void)delegate{
     _tableview.delegate=self;
     _tableview.dataSource=self;

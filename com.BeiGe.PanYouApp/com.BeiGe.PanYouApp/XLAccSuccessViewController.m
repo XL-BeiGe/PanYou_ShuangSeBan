@@ -8,6 +8,7 @@
 
 #import "XLAccSuccessViewController.h"
 #import "XLMainViewController.h"
+#import "XLCheckstandViewController.h"
 @interface XLAccSuccessViewController ()
 
 @end
@@ -42,5 +43,13 @@
 */
 
 - (IBAction)ComeBack:(id)sender {
+    
+    XLCheckstandViewController *xln=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"checkstand"];
+    for (UIViewController *controller in self.navigationController.viewControllers) {
+        if ([controller isKindOfClass:[xln class]]) {
+            [self.navigationController popToViewController:controller animated:YES];
+        }
+    }
+    
 }
 @end

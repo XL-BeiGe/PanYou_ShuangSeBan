@@ -11,7 +11,7 @@
 #import "Color+Hex.h"
 #import "WarningBox.h"
 #import "XL_WangLuo.h"
-
+#import "XLMainViewController.h"
 @interface XLquestionViewController ()<UITableViewDelegate,UITableViewDataSource>{
     NSArray*tempLateList;
 }
@@ -26,8 +26,24 @@
     // Do any additional setup after loading the view.
 //    self.view.backgroundColor=[UIColor blackColor];
     [self delegate];
-    
+    [self comeback];
 }
+-(void)comeback{
+    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
+    UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self  action:@selector(fanhui)];
+    [self.navigationItem setLeftBarButtonItem:left];
+}
+-(void)fanhui{
+    XLMainViewController *xln=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xlmain"];
+    for (UIViewController *controller in self.navigationController.viewControllers) {
+        if ([controller isKindOfClass:[xln class]]) {
+            [self.navigationController popToViewController:controller animated:YES];
+        }
+    }
+}
+
+
+
 -(void)viewWillAppear:(BOOL)animated{
     [self jiekou];
 }
@@ -113,7 +129,7 @@
         }else
         [self.navigationController pushViewController:xla animated:YES];
     }else{
-        [WarningBox warningBoxModeText:@"挖哈哈哈哈fsfsdfdsfdsfsdfsdfsdfdsfsdfsdfdsfdsfdsfdsfdsfdsfdssdsadsadasdihfiguhfdnvidhhvisnfvjdsuihfdcj nzkchsiuhdijnajfbhsjkdbfhdsghfui哈哈" andView:self.view];
+        [WarningBox warningBoxModeText:@"已经完成了" andView:self.view];
     }
 
     

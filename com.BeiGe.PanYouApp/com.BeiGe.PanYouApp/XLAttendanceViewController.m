@@ -14,7 +14,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "XL_WangLuo.h"
 #import "WarningBox.h"
-
+#import "XLMainViewController.h"
 @interface XLAttendanceViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate,CLLocationManagerDelegate>
 {
     //签到显示标识
@@ -43,8 +43,21 @@
     [self riqixianshi];
     [self wangluolianjie];
     [self anniupanduan];
+    [self comeback];
 }
-
+-(void)comeback{
+    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
+    UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self  action:@selector(fanhui)];
+    [self.navigationItem setLeftBarButtonItem:left];
+}
+-(void)fanhui{
+    XLMainViewController *xln=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xlmain"];
+    for (UIViewController *controller in self.navigationController.viewControllers) {
+        if ([controller isKindOfClass:[xln class]]) {
+            [self.navigationController popToViewController:controller animated:YES];
+        }
+    }
+}
 -(void)anniupanduan{
     //需要在接口返回时判断
     if (dao==2) {

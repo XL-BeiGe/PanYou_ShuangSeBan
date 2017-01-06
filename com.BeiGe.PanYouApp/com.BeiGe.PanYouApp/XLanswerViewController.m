@@ -10,6 +10,7 @@
 #import "WarningBox.h"
 #import "XL_WangLuo.h"
 #import "Color+Hex.h"
+#import "XLquestionViewController.h"
 @interface XLanswerViewController ()<UITableViewDelegate,UITableViewDataSource>{
     //答案的个数
     NSMutableArray*muarr;
@@ -58,7 +59,24 @@
     [self quxuanxiang:_timuarr[iii]];
     
     [self chuangjiantable];
+    [self comeback];
 }
+-(void)comeback{
+    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
+    UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self  action:@selector(fanhuii)];
+    [self.navigationItem setLeftBarButtonItem:left];
+}
+-(void)fanhuii{
+    XLquestionViewController *xln=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"question"];
+    for (UIViewController *controller in self.navigationController.viewControllers) {
+        if ([controller isKindOfClass:[xln class]]) {
+            [self.navigationController popToViewController:controller animated:YES];
+        }
+    }
+}
+
+
+
 -(void)chuangjiantable{
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat height = [UIScreen mainScreen].bounds.size.height;

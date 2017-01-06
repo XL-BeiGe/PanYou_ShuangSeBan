@@ -10,6 +10,7 @@
 #import "XLAccSuccessViewController.h"
 #import "WarningBox.h"
 #import "XL_WangLuo.h"
+#import "XLShopCarViewController.h"
 @interface XLSetAccountViewController ()
 {
   NSString  *chuannima;
@@ -25,15 +26,31 @@
     
     _accmoney.text = [NSString stringWithFormat:@"￥%@",_drugAmount];
   
+    [self comeback];
+    
+}
+-(void)comeback{
+    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
+    UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self  action:@selector(fanhui)];
+    [self.navigationItem setLeftBarButtonItem:left];
+}
+-(void)fanhui{
+    XLShopCarViewController *xln=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"shopcar"];
+    for (UIViewController *controller in self.navigationController.viewControllers) {
+        if ([controller isKindOfClass:[xln class]]) {
+            [self.navigationController popToViewController:controller animated:YES];
+        }
+    }
 }
 
+
 - (IBAction)FuTyp:(id)sender {
-    UIActionSheet *sheet=[[UIActionSheet alloc] initWithTitle:@"付款类型：" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"现金",@"刷卡", nil];
+    UIActionSheet *sheet=[[UIActionSheet alloc] initWithTitle:@"付款类型：" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"现金",@"医保卡", nil];
     
     [sheet showInView:self.view];
 }
 -(NSArray*)jiaming{
-    NSArray*arr=[NSArray arrayWithObjects:@"现金",@"刷卡", nil];
+    NSArray*arr=[NSArray arrayWithObjects:@"现金",@"医保卡", nil];
     return arr;
 }
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -92,13 +109,16 @@
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     NSString *zc = [_accmoney.text substringFromIndex:1];
     float zong = [zc floatValue];
-    NSLog(@"%@",string);
+   // NSLog(@"%@",string);
     float fu;
    
-    if (string.length ==0 ) {
-        fu= [[textField.text substringFromIndex:textField.text.length-1]  floatValue];
-    }else
-    fu= [[textField.text stringByAppendingString:string]  floatValue];
+    NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    
+    fu=[text floatValue];
+//    if (string.length ==0 ) {
+//        fu= [[textField.text substringFromIndex:textField.text.length-1]  floatValue];
+//    }else
+//    fu= [[textField.text stringByAppendingString:string]  floatValue];
     
     if (fu-zong<0){
         _zlmoney.text =@"还不够哟";

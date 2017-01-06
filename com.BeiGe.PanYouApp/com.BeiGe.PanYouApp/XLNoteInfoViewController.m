@@ -64,7 +64,7 @@
 }
 
 -(void)jiemian{
-    _Image.image =[UIImage imageNamed:@"icon_02_07.png"];
+    //_Image.image =[UIImage imageNamed:@"icon_02_07.png"];
     
     
     
@@ -104,7 +104,7 @@
 }
 -(void)fanhui{
 
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    //[self.navigationController popToRootViewControllerAnimated:YES];
     XLNoteViewController *xln=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"note"];
     for (UIViewController *controller in self.navigationController.viewControllers) {
         if ([controller isKindOfClass:[xln class]]) {

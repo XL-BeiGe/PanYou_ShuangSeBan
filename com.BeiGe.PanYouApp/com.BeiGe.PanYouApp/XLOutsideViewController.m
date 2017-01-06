@@ -9,7 +9,7 @@
 #import "XLOutsideViewController.h"
 #import "WarningBox.h"
 #import "XL_WangLuo.h"
-
+#import "XLAttendanceViewController.h"
 @interface XLOutsideViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextFieldDelegate,UITextViewDelegate>{
     UIView *backview;//时间选择器背景;
     int waifan;//外出返回时间选择器判断;
@@ -30,7 +30,24 @@
     [self delegate];
     _textview.delegate =self;
     [self tobar];
+    [self comeback];
 }
+
+-(void)comeback{
+    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
+    UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self  action:@selector(fanhui)];
+    [self.navigationItem setLeftBarButtonItem:left];
+}
+-(void)fanhui{
+    XLAttendanceViewController *xln=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"attendance"];
+    for (UIViewController *controller in self.navigationController.viewControllers) {
+        if ([controller isKindOfClass:[xln class]]) {
+            [self.navigationController popToViewController:controller animated:YES];
+        }
+    }
+}
+
+
 
 -(void)tobar{
 
