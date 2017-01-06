@@ -1457,7 +1457,7 @@
 					D2C1AC7E1DC97D8C00092F44 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = GP8BUACAG4;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -1917,7 +1917,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = com.BeiGe.PanYouApp/com.BeiGe.PanYouApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Yulan Zhao (4RSNZMG5V8)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yulan Zhao (4RSNZMG5V8)";
 				COMPRESS_PNG_FILES = NO;
 				DEVELOPMENT_TEAM = GP8BUACAG4;
 				INFOPLIST_FILE = com.BeiGe.PanYouApp/Info.plist;
@@ -1929,8 +1929,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.BeiGe.PanYouApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "ab20e8d2-68d2-4d31-ac6a-1d10256761fb";
+				PROVISIONING_PROFILE_SPECIFIER = ceshi_PanYou;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Lib";
 			};
@@ -1942,7 +1942,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = com.BeiGe.PanYouApp/com.BeiGe.PanYouApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Yulan Zhao (4RSNZMG5V8)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yulan Zhao (4RSNZMG5V8)";
 				COMPRESS_PNG_FILES = NO;
 				DEVELOPMENT_TEAM = GP8BUACAG4;
 				INFOPLIST_FILE = com.BeiGe.PanYouApp/Info.plist;
@@ -1954,8 +1954,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.BeiGe.PanYouApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "ab20e8d2-68d2-4d31-ac6a-1d10256761fb";
+				PROVISIONING_PROFILE_SPECIFIER = ceshi_PanYou;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Lib";
 			};

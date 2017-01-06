@@ -131,7 +131,16 @@
     NSString *jingwei=[NSString stringWithFormat:@"%@,%@",jing,wei];
     NSString *type=[NSString stringWithFormat:@"%d",haha];
     NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"];
-    NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userId",jingwei,@"Lonlat",type,@"type", nil];
+    
+    
+    
+    NSUserDefaults * shuju=[NSUserDefaults standardUserDefaults];//非登录接口用
+    NSString *userID=[shuju objectForKey:@"userId"];//登陆不用传
+    NSString *accessToken=[shuju objectForKey:@"accesstoken"];//登陆不用传
+    
+    
+    
+    NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:accessToken,@"accessToken",userID,@"userid",UserID,@"userId",jingwei,@"Lonlat",type,@"type", nil];
     NSLog(@"%@",rucan);
     //自己写的网络请求    请求外网地址
     NSString *str;
@@ -143,7 +152,11 @@
     [WarningBox warningBoxModeIndeterminate:[NSString stringWithFormat:@"正在签%@...",str] andView:self.view];
     [XL_WangLuo ShangChuanTuPianwithBizMethod:fangshi Rucan:rucan type:Post image:_image1 key:@"backgroundImage" success:^(id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
-        [WarningBox warningBoxModeText:[NSString stringWithFormat:@"签%@成功!",str] andView:self.view];
+        if([[responseObject objectForKey:@"code"] isEqualToString:@"0000"]){
+            [WarningBox warningBoxModeText:[NSString stringWithFormat:@"签%@成功!",str] andView:self.view];
+        }else if ([[responseObject objectForKey:@"code"] isEqualToString:@"1006"]){
+            [WarningBox warningBoxModeText:[NSString stringWithFormat:@"已经签%@，不用重复提交",str] andView:self.view];
+        }
         NSLog(@"%@",responseObject);
     } failure:^(NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];

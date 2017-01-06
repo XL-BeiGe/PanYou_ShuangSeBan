@@ -220,7 +220,13 @@
     */
     NSString *fangshi=@"/attendance/field";
     NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"];
-    NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userId",chuankai,@"beginTime",chuanjie,@"endTime",_textview.text,@"fieldReason", nil];
+    
+    NSUserDefaults * shuju=[NSUserDefaults standardUserDefaults];//非登录接口用
+    NSString *userID=[shuju objectForKey:@"userId"];//登陆不用传
+    NSString *accessToken=[shuju objectForKey:@"accesstoken"];//登陆不用传
+    
+    
+    NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:accessToken,@"accessToken",userID,@"userid",UserID,@"userId",chuankai,@"beginTime",chuanjie,@"endTime",_textview.text,@"fieldReason", nil];
     NSLog(@"%@",rucan);
     //自己写的网络请求    请求外网地址
    
@@ -230,9 +236,9 @@
         if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
             [WarningBox warningBoxModeText:[NSString stringWithFormat:@"打卡成功!"] andView:self.navigationController.view];
             [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            [WarningBox warningBoxModeText:@"打卡失败了哟～请重试..." andView:self.view];
         }
-        
-        NSLog(@"%@",responseObject);
     } failure:^(NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"网络错误，请重试!" andView:self.view];

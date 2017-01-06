@@ -32,22 +32,21 @@
         
         [WarningBox warningBoxModeIndeterminate:@"登录中..." andView:self.view];
         NSString *fangshi=@"/sys/login";
-       NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"DD000101",@"loginName",@"admin",@"password", nil];
-   // NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"feiziping",@"loginName",@"admin",@"password", nil];
+       NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"fd002",@"loginName",@"111111",@"password", nil];
         //自己写的网络请求    请求外网地址
         [XL_WangLuo QianWaiwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
             [WarningBox warningBoxHide:YES andView:self.view];
             NSLog(@"%@",responseObject);
-            @try {
+            @try {//DD000101    admin
                 if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
                     NSUserDefaults *user=[NSUserDefaults standardUserDefaults];
-                    [user setObject:@"DD000101" forKey:@"Name"];
-                    [user setObject:@"admin" forKey:@"Password"];
+                    [user setObject:@"fd002" forKey:@"Name"];
+                    [user setObject:@"111111" forKey:@"Password"];
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data" ] objectForKey:@"accessToken"]] forKey:@"accesstoken"];
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"mac"]] forKey:@"Mac"];
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"userId"]] forKey:@"userId"];
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"userId"]] forKey:@"UserID"];
-                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"name"]] forKey:@"CZname"];
+                    [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"name"]] forKey:@"CZname"];
                 }
                 else{
                     [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.view];
