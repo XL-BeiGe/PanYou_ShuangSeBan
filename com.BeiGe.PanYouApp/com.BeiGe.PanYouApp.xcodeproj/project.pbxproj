@@ -45,6 +45,7 @@
 		D2C1AC9D1DC97D8C00092F44 /* com_BeiGe_PanYouAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C1AC9C1DC97D8C00092F44 /* com_BeiGe_PanYouAppTests.m */; };
 		D2C1ACA81DC97D8C00092F44 /* com_BeiGe_PanYouAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C1ACA71DC97D8C00092F44 /* com_BeiGe_PanYouAppUITests.m */; };
 		D2CF97FA1DEBFC21002782F9 /* XLtongxiangqingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2CF97F91DEBFC21002782F9 /* XLtongxiangqingViewController.m */; };
+		D72755A21E208FE400B0AFE8 /* 新消息提示-2.png in Resources */ = {isa = PBXBuildFile; fileRef = D72755A11E208FE400B0AFE8 /* 新消息提示-2.png */; };
 		D72F30C41DD1BD13007F754F /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = D72F30C31DD1BD13007F754F /* camera.png */; };
 		D730F89C1DCACFB100F07053 /* XLLeaveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D730F89B1DCACFB000F07053 /* XLLeaveViewController.m */; };
 		D730F89F1DCAD93200F07053 /* XLStatisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D730F89E1DCAD93200F07053 /* XLStatisticsViewController.m */; };
@@ -62,7 +63,6 @@
 		D739C8F21DE7D01200942CD6 /* XLSettViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D739C8F11DE7D01200942CD6 /* XLSettViewController.m */; };
 		D7472E3B1E1F7ACC008D228F /* 试题背景.png in Resources */ = {isa = PBXBuildFile; fileRef = D7472E371E1F7ACC008D228F /* 试题背景.png */; };
 		D7472E3C1E1F7ACC008D228F /* 消息背景.png in Resources */ = {isa = PBXBuildFile; fileRef = D7472E381E1F7ACC008D228F /* 消息背景.png */; };
-		D7472E3D1E1F7ACC008D228F /* 未读红点.png in Resources */ = {isa = PBXBuildFile; fileRef = D7472E391E1F7ACC008D228F /* 未读红点.png */; };
 		D7472E3E1E1F7ACC008D228F /* icon_xiaoxi.png in Resources */ = {isa = PBXBuildFile; fileRef = D7472E3A1E1F7ACC008D228F /* icon_xiaoxi.png */; };
 		D75D8FAF1DC9D16E00CC3355 /* XLAttendanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D75D8FAE1DC9D16E00CC3355 /* XLAttendanceViewController.m */; };
 		D75D8FB11DC9DC1000CC3355 /* jinru_03.png in Resources */ = {isa = PBXBuildFile; fileRef = D75D8FB01DC9DC1000CC3355 /* jinru_03.png */; };
@@ -344,6 +344,7 @@
 		D2C1ACB51DC97DDA00092F44 /* com.BeiGe.PanYouApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = com.BeiGe.PanYouApp.entitlements; sourceTree = "<group>"; };
 		D2CF97F81DEBFC21002782F9 /* XLtongxiangqingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLtongxiangqingViewController.h; sourceTree = "<group>"; };
 		D2CF97F91DEBFC21002782F9 /* XLtongxiangqingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLtongxiangqingViewController.m; sourceTree = "<group>"; };
+		D72755A11E208FE400B0AFE8 /* 新消息提示-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "新消息提示-2.png"; sourceTree = "<group>"; };
 		D72F30C31DD1BD13007F754F /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
 		D730F89A1DCACFB000F07053 /* XLLeaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLLeaveViewController.h; sourceTree = "<group>"; };
 		D730F89B1DCACFB000F07053 /* XLLeaveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLLeaveViewController.m; sourceTree = "<group>"; };
@@ -372,7 +373,6 @@
 		D739C8F11DE7D01200942CD6 /* XLSettViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLSettViewController.m; sourceTree = "<group>"; };
 		D7472E371E1F7ACC008D228F /* 试题背景.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "试题背景.png"; sourceTree = "<group>"; };
 		D7472E381E1F7ACC008D228F /* 消息背景.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "消息背景.png"; sourceTree = "<group>"; };
-		D7472E391E1F7ACC008D228F /* 未读红点.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "未读红点.png"; sourceTree = "<group>"; };
 		D7472E3A1E1F7ACC008D228F /* icon_xiaoxi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_xiaoxi.png; sourceTree = "<group>"; };
 		D75D8FAD1DC9D16E00CC3355 /* XLAttendanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLAttendanceViewController.h; sourceTree = "<group>"; };
 		D75D8FAE1DC9D16E00CC3355 /* XLAttendanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLAttendanceViewController.m; sourceTree = "<group>"; };
@@ -1160,9 +1160,9 @@
 		D772CCB81DC9BE1C00BB28D9 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				D72755A11E208FE400B0AFE8 /* 新消息提示-2.png */,
 				D7472E371E1F7ACC008D228F /* 试题背景.png */,
 				D7472E381E1F7ACC008D228F /* 消息背景.png */,
-				D7472E391E1F7ACC008D228F /* 未读红点.png */,
 				D7472E3A1E1F7ACC008D228F /* icon_xiaoxi.png */,
 				D20954B81DE583F40091790C /* A4.png */,
 				D20954B91DE583F40091790C /* B4.png */,
@@ -1520,6 +1520,7 @@
 			files = (
 				D7472E3B1E1F7ACC008D228F /* 试题背景.png in Resources */,
 				D20954B41DE580EF0091790C /* B5.png in Resources */,
+				D72755A21E208FE400B0AFE8 /* 新消息提示-2.png in Resources */,
 				D772CD031DC9BE3100BB28D9 /* B3.png in Resources */,
 				D20954B61DE580EF0091790C /* D5.png in Resources */,
 				D77487CD1DD9652B007A92E3 /* icon_progress_bar.png in Resources */,
@@ -1558,7 +1559,6 @@
 				D77487B01DD9652B007A92E3 /* btn_save.png in Resources */,
 				D77487FE1DD9652B007A92E3 /* jianpanhaha33.png in Resources */,
 				D730F8B31DCB1DEF00F07053 /* downloads.png in Resources */,
-				D7472E3D1E1F7ACC008D228F /* 未读红点.png in Resources */,
 				D77487E21DD9652B007A92E3 /* jianpan_dk_04_03.png in Resources */,
 				D77488051DD9652B007A92E3 /* verson.png in Resources */,
 				D772CD061DC9BE3100BB28D9 /* C3.png in Resources */,

@@ -35,6 +35,8 @@
     [self shujuku];
     [self tableviewdelegate];
    
+    NSLog(@"传过来的状态%@",_sctype);
+    
     _coupon.delegate = self;
     _couprice.delegate = self;
     [self comeback];

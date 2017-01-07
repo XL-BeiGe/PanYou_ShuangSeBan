@@ -53,28 +53,15 @@
 
 - (IBAction)BJKaoQin:(id)sender {
     XLEditAttViewController *xln=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"editatt"];
-    for (UIViewController *controller in self.navigationController.viewControllers) {
-        if ([controller isKindOfClass:[xln class]]) {
-            [self.navigationController popToViewController:controller animated:YES];
-        }
-    }
-}
+   [self.navigationController pushViewController:xln animated:YES];}
 
 - (IBAction)ChangePas:(id)sender {
     XLChangepassViewController *xln=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"changepass"];
-    for (UIViewController *controller in self.navigationController.viewControllers) {
-        if ([controller isKindOfClass:[xln class]]) {
-            [self.navigationController popToViewController:controller animated:YES];
-        }
-    }
+    [self.navigationController pushViewController:xln animated:YES];
 }
 
 - (IBAction)Explain:(id)sender {
     XLShowViewController *xln=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"show"];
-    for (UIViewController *controller in self.navigationController.viewControllers) {
-        if ([controller isKindOfClass:[xln class]]) {
-            [self.navigationController popToViewController:controller animated:YES];
-        }
-    }
+   [self.navigationController pushViewController:xln animated:YES];
 }
 @end

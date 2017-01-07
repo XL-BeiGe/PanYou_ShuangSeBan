@@ -26,6 +26,8 @@
     
     _accmoney.text = [NSString stringWithFormat:@"￥%@",_drugAmount];
   
+    chuannima=@"1";
+    
     [self comeback];
     
 }
@@ -69,6 +71,8 @@
 }
 -(void)quedingwangluo{
     NSString *fangshi=@"/drug/postDrug";
+    
+    NSLog(@"付款类型%@",chuannima);
     NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:_consumptionInfoId,@"consumptionInfoId",_fumoney.text,@"drugAmountReceive",chuannima,@"drugAmountType",_zlmoney.text,@"drugAmountBack", nil];
     [WarningBox warningBoxModeIndeterminate:@"正在结账..." andView:self.view];
     [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
