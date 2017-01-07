@@ -23,9 +23,23 @@
     _fkmoney.text = [NSString stringWithFormat:@"￥%@",_zonge];
     _someone.text = [NSString stringWithFormat:@"%@",[def objectForKey:@"CZname"]];
     _sytime.text = [NSString stringWithFormat:@"%@",_shijian];
-    
+    [self comeback];
     // Do any additional setup after loading the view.
 }
+-(void)comeback{
+    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
+    UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self  action:@selector(fanhuii)];
+    [self.navigationItem setLeftBarButtonItem:left];
+}
+-(void)fanhuii{
+    XLCheckstandViewController *xln=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"checkstand"];
+    for (UIViewController *controller in self.navigationController.viewControllers) {
+        if ([controller isKindOfClass:[xln class]]) {
+            [self.navigationController popToViewController:controller animated:YES];
+        }
+    }
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

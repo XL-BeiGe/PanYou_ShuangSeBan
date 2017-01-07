@@ -7,7 +7,7 @@
 //
 
 #import "XLEditAttViewController.h"
-
+#import "XLSettViewController.h"
 @interface XLEditAttViewController ()
 
 @end
@@ -16,9 +16,23 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self comeback];
+    self.title = @"编辑考勤";
     // Do any additional setup after loading the view.
 }
-
+-(void)comeback{
+    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
+    UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self  action:@selector(fanhui)];
+    [self.navigationItem setLeftBarButtonItem:left];
+}
+-(void)fanhui{
+    XLSettViewController *xln=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"sett"];
+    for (UIViewController *controller in self.navigationController.viewControllers) {
+        if ([controller isKindOfClass:[xln class]]) {
+            [self.navigationController popToViewController:controller animated:YES];
+        }
+    }
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -185,7 +185,7 @@
     
     
     if([[pushList[indexPath.row]objectForKey:@"progressStatus"]isEqualToString:@"1"]){
-    img.image = [UIImage imageNamed:@"未读红点.png"];
+    img.image = [UIImage imageNamed:@"新消息提示-2.png"];
     }else{
     img.image = [UIImage imageNamed:@""];
     }
