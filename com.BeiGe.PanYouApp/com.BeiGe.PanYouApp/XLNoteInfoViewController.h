@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *neror;//内容
 @property (weak, nonatomic) IBOutlet UILabel *shij;//时间
 @property (weak, nonatomic) IBOutlet UITextView *textview;//备注
+@property (weak, nonatomic) IBOutlet UIView *imp;
 - (IBAction)victory:(id)sender;
 @property (strong, nonatomic) NSString *pushInfoId;
 @property (strong, nonatomic) NSString *zhT;

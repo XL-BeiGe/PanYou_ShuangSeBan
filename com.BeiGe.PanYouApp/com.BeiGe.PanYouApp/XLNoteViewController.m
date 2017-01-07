@@ -102,6 +102,7 @@
             
             
             [_table reloadData];
+            [WarningBox warningBoxHide:YES andView:self.view];
         }
     } failure:^(NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
@@ -142,6 +143,8 @@
     NSLog(@"refreshClick: -- 刷新触发");
     // 此处添加刷新tableView数据的代码
     [refreshControl endRefreshing];
+    
+    [self ChangeV:nil];
     //[self.table reloadData];// 刷新tableView即可
 }
 #pragma mark---tableview

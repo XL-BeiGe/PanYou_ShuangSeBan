@@ -147,7 +147,7 @@
     
      number.delegate = self;
    
-     [ZYCustomKeyboardTypeNumberView customKeyboardViewWithServiceTextField:number Delegate:self];
+    // [ZYCustomKeyboardTypeNumberView customKeyboardViewWithServiceTextField:number Delegate:self];
      number.textAlignment = NSTextAlignmentCenter;
      number.adjustsFontSizeToFitWidth = YES;
     // number.keyboardType = UIKeyboardTypeNumberPad;

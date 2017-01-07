@@ -171,8 +171,8 @@
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" tag="204" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="B9z-7N-biH">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="15" id="CDu-Oc-wmL"/>
-                                                        <constraint firstAttribute="height" constant="15" id="aVB-Xc-mD3"/>
+                                                        <constraint firstAttribute="width" constant="25" id="CDu-Oc-wmL"/>
+                                                        <constraint firstAttribute="height" constant="21" id="aVB-Xc-mD3"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
@@ -352,6 +352,7 @@
                     <connections>
                         <outlet property="Image" destination="a5a-0Y-q2Y" id="EWe-j9-Jp8"/>
                         <outlet property="compary" destination="ZaA-O6-jsw" id="TtM-8E-Ns9"/>
+                        <outlet property="imp" destination="TZA-Ox-Edd" id="u1a-T5-zLH"/>
                         <outlet property="neror" destination="Dp7-vG-0Gh" id="2kn-WN-Uwl"/>
                         <outlet property="renwuanniu" destination="OAF-ic-tX9" id="PyQ-5q-hWW"/>
                         <outlet property="shij" destination="qcg-Wt-230" id="6dv-az-h2F"/>

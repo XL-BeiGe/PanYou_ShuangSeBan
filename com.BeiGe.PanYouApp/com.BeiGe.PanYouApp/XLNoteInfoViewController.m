@@ -31,6 +31,16 @@
     [self anniujiekou:_zhT];
     }
     
+    if([_zhT isEqualToString:@"1"]||[_zhT isEqualToString:@"2"]){
+        _imp.hidden= YES;
+    }else if ([_zhT isEqualToString:@"3"]){
+    _imp.hidden= NO;
+    }else{
+    _imp.hidden= NO;
+        _textview.userInteractionEnabled = NO;
+    }
+    
+    
     
     [self xiangqingjiekou];
     [self navigation];
@@ -166,8 +176,37 @@
     [self anniujiekou:str];
     
 }
+-(BOOL)textViewShouldBeginEditing:(UITextView *)textView
+{
+  
+    
+    return YES;
+}
+-(void)textViewDidEndEditing:(UITextView *)textView{
+   
+}
 
-
+//视图上移的方法
+- (void) animateTextField: (CGFloat) textField up: (BOOL) up
+{
+    
+    //设置视图上移的距离，单位像素
+    
+    const int movementDistance = textField; // tweak as needed
+    //三目运算，判定是否需要上移视图或者不变
+    int movement = (up ? movementDistance : -movementDistance);
+    //设置动画的名字
+    [UIView beginAnimations: @"Animation" context: nil];
+    //设置动画的开始移动位置
+    [UIView setAnimationBeginsFromCurrentState: YES];
+    //设置动画的间隔时间
+    [UIView setAnimationDuration: 0.20];
+    //设置视图移动的位移
+    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
+    //设置动画结束
+    [UIView commitAnimations];
+    
+}
 
 -(void)anniujiekou:(NSString*)str{
     NSString *fangshi=@"/push/progress";
