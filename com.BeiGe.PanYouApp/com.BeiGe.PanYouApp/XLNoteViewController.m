@@ -20,7 +20,6 @@
 @end
 
 @implementation XLNoteViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title =@"通知";
@@ -29,37 +28,21 @@
     [self comeback];
     _segment.layer.cornerRadius = 0;
     _segment.layer.masksToBounds = NO;
-    
-    //[self tongzhijiekou:@""];
-    //zhT=@"1";
-}
-
--(void)comeback{
-    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
-    UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self  action:@selector(fanhui)];
-    [self.navigationItem setLeftBarButtonItem:left];
-}
--(void)fanhui{
-    XLMainViewController *xln=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xlmain"];
-    for (UIViewController *controller in self.navigationController.viewControllers) {
-        if ([controller isKindOfClass:[xln class]]) {
-            [self.navigationController popToViewController:controller animated:YES];
-        }
-    }
+    zhT=@"2";
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    if ([_typ isEqualToString:@"3"]){
+    
+    if ([zhT isEqualToString:@"3"]){
         _segment.selectedSegmentIndex = 1;
-       [self tongzhijiekou:@"3"];
-    }else if ([_typ isEqualToString:@"4"]){
+        [self tongzhijiekou:@"3"];
+    }else if ([zhT isEqualToString:@"4"]){
         _segment.selectedSegmentIndex = 2;
-       [self tongzhijiekou:@"4"];
+        [self tongzhijiekou:@"4"];
     }else{
         _segment.selectedSegmentIndex = 0;
-      [self tongzhijiekou:@""];
+        [self tongzhijiekou:@""];
     }
-  
 }
 
 -(void)tongzhijiekou:(NSString*)zhuangtai{
@@ -72,34 +55,25 @@
         NSLog(@"%@",responseObject);
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
-             pushList = [NSMutableArray array];
+            pushList = [NSMutableArray array];
             if(![zhuangtai isEqualToString:@""]){
                 pushList=[[responseObject objectForKey:@"data"] objectForKey:@"pushList"];
-              
-
             }else{
                 NSArray *ssa = [NSArray array];
-                
                 ssa =[[responseObject objectForKey:@"data"] objectForKey:@"pushList"];
-                
                 for (int i=0; i<ssa.count; i++) {
                     if([[ssa[i]objectForKey:@"progressStatus"]isEqualToString:@"1"]||[[ssa[i]objectForKey:@"progressStatus"]isEqualToString:@"2"]){
                         
                         [pushList addObject:ssa[i]];
                         NSLog(@"-------------------%@",pushList);
-                    }else{
-                    
                     }
                 }
-               
             }
-    
             if(pushList.count==0){
                 _table.hidden=YES;
             }else{
                 _table.hidden=NO;
             }
-            
             
             [_table reloadData];
             [WarningBox warningBoxHide:YES andView:self.view];
@@ -109,42 +83,42 @@
         [WarningBox warningBoxModeText:@"网络错误,请重试!" andView:self.view];
         NSLog(@"%@",error);
     }];
-
+    
 }
 - (IBAction)ChangeV:(UISegmentedControl *)sender {
-
+    
     if (sender.selectedSegmentIndex==0){
+        zhT=@"1";
         [self tongzhijiekou:@""];
-       // zhT=@"1";
         NSLog(@"未接受");
-        [_table reloadData];
     }else if (sender.selectedSegmentIndex==1){
+        zhT=@"3";
         [self tongzhijiekou:@"3"];
-        //zhT=@"3";
         NSLog(@"执行中");
-        [_table reloadData];
     }else if(sender.selectedSegmentIndex==2){
+        zhT=@"4";
         [self tongzhijiekou:@"4"];
-        //zhT=@"4";
         NSLog(@"已完成");
-        [_table reloadData];
     }
 }
 #pragma mark--刷新方法
 -(void)refrish{
-      NSLog(@"setupRefresh -- 下拉刷新");
+    NSLog(@"setupRefresh -- 下拉刷新");
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refreshClick:) forControlEvents:UIControlEventValueChanged];
     [self.table addSubview:refreshControl];
-    [refreshControl beginRefreshing];
-    [self refreshClick:refreshControl];
+    
 }
 - (void)refreshClick:(UIRefreshControl *)refreshControl {
+    
+    [refreshControl beginRefreshing];
+    
     NSLog(@"refreshClick: -- 刷新触发");
     // 此处添加刷新tableView数据的代码
+     [self tongzhijiekou:zhT];
     [refreshControl endRefreshing];
     
-    [self ChangeV:nil];
+   
     //[self.table reloadData];// 刷新tableView即可
 }
 #pragma mark---tableview
@@ -165,9 +139,9 @@
     if (cell==nil) {
         cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:aa];
     }
-//    for (UIView *v in [cell.contentView subviews]) {
-//        [v removeFromSuperview];
-//    }
+    //    for (UIView *v in [cell.contentView subviews]) {
+    //        [v removeFromSuperview];
+    //    }
     UILabel *titl =(UILabel*)[cell viewWithTag:201];
     UILabel *mess =(UILabel*)[cell viewWithTag:202];
     UILabel *time =(UILabel*)[cell viewWithTag:203];
@@ -177,7 +151,7 @@
     mess.text = [NSString stringWithFormat:@"%@",[pushList[indexPath.row] objectForKey:@"context"] ];
     
     
-  NSString *ss =[NSString stringWithFormat:@"%@",[pushList[indexPath.row] objectForKey:@"tcreateTime"]];
+    NSString *ss =[NSString stringWithFormat:@"%@",[pushList[indexPath.row] objectForKey:@"tcreateTime"]];
     NSTimeInterval ti=[ss doubleValue]/ 1000;
     NSDate*detaildate=[NSDate dateWithTimeIntervalSince1970:ti];
     NSDateFormatter*dateFormatter = [[NSDateFormatter alloc]init];
@@ -188,9 +162,9 @@
     
     
     if([[pushList[indexPath.row]objectForKey:@"progressStatus"]isEqualToString:@"1"]){
-    img.image = [UIImage imageNamed:@"新消息提示-2.png"];
+        img.image = [UIImage imageNamed:@"新消息提示-2.png"];
     }else{
-    img.image = [UIImage imageNamed:@""];
+        img.image = [UIImage imageNamed:@""];
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -200,7 +174,24 @@
     XLNoteInfoViewController *xl = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"noteinfo"];
     xl.pushInfoId=[NSString stringWithFormat:@"%@",[pushList[indexPath.row] objectForKey:@"pushInfoId"]];
     xl.zhT= [NSString stringWithFormat:@"%@",[pushList[indexPath.row] objectForKey:@"progressStatus"]];
-    //xl.zhT=zhT;
+    
+    [xl returnText:^(NSString *showText) {
+        zhT=showText;
+    }];
+    
     [self.navigationController pushViewController:xl animated:YES];
+}
+-(void)comeback{
+    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
+    UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self  action:@selector(fanhui)];
+    [self.navigationItem setLeftBarButtonItem:left];
+}
+-(void)fanhui{
+    XLMainViewController *xln=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xlmain"];
+    for (UIViewController *controller in self.navigationController.viewControllers) {
+        if ([controller isKindOfClass:[xln class]]) {
+            [self.navigationController popToViewController:controller animated:YES];
+        }
+    }
 }
 @end

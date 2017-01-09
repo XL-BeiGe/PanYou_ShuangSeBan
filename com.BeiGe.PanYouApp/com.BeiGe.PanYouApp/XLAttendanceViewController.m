@@ -25,6 +25,8 @@
     int nage;
     //经纬度
     NSString*jing,*wei;
+    //地址
+    NSString *LonlatPlace;
 }
 @property(strong,nonatomic) UIImage *image1;
 @property (nonatomic, strong) CLLocationManager* locationManager;
@@ -60,7 +62,7 @@
 }
 -(void)anniupanduan{
     //需要在接口返回时判断
-    if (dao!=2) {
+    if (dao!=1) {
         //灰色图标＋不可点击；ff9900
         _qiandao.backgroundColor=[UIColor lightGrayColor];
         _qiandao.userInteractionEnabled=NO;
@@ -69,7 +71,7 @@
         _qiandao.backgroundColor=[UIColor colorWithHexString:@"ff9900"];
         _qiandao.userInteractionEnabled=YES;
     }
-    if (tui!=2) {
+    if (tui!=1) {
         //灰色图标＋不可点击；
         _qiantui.backgroundColor=[UIColor lightGrayColor];
         _qiantui.userInteractionEnabled=NO;
@@ -153,7 +155,7 @@
     
     
     
-    NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:accessToken,@"accessToken",userID,@"userid",UserID,@"userId",jingwei,@"Lonlat",type,@"type", nil];
+    NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:accessToken,@"accessToken",userID,@"userid",UserID,@"userId",jingwei,@"Lonlat",type,@"type",LonlatPlace,@"LonlatPlace", nil];
     NSLog(@"%@",rucan);
     //自己写的网络请求    请求外网地址
     NSString *str;
@@ -207,9 +209,16 @@
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     //根据经纬度反向地理编译出地址信息
     [geocoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray *array, NSError *error){
+        
+
         if (array.count > 0){
-//            CLPlacemark *placemark = [array objectAtIndex:0];
             
+            
+            CLPlacemark *placemark = [array objectAtIndex:0];
+            
+            LonlatPlace=[placemark.addressDictionary objectForKey:@"FormattedAddressLines"][0];
+            
+//
 //            sheng=[NSString stringWithFormat:@"%@",[placemark.addressDictionary objectForKey:@"State"]];
 //            
 //            
@@ -226,7 +235,7 @@
 //                //区
 //                qu=[NSString stringWithFormat:@"%@",placemark.subLocality];
 //            }
-            
+        
         }
         else if (error == nil && [array count] == 0)
         {

@@ -300,7 +300,8 @@
 -(void)huiyuanchaxun{
     NSString *fangshi=@"/drug/vipQuery";
     type=[self isMobileNumber:_vipnum.text]?@"2":@"1";
-    NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:_vipnum.text,@"no",type,@"type", nil];
+    NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"];
+    NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:_vipnum.text,@"no",type,@"type",UserID,@"userId", nil];
     
     [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         NSLog(@"%@",responseObject);

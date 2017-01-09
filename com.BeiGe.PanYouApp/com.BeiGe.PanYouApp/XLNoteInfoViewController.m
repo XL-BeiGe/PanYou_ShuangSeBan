@@ -16,6 +16,7 @@
 {
     UILabel *placeor;
     NSDictionary*pushTemplate;
+    int caca;
 }
 @property (weak, nonatomic) IBOutlet UIButton *renwuanniu;
 @end
@@ -25,18 +26,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"%@",_zhT);
-    
+    caca=0;
     if([_zhT isEqualToString:@"1"]){
         _zhT=@"2";
-    [self anniujiekou:_zhT];
+        [self anniujiekou:_zhT];
     }
     
     if([_zhT isEqualToString:@"1"]||[_zhT isEqualToString:@"2"]){
         _imp.hidden= YES;
     }else if ([_zhT isEqualToString:@"3"]){
-    _imp.hidden= NO;
+        _imp.hidden= NO;
     }else{
-    _imp.hidden= NO;
+        _imp.hidden= NO;
+        caca=1;
         _textview.userInteractionEnabled = NO;
     }
     
@@ -45,7 +47,7 @@
     [self xiangqingjiekou];
     [self navigation];
     self.title = @"通知详情";
-//    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    //    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[UIColor whiteColor]}];
     self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
@@ -74,16 +76,13 @@
 }
 
 -(void)jiemian{
-    //_Image.image =[UIImage imageNamed:@"icon_02_07.png"];
-    
-    
-    
     if([pushTemplate objectForKey:@"image"]!=nil){
-    NSURL*url=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",Scheme,QianWaiWangIP,[pushTemplate objectForKey:@"image"]]];
+        _Image.contentMode = UIViewContentModeScaleAspectFill;
+        _Image.clipsToBounds  = YES;//是否剪切掉超出 UIImageView 范围的图片
+        [_Image setContentScaleFactor:[[UIScreen mainScreen] scale]];//缩放图片的分辨率
+        NSURL*url=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",Scheme,QianWaiWangIP,[pushTemplate objectForKey:@"image"]]];
         [_Image sd_setImageWithURL:url  placeholderImage:[UIImage imageNamed:@"icon_02_07.png"]];
-    
     }
-    
     _titlle.text = [pushTemplate objectForKey:@"title"];
     _neror.text = [pushTemplate objectForKey:@"context"];
     _compary.text = [NSString stringWithFormat:@"来源:%@",[pushTemplate objectForKey:@"pushSrc"]];
@@ -93,11 +92,14 @@
     [self tobar];
     _textview.textContainerInset = UIEdgeInsetsMake(0, 0, 5, 15);
     placeor = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 150, 20)];
+    
     placeor.text = @"请输入您的建议...";
     placeor.textColor = [UIColor colorWithRed:213.0/255 green:213.0/255 blue:218.0/255 alpha:1.0];
     placeor.font =[UIFont systemFontOfSize:14];
     placeor.backgroundColor = [UIColor clearColor];
-    [_textview addSubview:placeor];
+    if (caca!=1) {
+        [_textview addSubview:placeor];
+    }
     if ([_zhT isEqualToString:@"2"]) {
         _renwuanniu.titleLabel.text=@"执行任务";
     }else if ([_zhT isEqualToString:@"3"]){
@@ -106,25 +108,6 @@
         _renwuanniu.hidden=YES;
     }
 }
-
--(void)navigation{
-    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
-    UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self  action:@selector(fanhui)];
-    [self.navigationItem setLeftBarButtonItem:left];
-}
--(void)fanhui{
-
-    //[self.navigationController popToRootViewControllerAnimated:YES];
-    XLNoteViewController *xln=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"note"];
-    for (UIViewController *controller in self.navigationController.viewControllers) {
-        if ([controller isKindOfClass:[xln class]]) {
-            [self.navigationController popToViewController:controller animated:YES];
-        }
-    }
-    
-}
-
-
 -(void)xiangqingjiekou{
     NSString *fangshi=@"/push/pushDetail";
     NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:_pushInfoId,@"pushInfoId", nil];
@@ -142,17 +125,17 @@
         [WarningBox warningBoxModeText:@"网络错误,请重试!" andView:self.view];
         NSLog(@"%@",error);
     }];
-
+    
 }
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
     [self.textview resignFirstResponder];
@@ -170,20 +153,20 @@
     if ([_zhT isEqualToString:@"2"]) {
         str=@"3";
     }else if ([_zhT isEqualToString:@"3"]){
-       str=@"4";
+        str=@"4";
     }
-
+    
     [self anniujiekou:str];
     
 }
 -(BOOL)textViewShouldBeginEditing:(UITextView *)textView
 {
-  
+    
     
     return YES;
 }
 -(void)textViewDidEndEditing:(UITextView *)textView{
-   
+    
 }
 
 //视图上移的方法
@@ -211,27 +194,25 @@
 -(void)anniujiekou:(NSString*)str{
     NSString *fangshi=@"/push/progress";
     NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"];
-    NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:_pushInfoId,@"pushId",UserID,@"userId",str,@"progressStatus", nil];
+    NSString*remarks=[NSString string];
+    if ([str isEqual:@"3"]) {
+        remarks=_textview.text;
+    }
+    
+    NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:_pushInfoId,@"pushId",UserID,@"userId",str,@"progressStatus",remarks,@"remarks", nil];
     [WarningBox warningBoxModeIndeterminate:@"加载界面..." andView:self.view];
     [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         
-        
-        
-        NSLog(@"%@",responseObject);
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-         
+        if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
             if([str isEqualToString:@"2"]){
                 [WarningBox warningBoxHide:YES andView:self.view];
             }else{
-            
-            XLNoteViewController *xln = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"note"];
-         
-            xln.typ=str;
-            [self.navigationController pushViewController:xln animated:YES];
+                if (self.returnTextBlock != nil) {
+                    self.returnTextBlock(str);
+                }
+                [self fanhui];
             }
-        });
-       
+        }
         [WarningBox warningBoxHide:YES andView:self.view];
         
     } failure:^(NSError *error) {
@@ -239,5 +220,24 @@
         [WarningBox warningBoxModeText:@"网络错误,请重试!" andView:self.view];
         NSLog(@"%@",error);
     }];
+}
+//block传值 方法
+- (void)returnText:(ReturnTextBlock)block {
+    self.returnTextBlock = block;
+}
+-(void)navigation{
+    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
+    UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self  action:@selector(fanhui)];
+    [self.navigationItem setLeftBarButtonItem:left];
+}
+//返回到固定页
+-(void)fanhui{
+    //    XLNoteViewController *xln=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"note"];
+    //    for (UIViewController *controller in self.navigationController.viewControllers) {
+    //        if ([controller isKindOfClass:[xln class]]) {
+    //            [self.navigationController popToViewController:controller animated:YES];
+    //        }
+    //    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 @end

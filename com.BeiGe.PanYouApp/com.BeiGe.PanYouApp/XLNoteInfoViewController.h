@@ -7,8 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
+//为声明的Block定义名字
+typedef void (^ReturnTextBlock)(NSString *showText);
 @interface XLNoteInfoViewController : UIViewController
+//传值 定义Block属性
+@property (nonatomic, copy) ReturnTextBlock returnTextBlock;
+//传值方法
+- (void)returnText:(ReturnTextBlock)block;
+
 @property (weak, nonatomic) IBOutlet UILabel *compary;//来源
 @property (weak, nonatomic) IBOutlet UILabel *titlle;//标题
 @property (weak, nonatomic) IBOutlet UIImageView *Image;//图片

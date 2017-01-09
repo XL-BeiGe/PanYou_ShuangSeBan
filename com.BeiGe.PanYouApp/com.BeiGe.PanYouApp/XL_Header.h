@@ -24,7 +24,7 @@
 #define JuYuWang [NSString stringWithFormat:@"%@%@%@%@",Scheme,JuyuwangIP,AppName,apath]
 
 
-#define QianWaiWangIP @"192.168.1.114:8080"
+#define QianWaiWangIP @"192.168.1.126:8080"
 
 #define QianWaiWang [NSString stringWithFormat:@"%@%@%@%@",Scheme,QianWaiWangIP,AppName,apath]
 
