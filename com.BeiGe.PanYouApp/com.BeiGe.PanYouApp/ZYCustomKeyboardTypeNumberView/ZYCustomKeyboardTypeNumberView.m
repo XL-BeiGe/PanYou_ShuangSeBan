@@ -24,6 +24,7 @@ CG_INLINE CGFloat GTFixFloat(CGFloat oldValue) {
 
 @implementation ZYCustomKeyboardTypeNumberView
 
+
 + (instancetype)customKeyboardViewWithServiceTextField:(UITextField *)textField Delegate:(id<ZYCustomKeyboardTypeNumberViewDelegate>)delegate{
     
     ZYCustomKeyboardTypeNumberView *keyboardView = [[ZYCustomKeyboardTypeNumberView alloc] initWithFrame:CGRectMake(0, 0, mScreenWidth, GTFixFloat(mKeyboardHeight))];
@@ -203,6 +204,14 @@ CG_INLINE CGFloat GTFixFloat(CGFloat oldValue) {
 {
     NSAssert(self.serviceTextField != nil, @"serviceTextField不能为空!!!");
 }
+-(void)customKeyboardTypeNumberView_resignTextFieldFirstResponder{
+    [self assertServiceTextField];
+    self.textString = self.serviceTextField.text;
+    [self.serviceTextField resignFirstResponder];
+    if ([self.delegate respondsToSelector:@selector(customKeyboardTypeNumberView_confirmKeyClicked)]) {
+        [self.delegate customKeyboardTypeNumberView_resignTextFieldFirstResponder];
+    }
 
+}
 
 @end

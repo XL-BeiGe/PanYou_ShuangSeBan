@@ -14,9 +14,11 @@
 #import "XL_Header.h"
 #import "XL_FMDB.h"
 #import "XLMainViewController.h"
+#import "ZYCustomKeyboardTypeNumberView.h"
+
 #define gouwulei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"drugId",@"text",@"drugCount",@"text",@"drugPriceType",@"text",@"price",@"text",@"name",@"text",@"qtmd", nil]
 
-@interface XLCheckstandViewController ()
+@interface XLCheckstandViewController ()<ZYCustomKeyboardTypeNumberViewDelegate>
 {
     XL_FMDB  *XL;//数据库调用者
     FMDatabase *db;//数据库
@@ -31,8 +33,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    
-    _vipnum.delegate = self;
+    [ZYCustomKeyboardTypeNumberView customKeyboardViewWithServiceTextField:_vipnum Delegate:self];
     _checkyp.delegate = self;
+    _checkyp.keyboardType=UIKeyboardTypeNamePhonePad;
+    _checkyp.autocorrectionType = UITextAutocorrectionTypeNo;
     _queding.layer.borderWidth = 1;
     _queding.layer.borderColor = [[UIColor colorWithHexString:@"32CC96"] CGColor];
     
@@ -51,7 +55,14 @@
     [self comeback];
     // Do any additional setup after loading the view.
 }
-
+-(void)customKeyboardTypeNumberView_shrinkKeyClicked{
+    [self huiyuanchaxun];
+    [_checkyp becomeFirstResponder];
+}
+-(void)customKeyboardTypeNumberView_confirmKeyClicked{
+    [self huiyuanchaxun];
+    [_checkyp becomeFirstResponder];
+}
 -(void)comeback{
     self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
     UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self  action:@selector(fanhui)];
@@ -61,26 +72,11 @@
     XLMainViewController *xln=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xlmain"];
     for (UIViewController *controller in self.navigationController.viewControllers) {
         if ([controller isKindOfClass:[xln class]]) {
+            [XL clearDatabase:db from:@"gouwu"];
             [self.navigationController popToViewController:controller animated:YES];
         }
     }
 }
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 -(void)clear{
     _checkyp.text= @"";
@@ -110,12 +106,13 @@
     NSString *fangshi=@"/drug/drugDataSync";
     NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"];
     NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userid", nil];
-    [WarningBox warningBoxModeIndeterminate:@"数据下载中..." andView:self.view];
+    [WarningBox warningBoxModeIndeterminate:@"药品信息下载中..." andView:self.view];
     [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         NSLog(@"%@",responseObject);
         [WarningBox warningBoxHide:YES andView:self.view];
         
         [XL clearDatabase:db from:ChaXunBiaoMing];
+        [XL clearDatabase:db from:@"gouwu"];
         NSArray *list=[[responseObject objectForKey:@"data"] objectForKey:@"drugList"];
         
         if (list.count==0){
@@ -127,7 +124,7 @@
                 [XL  DataBase:db insertKeyValues:dd intoTable:ChaXunBiaoMing];
             }
             
-          [WarningBox warningBoxModeText:@"数据已下载!" andView:self.view];
+          [WarningBox warningBoxModeText:@"药品信息已下载 😊" andView:self.view];
         }
        
      
@@ -147,7 +144,7 @@
     [_checkyp resignFirstResponder];
     NSArray *arr = [XL DataBase:db selectKeyTypes:ChaXunShiTiLei fromTable:ChaXunBiaoMing];
     if (arr.count==0){
-        [WarningBox warningBoxModeText:@"请重新输入" andView:self.view];
+        [WarningBox warningBoxModeText:@"请先点击右上角，下载药品信息" andView:self.view];
     }else{
         NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:_checkyp.text,@"productCode",_checkyp.text,@"barCode",_checkyp.text,@"pycode", nil];
         findarr =[XL DataBase:db selectKeyTypes:ChaXunShiTiLei fromTable:ChaXunBiaoMing whereConditionz:dic];
@@ -218,6 +215,7 @@
    [XL DataBase:db insertKeyValues:dat intoTable:@"gouwu"];
    
     [self clear];
+      [_checkyp becomeFirstResponder];
     }
 }
 
@@ -270,6 +268,9 @@
    
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    if ([_vipnum isFirstResponder]) {
+        [self huiyuanchaxun];
+    }
     [self.view endEditing:YES];
 }
 
@@ -292,11 +293,7 @@
 
 
 #pragma mark----会员查询
--(void)textFieldDidEndEditing:(UITextField *)textField{
-    if(textField==_vipnum){
-        [self huiyuanchaxun];
-    }
-}
+
 -(void)huiyuanchaxun{
     NSString *fangshi=@"/drug/vipQuery";
     type=[self isMobileNumber:_vipnum.text]?@"2":@"1";

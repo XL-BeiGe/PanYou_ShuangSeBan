@@ -420,15 +420,6 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入卡号/手机号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JNJ-kV-Zuy">
-                                        <rect key="frame" x="97" y="12.5" width="193" height="25"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="25" id="FZZ-e9-nhV"/>
-                                        </constraints>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Oq2-no-XHL">
                                         <rect key="frame" x="315" y="10" width="30" height="30"/>
                                         <constraints>
@@ -436,15 +427,25 @@
                                             <constraint firstAttribute="height" constant="30" id="BtO-AB-ZsT"/>
                                         </constraints>
                                     </imageView>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入卡号/手机号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JNJ-kV-Zuy">
+                                        <rect key="frame" x="97" y="13" width="270" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="FZZ-e9-nhV"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="JNJ-kV-Zuy" firstAttribute="centerY" secondItem="Tud-Db-Q5C" secondAttribute="centerY" id="G9X-NL-t0y"/>
                                     <constraint firstAttribute="trailing" secondItem="Oq2-no-XHL" secondAttribute="trailing" constant="30" id="WcV-1h-h2n"/>
                                     <constraint firstAttribute="height" constant="50" id="bil-99-82d"/>
+                                    <constraint firstAttribute="trailing" secondItem="JNJ-kV-Zuy" secondAttribute="trailing" constant="8" id="dxJ-85-lvT"/>
                                     <constraint firstItem="Oq2-no-XHL" firstAttribute="centerY" secondItem="Tud-Db-Q5C" secondAttribute="centerY" id="gbg-ZM-uj2"/>
                                     <constraint firstItem="ORy-xV-mq6" firstAttribute="leading" secondItem="Tud-Db-Q5C" secondAttribute="leading" constant="30" id="ki0-Nb-01h"/>
                                     <constraint firstItem="ORy-xV-mq6" firstAttribute="centerY" secondItem="Tud-Db-Q5C" secondAttribute="centerY" id="qSL-bC-GQC"/>
+                                    <constraint firstItem="JNJ-kV-Zuy" firstAttribute="centerY" secondItem="Tud-Db-Q5C" secondAttribute="centerY" id="tAX-xI-UoC"/>
                                     <constraint firstItem="JNJ-kV-Zuy" firstAttribute="leading" secondItem="ORy-xV-mq6" secondAttribute="trailing" constant="10" id="uKo-nS-SHU"/>
                                 </constraints>
                             </view>
@@ -680,7 +681,6 @@
                             <constraint firstItem="5hi-oX-dNn" firstAttribute="leading" secondItem="TV0-XO-aUC" secondAttribute="leading" id="DFc-Ef-jQJ"/>
                             <constraint firstItem="Vx6-sy-KHw" firstAttribute="width" secondItem="ORy-xV-mq6" secondAttribute="width" id="JZ4-RD-KvV"/>
                             <constraint firstItem="Tud-Db-Q5C" firstAttribute="leading" secondItem="TV0-XO-aUC" secondAttribute="leading" id="OvG-js-vNf"/>
-                            <constraint firstItem="aw7-wH-ptX" firstAttribute="width" secondItem="JNJ-kV-Zuy" secondAttribute="width" id="Pzv-4k-g6A"/>
                             <constraint firstAttribute="trailing" secondItem="fky-92-0Vu" secondAttribute="trailing" constant="15" id="Qsa-4e-UNa"/>
                             <constraint firstItem="8nq-GS-0sw" firstAttribute="leading" secondItem="TV0-XO-aUC" secondAttribute="leading" constant="10" id="SzE-be-h88"/>
                             <constraint firstItem="8nq-GS-0sw" firstAttribute="top" secondItem="5hi-oX-dNn" secondAttribute="bottom" constant="30" id="V0m-vu-N4d"/>
@@ -711,7 +711,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Krv-tD-UuB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="526" y="-723"/>
+            <point key="canvasLocation" x="525.60000000000002" y="-723.68815592203907"/>
         </scene>
         <!--Shop Car View Controller-->
         <scene sceneID="u6o-vN-s9R">
