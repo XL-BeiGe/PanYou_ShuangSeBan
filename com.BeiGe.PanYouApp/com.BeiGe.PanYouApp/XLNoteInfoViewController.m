@@ -76,6 +76,11 @@
 }
 
 -(void)jiemian{
+    if ([pushTemplate isEqual:@""]) {
+        _renwuanniu.hidden=YES;
+        _imp.hidden=YES;
+        return;
+    }
     if([pushTemplate objectForKey:@"image"]!=nil){
         _Image.contentMode = UIViewContentModeScaleAspectFill;
         _Image.clipsToBounds  = YES;//是否剪切掉超出 UIImageView 范围的图片
@@ -117,6 +122,7 @@
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
             pushTemplate=[[responseObject objectForKey:@"data"] objectForKey:@"pushTemplate"];
+            NSLog(@"-------%@",pushTemplate);
             [self jiemian];
             
         }
