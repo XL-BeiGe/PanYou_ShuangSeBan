@@ -3050,10 +3050,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="TView" destination="3mN-sH-fyZ" id="sGN-Q7-vG1"/>
                         <outlet property="backTime" destination="QxA-71-clY" id="qgL-8J-RAc"/>
                         <outlet property="imagev" destination="mCs-og-a4h" id="ird-Ld-Ik6"/>
                         <outlet property="outTime" destination="Vr7-Pm-JSe" id="W0D-y6-Jt1"/>
                         <outlet property="textview" destination="fNT-9j-4kc" id="IvF-rI-VH5"/>
+                        <outlet property="tijiaoanniu" destination="4gB-wg-2Xs" id="sog-LQ-Lo3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0aL-ux-hwB" userLabel="First Responder" sceneMemberID="firstResponder"/>

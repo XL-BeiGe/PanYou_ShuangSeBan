@@ -13,6 +13,8 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *backTime;
 
+@property (weak, nonatomic) IBOutlet UIView *TView;
+@property (weak, nonatomic) IBOutlet UIButton *tijiaoanniu;
 @property (weak, nonatomic) IBOutlet UITextView *textview;//原因
 @property (weak, nonatomic) IBOutlet UIImageView *imagev;//图片
 - (IBAction)OutTim:(id)sender;

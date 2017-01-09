@@ -15,6 +15,9 @@
     int waifan;//外出返回时间选择器判断;
     NSString* chuankai;
     NSString* chuanjie;
+    
+    CGFloat cha;
+    int pan;
 }
 
 @property(strong,nonatomic) UIImage *image1;
@@ -135,6 +138,7 @@
 -(void)delegate{
     _outTime.delegate=self;
     _backTime.delegate=self;
+    [self registerForKeyboardNotifications];
 }
 -(void)dianji{
     [self xiangji];
@@ -262,5 +266,59 @@
         NSLog(@"%@",error);
     }];
 
+}
+#pragma  mark ---注册通知
+- (void) registerForKeyboardNotifications
+{
+    cha=0.0;
+    pan=0;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(qkeyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(qkeyboardWasHidden:) name:UIKeyboardWillHideNotification object:nil];
+}
+#pragma mark ----通知实现
+- (void) qkeyboardWasShown:(NSNotification *) notif
+{
+    if (pan==0) {
+        NSDictionary *info = [notif userInfo];
+        NSValue *value = [info objectForKey:UIKeyboardFrameBeginUserInfoKey];
+        CGSize keyboardSize = [value CGRectValue].size;
+        CGRect rect = CGRectMake(_TView.frame.origin.x, _TView.frame.origin.y, _TView.frame.size.width,_TView.frame.size.height);
+        CGFloat kongjian=rect.origin.y+rect.size.height;
+        CGFloat viewK=[UIScreen mainScreen].bounds.size.height;
+        CGFloat jianpan=keyboardSize.height;
+        if (viewK > kongjian+ jianpan) {
+            cha=0;
+        }else{
+            cha=viewK-kongjian-jianpan;
+        }
+        pan=1;
+        [self animateTextField:cha  up: YES];
+    }
+}
+- (void) qkeyboardWasHidden:(NSNotification *) notif
+{
+    pan=0;
+    [self animateTextField:cha up:NO];
+}
+//视图上移的方法
+- (void) animateTextField: (CGFloat) textField up: (BOOL) up
+{
+    
+    //设置视图上移的距离，单位像素
+    const int movementDistance = textField; // tweak as needed
+    //三目运算，判定是否需要上移视图或者不变
+    int movement = (up ? movementDistance : -movementDistance);
+    //设置动画的名字
+    [UIView beginAnimations: @"Animation" context: nil];
+    //设置动画的开始移动位置
+    [UIView setAnimationBeginsFromCurrentState: YES];
+    //设置动画的间隔时间
+    [UIView setAnimationDuration: 0.20];
+    //设置视图移动的位移
+    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
+    //设置动画结束
+    [UIView commitAnimations];
+    
 }
 @end

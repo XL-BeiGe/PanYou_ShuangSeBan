@@ -69,7 +69,7 @@
 -(void)delegate{
     _username.delegate=self;
     _password.delegate=self;
-    _username.keyboardType=UIKeyboardTypeASCIICapable;
+    _username.keyboardType=UIKeyboardTypeNamePhonePad;
     _username.autocorrectionType = UITextAutocorrectionTypeNo;
     [_username setClearButtonMode:UITextFieldViewModeWhileEditing];
     [_password setClearButtonMode:UITextFieldViewModeWhileEditing];
