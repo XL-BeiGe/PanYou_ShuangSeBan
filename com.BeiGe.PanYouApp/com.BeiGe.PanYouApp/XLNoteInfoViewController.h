@@ -20,6 +20,9 @@ typedef void (^ReturnTextBlock)(NSString *showText);
 @property (weak, nonatomic) IBOutlet UIImageView *Image;//图片
 @property (weak, nonatomic) IBOutlet UILabel *neror;//内容
 @property (weak, nonatomic) IBOutlet UILabel *shij;//时间
+@property (weak, nonatomic) IBOutlet UIImageView *view1;
+@property (weak, nonatomic) IBOutlet UIView *view2;
+@property (weak, nonatomic) IBOutlet UIImageView *backimg;
 @property (weak, nonatomic) IBOutlet UITextView *textview;//备注
 @property (weak, nonatomic) IBOutlet UIView *imp;
 - (IBAction)victory:(id)sender;

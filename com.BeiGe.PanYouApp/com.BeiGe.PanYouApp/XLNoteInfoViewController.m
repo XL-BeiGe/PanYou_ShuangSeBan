@@ -12,6 +12,7 @@
 #import "XL_Header.h"
 #import "XLNoteViewController.h"
 #import "SDWebImage/UIImageView+WebCache.h"
+#import "XLSizeForLabel.h"
 @interface XLNoteInfoViewController ()<UITextViewDelegate>
 {
     UILabel *placeor;
@@ -27,6 +28,12 @@
     [super viewDidLoad];
     NSLog(@"%@",_zhT);
     caca=0;
+  
+    
+    
+    _backimg.hidden= YES;
+    [self xiangqingjiekou];
+    [self navigation];
     if([_zhT isEqualToString:@"1"]){
         _zhT=@"2";
         [self anniujiekou:_zhT];
@@ -43,9 +50,6 @@
     }
     
     
-    
-    [self xiangqingjiekou];
-    [self navigation];
     self.title = @"通知详情";
     //    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[UIColor whiteColor]}];
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -82,16 +86,30 @@
         return;
     }
     if([pushTemplate objectForKey:@"image"]!=nil){
-        _Image.contentMode = UIViewContentModeScaleAspectFill;
+        //_Image.contentMode = UIViewContentModeScaleAspectFill;
+        _Image.contentMode = UIViewContentModeScaleAspectFit;
         _Image.clipsToBounds  = YES;//是否剪切掉超出 UIImageView 范围的图片
         [_Image setContentScaleFactor:[[UIScreen mainScreen] scale]];//缩放图片的分辨率
         NSURL*url=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",Scheme,QianWaiWangIP,[pushTemplate objectForKey:@"image"]]];
         [_Image sd_setImageWithURL:url  placeholderImage:[UIImage imageNamed:@"icon_02_07.png"]];
+     
     }
-    _titlle.text = [pushTemplate objectForKey:@"title"];
-    _neror.text = [pushTemplate objectForKey:@"context"];
+    
+    _neror.text = [NSString stringWithFormat:@"%@",[pushTemplate objectForKey:@"context"]];
+   // _neror.adjustsFontSizeToFitWidth =YES;
+  //CGSize digestHeight = [XLSizeForLabel labelRectWithSize:CGSizeMake([[UIScreen mainScreen]bounds].size.width - 20, MAXFLOAT) LabelText:_neror.text Font:[UIFont systemFontOfSize:15.0f]];
+    
+    //_neror.frame = CGRectMake([[UIScreen mainScreen]bounds].origin.x,[[UIScreen mainScreen]bounds].origin.y,[[UIScreen mainScreen]bounds].size.width - 20,[digestHeight float]);
+
+    
+    
+    _titlle.text =[NSString stringWithFormat:@"%@",[pushTemplate objectForKey:@"title"]];
+    //_neror.text = [NSString stringWithFormat:@"%@",[pushTemplate objectForKey:@"context"]];
     _compary.text = [NSString stringWithFormat:@"来源:%@",[pushTemplate objectForKey:@"pushSrc"]];
-    _shij.text = [NSString stringWithFormat:@"时间:%@",[pushTemplate objectForKey:@"createTime"]];
+    NSString *ss =[NSString stringWithFormat:@"%@",[pushTemplate objectForKey:@"createTime"]];
+    NSString *sss = [ss substringToIndex:10];
+    _shij.text =sss;
+    
     
     _textview.delegate = self;
     [self tobar];
@@ -123,7 +141,26 @@
         if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
             pushTemplate=[[responseObject objectForKey:@"data"] objectForKey:@"pushTemplate"];
             NSLog(@"-------%@",pushTemplate);
-            [self jiemian];
+            
+            if([pushTemplate isEqual:@""]){
+                _view1.hidden=YES;
+                _view2.hidden=YES;
+                _imp.hidden =YES;
+                _renwuanniu.hidden = YES;
+                _backimg.hidden =NO;
+                NSLog(@"应该都隐藏");
+            }else{
+                _view1.hidden=NO;
+                _view2.hidden=NO;
+               // _imp.hidden =NO;
+                _renwuanniu.hidden =NO;
+                _backimg.hidden =YES;
+              [self jiemian];
+                NSLog(@"应该都显示");
+            }
+            
+            
+          
             
         }
     } failure:^(NSError *error) {

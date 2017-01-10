@@ -58,6 +58,7 @@
 		D730F8B91DCB245400F07053 /* XLShopCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D730F8B81DCB245400F07053 /* XLShopCarViewController.m */; };
 		D730F8BC1DCB31C200F07053 /* XLSetAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D730F8BB1DCB31C200F07053 /* XLSetAccountViewController.m */; };
 		D730F8BF1DCB31DC00F07053 /* XLAccSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D730F8BE1DCB31DC00F07053 /* XLAccSuccessViewController.m */; };
+		D7336D131E236B7E0008AAA7 /* XLSizeForLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D7336D121E236B7E0008AAA7 /* XLSizeForLabel.m */; };
 		D739C8EA1DE7CF3800942CD6 /* XLShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D739C8E91DE7CF3800942CD6 /* XLShowViewController.m */; };
 		D739C8EF1DE7D00200942CD6 /* XLChangepassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D739C8EE1DE7D00200942CD6 /* XLChangepassViewController.m */; };
 		D739C8F21DE7D01200942CD6 /* XLSettViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D739C8F11DE7D01200942CD6 /* XLSettViewController.m */; };
@@ -365,6 +366,8 @@
 		D730F8BB1DCB31C200F07053 /* XLSetAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLSetAccountViewController.m; sourceTree = "<group>"; };
 		D730F8BD1DCB31DC00F07053 /* XLAccSuccessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLAccSuccessViewController.h; sourceTree = "<group>"; };
 		D730F8BE1DCB31DC00F07053 /* XLAccSuccessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLAccSuccessViewController.m; sourceTree = "<group>"; };
+		D7336D111E236B7E0008AAA7 /* XLSizeForLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLSizeForLabel.h; sourceTree = "<group>"; };
+		D7336D121E236B7E0008AAA7 /* XLSizeForLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLSizeForLabel.m; sourceTree = "<group>"; };
 		D739C8E81DE7CF3800942CD6 /* XLShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLShowViewController.h; sourceTree = "<group>"; };
 		D739C8E91DE7CF3800942CD6 /* XLShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLShowViewController.m; sourceTree = "<group>"; };
 		D739C8ED1DE7D00200942CD6 /* XLChangepassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLChangepassViewController.h; sourceTree = "<group>"; };
@@ -1050,6 +1053,8 @@
 				D76B34AE1DC9924900E285AB /* Color+Hex.m */,
 				D76B34AA1DC9923500E285AB /* XL_WangLuo.h */,
 				D76B34AB1DC9923500E285AB /* XL_WangLuo.m */,
+				D7336D111E236B7E0008AAA7 /* XLSizeForLabel.h */,
+				D7336D121E236B7E0008AAA7 /* XLSizeForLabel.m */,
 			);
 			name = "宏定义";
 			sourceTree = "<group>";
@@ -1747,6 +1752,7 @@
 				D730F89C1DCACFB100F07053 /* XLLeaveViewController.m in Sources */,
 				D76B35151DC992F400E285AB /* SBJsonTokeniser.m in Sources */,
 				D7C8CE4F1E14F9D000062F00 /* UIImage+WebP.m in Sources */,
+				D7336D131E236B7E0008AAA7 /* XLSizeForLabel.m in Sources */,
 				D76B35161DC992F400E285AB /* SBJsonUTF8Stream.m in Sources */,
 				D7C8CE521E14F9D000062F00 /* UIView+WebCacheOperation.m in Sources */,
 				D7C8CE4A1E14F9D000062F00 /* SDWebImageManager.m in Sources */,
