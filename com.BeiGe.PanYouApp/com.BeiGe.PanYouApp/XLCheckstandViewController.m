@@ -35,10 +35,13 @@
    
     [ZYCustomKeyboardTypeNumberView customKeyboardViewWithServiceTextField:_vipnum Delegate:self];
     _checkyp.delegate = self;
+    _checkyp.keyboardType=UIKeyboardTypeAlphabet;
     _checkyp.keyboardType=UIKeyboardTypeNamePhonePad;
+//    _checkyp.keyboardType=UIKeyboardTypeNumbersAndPunctuation;
     _checkyp.autocorrectionType = UITextAutocorrectionTypeNo;
     _queding.layer.borderWidth = 1;
     _queding.layer.borderColor = [[UIColor colorWithHexString:@"32CC96"] CGColor];
+    _queding.layer.cornerRadius=5.0;
     
     _sum.layer.borderWidth = 1;
     _sum.layer.borderColor = [[UIColor colorWithHexString:@"32CC96"] CGColor];
@@ -46,21 +49,36 @@
     _subtract.layer.borderWidth = 1;
     _subtract.layer.borderColor = [[UIColor colorWithHexString:@"32CC96"] CGColor];
     _subtract.layer.cornerRadius = 5.0;
-    
+    [XL clearDatabase:db from:@"gouwu"];
     
     type=@"3";
     [self navagation];
     [self clear];
     [self shujuku];
     [self comeback];
+    
+    
+    
+    [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"consumptionDetailNo"];
     // Do any additional setup after loading the view.
 }
 -(void)customKeyboardTypeNumberView_shrinkKeyClicked{
-    [self huiyuanchaxun];
+//    [self huiyuanchaxun];
+    if (![_vipnum.text isEqualToString:@""]) {
+        type=[self isMobileNumber:_vipnum.text]?@"2":@"1";
+    }else{
+        type=@"3";
+    }
+    
     [_checkyp becomeFirstResponder];
 }
 -(void)customKeyboardTypeNumberView_confirmKeyClicked{
-    [self huiyuanchaxun];
+//    [self huiyuanchaxun];
+    if (![_vipnum.text isEqualToString:@""]) {
+        type=[self isMobileNumber:_vipnum.text]?@"2":@"1";
+    }else{
+        type=@"3";
+    }
     [_checkyp becomeFirstResponder];
 }
 -(void)comeback{
@@ -151,6 +169,7 @@
     
         if (findarr.count==0){
             [WarningBox warningBoxModeText:@"未找到药品" andView:self.view];
+            [self clear];
         }else{
             [self xianshi];
         }
@@ -267,9 +286,20 @@
     
    
 }
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    if ([_vipnum isFirstResponder]) {
+//        [self huiyuanchaxun];
+    }
+    return YES;
+}
+
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     if ([_vipnum isFirstResponder]) {
-        [self huiyuanchaxun];
+//        [self huiyuanchaxun];
+        if ([_vipnum.text isEqualToString:@""]) {
+            type=@"3";
+        }else
+        type=[self isMobileNumber:_vipnum.text]?@"2":@"1";
     }
     [self.view endEditing:YES];
 }

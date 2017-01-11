@@ -29,18 +29,37 @@
 
 @implementation XLShopCarViewController
 
+-(void)viewWillAppear:(BOOL)animated{
+    [self shujuku];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"购物车";
-    [self shujuku];
+    
     [self tableviewdelegate];
-   
+    
     NSLog(@"传过来的状态%@",_sctype);
     
-    _coupon.delegate = self;
-    _couprice.delegate = self;
+    
+    [ZYCustomKeyboardTypeNumberView customKeyboardViewWithServiceTextField:_couprice Delegate:self];
+    _coupon.delegate=self;
+    
     [self comeback];
     // Do any additional setup after loading the view.
+}
+
+//自定义键盘
+- (void)setupCustomedKeyboard:(UITextField*)tf {
+    tf.inputView = [DSKyeboard keyboardWithTextField:tf];
+    
+    
+    [(DSKyeboard *)tf.inputView dsKeyboardTextChangedOutputBlock:^(NSString *fakePassword) {
+        
+        tf.text = fakePassword;
+    } loginBlock:^(NSString *password) {
+        [tf resignFirstResponder];
+        //        tf.text = [NSString stringWithFormat:@"%@", password];
+    }];
 }
 
 -(void)comeback{
@@ -52,6 +71,7 @@
     XLCheckstandViewController *xln=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"checkstand"];
     for (UIViewController *controller in self.navigationController.viewControllers) {
         if ([controller isKindOfClass:[xln class]]) {
+            [self updatefmdb ];
             [self.navigationController popToViewController:controller animated:YES];
         }
     }
@@ -59,26 +79,19 @@
 
 
 -(void)wangluo{
-//网络请求
+    //网络请求
     
-     [self updatefmdb];
-    
+    [self updatefmdb];
     shoparr = [XL DataBase:db selectKeyTypes:gouwulei fromTable:@"gouwu"];
-         for (int i=0;i<shoparr.count;i++) {
+    for (int i=0;i<shoparr.count;i++) {
         [shoparr[i]removeObjectForKey:@"price"];
         [shoparr[i]removeObjectForKey:@"name"];
         [shoparr[i]removeObjectForKey:@"qtmd"];
     }
-  
-   
-    
     NSString *fangshi=@"/drug/shoppingCart";
     NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"];
-    NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"operateUserId",_scno,@"no",_sctype,@"type",_coupon.text,@"coupon",_couprice.text,@"couponPrice",shoparr,@"drugList", nil];
-    NSLog(@"------------------------%@",rucan);
-    
-    
-    
+    NSString *consumptionDetailNo = [[NSUserDefaults standardUserDefaults] objectForKey:@"consumptionDetailNo"];
+    NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"operateUserId",_scno,@"no",_sctype,@"type",_coupon.text,@"coupon",_couprice.text,@"couponPrice",shoparr,@"drugList",consumptionDetailNo,@"consumptionDetailNo", nil];
     
     [WarningBox warningBoxModeIndeterminate:@"正在计算总价..." andView:self.view];
     [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
@@ -87,22 +100,23 @@
         if([[responseObject objectForKey:@"code"]isEqualToString:@"0000"]){
             NSString *drugAmount=[[responseObject objectForKey:@"data"] objectForKey:@"drugAmount"];
             NSString *consumptionInfoId=[[responseObject objectForKey:@"data"] objectForKey:@"consumptionInfoId"];
+            [[NSUserDefaults standardUserDefaults] setObject:[[responseObject objectForKey:@"data"] objectForKey:@"consumptionDetailNo"] forKey:@"consumptionDetailNo"];
             
-            [XL clearDatabase:db from:@"gouwu"];
+            //            [XL clearDatabase:db from:@"gouwu"];
             
-        XLSetAccountViewController *shop = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"setacc"];
+            XLSetAccountViewController *shop = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"setacc"];
             shop.drugAmount=drugAmount;
             shop.consumptionInfoId=consumptionInfoId;
-        [self.navigationController pushViewController:shop animated:YES];
+            [self.navigationController pushViewController:shop animated:YES];
         }
     } failure:^(NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"网络错误,请重试!" andView:self.view];
         NSLog(@"%@",error);
     }];
-
     
-   
+    
+    
 }
 
 -(void)tableviewdelegate{
@@ -127,7 +141,6 @@
     //    for (UIView *v in [cell.contentView subviews]) {
     //        [v removeFromSuperview];
     //    }
-    
     UILabel *name =[[UILabel alloc]initWithFrame:CGRectMake(15,12,80,25)];
     UILabel *price =[[UILabel alloc]initWithFrame:CGRectMake(15,45,80,25)];
     UILabel *namete =[[UILabel alloc]initWithFrame:CGRectMake(100,12,self.view.frame.size.width-120,25)];
@@ -135,48 +148,48 @@
     
     UIButton *sum =[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width-50,45,25,25)];
     number =[[UITextField alloc]initWithFrame:CGRectMake(sum.frame.origin.x-40,45,40,25)];
-     UIButton *subtrace = [[UIButton alloc]initWithFrame:CGRectMake(number.frame.origin.x-25,45,25,25)];
-     name.text = @"药品名称:";
-     price.text = @"药品价格:";
-     pricete.textColor = [UIColor colorWithHexString:@"FF6534" alpha:1];
+    UIButton *subtrace = [[UIButton alloc]initWithFrame:CGRectMake(number.frame.origin.x-25,45,25,25)];
+    name.text = @"药品名称:";
+    price.text = @"药品价格:";
+    pricete.textColor = [UIColor colorWithHexString:@"FF6534" alpha:1];
     // 药品名称
-   
-     namete.text = [NSString stringWithFormat:@"%@",[shoparr[indexPath.row]objectForKey:@"name"]];
+    
+    namete.text = [NSString stringWithFormat:@"%@",[shoparr[indexPath.row]objectForKey:@"name"]];
     //药品价格
-     pricete.text = [NSString stringWithFormat:@"%@",[shoparr[indexPath.row]objectForKey:@"price"]];
+    pricete.text = [NSString stringWithFormat:@"%@",[shoparr[indexPath.row]objectForKey:@"price"]];
     
-     number.delegate = self;
-   
-    // [ZYCustomKeyboardTypeNumberView customKeyboardViewWithServiceTextField:number Delegate:self];
-     number.textAlignment = NSTextAlignmentCenter;
-     number.adjustsFontSizeToFitWidth = YES;
+    number.delegate = self;
+    number.textAlignment = NSTextAlignmentCenter;
+    number.adjustsFontSizeToFitWidth = YES;
     // number.keyboardType = UIKeyboardTypeNumberPad;
-     number.tag = 600+indexPath.row;
+    number.tag = 600+indexPath.row;
+    [ZYCustomKeyboardTypeNumberView customKeyboardViewWithServiceTextField:number Delegate:self];
     
- 
+    
+    
     //药品数量
-     number.text = [NSString stringWithFormat:@"%@",[shoparr[indexPath.row]objectForKey:@"drugCount"]];
+    number.text = [NSString stringWithFormat:@"%@",[shoparr[indexPath.row]objectForKey:@"drugCount"]];
     
     [subtrace setTitle:@"-" forState:UIControlStateNormal];
     [sum setTitle:@"+" forState:UIControlStateNormal];
     [sum setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     [subtrace setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-
+    
     
     
     [number addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-    [number addTarget:self action:@selector(NumberLength:) forControlEvents:UIControlEventEditingChanged];
+    //    [number addTarget:self action:@selector(NumberLength:) forControlEvents:UIControlEventEditingChanged];
     [sum addTarget:self action:@selector(sum:) forControlEvents:UIControlEventTouchUpInside];
     [subtrace addTarget:self action:@selector(subtrace:) forControlEvents:UIControlEventTouchUpInside];
- 
     
-        [cell.contentView addSubview:name];
-        [cell.contentView addSubview:price];
-        [cell.contentView addSubview:namete];
-        [cell.contentView addSubview:sum];
-        [cell.contentView addSubview:number];
-        [cell.contentView addSubview:subtrace];
-        [cell.contentView addSubview:pricete];
+    
+    [cell.contentView addSubview:name];
+    [cell.contentView addSubview:price];
+    [cell.contentView addSubview:namete];
+    [cell.contentView addSubview:sum];
+    [cell.contentView addSubview:number];
+    [cell.contentView addSubview:subtrace];
+    [cell.contentView addSubview:pricete];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
@@ -189,12 +202,11 @@
     return  UITableViewCellEditingStyleDelete;
 }
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
- //删除方法
-   
     [self updatefmdb];
+    
     //删除某一条数据
-    NSDictionary *ddic = [NSDictionary dictionaryWithObjectsAndKeys:[shoparr[indexPath.row] objectForKey:@"drugId"],@"drugId", nil];
-    shoparr  =[XL DataBase:db deleteKeyTypes:gouwulei fromTable:@"gouwu" whereCondition:ddic];
+    NSDictionary *ddic = [NSDictionary dictionaryWithObjectsAndKeys:[shoparr[indexPath.row] objectForKey:@"qtmd"],@"qtmd", nil];
+    [XL DataBase:db deleteKeyTypes:gouwulei fromTable:@"gouwu" whereCondition:ddic];
     shoparr = [XL DataBase:db selectKeyTypes:gouwulei fromTable:@"gouwu"];
     [_tabel reloadData];
 }
@@ -206,42 +218,47 @@
     [self.view endEditing:YES];
 }
 
-
-
 //限制数量长度
--(void)NumberLength:(UITextField *)theTextField
+-(BOOL)NumberLength:(UILabel *)theTextField
 {
-    UITableViewCell *cell=(UITableViewCell*)[[theTextField superview] superview ];
-    
-    NSIndexPath *index=[self.tabel indexPathForCell:cell];
-    
-    UILabel*oo=[cell viewWithTag:index.row+600];
-    
-   
     int MaxLen = 4;
-    NSString* szText = [oo text];
-    if ([oo.text length]> MaxLen)
+    NSString* szText = [theTextField text];
+    if ([theTextField.text length]> MaxLen)
     {
-    oo.text = [szText substringToIndex:MaxLen];
+        theTextField.text = [szText substringToIndex:MaxLen];
+        return NO;
     }
-       NSLog(@"限制长度");
+    NSLog(@"限制长度");
     
+    return YES;
 }
 //修改数量
--(void)textFieldDidChange :(UITextField *)theTextField
+-(BOOL)textFieldDidChange :(UITextField *)theTextField
 {
-    UITableViewCell *cell=(UITableViewCell*)[[theTextField superview] superview ];
     
-    NSIndexPath *index=[self.tabel indexPathForCell:cell];
-    
-    UILabel*oo=[cell viewWithTag:index.row+600];
-    
-    oo.text=[NSString stringWithFormat:@"%d",[oo.text intValue]];
-    
+//    UITableViewCell *cell=(UITableViewCell*)[[theTextField superview] superview ];
+//    
+//    NSIndexPath *index=[self.tabel indexPathForCell:cell];
+//    
+//    UILabel*oo=[cell viewWithTag:index.row+600];
+//    
+//    oo.text=[NSString stringWithFormat:@"%d",[oo.text intValue]];
+    UILabel *oo=[[UILabel alloc] init];
+    oo.text=theTextField.text;
+    [self NumberLength:oo];
     NSString*qw=oo.text;
-    NSLog(@"修改数量");
-    [shoparr[index.row] setObject:qw forKey:@"drugCount"];
     
+    NSUInteger mm=theTextField.tag-600;
+    
+    NSLog(@"修改数量");
+    
+    if ([self NumberLength:oo]) {
+        [shoparr[mm] setObject:qw forKey:@"drugCount"];
+        return YES;
+    }else{
+        return NO;
+    }
+    return YES;
 }
 
 -(void)sum:(UIButton*)btn{
@@ -251,7 +268,7 @@
     NSIndexPath *index=[self.tabel indexPathForCell:cell];
     
     UILabel*oo=[cell viewWithTag:index.row+600];
-   
+    
     NSString*qw=oo.text;
     
     int wq=[qw intValue];
@@ -259,11 +276,11 @@
     qw =[NSString stringWithFormat:@"%d", wq+1];
     
     oo.text=qw;
- 
+    
     //  存入jieshou数组中
-   [shoparr[index.row] setObject:qw forKey:@"drugCount"];
-
-  
+    [shoparr[index.row] setObject:qw forKey:@"drugCount"];
+    
+    
 }
 
 -(void)subtrace:(UIButton*)btn{
@@ -273,7 +290,7 @@
     NSIndexPath *index=[self.tabel indexPathForCell:cell];
     
     UILabel*oo=[cell viewWithTag:index.row+600];
-   
+    
     NSString*qw=oo.text;
     
     int wq=[qw intValue];
@@ -287,7 +304,7 @@
     
     //  存入jieshou数组中
     [shoparr[index.row] setObject:qw forKey:@"drugCount"];
-  
+    
 }
 
 //键盘退下
@@ -321,26 +338,29 @@
 
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    if (textField==number){
-        [self textFieldDidChange:textField];
-        [self NumberLength:textField];
-        [self animateTextField:-160 up:YES];
-    }else{
-    
+    if ( textField == _coupon) {
+        [self setupCustomedKeyboard:textField];
     }
+    //    if (textField==number){
+    //        [self textFieldDidChange:textField];
+    ////        [self NumberLength:textField];
+    //        [self animateTextField:-160 up:YES];
+    //    }else{
+    //
+    //    }
     
     return YES;
 }
--(void)textFieldDidEndEditing:(UITextField *)textField{
-    if (textField==number){
-        [self textFieldDidChange:textField];
-        [self NumberLength:textField];
-        [self animateTextField:-160 up:NO];
-    }else{
-    
-    }
-   
-}
+//-(void)textFieldDidEndEditing:(UITextField *)textField{
+//    if (textField==number){
+//        [self textFieldDidChange:textField];
+////        [self NumberLength:textField];
+//        [self animateTextField:-160 up:NO];
+//    }else{
+//
+//    }
+//
+//}
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }
@@ -349,7 +369,7 @@
 - (IBAction)SetAccounts:(id)sender {
     //网络请求
     [self wangluo];
-   
+    
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -357,12 +377,12 @@
     if(textField==_coupon){
         [_couprice becomeFirstResponder];
     }else{
-    [textField resignFirstResponder];
+        [textField resignFirstResponder];
     }
     return YES;
 }
 -(void)navigation{
-  
+    
     UIBarButtonItem*right=[[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self  action:@selector(fanhui)];
     [self.navigationItem setRightBarButtonItem:right];
 }
@@ -374,7 +394,7 @@
 
 #pragma mark--修改数据库
 -(void)updatefmdb{
-
+    
     //将数组里的都更新到数据库中
     NSDictionary *updic;
     NSDictionary *udic;
@@ -383,7 +403,7 @@
         udic = [NSDictionary dictionaryWithObjectsAndKeys:[shoparr[i] objectForKey:@"qtmd"],@"qtmd", nil];
         [XL DataBase:db updateTable:@"gouwu" setKeyValues:updic whereCondition:udic];
     }
-
+    
     
     
 }

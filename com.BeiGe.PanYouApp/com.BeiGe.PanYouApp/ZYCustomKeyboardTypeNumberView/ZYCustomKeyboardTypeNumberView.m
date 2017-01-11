@@ -7,6 +7,7 @@
 //
 
 #import "ZYCustomKeyboardTypeNumberView.h"
+#import "XLShopCarViewController.h"
 
 static const CGFloat mKeyboardHeight = 202;
 CG_INLINE CGFloat GTFixFloat(CGFloat oldValue) {
@@ -24,9 +25,13 @@ CG_INLINE CGFloat GTFixFloat(CGFloat oldValue) {
 
 @implementation ZYCustomKeyboardTypeNumberView
 
-
+int i;
+UITextField*_textField;
 + (instancetype)customKeyboardViewWithServiceTextField:(UITextField *)textField Delegate:(id<ZYCustomKeyboardTypeNumberViewDelegate>)delegate{
-    
+    if (textField.tag>600&&textField.tag<700) {
+        i=1;
+        _textField=textField;
+    }
     ZYCustomKeyboardTypeNumberView *keyboardView = [[ZYCustomKeyboardTypeNumberView alloc] initWithFrame:CGRectMake(0, 0, mScreenWidth, GTFixFloat(mKeyboardHeight))];
     keyboardView.serviceTextField = textField;
     textField.inputView = keyboardView;
@@ -142,6 +147,7 @@ CG_INLINE CGFloat GTFixFloat(CGFloat oldValue) {
     self.textString = self.serviceTextField.text;
     
     if ([button.titleLabel.text isEqualToString:@"."]) {
+        
         if ([self.textString isEqualToString:@""]) {
             self.textString = @"0";
             
@@ -152,6 +158,13 @@ CG_INLINE CGFloat GTFixFloat(CGFloat oldValue) {
     }
     
     self.textString = [NSString stringWithFormat:@"%@%@",self.textString, button.titleLabel.text];
+    if (i==1) {
+        _textField.text = [NSString stringWithFormat:@"%@%@",self.textString, button.titleLabel.text];
+        XLShopCarViewController*shop=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"shopcar"];
+        if ([shop textFieldDidChange:_textField]) {
+            self.serviceTextField.text = self.textString;
+        };
+    }else
     self.serviceTextField.text = self.textString;
     if ([self.delegate respondsToSelector:@selector(customKeyboardTypeNumberView_changeTextFieldWithText:)]) {
         [self.delegate customKeyboardTypeNumberView_changeTextFieldWithText:self.textString];
@@ -166,6 +179,11 @@ CG_INLINE CGFloat GTFixFloat(CGFloat oldValue) {
     NSInteger length = self.textString.length;
     if (length == 0) {
         self.textString = @"";
+        if (i==1) {
+            self.textString = @"1";
+            XLShopCarViewController*shop=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"shopcar"];
+            [shop textFieldDidChange:_textField];
+        }
         return;
     }
     
@@ -199,7 +217,6 @@ CG_INLINE CGFloat GTFixFloat(CGFloat oldValue) {
         [self.delegate customKeyboardTypeNumberView_confirmKeyClicked];
     }
 }
-
 -(void)assertServiceTextField
 {
     NSAssert(self.serviceTextField != nil, @"serviceTextField不能为空!!!");
@@ -211,7 +228,7 @@ CG_INLINE CGFloat GTFixFloat(CGFloat oldValue) {
     if ([self.delegate respondsToSelector:@selector(customKeyboardTypeNumberView_confirmKeyClicked)]) {
         [self.delegate customKeyboardTypeNumberView_resignTextFieldFirstResponder];
     }
-
 }
+
 
 @end

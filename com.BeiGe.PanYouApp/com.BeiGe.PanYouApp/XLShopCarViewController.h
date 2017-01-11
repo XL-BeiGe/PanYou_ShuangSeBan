@@ -15,5 +15,5 @@
 - (IBAction)SetAccounts:(id)sender;
 @property (strong, nonatomic) NSString*sctype;
 @property (strong, nonatomic) NSString*scno;
-
+-(BOOL)textFieldDidChange :(UITextField *)theTextField;
 @end

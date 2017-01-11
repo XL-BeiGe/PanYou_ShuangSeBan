@@ -92,16 +92,19 @@
     
     [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
-        if (![[responseObject objectForKey:@"code"]isEqual:@"9999"]) {
+        if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
             NSDictionary* data=[responseObject objectForKey:@"data"];
             dao=[[data objectForKey:@"isSign"] intValue];
             tui=[[data objectForKey:@"isSignOut"] intValue];
             NSLog(@"%d----%d",dao,tui);
             [self anniupanduan];
         }
-        else{
+        else if([[responseObject objectForKey:@"code"]isEqual:@"1007"]){
 //            [WarningBox warningBoxModeText:@"请重新进入该页面！" andView:self.view];
+        }else if([[responseObject objectForKey:@"code"]isEqual:@"9999"]){
+            //账号在其他手机登录，请重新登录。
         }
+
         
     } failure:^(NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];

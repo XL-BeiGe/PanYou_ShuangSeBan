@@ -11,9 +11,12 @@
 #import "WarningBox.h"
 #import "XL_WangLuo.h"
 #import "XLShopCarViewController.h"
+#import "XL_FMDB.h"
 @interface XLSetAccountViewController ()
 {
-  NSString  *chuannima;
+    NSString  *chuannima;
+    XL_FMDB  *XL;//数据库调用者
+    FMDatabase *db;//数据库
 }
 @end
 
@@ -23,13 +26,19 @@
     [super viewDidLoad];
     self.title = @"结账";
     _fumoney.delegate = self;
-    
+    _futype.text=@"现金";
     _accmoney.text = [NSString stringWithFormat:@"￥%@",_drugAmount];
   
     chuannima=@"1";
     
     [self comeback];
+    [self shujuku];
     
+}
+-(void)shujuku{
+    XL = [XL_FMDB tool];
+    [XL_FMDB allocWithZone:NULL];
+    db = [XL getDBWithDBName:@"pandian.sqlite"];
 }
 -(void)comeback{
     self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
@@ -63,11 +72,9 @@
     }
 }
 
-
 - (IBAction)Sure:(id)sender {
     //网络请求
     [self quedingwangluo];
-   
 }
 -(void)quedingwangluo{
     NSString *fangshi=@"/drug/postDrug";
@@ -78,11 +85,11 @@
     [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         NSLog(@"%@",responseObject);
         
-        
         [WarningBox warningBoxHide:YES andView:self.view];
         
         if ( [[responseObject objectForKey:@"code"]isEqualToString:@"0000"]) {
-            
+            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"consumptionDetailNo"];
+            [XL clearDatabase:db from:@"gouwu"];
             NSDate*date=[NSDate date];
             NSDateFormatter*dateFormatter=[[NSDateFormatter alloc] init];
             // 为日期格式器设置格式字符串
@@ -92,15 +99,12 @@
             NSString *message =  [NSString stringWithFormat:
                                   @"%@", destDateString];
            
-            
             XLAccSuccessViewController *shop = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"accsuc"];
             shop.zonge=_drugAmount;
             shop.shijian=message;
             [self.navigationController pushViewController:shop animated:YES];
         }
-        
-        
-        
+    
     } failure:^(NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"网络错误,请重试!" andView:self.view];
@@ -130,7 +134,6 @@
         _zlmoney.text = [NSString stringWithFormat:@"￥%.2f",fu-zong];
     }
 
-    
     return YES;
 }
 
