@@ -34,6 +34,7 @@
     _textview.delegate =self;
     [self tobar];
     [self comeback];
+    self.title =@"外勤";
 }
 
 -(void)comeback{

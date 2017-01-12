@@ -29,6 +29,7 @@
     waiqinlist=[[NSMutableArray alloc] init];
     [self delegate];
     [self comeback];
+    self.title =@"统计";
 }
 
 -(void)comeback{

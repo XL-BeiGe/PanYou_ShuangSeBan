@@ -147,16 +147,31 @@
     UILabel *time =(UILabel*)[cell viewWithTag:203];
     UIImageView *icoimg = (UIImageView*)[cell viewWithTag:200];
     UIImageView *img = (UIImageView*)[cell viewWithTag:204];
-    titl.text = [NSString stringWithFormat:@"%@",[pushList[indexPath.row] objectForKey:@"title"]];
-    mess.text = [NSString stringWithFormat:@"%@",[pushList[indexPath.row] objectForKey:@"context"] ];
+    
+    if(nil==[pushList[indexPath.row] objectForKey:@"title"]){
+    titl.text =@"";
+    }else{
+     titl.text = [NSString stringWithFormat:@"%@",[pushList[indexPath.row] objectForKey:@"title"]];
+    }
+    if(nil==[pushList[indexPath.row] objectForKey:@"context"]){
+         mess.text =@"";
+    }else{
+     mess.text = [NSString stringWithFormat:@"%@",[pushList[indexPath.row] objectForKey:@"context"] ];
+    }
+   
+    if(nil==[pushList[indexPath.row] objectForKey:@"tcreateTime"]){
+    time.text = @"";
+    }else{
+        NSString *ss =[NSString stringWithFormat:@"%@",[pushList[indexPath.row] objectForKey:@"tcreateTime"]];
+        NSTimeInterval ti=[ss doubleValue]/ 1000;
+        NSDate*detaildate=[NSDate dateWithTimeIntervalSince1970:ti];
+        NSDateFormatter*dateFormatter = [[NSDateFormatter alloc]init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        time.text = [dateFormatter stringFromDate:detaildate];
+    }
     
     
-    NSString *ss =[NSString stringWithFormat:@"%@",[pushList[indexPath.row] objectForKey:@"tcreateTime"]];
-    NSTimeInterval ti=[ss doubleValue]/ 1000;
-    NSDate*detaildate=[NSDate dateWithTimeIntervalSince1970:ti];
-    NSDateFormatter*dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    time.text = [dateFormatter stringFromDate:detaildate];
+   
     
     icoimg.image = [UIImage imageNamed:@"通知列表小标.png"];
     

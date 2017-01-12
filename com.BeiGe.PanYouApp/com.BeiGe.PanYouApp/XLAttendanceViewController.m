@@ -46,6 +46,7 @@
     [self wangluolianjie];
     [self anniupanduan];
     [self comeback];
+    self.title = @"考勤";
 }
 -(void)comeback{
     self.navigationController.navigationBar.tintColor=[UIColor whiteColor];

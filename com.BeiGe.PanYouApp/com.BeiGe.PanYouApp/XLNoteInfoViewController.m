@@ -94,21 +94,39 @@
         [_Image sd_setImageWithURL:url  placeholderImage:[UIImage imageNamed:@"icon_02_07.png"]];
      
     }
-    
+    if(nil==[pushTemplate objectForKey:@"context"]){
+    _neror.text =@"";
+    }else{
     _neror.text = [NSString stringWithFormat:@"%@",[pushTemplate objectForKey:@"context"]];
+    }
    // _neror.adjustsFontSizeToFitWidth =YES;
   //CGSize digestHeight = [XLSizeForLabel labelRectWithSize:CGSizeMake([[UIScreen mainScreen]bounds].size.width - 20, MAXFLOAT) LabelText:_neror.text Font:[UIFont systemFontOfSize:15.0f]];
     
     //_neror.frame = CGRectMake([[UIScreen mainScreen]bounds].origin.x,[[UIScreen mainScreen]bounds].origin.y,[[UIScreen mainScreen]bounds].size.width - 20,[digestHeight float]);
-
+    if(nil==[pushTemplate objectForKey:@"title"]){
+    _titlle.text =@"";
+    }else{
+     _titlle.text =[NSString stringWithFormat:@"%@",[pushTemplate objectForKey:@"title"]];
+    }
     
+    if(nil==[pushTemplate objectForKey:@"pushSrc"]){
+       _compary.text =@"";
+    }else{
+       _compary.text = [NSString stringWithFormat:@"来源:%@",[pushTemplate objectForKey:@"pushSrc"]];
+    }
     
-    _titlle.text =[NSString stringWithFormat:@"%@",[pushTemplate objectForKey:@"title"]];
+    if(nil==[pushTemplate objectForKey:@"createTime"]){
+       _shij.text =@"";
+    }else{
+        NSString *ss =[NSString stringWithFormat:@"%@",[pushTemplate objectForKey:@"createTime"]];
+        NSString *sss = [ss substringToIndex:10];
+        _shij.text =sss;
+    }
+    
+   
     //_neror.text = [NSString stringWithFormat:@"%@",[pushTemplate objectForKey:@"context"]];
-    _compary.text = [NSString stringWithFormat:@"来源:%@",[pushTemplate objectForKey:@"pushSrc"]];
-    NSString *ss =[NSString stringWithFormat:@"%@",[pushTemplate objectForKey:@"createTime"]];
-    NSString *sss = [ss substringToIndex:10];
-    _shij.text =sss;
+    
+  
     
     
     _textview.delegate = self;
@@ -238,7 +256,7 @@
     NSString *fangshi=@"/push/progress";
     NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"];
     NSString*remarks=[NSString string];
-    if ([str isEqual:@"3"]) {
+    if ([str isEqual:@"4"]) {
         remarks=_textview.text;
     }
     

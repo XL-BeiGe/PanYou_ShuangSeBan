@@ -30,6 +30,7 @@
     _reason.delegate = self;
     [self tobar];
     [self comeback];
+    self.title =@"请假";
 }
 
 -(void)comeback{

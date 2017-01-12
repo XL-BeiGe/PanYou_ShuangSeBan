@@ -27,6 +27,7 @@
 //    self.view.backgroundColor=[UIColor blackColor];
     [self delegate];
     [self comeback];
+     self.title =@"答题";
 }
 -(void)comeback{
     self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
@@ -83,15 +84,46 @@
     UILabel*datian   =[cell viewWithTag:6];
     UILabel*shengtian=[cell viewWithTag:7];
     //state: 已完成，未完成，进行中，待进行；
-    
-    
+    if(nil==[tempLateList[indexPath.section] objectForKey:@"examTemplateName"]){
+    taoti.text =@"";
+    }else{
     taoti.text=[NSString stringWithFormat:@"%@", [tempLateList[indexPath.section] objectForKey:@"examTemplateName"]];
+    }
     
-    daci.text =[NSString stringWithFormat:@"%@", [tempLateList[indexPath.section] objectForKey:@"answerTimes"]];
-    shengci.text=[NSString stringWithFormat:@"%@", [tempLateList[indexPath.section] objectForKey:@"surplusAnswerTimes"]];
-    cuoci.text=[NSString stringWithFormat:@"%@", [tempLateList[indexPath.section] objectForKey:@"errorAnswerTimes"]];
-    datian.text=[NSString stringWithFormat:@"%@", [tempLateList[indexPath.section] objectForKey:@"answerDay"]];
+    if(nil==[tempLateList[indexPath.section] objectForKey:@"answerTimes"]){
+      daci.text  =@"";
+    }else{
+     daci.text =[NSString stringWithFormat:@"%@", [tempLateList[indexPath.section] objectForKey:@"answerTimes"]];
+    }
+    
+    if(nil==[tempLateList[indexPath.section] objectForKey:@"surplusAnswerTimes"]){
+       shengci.text=@"";
+    }else{
+     shengci.text=[NSString stringWithFormat:@"%@", [tempLateList[indexPath.section] objectForKey:@"surplusAnswerTimes"]];
+    }
+    
+    if(nil==[tempLateList[indexPath.section] objectForKey:@"errorAnswerTimes"]){
+        cuoci.text=@"";
+    }else{
+      cuoci.text=[NSString stringWithFormat:@"%@", [tempLateList[indexPath.section] objectForKey:@"errorAnswerTimes"]];
+    }
+    
+    if(nil==[tempLateList[indexPath.section] objectForKey:@"answerDay"]){
+       datian.text=@"";
+    }else{
+     datian.text=[NSString stringWithFormat:@"%@", [tempLateList[indexPath.section] objectForKey:@"answerDay"]];
+    }
+    
+    
+    if(nil==[tempLateList[indexPath.section] objectForKey:@"surplusAnswerDay"]){
+    shengtian.text =@"";
+    }else{
     shengtian.text=[NSString stringWithFormat:@"%@", [tempLateList[indexPath.section] objectForKey:@"surplusAnswerDay"]];
+    }
+    
+   
+    
+    
     //是否可以回答, 1能，2 不能；
     NSString*isAnswser=[NSString stringWithFormat:@"%@", [tempLateList[indexPath.section] objectForKey:@"isAnswser"]];
     //是否是正常答题,  1是，2不是

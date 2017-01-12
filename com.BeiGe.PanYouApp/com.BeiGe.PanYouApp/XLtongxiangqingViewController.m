@@ -26,6 +26,7 @@
     // Do any additional setup after loading the view.
     [self delegate];
     [self comeback];
+    self.title =@"统计详情";
 }
 -(void)comeback{
     self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
