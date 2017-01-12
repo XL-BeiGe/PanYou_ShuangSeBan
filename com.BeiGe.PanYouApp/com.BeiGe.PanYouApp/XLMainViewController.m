@@ -16,6 +16,7 @@
 #import "WarningBox.h"
 #import "XL_WangLuo.h"
 #import "AppDelegate.h"
+#import "XL_Header.h"
 #import "XLHomeViewController.h"
 
 @interface XLMainViewController ()
@@ -87,6 +88,7 @@
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"网络盘点" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         //具体实现逻辑代码
         NSLog(@"网络盘点");
+        [[NSUserDefaults standardUserDefaults] setObject:QianWaiWangIP forKey:@"JuYuWang"];
         XLHomeViewController*xx;
         [self tiaoye:xx mingzi:@"home"];
         

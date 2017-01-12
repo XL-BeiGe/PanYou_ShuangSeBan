@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "WarningBox.h"
 #import "XL_WangLuo.h"
+#import "XL_Header.h"
 #import "AppDelegate.h"
 #import "XLxixixihahaViewController.h"
 @interface ViewController ()<UITextFieldDelegate>
@@ -112,7 +113,8 @@
                     [user setObject:_username.text forKey:@"Name"];
                     [user setObject:_password.text forKey:@"Password"];
                     //其他接口必须用
-                    [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data" ] objectForKey:@"accessToken"]] forKey:@"accesstoken"];
+                    [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data" ] objectForKey:@"accessToken"]] forKey:@"accessToken"];
+                    
                     //平台机器码
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"mac"]] forKey:@"Mac"];
                     //给两个平台的userId 赋值
@@ -122,6 +124,11 @@
                     [user setObject:[NSString stringWithFormat:@"%@",[[[responseObject objectForKey:@"data"] objectForKey:@"office"] objectForKey:@"id"]] forKey:@"mendian"];
                     //收银台需要显示的名称
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"name"]] forKey:@"CZname"];
+                    if(NULL ==[[NSUserDefaults standardUserDefaults] objectForKey:@"JuYuWang"]){
+                        [[NSUserDefaults standardUserDefaults] setObject:QianWaiWangIP forKey:@"JuYuWang"];
+                    }
+                    
+                    
                     //登陆成功后重新注册一次极光的标签和别名
                     [[AppDelegate appDelegate] method];
                     [self jumpHome];
