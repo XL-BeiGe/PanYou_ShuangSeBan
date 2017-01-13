@@ -236,15 +236,14 @@
 -(BOOL)textFieldDidChange :(UITextField *)theTextField
 {
     
-//    UITableViewCell *cell=(UITableViewCell*)[[theTextField superview] superview ];
-//    
-//    NSIndexPath *index=[self.tabel indexPathForCell:cell];
-//    
-//    UILabel*oo=[cell viewWithTag:index.row+600];
-//    
-//    oo.text=[NSString stringWithFormat:@"%d",[oo.text intValue]];
-    UILabel *oo=[[UILabel alloc] init];
-    oo.text=theTextField.text;
+    UITableViewCell *cell=(UITableViewCell*)[[theTextField superview] superview ];
+    
+    NSIndexPath *index=[self.tabel indexPathForCell:cell];
+    
+    UILabel*oo=[cell viewWithTag:index.row+600];
+    
+    oo.text=[NSString stringWithFormat:@"%d",[oo.text intValue]];
+    
     [self NumberLength:oo];
     NSString*qw=oo.text;
     
@@ -316,6 +315,7 @@
 -(void)customKeyboardTypeNumberView_changeTextFieldWithText:(UITextField *)string{
     if (string.tag>=600&&string.tag<700) {
         NSLog(@"麻辣隔壁    ");
+        [self textFieldDidChange:string];
 //        nasnflakjfkaslfmel
     }
 }
