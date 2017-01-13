@@ -134,7 +134,7 @@
         NSArray *list=[[responseObject objectForKey:@"data"] objectForKey:@"drugList"];
         
         if (list.count==0){
-         [WarningBox warningBoxModeIndeterminate:@"没有药品信息" andView:self.view];
+         [WarningBox warningBoxModeText:@"没有药品信息" andView:self.view];
         }else{
             for(int i=0;i<list.count;i++){
                 

@@ -25,13 +25,9 @@ CG_INLINE CGFloat GTFixFloat(CGFloat oldValue) {
 
 @implementation ZYCustomKeyboardTypeNumberView
 
-int i;
-UITextField*_textField;
+
 + (instancetype)customKeyboardViewWithServiceTextField:(UITextField *)textField Delegate:(id<ZYCustomKeyboardTypeNumberViewDelegate>)delegate{
-    if (textField.tag>600&&textField.tag<700) {
-        i=1;
-        _textField=textField;
-    }
+    
     ZYCustomKeyboardTypeNumberView *keyboardView = [[ZYCustomKeyboardTypeNumberView alloc] initWithFrame:CGRectMake(0, 0, mScreenWidth, GTFixFloat(mKeyboardHeight))];
     keyboardView.serviceTextField = textField;
     textField.inputView = keyboardView;
@@ -152,22 +148,20 @@ UITextField*_textField;
             self.textString = @"0";
             
         }
-        //        else if ([self.textString containsString:@"."]) {
-        //            return;
-        //        }
+        else if ([self.textString containsString:@"."]) {
+            return;
+        }
     }
     
     self.textString = [NSString stringWithFormat:@"%@%@",self.textString, button.titleLabel.text];
-    if (i==1) {
-        _textField.text = [NSString stringWithFormat:@"%@%@",self.textString, button.titleLabel.text];
-        XLShopCarViewController*shop=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"shopcar"];
-        if ([shop textFieldDidChange:_textField]) {
-            self.serviceTextField.text = self.textString;
-        };
-    }else
+    if (_serviceTextField.tag>=600&&_serviceTextField.tag<700) {
+        if (_textString.length >4) {
+            return;
+        }
+    }
     self.serviceTextField.text = self.textString;
     if ([self.delegate respondsToSelector:@selector(customKeyboardTypeNumberView_changeTextFieldWithText:)]) {
-        [self.delegate customKeyboardTypeNumberView_changeTextFieldWithText:self.textString];
+        [self.delegate customKeyboardTypeNumberView_changeTextFieldWithText:self.serviceTextField];
     }
 }
 /**
@@ -179,11 +173,6 @@ UITextField*_textField;
     NSInteger length = self.textString.length;
     if (length == 0) {
         self.textString = @"";
-        if (i==1) {
-            self.textString = @"1";
-            XLShopCarViewController*shop=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"shopcar"];
-            [shop textFieldDidChange:_textField];
-        }
         return;
     }
     
@@ -191,7 +180,7 @@ UITextField*_textField;
     self.textString = substring;
     self.serviceTextField.text = substring;
     if ([self.delegate respondsToSelector:@selector(customKeyboardTypeNumberView_changeTextFieldWithText:)]) {
-        [self.delegate customKeyboardTypeNumberView_changeTextFieldWithText:self.textString];
+        [self.delegate customKeyboardTypeNumberView_changeTextFieldWithText:self.serviceTextField];
     }
 }
 /**

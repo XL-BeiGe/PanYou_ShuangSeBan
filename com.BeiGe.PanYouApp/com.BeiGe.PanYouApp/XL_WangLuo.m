@@ -206,7 +206,7 @@
     NSString *UserID=[shuju objectForKey:@"userId"];//登陆不用传
     NSLog(@"%@",UserID);
     NSString *vaildToken=@"";//传空或非空
-    NSString *accessToken=[shuju objectForKey:@"accesstoken"];//登陆不用传
+    NSString *accessToken=[shuju objectForKey:@"accessToken"];//登陆不用传
     SBJsonWriter *writer=[[SBJsonWriter alloc] init];
     
     NSDictionary*BizParamStr=BizParamSt;

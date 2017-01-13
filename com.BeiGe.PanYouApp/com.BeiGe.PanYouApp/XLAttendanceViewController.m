@@ -155,7 +155,7 @@
     
     NSUserDefaults * shuju=[NSUserDefaults standardUserDefaults];//非登录接口用
     NSString *userID=[shuju objectForKey:@"userId"];//登陆不用传
-    NSString *accessToken=[shuju objectForKey:@"accesstoken"];//登陆不用传
+    NSString *accessToken=[shuju objectForKey:@"accessToken"];//登陆不用传
     
     
     

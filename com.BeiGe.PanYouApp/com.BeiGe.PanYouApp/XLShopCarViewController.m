@@ -313,13 +313,17 @@
 //键盘确定按钮
 -(void)customKeyboardTypeNumberView_confirmKeyClicked{
 }
-
+-(void)customKeyboardTypeNumberView_changeTextFieldWithText:(UITextField *)string{
+    if (string.tag>=600&&string.tag<700) {
+        NSLog(@"麻辣隔壁    ");
+//        nasnflakjfkaslfmel
+    }
+}
 //视图上移的方法
 - (void) animateTextField: (CGFloat) textField up: (BOOL) up
 {
     
     //设置视图上移的距离，单位像素
-    
     const int movementDistance = textField; // tweak as needed
     //三目运算，判定是否需要上移视图或者不变
     int movement = (up ? movementDistance : -movementDistance);

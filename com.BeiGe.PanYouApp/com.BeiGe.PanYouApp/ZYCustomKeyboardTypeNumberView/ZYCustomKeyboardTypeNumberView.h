@@ -18,7 +18,7 @@
 
 @optional
 /***  文本框文本的变化 */
-- (void)customKeyboardTypeNumberView_changeTextFieldWithText:(NSString *)string;
+- (void)customKeyboardTypeNumberView_changeTextFieldWithText:(UITextField *)string;
 /***  TODO 注销第一响应者 */
 - (void)customKeyboardTypeNumberView_resignTextFieldFirstResponder;
 @end
