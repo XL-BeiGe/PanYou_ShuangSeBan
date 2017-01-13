@@ -18,6 +18,8 @@
     UILabel *placeor;
     NSDictionary*pushTemplate;
     int caca;
+    CGFloat cha;
+    int pan;
 }
 @property (weak, nonatomic) IBOutlet UIButton *renwuanniu;
 @end
@@ -28,7 +30,7 @@
     [super viewDidLoad];
     NSLog(@"%@",_zhT);
     caca=0;
-  
+  [self registerForKeyboardNotifications];
     
     
     _backimg.hidden= YES;
@@ -230,27 +232,7 @@
     
 }
 
-//视图上移的方法
-- (void) animateTextField: (CGFloat) textField up: (BOOL) up
-{
-    
-    //设置视图上移的距离，单位像素
-    
-    const int movementDistance = textField; // tweak as needed
-    //三目运算，判定是否需要上移视图或者不变
-    int movement = (up ? movementDistance : -movementDistance);
-    //设置动画的名字
-    [UIView beginAnimations: @"Animation" context: nil];
-    //设置动画的开始移动位置
-    [UIView setAnimationBeginsFromCurrentState: YES];
-    //设置动画的间隔时间
-    [UIView setAnimationDuration: 0.20];
-    //设置视图移动的位移
-    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
-    //设置动画结束
-    [UIView commitAnimations];
-    
-}
+
 
 -(void)anniujiekou:(NSString*)str{
     NSString *fangshi=@"/push/progress";
@@ -288,17 +270,69 @@
 }
 -(void)navigation{
     self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
-    UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self  action:@selector(fanhui)];
+    UIBarButtonItem*left=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back@2x"] style:UIBarButtonItemStyleDone target:self action:@selector(fanhui)];
     [self.navigationItem setLeftBarButtonItem:left];
 }
 //返回到固定页
 -(void)fanhui{
-    //    XLNoteViewController *xln=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"note"];
-    //    for (UIViewController *controller in self.navigationController.viewControllers) {
-    //        if ([controller isKindOfClass:[xln class]]) {
-    //            [self.navigationController popToViewController:controller animated:YES];
-    //        }
-    //    }
+
     [self.navigationController popViewControllerAnimated:YES];
 }
+#pragma mark----页面弹起
+//视图上移的方法
+- (void) animateTextField: (CGFloat) textField up: (BOOL) up
+{
+    
+    //设置视图上移的距离，单位像素
+    
+    const int movementDistance = textField; // tweak as needed
+    //三目运算，判定是否需要上移视图或者不变
+    int movement = (up ? movementDistance : -movementDistance);
+    //设置动画的名字
+    [UIView beginAnimations: @"Animation" context: nil];
+    //设置动画的开始移动位置
+    [UIView setAnimationBeginsFromCurrentState: YES];
+    //设置动画的间隔时间
+    [UIView setAnimationDuration: 0.20];
+    //设置视图移动的位移
+    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
+    //设置动画结束
+    [UIView commitAnimations];
+    
+}
+#pragma  mark ---注册通知
+- (void) registerForKeyboardNotifications
+{
+    cha=0.0;
+    pan=0;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(qkeyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(qkeyboardWasHidden:) name:UIKeyboardWillHideNotification object:nil];
+}
+#pragma mark ----通知实现
+- (void) qkeyboardWasShown:(NSNotification *) notif
+{
+    if (pan==0) {
+        NSDictionary *info = [notif userInfo];
+        NSValue *value = [info objectForKey:UIKeyboardFrameBeginUserInfoKey];
+        CGSize keyboardSize = [value CGRectValue].size;
+        CGRect rect = CGRectMake(_renwuanniu.frame.origin.x, _renwuanniu.frame.origin.y, _renwuanniu.frame.size.width,_renwuanniu.frame.size.height);
+        CGFloat kongjian=rect.origin.y+rect.size.height;
+        CGFloat viewK=[UIScreen mainScreen].bounds.size.height;
+        CGFloat jianpan=keyboardSize.height;
+        if (viewK > kongjian+ jianpan) {
+            cha=0;
+        }else{
+            cha=viewK-kongjian-jianpan;
+        }
+        pan=1;
+        [self animateTextField:cha  up: YES];
+    }
+}
+- (void) qkeyboardWasHidden:(NSNotification *) notif
+{
+    pan=0;
+    [self animateTextField:cha up:NO];
+}
+
 @end

@@ -83,7 +83,7 @@
 }
 -(void)comeback{
     self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
-    UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self  action:@selector(fanhui)];
+    UIBarButtonItem*left=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back@2x"] style:UIBarButtonItemStyleDone target:self action:@selector(fanhui)];
     [self.navigationItem setLeftBarButtonItem:left];
 }
 -(void)fanhui{
@@ -107,7 +107,7 @@
     _sum.hidden = YES;
 }
 -(void)navagation{
-    self.title = @"收银台";
+    // self.title = @"收银台";
     UIButton *btn =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, 20)];
     [btn setImage:[UIImage imageNamed:@"downloads.png"] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(Download:) forControlEvents:UIControlEventTouchUpInside];
@@ -126,6 +126,7 @@
     NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userid", nil];
     [WarningBox warningBoxModeIndeterminate:@"药品信息下载中..." andView:self.view];
     [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
+        if ([[responseObject objectForKey:@"code"]isEqualToString:@"0000"]){
         NSLog(@"%@",responseObject);
         [WarningBox warningBoxHide:YES andView:self.view];
         
@@ -145,7 +146,7 @@
           [WarningBox warningBoxModeText:@"药品信息已下载 😊" andView:self.view];
         }
        
-     
+        }
     } failure:^(NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"网络错误,请重试!" andView:self.view];

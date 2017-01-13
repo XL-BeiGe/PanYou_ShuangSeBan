@@ -27,11 +27,11 @@
 //    self.view.backgroundColor=[UIColor blackColor];
     [self delegate];
     [self comeback];
-     self.title =@"答题";
+     self.title =@"每日答题";
 }
 -(void)comeback{
     self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
-    UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self  action:@selector(fanhui)];
+ UIBarButtonItem*left=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back@2x"] style:UIBarButtonItemStyleDone target:self action:@selector(fanhui)];
     [self.navigationItem setLeftBarButtonItem:left];
 }
 -(void)fanhui{
