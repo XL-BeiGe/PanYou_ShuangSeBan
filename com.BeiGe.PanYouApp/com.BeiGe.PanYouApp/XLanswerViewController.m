@@ -56,9 +56,9 @@
     duicuo=1;
     dianjicishu=0;
     NSLog(@"%@",_timuarr);
-    [self quxuanxiang:_timuarr[iii]];
-    
+    //以下两个的顺序千万不要反
     [self chuangjiantable];
+    [self quxuanxiang:_timuarr[iii]];
     [self comeback];
 }
 -(void)comeback{

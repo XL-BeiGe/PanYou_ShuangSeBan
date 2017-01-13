@@ -87,7 +87,7 @@
     NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userId",date,@"currentDate", nil];
     [WarningBox warningBoxModeIndeterminate:@"加载界面..." andView:self.view];
     [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
-        NSLog(@"%@",responseObject);
+//        NSLog(@"%@",responseObject);
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
             NSDictionary*data=[responseObject objectForKey:@"data"];
@@ -148,7 +148,10 @@
 }
 - (IBAction)Left:(id)sender {
     yue=[NSString stringWithFormat:@"%d",[yue intValue]-1];
-    if ([yue isEqualToString:@"0"]) {
+    if(yue.length<2){
+        yue=[NSString stringWithFormat:@"0%@",yue];
+    }
+    if ([yue isEqualToString:@"00"]) {
         yue=@"12";
         nian=[NSString stringWithFormat:@"%d",[nian intValue]-1];
     }
@@ -157,13 +160,15 @@
 }
 
 - (IBAction)Right:(id)sender {
-    
     if ([nian isEqualToString:ynian]&&[yue isEqualToString:yyue]) {
         
     }else{
         yue=[NSString stringWithFormat:@"%d",[yue intValue]+1];
+        if(yue.length<2){
+            yue=[NSString stringWithFormat:@"0%@",yue];
+        }
         if ([yue isEqualToString:@"13"]) {
-            yue=@"1";
+            yue=@"01";
             nian=[NSString stringWithFormat:@"%d",[nian intValue]+1];
         }
         _month.text=[NSString stringWithFormat:@"%@年%@月",nian,yue];
