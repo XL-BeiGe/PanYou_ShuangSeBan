@@ -109,7 +109,7 @@
 -(void)navagation{
     // self.title = @"收银台";
     UIButton *btn =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, 20)];
-    [btn setImage:[UIImage imageNamed:@"downloads.png"] forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:@"downloads@2x.png"] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(Download:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *right = [[UIBarButtonItem alloc]initWithCustomView:btn];
     self.navigationItem.rightBarButtonItem = right;
@@ -133,7 +133,7 @@
         [XL clearDatabase:db from:ChaXunBiaoMing];
         [XL clearDatabase:db from:@"gouwu"];
         NSArray *list=[[responseObject objectForKey:@"data"] objectForKey:@"drugList"];
-        
+            NSLog(@"%lu",(unsigned long)list.count);
         if (list.count==0){
          [WarningBox warningBoxModeText:@"没有药品信息" andView:self.view];
         }else{

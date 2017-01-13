@@ -882,7 +882,7 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jWX-9f-VAX">
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uec-Xh-ZnR">
@@ -890,16 +890,19 @@
                                             <action selector="FuTyp:" destination="4LV-bq-ELI" eventType="touchUpInside" id="5Tl-qP-awh"/>
                                         </connections>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="下拉.png" translatesAutoresizingMaskIntoConstraints="NO" id="gGM-eT-JRh"/>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="Uec-Xh-ZnR" firstAttribute="top" secondItem="N82-86-mCH" secondAttribute="top" id="1SG-8J-f0n"/>
                                     <constraint firstItem="jWX-9f-VAX" firstAttribute="centerY" secondItem="N82-86-mCH" secondAttribute="centerY" id="C8s-FY-wUr"/>
                                     <constraint firstAttribute="bottom" secondItem="Uec-Xh-ZnR" secondAttribute="bottom" id="DAg-vN-ZMq"/>
+                                    <constraint firstItem="gGM-eT-JRh" firstAttribute="leading" secondItem="jWX-9f-VAX" secondAttribute="trailing" constant="15" id="E2Y-yf-eZd"/>
+                                    <constraint firstAttribute="trailing" secondItem="gGM-eT-JRh" secondAttribute="trailing" constant="15" id="QVm-u8-FZA"/>
                                     <constraint firstAttribute="trailing" secondItem="Uec-Xh-ZnR" secondAttribute="trailing" id="R8T-YL-enB"/>
                                     <constraint firstAttribute="height" constant="50" id="UOg-Vv-JXA"/>
                                     <constraint firstItem="upz-n4-Of8" firstAttribute="centerY" secondItem="N82-86-mCH" secondAttribute="centerY" id="egy-94-rdy"/>
-                                    <constraint firstAttribute="trailing" secondItem="jWX-9f-VAX" secondAttribute="trailing" constant="15" id="nSh-hk-JID"/>
+                                    <constraint firstItem="gGM-eT-JRh" firstAttribute="centerY" secondItem="N82-86-mCH" secondAttribute="centerY" id="g2Y-Uc-c4l"/>
                                     <constraint firstItem="Uec-Xh-ZnR" firstAttribute="leading" secondItem="N82-86-mCH" secondAttribute="leading" id="tXO-xu-A3M"/>
                                     <constraint firstItem="upz-n4-Of8" firstAttribute="leading" secondItem="N82-86-mCH" secondAttribute="leading" constant="15" id="u1C-Fv-jsS"/>
                                 </constraints>
@@ -950,7 +953,7 @@
                                     <constraint firstAttribute="width" constant="60" id="gON-yg-Nmp"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="恭喜您结账成功" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gEc-uR-YQW">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="恭喜您结账成功！" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gEc-uR-YQW">
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -969,7 +972,7 @@
                                             <constraint firstAttribute="height" constant="1" id="Fwi-Xt-Mlj"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="总账金额" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Kf-Bc-40w">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="总账总额" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Kf-Bc-40w">
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -2530,20 +2533,12 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C70-8Y-7Br">
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bbE-6W-3EH">
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="4a8-l8-vqS"/>
-                                            <constraint firstAttribute="width" constant="30" id="leq-15-CIO"/>
-                                        </constraints>
                                         <state key="normal" image="left.png"/>
                                         <connections>
                                             <action selector="Left:" destination="OKN-PB-Ews" eventType="touchUpInside" id="cEd-9Y-e7x"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dul-e8-Wmu">
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="30" id="LyB-iA-TPd"/>
-                                            <constraint firstAttribute="height" constant="30" id="my5-TN-ioM"/>
-                                        </constraints>
                                         <state key="normal" image="right.png"/>
                                         <connections>
                                             <action selector="Right:" destination="OKN-PB-Ews" eventType="touchUpInside" id="awS-G9-kAO"/>
@@ -4415,10 +4410,11 @@
         <image name="jianpan_mr_35.png" width="190" height="154"/>
         <image name="jinru_03.png" width="18" height="24"/>
         <image name="lainxi.png" width="60" height="60"/>
-        <image name="left.png" width="100" height="100"/>
+        <image name="left.png" width="16" height="16"/>
         <image name="next.png" width="34" height="54"/>
-        <image name="right.png" width="100" height="100"/>
+        <image name="right.png" width="16" height="16"/>
         <image name="wifi.png" width="128" height="128"/>
+        <image name="下拉.png" width="16" height="16"/>
         <image name="助记码.png" width="190" height="154"/>
         <image name="助记码2.png" width="190" height="151"/>
         <image name="按钮.png" width="82" height="46"/>
