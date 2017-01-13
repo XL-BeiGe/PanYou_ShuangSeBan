@@ -16,7 +16,7 @@
 #import "XLMainViewController.h"
 #import "ZYCustomKeyboardTypeNumberView.h"
 
-#define gouwulei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"drugId",@"text",@"drugCount",@"text",@"drugPriceType",@"text",@"price",@"text",@"name",@"text",@"qtmd", nil]
+#define gouwulei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"drugId",@"text",@"drugCount",@"text",@"drugPriceType",@"text",@"salePrice",@"text",@"vipPrice",@"text",@"name",@"text",@"qtmd", nil]
 
 @interface XLCheckstandViewController ()<ZYCustomKeyboardTypeNumberViewDelegate>
 {
@@ -24,7 +24,7 @@
     FMDatabase *db;//数据库
     NSArray *findarr;
     NSString*type;
-  
+   int typ;
 }
 @end
 
@@ -32,7 +32,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+    _vipnum.delegate= self;
     [ZYCustomKeyboardTypeNumberView customKeyboardViewWithServiceTextField:_vipnum Delegate:self];
     _checkyp.delegate = self;
     _checkyp.keyboardType=UIKeyboardTypeAlphabet;
@@ -160,6 +160,9 @@
  
 }
 -(void)chazhao{
+    
+    NSLog(@"会员类型-----%@",type);
+    
     [_checkyp resignFirstResponder];
     NSArray *arr = [XL DataBase:db selectKeyTypes:ChaXunShiTiLei fromTable:ChaXunBiaoMing];
     if (arr.count==0){
@@ -206,19 +209,16 @@
   if([_number.text intValue]==0){
      [WarningBox warningBoxModeText:@"请添加药品数量" andView:self.view];
   }else{
-      int typ;
-    NSString *Ss;
+     
+   
      
     if([type isEqualToString:@"3"]){
         typ=1;//非会员
-        Ss = [NSString stringWithFormat:@"%@",[findarr[0]objectForKey:@"salePrice"]];
     }else if ([type isEqualToString:@"1"]||[type isEqualToString:@"2"]) {
         typ=2; //会员
-      
-        Ss = [NSString stringWithFormat:@"%@",[findarr[0]objectForKey:@"vipPrice"]];
-    }
-   
-
+}
+   NSString *sale = [NSString stringWithFormat:@"%@",[findarr[0]objectForKey:@"salePrice"]];
+    NSString *vip= [NSString stringWithFormat:@"%@",[findarr[0]objectForKey:@"vipPrice"]];
    NSString *sss= [NSString stringWithFormat:@"%@",[findarr[0] objectForKey:@"id"]];
    NSString *ssq= [NSString stringWithFormat:@"%@",[findarr[0] objectForKey:@"productName"]];
     NSString *tt=  [NSString stringWithFormat:@"%d",typ];
@@ -229,7 +229,7 @@
  
 
       
-   NSDictionary *dat = [NSDictionary dictionaryWithObjectsAndKeys:sss,@"drugId",tt,@"drugPriceType",ssr,@"drugCount",Ss,@"price",ssq,@"name",date2,@"qtmd", nil];
+   NSDictionary *dat = [NSDictionary dictionaryWithObjectsAndKeys:sss,@"drugId",tt,@"drugPriceType",ssr,@"drugCount",sale,@"salePrice",vip,@"vipPrice",ssq,@"name",date2,@"qtmd", nil];
 
       
    [XL DataBase:db insertKeyValues:dat intoTable:@"gouwu"];
@@ -264,7 +264,9 @@
     if (cis.count==0){
      [WarningBox warningBoxModeText:@"请添加药品" andView:self.view];
     }else{
-    
+        [self xiugaigouwu];//修改购物车数据的会员类型
+        
+        
     XLShopCarViewController *shop = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"shopcar"];
     shop.scno=_vipnum.text;
     
@@ -304,6 +306,16 @@
     }
     [self.view endEditing:YES];
 }
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    if(textField==_vipnum){
+        if ([_vipnum.text isEqualToString:@""]) {
+            type=@"3";
+        }else{
+            type=[self isMobileNumber:_vipnum.text]?@"2":@"1";
+
+        }
+    }
+}
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
   
@@ -318,6 +330,21 @@
     
     return YES;
 }
+
+-(void)xiugaigouwu{
+ 
+    NSArray  *shor = [XL DataBase:db selectKeyTypes:gouwulei fromTable:@"gouwu"];
+    NSDictionary *updic;
+    NSDictionary *udic;
+    NSString *typpp = [NSString stringWithFormat:@"%d",typ];
+    for (int i=0; i<shor.count; i++) {
+    updic = [NSDictionary dictionaryWithObjectsAndKeys:typpp,@"drugPriceType", nil];
+    udic = [NSDictionary dictionaryWithObjectsAndKeys:[shor[i] objectForKey:@"qtmd"],@"qtmd", nil];
+        [XL DataBase:db updateTable:@"gouwu" setKeyValues:updic whereCondition:udic];
+    }
+
+}
+
 
 
 

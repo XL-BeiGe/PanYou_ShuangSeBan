@@ -16,7 +16,8 @@
 #import "ZYCustomKeyboardTypeNumberView.h"
 #import "DSKyeboard.h"
 #import "XLCheckstandViewController.h"
-#define gouwulei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"drugId",@"text",@"drugCount",@"text",@"drugPriceType",@"text",@"price",@"text",@"name",@"text",@"qtmd", nil]
+#define gouwulei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"drugId",@"text",@"drugCount",@"text",@"drugPriceType",@"text",@"salePrice",@"text",@"vipPrice",@"text",@"name",@"text",@"qtmd", nil]
+
 @interface XLShopCarViewController ()<ZYCustomKeyboardTypeNumberViewDelegate>
 {
     XL_FMDB  *XL;//数据库调用者
@@ -84,7 +85,8 @@
     [self updatefmdb];
     shoparr = [XL DataBase:db selectKeyTypes:gouwulei fromTable:@"gouwu"];
     for (int i=0;i<shoparr.count;i++) {
-        [shoparr[i]removeObjectForKey:@"price"];
+        [shoparr[i]removeObjectForKey:@"vipPrice"];
+        [shoparr[i]removeObjectForKey:@"salePrice"];
         [shoparr[i]removeObjectForKey:@"name"];
         [shoparr[i]removeObjectForKey:@"qtmd"];
     }
@@ -156,7 +158,13 @@
     
     namete.text = [NSString stringWithFormat:@"%@",[shoparr[indexPath.row]objectForKey:@"name"]];
     //药品价格
-    pricete.text = [NSString stringWithFormat:@"%@",[shoparr[indexPath.row]objectForKey:@"price"]];
+    if([_sctype isEqualToString:@"3"]){
+     pricete.text = [NSString stringWithFormat:@"%@",[shoparr[indexPath.row]objectForKey:@"salePrice"]];
+    }else{
+     pricete.text = [NSString stringWithFormat:@"%@",[shoparr[indexPath.row]objectForKey:@"vipPrice"]];
+    }
+    
+   
     
     number.delegate = self;
     number.textAlignment = NSTextAlignmentCenter;
