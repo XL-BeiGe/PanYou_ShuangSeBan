@@ -146,7 +146,14 @@
         [WarningBox warningBoxModeText:@"请先盘点数据!" andView:self.view];
     }else{
         [WarningBox warningBoxModeIndeterminate:@"正在提交盘点结果...." andView:self.view];
-        NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:@"Mac"],@"mac",[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"],@"checker",[[NSUserDefaults standardUserDefaults]objectForKey:@"zhuangtai"],@"state",list,@"list",nil];
+        NSUserDefaults *isPandian=[NSUserDefaults standardUserDefaults];
+        NSDictionary*rucan;
+        if ([[isPandian objectForKey:@"isPandian"] isEqualToString:@"0"]) {
+            rucan=[NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:@"Mac"],@"mac",[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"],@"checker",[[NSUserDefaults standardUserDefaults]objectForKey:@"zhuangtai"],@"state",list,@"list",nil];
+        }else{
+            NSString * officeId=[isPandian objectForKey:@"mendian"];
+            rucan=[NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:@"Mac"],@"mac",[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"],@"checker",[[NSUserDefaults standardUserDefaults]objectForKey:@"zhuangtai"],@"state",list,@"list",officeId,@"officeId",nil];
+        }
         NSLog(@"上传的数据-------\n\n%lu",(unsigned long)list.count);
         NSLog(@"上传的数据-------\n\n%@",rucan);
         [self shangchuan:rucan];
@@ -168,9 +175,16 @@
 }
 -(void)tongbushuju{
     NSString *fangshi=@"/sys/products";
-    
+    NSUserDefaults *isPandian=[NSUserDefaults standardUserDefaults];
+    NSDictionary*rucan;
+    if ([[isPandian objectForKey:@"isPandian"] isEqualToString:@"0"]) {
+        rucan=nil;
+    }else{
+        NSString * officeId=[isPandian objectForKey:@"mendian"];
+        rucan=[NSDictionary dictionaryWithObjectsAndKeys:officeId,@"officeId", nil];
+    }
     //自己写的网络请求    请求外网地址
-    [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:nil type:Post success:^(id responseObject) {
+    [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         NSLog(@"%@",responseObject);
         @try {
             if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
@@ -208,7 +222,14 @@
 -(void)xiazaishuju:(NSString *)str :(NSString *)ss{
     [WarningBox warningBoxModeIndeterminate:[NSString stringWithFormat:@"正在同步%@",str] andView:self.view];
     NSString *fangshi=@"/sys/download";
-    NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"",@"checkId",ss,@"status", nil];
+    NSUserDefaults *isPandian=[NSUserDefaults standardUserDefaults];
+    NSDictionary*rucan;
+    if ([[isPandian objectForKey:@"isPandian"] isEqualToString:@"0"]) {
+        rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"",@"checkId",ss,@"status", nil];
+    }else{
+        NSString * officeId=[isPandian objectForKey:@"mendian"];
+        rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"",@"checkId",ss,@"status",officeId,@"officeId", nil];
+    }
     //自己写的网络请求    请求外网地址
     [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];

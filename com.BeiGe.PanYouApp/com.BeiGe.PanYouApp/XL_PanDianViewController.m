@@ -727,7 +727,7 @@
     }
     NSDictionary*tiao1=[NSDictionary dictionaryWithObjectsAndKeys:[arr[i] objectForKey:@"prodBatchNo"],@"prodBatchNo",[arr[i] objectForKey:@"barCode"],@"barCode", nil];
     NSArray*nbh=[ XL DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereConditions:tiao1];
-    NSDictionary*val1=[NSDictionary dictionaryWithObjectsAndKeys:[nbh[0] objectForKey:@"f1"],@"f1",shularr[i],@"checkNum",_ypgoods.text,@"newpos",dateString,@"checktime", nil];
+    NSDictionary*val1=[NSDictionary dictionaryWithObjectsAndKeys:shularr[i],@"checkNum",_ypgoods.text,@"newpos",dateString,@"checktime",[nbh[0] objectForKey:@"f1"],@"f1", nil];
 //    NSLog(@"%@",[nbh[0] objectForKey:@"f1"]);
     [XL DataBase:db updateTable:ShangChuanBiaoMing setKeyValues:val1 whereConditions:tiao1];
 //    NSLog(@"批号修改上传表数量***** %@--------%@",[arr[i] objectForKey:@"prodBatchNo"],shularr[i]);
@@ -834,7 +834,7 @@
             yuliuziduan2= [tianjiade objectForKey:@"f2"];
         }
         
-        dic =[NSDictionary dictionaryWithObjectsAndKeys:approvalNumber,@"approvalNumber",vipPrice,@"vipPrice",specification,@"specification",salePrice,@"salePrice",pycode,@"pycode",productName,@"productName",productCode,@"productCode",manufacturer,@"manufacturer",Id,@"id",costPrice,@"costPrice",barCode,@"barCode",prodBatchNo,@"prodBatchNo",checkNum,@"checkNum",oldpos,@"oldpos",@"",@"stockNum",@"1",@"status",@"",@"purchaseBatchNo",[[NSUserDefaults standardUserDefaults] objectForKey:@"checkId"],@"checkId",yuliuziduan1,@"f1",yuliuziduan2,@"f2", nil];
+        dic =[NSDictionary dictionaryWithObjectsAndKeys:approvalNumber,@"approvalNumber",vipPrice,@"vipPrice",specification,@"specification",salePrice,@"salePrice",pycode,@"pycode",productName,@"productName",productCode,@"productCode",manufacturer,@"manufacturer",Id,@"id",costPrice,@"costPrice",barCode,@"barCode",prodBatchNo,@"prodBatchNo",checkNum,@"checkNum",oldpos,@"oldpos",@"",@"stockNum",@"1",@"status",@"",@"purchaseBatchNo",[[NSUserDefaults standardUserDefaults] objectForKey:@"checkId"],@"checkId",yuliuziduan2,@"f2",yuliuziduan1,@"f1", nil];
         
         arr=[NSArray arrayWithObject:dic];
     }else{
@@ -920,7 +920,7 @@
         }
         
         if (tjphpanduan==1){
-            dic =[NSDictionary dictionaryWithObjectsAndKeys:approvalNumber,@"approvalNumber",vipPrice,@"vipPrice",salePrice,@"salePrice",pycode,@"pycode",purchaseBatchNo,@"purchaseBatchNo",productName,@"productName",productCode,@"productCode",oldpos,@"oldpos",manufacturer,@"manufacturer",Id,@"id",costPrice,@"costPrice",checkId,@"checkId",barCode,@"barCode",pi1.text,@"prodBatchNo",shu1.text,@"checkNum", stockNum,@"stockNum",@"2",@"status",specification,@"specification",yuliuziduan1,@"f1",yuliuziduan2,@"f2",nil];
+            dic =[NSDictionary dictionaryWithObjectsAndKeys:approvalNumber,@"approvalNumber",vipPrice,@"vipPrice",salePrice,@"salePrice",pycode,@"pycode",purchaseBatchNo,@"purchaseBatchNo",productName,@"productName",productCode,@"productCode",oldpos,@"oldpos",manufacturer,@"manufacturer",Id,@"id",costPrice,@"costPrice",checkId,@"checkId",barCode,@"barCode",pi1.text,@"prodBatchNo",shu1.text,@"checkNum", stockNum,@"stockNum",@"2",@"status",specification,@"specification",yuliuziduan2,@"f2",yuliuziduan1,@"f1", nil];
         }
     }
 //    NSLog(@"插入到下载表的数据 -*-*-*-*-*-*-*-*-*-*%@",dic);
@@ -1004,7 +1004,7 @@
             yuliuziduan2= [nbh[0] objectForKey:@"f2"];
         }
 //        NSLog(@"上传插入1-－－－－%@,%@",yuliuziduan1,yuliuziduan2);
-        scdic =[NSDictionary dictionaryWithObjectsAndKeys:barCode,@"barCode",manufacturer,@"manufacturer",pycode,@"pycode",prodBatchNo,@"prodBatchNo",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",huoweihao,@"newpos",dateString,@"checktime",_onelabel.text,@"checkNum",@"1",@"status",[[NSUserDefaults standardUserDefaults] objectForKey:@"checkId"],@"checkId",yuliuziduan1,@"f1",yuliuziduan2,@"f2", nil];
+        scdic =[NSDictionary dictionaryWithObjectsAndKeys:barCode,@"barCode",manufacturer,@"manufacturer",pycode,@"pycode",prodBatchNo,@"prodBatchNo",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",huoweihao,@"newpos",dateString,@"checktime",_onelabel.text,@"checkNum",@"1",@"status",[[NSUserDefaults standardUserDefaults] objectForKey:@"checkId"],@"checkId",yuliuziduan2,@"f2",yuliuziduan1,@"f1", nil];
         
     }
     else{
@@ -1080,10 +1080,10 @@
             //            }
             
 //            NSLog(@"添加批号时的status＝＝＝＝  %@",status);
-            scdic =[NSDictionary dictionaryWithObjectsAndKeys:status,@"status",barCode,@"barCode",checkId,@"checkId",manufacturer,@"manufacturer",pycode,@"pycode",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",_ypgoods.text,@"newpos",dateString,@"checktime",shularr[i],@"checkNum",prodBatchNo,@"prodBatchNo",yuliuziduan1,@"f1",yuliuziduan2,@"f2", nil];
+            scdic =[NSDictionary dictionaryWithObjectsAndKeys:status,@"status",barCode,@"barCode",checkId,@"checkId",manufacturer,@"manufacturer",pycode,@"pycode",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",_ypgoods.text,@"newpos",dateString,@"checktime",shularr[i],@"checkNum",prodBatchNo,@"prodBatchNo",yuliuziduan2,@"f2",yuliuziduan1,@"f1", nil];
         }else{
 //            NSLog(@"不添加时候的  status   ＝＝＝＝＝   %@",status);
-            scdic =[NSDictionary dictionaryWithObjectsAndKeys:status,@"status",barCode,@"barCode",checkId,@"checkId",manufacturer,@"manufacturer",pycode,@"pycode",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",_ypgoods.text,@"newpos",dateString,@"checktime",shularr[i],@"checkNum",prodBatchNo,@"prodBatchNo",yuliuziduan1,@"f1",yuliuziduan2,@"f2", nil];
+            scdic =[NSDictionary dictionaryWithObjectsAndKeys:status,@"status",barCode,@"barCode",checkId,@"checkId",manufacturer,@"manufacturer",pycode,@"pycode",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",_ypgoods.text,@"newpos",dateString,@"checktime",shularr[i],@"checkNum",prodBatchNo,@"prodBatchNo",yuliuziduan2,@"f2",yuliuziduan1,@"f1", nil];
             
         }
     }
