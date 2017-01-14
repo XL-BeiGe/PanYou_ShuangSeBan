@@ -181,9 +181,24 @@
 }
 
 -(void)xianshi{
-    _ypname.text =[NSString stringWithFormat:@"%@",[findarr[0] objectForKey:@"productName"]] ;
+    if(nil==[findarr[0] objectForKey:@"productName"]){
+    _ypname.text =@"";
+    }else{
+    _ypname.text =[NSString stringWithFormat:@"%@",[findarr[0] objectForKey:@"productName"]];
+    }
+    if(nil==[findarr[0] objectForKey:@"manufacturer"]){
+    _sccomp.text =@"";
+    }else{
     _sccomp.text = [NSString stringWithFormat:@"%@",[findarr[0] objectForKey:@"manufacturer"]];
-    _scday.text = [NSString stringWithFormat:@"%@",[findarr[0] objectForKey:@"approvalNumber"]];
+    }
+    
+    if(nil==[findarr[0] objectForKey:@"approvalNumber"]){
+    _scday.text =@"";
+    }else{
+    _scday.text =[NSString stringWithFormat:@"%@",[findarr[0] objectForKey:@"approvalNumber"]];
+    }
+    
+    
     
     _number.text =[NSString stringWithFormat:@"1"];
     _subtract.hidden = NO;
@@ -216,20 +231,20 @@
         typ=1;//非会员
     }else if ([type isEqualToString:@"1"]||[type isEqualToString:@"2"]) {
         typ=2; //会员
-}
+     }
    NSString *sale = [NSString stringWithFormat:@"%@",[findarr[0]objectForKey:@"salePrice"]];
     NSString *vip= [NSString stringWithFormat:@"%@",[findarr[0]objectForKey:@"vipPrice"]];
-   NSString *sss= [NSString stringWithFormat:@"%@",[findarr[0] objectForKey:@"id"]];
-   NSString *ssq= [NSString stringWithFormat:@"%@",[findarr[0] objectForKey:@"productName"]];
-    NSString *tt=  [NSString stringWithFormat:@"%d",typ];
-   NSString *ssr= [NSString stringWithFormat:@"%@",_number.text];
+   NSString *ypid= [NSString stringWithFormat:@"%@",[findarr[0] objectForKey:@"id"]];
+   NSString *ypnam= [NSString stringWithFormat:@"%@",[findarr[0] objectForKey:@"productName"]];
+    NSString *saltype=  [NSString stringWithFormat:@"%d",typ];
+   NSString *number= [NSString stringWithFormat:@"%@",_number.text];
       
     NSDate *senddate = [NSDate date];
   NSString *date2 = [NSString stringWithFormat:@"%ld", (long)[senddate timeIntervalSince1970]];
  
 
       
-   NSDictionary *dat = [NSDictionary dictionaryWithObjectsAndKeys:sss,@"drugId",tt,@"drugPriceType",ssr,@"drugCount",sale,@"salePrice",vip,@"vipPrice",ssq,@"name",date2,@"qtmd", nil];
+   NSDictionary *dat = [NSDictionary dictionaryWithObjectsAndKeys:ypid,@"drugId",saltype,@"drugPriceType",number,@"drugCount",sale,@"salePrice",vip,@"vipPrice",ypnam,@"name",date2,@"qtmd", nil];
 
       
    [XL DataBase:db insertKeyValues:dat intoTable:@"gouwu"];
@@ -264,6 +279,12 @@
     if (cis.count==0){
      [WarningBox warningBoxModeText:@"请添加药品" andView:self.view];
     }else{
+        
+        if([type isEqualToString:@"3"]){
+            typ=1;//非会员
+        }else if ([type isEqualToString:@"1"]||[type isEqualToString:@"2"]) {
+            typ=2; //会员
+        }
         [self xiugaigouwu];//修改购物车数据的会员类型
         
         
