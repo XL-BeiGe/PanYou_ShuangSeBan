@@ -122,7 +122,7 @@
 }
 -(void)shangchuanshujujiexi{
     NSArray *list1 = [XL DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing];
-    NSLog(@"上传表里的数据%@",list1);
+//    NSLog(@"上传表里的数据%@",list1);
     NSMutableArray*list = [[NSMutableArray alloc] init];
     for (NSDictionary*dd in list1) {
         if (![[dd objectForKey:@"checkNum"] isEqualToString:@"0"]) {
@@ -154,8 +154,8 @@
             NSString * officeId=[isPandian objectForKey:@"mendian"];
             rucan=[NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:@"Mac"],@"mac",[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"],@"checker",[[NSUserDefaults standardUserDefaults]objectForKey:@"zhuangtai"],@"state",list,@"list",officeId,@"officeId",nil];
         }
-        NSLog(@"上传的数据-------\n\n%lu",(unsigned long)list.count);
-        NSLog(@"上传的数据-------\n\n%@",rucan);
+//        NSLog(@"上传的数据-------\n\n%lu",(unsigned long)list.count);
+//        NSLog(@"上传的数据-------\n\n%@",rucan);
         [self shangchuan:rucan];
     }
     
@@ -185,12 +185,12 @@
     }
     //自己写的网络请求    请求外网地址
     [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
-        NSLog(@"%@",responseObject);
+//        NSLog(@"%@",responseObject);
         @try {
             if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
                 NSArray *list=[[responseObject objectForKey:@"data"] objectForKey:@"list"];
-                NSLog(@"同步数据-*-*-*-\n\n\n%lu",(unsigned long)list.count);
-                NSLog(@"同步数据-*-*-*-\n\n\n%@",list);
+//                NSLog(@"同步数据-*-*-*-\n\n\n%lu",(unsigned long)list.count);
+//                NSLog(@"同步数据-*-*-*-\n\n\n%@",list);
                 //清空数据
                 [XL clearDatabase:db from:TongBuBiaoMing];
                 
@@ -202,6 +202,10 @@
                     }
                     NSString  *code = [NSString stringWithFormat:@"%@,%@",barcode,[list[i]objectForKey:@"productCode"]];
                     NSMutableDictionary * dd=[NSMutableDictionary dictionaryWithDictionary:list[i]];
+                    if (NULL != [dd objectForKey:@"office"]) {
+                        [dd removeObjectForKey:@"office"];
+                    }
+                    
                     [dd setObject:[NSString stringWithFormat:@"%@", code ] forKey:@"barCode"];
                     [XL DataBase:db insertKeyValues:dd intoTable:TongBuBiaoMing];
                     
@@ -234,7 +238,7 @@
     [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
         @try {
-            NSLog(@"%@",responseObject);
+//            NSLog(@"%@",responseObject);
             if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
                 NSDictionary*dataa=[responseObject objectForKey:@"data"];
                 
@@ -246,12 +250,12 @@
                 }
                 
                 NSMutableArray *list=[dataa objectForKey:@"list"];
-                NSLog(@"\n\n下载数据*******\n\n%lu",(unsigned long)list.count);
-                NSLog(@"\n\n下载数据*******\n\n%@",list);
+//                NSLog(@"\n\n下载数据*******\n\n%lu",(unsigned long)list.count);
+//                NSLog(@"\n\n下载数据*******\n\n%@",list);
                 if(list.count == 0){
                     [WarningBox warningBoxModeText:@"后台数据为空，请联系管理员添加数据......" andView:self.view];
                 }else{
-                    [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@同步成功!",str] andView:self.view];
+                    [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@同步成功%lu条数据!",str,(unsigned long)list.count] andView:self.view];
                     [[NSUserDefaults standardUserDefaults] setObject:[list[0] objectForKey:@"checkId"] forKey:@"checkId"];
                     [XL clearDatabase:db from:ShangChuanBiaoMing];
                     [XL clearDatabase:db from:XiaZaiBiaoMing];

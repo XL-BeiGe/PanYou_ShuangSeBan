@@ -89,7 +89,7 @@
         //具体实现逻辑代码
         NSLog(@"网络盘点");
         [[NSUserDefaults standardUserDefaults] setObject:QianWaiWangIP forKey:@"JuYuWang"];
-        [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"isPandian"];
+        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"isPandian"];
         XLHomeViewController*xx;
         [self tiaoye:xx mingzi:@"home"];
     }];

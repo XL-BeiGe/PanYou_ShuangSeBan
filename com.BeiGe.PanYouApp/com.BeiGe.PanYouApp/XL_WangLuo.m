@@ -32,8 +32,8 @@
     
     NSString *Rucan=[writer stringWithObject:BizParamStr];
     NSDictionary *ChuanCan=[NSDictionary dictionaryWithObjectsAndKeys:Appkey,@"appkey",UserID,@"userid",vaildToken,@"vaildToken",accessToken,@"accessToken",Rucan,@"params", nil];
-    NSLog(@"-*-*-*-*-%@",Url);
-    NSLog(@"\n－－－－－请求－－－－－\n%@",ChuanCan);
+//    NSLog(@"-*-*-*-*-%@",Url);
+//    NSLog(@"\n－－－－－请求－－－－－\n%@",ChuanCan);
     AFHTTPSessionManager *manager=[AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
     
@@ -84,9 +84,9 @@
     NSString *BizMethod=BizMetho;
     
     NSString *Url=[NSString stringWithFormat:@"%@%@",JuYuwang,BizMethod];
-    NSLog(@"\n\n*********\n\n%@",Url);
+//    NSLog(@"\n\n*********\n\n%@",Url);
     NSString *UserID=[shuju objectForKey:@"UserID"];//登陆不用传
-    NSLog(@"%@",UserID);
+//    NSLog(@"%@",UserID);
     NSString *vaildToken=@"";//传空或非空
     NSString *accessToken=[shuju objectForKey:@"accessToken"];//登陆不用传
     SBJsonWriter *writer=[[SBJsonWriter alloc] init];
@@ -95,7 +95,7 @@
     
     NSString *Rucan=[writer stringWithObject:BizParamStr];
     NSDictionary *ChuanCan=[NSDictionary dictionaryWithObjectsAndKeys:Appkey,@"appkey",vaildToken,@"vaildToken",UserID,@"userid",accessToken,@"accessToken",Rucan,@"params", nil];
-    NSLog(@"%@",ChuanCan);
+//    NSLog(@"%@",ChuanCan);
     AFHTTPSessionManager *manager=[AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
     
@@ -158,8 +158,8 @@
     
     NSString *Rucan=[writer stringWithObject:BizParamStr];
     NSDictionary *ChuanCan=[NSDictionary dictionaryWithObjectsAndKeys:Appkey,@"appkey",UserID,@"userid",vaildToken,@"vaildToken",accessToken,@"accessToken",Rucan,@"params", nil];
-    NSLog(@"-*-*-*-*-%@",Url);
-    NSLog(@"\n－－－－－请求－－－－－\n%@",ChuanCan);
+//    NSLog(@"-*-*-*-*-%@",Url);
+//    NSLog(@"\n－－－－－请求－－－－－\n%@",ChuanCan);
     AFHTTPSessionManager *manager=[AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
     
@@ -209,9 +209,9 @@
     NSString *BizMethod=BizMetho;
     
     NSString *Url=[NSString stringWithFormat:@"%@%@",QianWaiwang,BizMethod];
-    NSLog(@"\n\n*********\n\n%@",Url);
+//    NSLog(@"\n\n*********\n\n%@",Url);
     NSString *UserID=[shuju objectForKey:@"userId"];//登陆不用传
-    NSLog(@"%@",UserID);
+//    NSLog(@"%@",UserID);
     NSString *vaildToken=@"";//传空或非空
     NSString *accessToken=[shuju objectForKey:@"accesstoken"];//登陆不用传
     SBJsonWriter *writer=[[SBJsonWriter alloc] init];
@@ -220,7 +220,7 @@
     
     NSString *Rucan=[writer stringWithObject:BizParamStr];
     NSDictionary *ChuanCan=[NSDictionary dictionaryWithObjectsAndKeys:Appkey,@"appkey",vaildToken,@"vaildToken",UserID,@"userid",accessToken,@"accessToken",Rucan,@"params", nil];
-    NSLog(@"%@",ChuanCan);
+//    NSLog(@"%@",ChuanCan);
     AFHTTPSessionManager *manager=[AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
     
@@ -270,7 +270,7 @@
     NSString *BizMethod=BizMetho;
     
     NSString *Url=[NSString stringWithFormat:@"%@%@",JuYuwang,BizMethod];
-    NSLog(@"\n\n*********\n\n%@",Url);
+//    NSLog(@"\n\n*********\n\n%@",Url);
     
     
    
