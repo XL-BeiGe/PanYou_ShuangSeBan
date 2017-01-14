@@ -13,6 +13,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *day;//年月日
 @property (weak, nonatomic) IBOutlet UIButton *qiandao;
 @property (weak, nonatomic) IBOutlet UIButton *qiantui;
+@property (weak, nonatomic) IBOutlet UILabel *shangban;
+@property (weak, nonatomic) IBOutlet UILabel *xiaban;
 
 
 - (IBAction)QianDao:(id)sender;

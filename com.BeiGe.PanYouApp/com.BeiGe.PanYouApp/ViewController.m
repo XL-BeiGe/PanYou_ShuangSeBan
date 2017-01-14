@@ -21,9 +21,9 @@
 
 @implementation ViewController
 -(void)viewWillAppear:(BOOL)animated{
-    if (NULL !=[[NSUserDefaults standardUserDefaults] objectForKey:@"Name"]) {
-        _username.text=[[NSUserDefaults standardUserDefaults] objectForKey:@"Name"];
-        _password.text=[[NSUserDefaults standardUserDefaults] objectForKey:@"Password"];
+    if (NULL !=[[NSUserDefaults standardUserDefaults] objectForKey:@"name"]) {
+        _username.text=[[NSUserDefaults standardUserDefaults] objectForKey:@"name"];
+        _password.text=[[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
     }
 }
 
@@ -110,13 +110,14 @@
                 if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
                     NSUserDefaults *user=[NSUserDefaults standardUserDefaults];
                     //账号密码
-                    [user setObject:_username.text forKey:@"Name"];
-                    [user setObject:_password.text forKey:@"Password"];
+                    [user setObject:_username.text forKey:@"name"];
+                    [user setObject:_password.text forKey:@"password"];
                     //其他接口必须用
+                    [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data" ] objectForKey:@"accessToken"]] forKey:@"accesstoken"];
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data" ] objectForKey:@"accessToken"]] forKey:@"accessToken"];
-                    
                     //平台机器码
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"mac"]] forKey:@"Mac"];
+                    [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"mac"]] forKey:@"mac"];
                     //给两个平台的userId 赋值
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"userId"]] forKey:@"userId"];
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"userId"]] forKey:@"UserID"];

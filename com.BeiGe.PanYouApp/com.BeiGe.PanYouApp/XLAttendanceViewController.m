@@ -17,10 +17,10 @@
 #import "XLMainViewController.h"
 @interface XLAttendanceViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate,CLLocationManagerDelegate>
 {
-    //签到显示标识
-    int dao;
-    //签退显示标识
-    int tui;
+    //班次
+    NSArray*banci;
+    //规则ID
+    NSString* ruleId;
     //点击签到／签退判断
     int nage;
     //经纬度
@@ -39,19 +39,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    dao=2;
-    tui=2;
+    
     nage=99;
     [self riqixianshi];
     [self wangluolianjie];
     [self anniupanduan];
     [self comeback];
+    [self anniupanduan];
     self.title = @"考勤";
 }
 -(void)comeback{
     self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
     UIBarButtonItem*left=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back@2x"] style:UIBarButtonItemStyleDone target:self action:@selector(fanhui)];
+    UIBarButtonItem*right=[[UIBarButtonItem alloc]initWithTitle:@"请选择班次" style:UIBarButtonItemStyleDone target:self action:@selector(tan)];
+    [self.navigationItem setRightBarButtonItem:right];
     [self.navigationItem setLeftBarButtonItem:left];
+}
+-(void)bianyou:(NSString*)string{
+    UIBarButtonItem*right=[[UIBarButtonItem alloc]initWithTitle:string style:UIBarButtonItemStyleDone target:self action:@selector(tan)];
+    [self.navigationItem setRightBarButtonItem:right];
 }
 -(void)fanhui{
     XLMainViewController *xln=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xlmain"];
@@ -63,63 +69,88 @@
 }
 -(void)anniupanduan{
     //需要在接口返回时判断
-    if (dao!=1) {
-        //灰色图标＋不可点击；ff9900
-        _qiandao.backgroundColor=[UIColor lightGrayColor];
-        _qiandao.userInteractionEnabled=NO;
-    }else{
-        //橙色图标＋可点击 black
-        _qiandao.backgroundColor=[UIColor colorWithHexString:@"ff9900"];
-        _qiandao.userInteractionEnabled=YES;
-    }
-    if (tui!=1) {
-        //灰色图标＋不可点击；
-        _qiantui.backgroundColor=[UIColor lightGrayColor];
-        _qiantui.userInteractionEnabled=NO;
-    }else{
-        //橙色图标＋可点击
-        _qiantui.backgroundColor=[UIColor colorWithHexString:@"ff9900"];
-        _qiantui.userInteractionEnabled=YES;
-    }
-
+    //    if (dao!=1) {
+    //        //灰色图标＋不可点击；ff9900
+    //        _qiandao.backgroundColor=[UIColor lightGrayColor];
+    //        _qiandao.userInteractionEnabled=NO;
+    //    }else{
+    //橙色图标＋可点击 black
+    _qiandao.backgroundColor=[UIColor colorWithHexString:@"ff9900"];
+    _qiandao.userInteractionEnabled=YES;
+    //    }
+    //    if (tui!=1) {
+    //        //灰色图标＋不可点击；
+    //        _qiantui.backgroundColor=[UIColor lightGrayColor];
+    //        _qiantui.userInteractionEnabled=NO;
+    //    }else{
+    //橙色图标＋可点击
+    _qiantui.backgroundColor=[UIColor colorWithHexString:@"ff9900"];
+    _qiantui.userInteractionEnabled=YES;
+    //    }
+    
 }
 
 -(void)wangluolianjie{
     [WarningBox warningBoxModeIndeterminate:[NSString stringWithFormat:@""] andView:self.view];
     NSString *fangshi=@"/attendance/index";
     NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"];
-    NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userId", nil];
+    NSString* officeId=[[NSUserDefaults standardUserDefaults] objectForKey:@"mendian"];
+    NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userId",officeId,@"officeId", nil];
     //自己写的网络请求    请求外网地址
     
     [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
             NSDictionary* data=[responseObject objectForKey:@"data"];
-            dao=[[data objectForKey:@"isSign"] intValue];
-            tui=[[data objectForKey:@"isSignOut"] intValue];
-            NSLog(@"%d----%d",dao,tui);
+            banci=[data objectForKey:@"attendanceRules"];
+            
             [self anniupanduan];
         }
         else if([[responseObject objectForKey:@"code"]isEqual:@"1007"]){
-//            [WarningBox warningBoxModeText:@"请重新进入该页面！" andView:self.view];
+            //            [WarningBox warningBoxModeText:@"请重新进入该页面！" andView:self.view];
         }else if([[responseObject objectForKey:@"code"]isEqual:@"9999"]){
             //账号在其他手机登录，请重新登录。
         }
-
+        
         
     } failure:^(NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
     }];
-
+    
+}
+-(void)tan{
+    UIAlertController * alert = [[UIAlertController alloc] init];
+    for (int i = 0; i < banci.count; i++) {
+        NSUInteger index=i;
+        NSString * biaotou=[banci[index]objectForKey:@"ruleName"];
+        UIAlertAction * action = [UIAlertAction actionWithTitle:biaotou style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            _shangban.text=[banci[index] objectForKey:@"ruleBeginTime"];
+            _xiaban.text=[banci[index] objectForKey:@"ruleEndTime"];
+            ruleId=[banci[index] objectForKey:@"id"];
+            [self bianyou:biaotou];
+        }];
+        [alert addAction:action];
+    }
+    UIAlertAction * cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:cancelAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 - (IBAction)QianDao:(id)sender {
-    [self xiangji];
-    nage=1;
+    if (([_shangban.text isEqual:@""]||[_xiaban.text isEqual:@""])) {
+        [WarningBox warningBoxModeText:@"请先选择班次" andView:self.view];
+    }else{
+        [self xiangji];
+        nage=1;
+    }
 }
 
 - (IBAction)QianTui:(id)sender {
-    [self xiangji];
-    nage=2;
+    if (([_shangban.text isEqual:@""]||[_xiaban.text isEqual:@""])) {
+        [WarningBox warningBoxModeText:@"请先选择班次" andView:self.view];
+    }else{
+        [self xiangji];
+        nage=2;
+    }
 }
 
 - (IBAction)WaiQin:(id)sender {
@@ -143,8 +174,8 @@
 }
 //签到签退接口；
 -(void)qiandao_tui:(int)haha{
-//    方法名：attendance/sign
-//入参为：(用户ID):@"userId" (jing,wei):@"Lonlat"(_image):@"backgroundImage"(haha):@"type"
+    //    方法名：attendance/sign
+    //入参为：(用户ID):@"userId" (jing,wei):@"Lonlat"(_image):@"backgroundImage"(haha):@"type"
     
     NSString *fangshi=@"/attendance/sign";
     NSString *jingwei=[NSString stringWithFormat:@"%@,%@",jing,wei];
@@ -155,11 +186,12 @@
     
     NSUserDefaults * shuju=[NSUserDefaults standardUserDefaults];//非登录接口用
     NSString *userID=[shuju objectForKey:@"userId"];//登陆不用传
-    NSString *accessToken=[shuju objectForKey:@"accessToken"];//登陆不用传
+    NSString *accessToken=[shuju objectForKey:@"accesstoken"];//登陆不用传
     
+    NSString *ruleBeginTime = _shangban.text;
+    NSString *ruleEndTime   = _xiaban.text;
     
-    
-    NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:accessToken,@"accessToken",userID,@"userid",UserID,@"userId",jingwei,@"Lonlat",type,@"type",LonlatPlace,@"LonlatPlace", nil];
+    NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:accessToken,@"accessToken",userID,@"userid",UserID,@"userId",jingwei,@"Lonlat",type,@"type",LonlatPlace,@"LonlatPlace",ruleBeginTime,@"ruleBeginTime",ruleEndTime,@"ruleEndTime",ruleId,@"ruleId", nil];
     NSLog(@"%@",rucan);
     //自己写的网络请求    请求外网地址
     NSString *str;
@@ -214,7 +246,7 @@
     //根据经纬度反向地理编译出地址信息
     [geocoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray *array, NSError *error){
         
-
+        
         if (array.count > 0){
             
             
@@ -222,24 +254,24 @@
             
             LonlatPlace=[placemark.addressDictionary objectForKey:@"FormattedAddressLines"][0];
             
-//
-//            sheng=[NSString stringWithFormat:@"%@",[placemark.addressDictionary objectForKey:@"State"]];
-//            
-//            
-//            //获取城市
-//            NSString *city = placemark.locality;
-//            
-//            if (city) {
-//                //四大直辖市的城市信息无法通过locality获得，只能通过获取省份的方法来获得（如果city为空，则可知为直辖市）
-//                city = placemark.administrativeArea;
-//                
-//                //市
-//                
-//                shi=[NSString stringWithFormat:@"%@",placemark.locality];
-//                //区
-//                qu=[NSString stringWithFormat:@"%@",placemark.subLocality];
-//            }
-        
+            //
+            //            sheng=[NSString stringWithFormat:@"%@",[placemark.addressDictionary objectForKey:@"State"]];
+            //
+            //
+            //            //获取城市
+            //            NSString *city = placemark.locality;
+            //
+            //            if (city) {
+            //                //四大直辖市的城市信息无法通过locality获得，只能通过获取省份的方法来获得（如果city为空，则可知为直辖市）
+            //                city = placemark.administrativeArea;
+            //
+            //                //市
+            //
+            //                shi=[NSString stringWithFormat:@"%@",placemark.locality];
+            //                //区
+            //                qu=[NSString stringWithFormat:@"%@",placemark.subLocality];
+            //            }
+            
         }
         else if (error == nil && [array count] == 0)
         {

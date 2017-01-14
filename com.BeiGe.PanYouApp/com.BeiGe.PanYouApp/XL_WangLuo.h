@@ -21,15 +21,29 @@ typedef NS_ENUM(NSUInteger,Post_or_Get) {
 };
 
 @interface XL_WangLuo : NSObject
-
+/*
+ * 单机版的登录
+ */
 +(void)WaiwangQingqiuwithBizMethod:(NSString*)BizMetho Rucan:(NSDictionary*)BizParamSt type:(Post_or_Get)type success:(void (^)(id responseObject))success
                          failure:(void (^)(NSError *error))failure;
-+(void)QianWaiwangQingqiuwithBizMethod:(NSString*)BizMetho Rucan:(NSDictionary*)BizParamSt type:(Post_or_Get)type success:(void (^)(id responseObject))success
-                           failure:(void (^)(NSError *error))failure;
+/*
+ * 单机版除了登录接口
+ */
 +(void)JuYuwangQingqiuwithBizMethod:(NSString*)BizMetho Rucan:(NSDictionary*)BizParamSt type:(Post_or_Get)type success:(void (^)(id responseObject))success
                           failure:(void (^)(NSError *error))failure;
+/*
+ * 店小二的上传图片
+ */
 +(void)ShangChuanTuPianwithBizMethod:(NSString*)BizMetho Rucan:(NSDictionary*)BizParamSt type:(Post_or_Get)type image:(UIImage*)image key:(NSString*)key success:(void (^)(id responseObject))success
                              failure:(void (^)(NSError *error))failure;
+/*
+ * 外网登陆专用
+ */
++(void)QianWaiwangQingqiuwithBizMethod:(NSString*)BizMetho Rucan:(NSDictionary*)BizParamSt type:(Post_or_Get)type success:(void (^)(id responseObject))success
+                               failure:(void (^)(NSError *error))failure;
+/*
+ * 外网除了登录接口
+ */
 +(void)QianWaiWangQingqiuwithBizMethod:(NSString*)BizMetho Rucan:(NSDictionary*)BizParamSt type:(Post_or_Get)type success:(void (^)(id responseObject))success
                             failure:(void (^)(NSError *error))failure;
 @end

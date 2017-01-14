@@ -22,7 +22,7 @@
 -(void)viewWillAppear:(BOOL)animated{
    // [self.navigationController setNavigationBarHidden:YES animated:YES];
     if (NULL == JuyuwangIP) {
-        [[NSUserDefaults standardUserDefaults]setObject:@"192.168.1.103:8080" forKey:@"JuYuWang"];
+        [[NSUserDefaults standardUserDefaults]setObject:@"www.yaopandian.com" forKey:@"JuYuWang"];
     }
     if (NULL !=[[NSUserDefaults standardUserDefaults] objectForKey:@"Name"]) {
         _Name.text=[[NSUserDefaults standardUserDefaults] objectForKey:@"Name"];
@@ -31,7 +31,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [[NSUserDefaults standardUserDefaults]setObject:@"www.yaopandian.com" forKey:@"JuYuWang"];
     [self delegate];
     [self registerForKeyboardNotifications];
 }
