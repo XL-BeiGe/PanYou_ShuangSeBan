@@ -69,6 +69,7 @@
 		D7472E3B1E1F7ACC008D228F /* 试题背景.png in Resources */ = {isa = PBXBuildFile; fileRef = D7472E371E1F7ACC008D228F /* 试题背景.png */; };
 		D7472E3C1E1F7ACC008D228F /* 消息背景.png in Resources */ = {isa = PBXBuildFile; fileRef = D7472E381E1F7ACC008D228F /* 消息背景.png */; };
 		D7472E3E1E1F7ACC008D228F /* icon_xiaoxi.png in Resources */ = {isa = PBXBuildFile; fileRef = D7472E3A1E1F7ACC008D228F /* icon_xiaoxi.png */; };
+		D74D98631E29BD8400B4DC83 /* XLImageShow.m in Sources */ = {isa = PBXBuildFile; fileRef = D74D98621E29BD8400B4DC83 /* XLImageShow.m */; };
 		D75D8FAF1DC9D16E00CC3355 /* XLAttendanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D75D8FAE1DC9D16E00CC3355 /* XLAttendanceViewController.m */; };
 		D75D8FB11DC9DC1000CC3355 /* jinru_03.png in Resources */ = {isa = PBXBuildFile; fileRef = D75D8FB01DC9DC1000CC3355 /* jinru_03.png */; };
 		D76B34AC1DC9923500E285AB /* XL_WangLuo.m in Sources */ = {isa = PBXBuildFile; fileRef = D76B34AB1DC9923500E285AB /* XL_WangLuo.m */; };
@@ -385,6 +386,8 @@
 		D7472E371E1F7ACC008D228F /* 试题背景.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "试题背景.png"; sourceTree = "<group>"; };
 		D7472E381E1F7ACC008D228F /* 消息背景.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "消息背景.png"; sourceTree = "<group>"; };
 		D7472E3A1E1F7ACC008D228F /* icon_xiaoxi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_xiaoxi.png; sourceTree = "<group>"; };
+		D74D98611E29BD8400B4DC83 /* XLImageShow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLImageShow.h; sourceTree = "<group>"; };
+		D74D98621E29BD8400B4DC83 /* XLImageShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLImageShow.m; sourceTree = "<group>"; };
 		D75D8FAD1DC9D16E00CC3355 /* XLAttendanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLAttendanceViewController.h; sourceTree = "<group>"; };
 		D75D8FAE1DC9D16E00CC3355 /* XLAttendanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLAttendanceViewController.m; sourceTree = "<group>"; };
 		D75D8FB01DC9DC1000CC3355 /* jinru_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jinru_03.png; sourceTree = "<group>"; };
@@ -1061,6 +1064,8 @@
 				D76B34AE1DC9924900E285AB /* Color+Hex.m */,
 				D76B34AA1DC9923500E285AB /* XL_WangLuo.h */,
 				D76B34AB1DC9923500E285AB /* XL_WangLuo.m */,
+				D74D98611E29BD8400B4DC83 /* XLImageShow.h */,
+				D74D98621E29BD8400B4DC83 /* XLImageShow.m */,
 				D7336D111E236B7E0008AAA7 /* XLSizeForLabel.h */,
 				D7336D121E236B7E0008AAA7 /* XLSizeForLabel.m */,
 			);
@@ -1740,6 +1745,7 @@
 				D76B34DD1DC9927C00E285AB /* XL_FMDB.m in Sources */,
 				D76B350C1DC992F400E285AB /* NSObject+SBJson.m in Sources */,
 				D774873B1DD964B0007A92E3 /* XLNetworkViewController.m in Sources */,
+				D74D98631E29BD8400B4DC83 /* XLImageShow.m in Sources */,
 				D774873E1DD964B0007A92E3 /* XLChangeViewController.m in Sources */,
 				D730F8AD1DCB108600F07053 /* XLCheckstandViewController.m in Sources */,
 				D739C8EA1DE7CF3800942CD6 /* XLShowViewController.m in Sources */,

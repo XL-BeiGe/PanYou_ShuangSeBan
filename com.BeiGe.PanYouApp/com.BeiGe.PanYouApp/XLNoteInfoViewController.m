@@ -13,6 +13,7 @@
 #import "XLNoteViewController.h"
 #import "SDWebImage/UIImageView+WebCache.h"
 #import "XLSizeForLabel.h"
+#import "XLImageShow.h"
 @interface XLNoteInfoViewController ()<UITextViewDelegate>
 {
     UILabel *placeor;
@@ -55,6 +56,23 @@
     self.title = @"通知详情";
     //    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[UIColor whiteColor]}];
     self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    
+ 
+    [self Imageshows];
+    
+}
+-(void)Imageshows{
+    _Image.userInteractionEnabled =YES;
+    UITapGestureRecognizer *tap  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(magnifyImage)];
+    
+    [_Image addGestureRecognizer:tap];
+}
+
+- (void)magnifyImage
+{
+    NSLog(@"局部放大");
+    [XLImageShow showImage:_Image];//调用方法
 }
 
 -(void)tobar{
