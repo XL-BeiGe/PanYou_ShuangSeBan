@@ -43,14 +43,16 @@
     [self.navigationController setNavigationBarHidden:NO];
     
     self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
-    UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"店小二" style:UIBarButtonItemStyleDone target:nil action:nil];
+    UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"店小二" style:UIBarButtonItemStyleDone target:self action:@selector(huilaojia)];
     [self.navigationItem setLeftBarButtonItem:left];
     
     UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"cehua_12.png"] style:UIBarButtonItemStyleDone target:self action:@selector(set:)];
     
     [self.navigationItem setRightBarButtonItem:right];
 }
-
+-(void)huilaojia{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
 //同步全部库存
 - (IBAction)KuCun_Button:(id)sender {
     

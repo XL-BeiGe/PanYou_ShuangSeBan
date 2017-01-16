@@ -166,6 +166,7 @@
     }else if ([_zhT isEqualToString:@"3"]){
         _renwuanniu.titleLabel.text=@"完成任务";
     }else{
+        _textview.text=[NSString stringWithFormat:@"%@",[pushTemplate objectForKey:@"remarks"]];
         _renwuanniu.hidden=YES;
     }
 }
