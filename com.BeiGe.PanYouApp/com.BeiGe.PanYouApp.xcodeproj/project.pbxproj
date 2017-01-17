@@ -278,6 +278,7 @@
 		D7C8CE501E14F9D000062F00 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C8CE3E1E14F9D000062F00 /* UIImageView+HighlightedWebCache.m */; };
 		D7C8CE511E14F9D000062F00 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C8CE401E14F9D000062F00 /* UIImageView+WebCache.m */; };
 		D7C8CE521E14F9D000062F00 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C8CE421E14F9D000062F00 /* UIView+WebCacheOperation.m */; };
+		D7FB4E361E2DE8B3001398CA /* XLDateCompare.m in Sources */ = {isa = PBXBuildFile; fileRef = D7FB4E351E2DE8B3001398CA /* XLDateCompare.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -666,6 +667,8 @@
 		D7C8CE401E14F9D000062F00 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		D7C8CE411E14F9D000062F00 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		D7C8CE421E14F9D000062F00 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		D7FB4E341E2DE8B3001398CA /* XLDateCompare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLDateCompare.h; sourceTree = "<group>"; };
+		D7FB4E351E2DE8B3001398CA /* XLDateCompare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLDateCompare.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1068,6 +1071,8 @@
 				D74D98621E29BD8400B4DC83 /* XLImageShow.m */,
 				D7336D111E236B7E0008AAA7 /* XLSizeForLabel.h */,
 				D7336D121E236B7E0008AAA7 /* XLSizeForLabel.m */,
+				D7FB4E341E2DE8B3001398CA /* XLDateCompare.h */,
+				D7FB4E351E2DE8B3001398CA /* XLDateCompare.m */,
 			);
 			name = "宏定义";
 			sourceTree = "<group>";
@@ -1743,6 +1748,7 @@
 				D7959B731DCC5A2600985309 /* XLNoteViewController.m in Sources */,
 				D76B350E1DC992F400E285AB /* SBJsonStreamParser.m in Sources */,
 				D76B34DD1DC9927C00E285AB /* XL_FMDB.m in Sources */,
+				D7FB4E361E2DE8B3001398CA /* XLDateCompare.m in Sources */,
 				D76B350C1DC992F400E285AB /* NSObject+SBJson.m in Sources */,
 				D774873B1DD964B0007A92E3 /* XLNetworkViewController.m in Sources */,
 				D74D98631E29BD8400B4DC83 /* XLImageShow.m in Sources */,

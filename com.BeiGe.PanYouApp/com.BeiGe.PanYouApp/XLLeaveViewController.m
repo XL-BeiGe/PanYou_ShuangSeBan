@@ -10,12 +10,14 @@
 #import "WarningBox.h"
 #import "XL_WangLuo.h"
 #import "XLAttendanceViewController.h"
+#import "XLDateCompare.h"
 @interface XLLeaveViewController ()<UITextFieldDelegate,UIActionSheetDelegate,UITextViewDelegate>{
     int kaijie;//开始结束判断;
     UIView *backview;//透明的
     NSString*kaishi;
     NSString*jieshi;
     NSString*chuannima;
+     UILabel *placeor;
 }
 @property(strong,nonatomic) UIDatePicker *picker;
 @end
@@ -31,6 +33,7 @@
     [self tobar];
     [self comeback];
     self.title =@"请假";
+    [self tttttttttt];
 }
 
 -(void)comeback{
@@ -46,11 +49,25 @@
         }
     }
 }
-
-
+-(void)tttttttttt{
+    
+    _reason.textContainerInset = UIEdgeInsetsMake(0, 0, 5, 15);
+    placeor = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 150, 20)];
+    placeor.text = @"备注:";
+    [_reason addSubview:placeor];
+    placeor.font =[UIFont systemFontOfSize:14];
+    placeor.backgroundColor = [UIColor clearColor];
+    placeor.textColor = [UIColor colorWithRed:213.0/255 green:213.0/255 blue:218.0/255 alpha:1.0];
+}
+-(void)textViewDidChange:(UITextView *)textView {
+    if (textView.text.length==0) {
+        placeor.text = @"备注:";
+    }
+    else {
+        placeor.text = @" ";
+    }
+}
 -(void)tobar{
-    
-    
     UIToolbar * topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0,self.view.frame.size.width, 30)];
     topView.backgroundColor = [UIColor clearColor];
     [topView setBarStyle:UIBarStyleDefault];
@@ -65,8 +82,7 @@
     NSArray * buttonsArray = [NSArray arrayWithObjects:btnSpace,doneBtn,nil];
     [topView setItems:buttonsArray];
     [self.reason setInputAccessoryView:topView];
-    
-    
+
 }
 -(void)wancheng {
     [_reason resignFirstResponder];
@@ -81,24 +97,40 @@
     // 获取用户通过UIDatePicker设置的日期和时间
     NSDate *selected = [_picker date];
     // 创建一个日期格式器
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    NSDateFormatter *datefffff=[[NSDateFormatter alloc] init];
+    NSDateFormatter*dateFormatter=[[NSDateFormatter alloc] init];
+    
     // 为日期格式器设置格式字符串
-    [dateFormatter setDateFormat:@"yyyy年MM月dd日 HH:mm"];
-    [datefffff setDateFormat:@"yyyy-MM-dd HH:mm"];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
     // 使用日期格式器格式化日期、时间
     NSString *destDateString = [dateFormatter stringFromDate:selected];
-    NSString *message =  [NSString stringWithFormat:
-                          @"%@", destDateString];
-    NSString *daterr=[datefffff stringFromDate:selected];
-    NSString *msg=[NSString stringWithFormat:@"%@",daterr];
+    NSString *message =[NSString stringWithFormat:@"%@", destDateString];
+    
+    NSDate *date = [NSDate date];
+    NSDateFormatter *dateForm = [[NSDateFormatter alloc] init];
+    [dateForm setDateFormat:@"yyyy-MM-dd HH:mm"];
+    NSString *nowdate =[dateForm stringFromDate:date];
+    
     
     if (kaijie==1) {
-        _beginTime.text=message;
-        kaishi=msg;
+        int ixi =[XLDateCompare compareDate:message withDate:nowdate];
+        if (ixi==-1){
+            _beginTime.text=message;
+            kaishi=message;
+        }
+        else{
+            [WarningBox warningBoxModeText:@"开始时间应大于当前时间" andView:self.view];
+        }
     }else{
-        _endTime.text=message;
-        jieshi=msg;
+        int ixix =[XLDateCompare compareDate:_beginTime.text withDate:message];
+        if (ixix==1){
+            _endTime.text=message;
+            jieshi=message;
+        }else{
+        [WarningBox warningBoxModeText:@"结束时间必须大于开始时间" andView:self.view];
+        }
+   
+        
+        
     }
     [self xiaoshi];
 }

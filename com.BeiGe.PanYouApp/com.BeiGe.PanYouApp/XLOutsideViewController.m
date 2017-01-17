@@ -10,12 +10,13 @@
 #import "WarningBox.h"
 #import "XL_WangLuo.h"
 #import "XLAttendanceViewController.h"
+#import "XLDateCompare.h"
 @interface XLOutsideViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextFieldDelegate,UITextViewDelegate>{
     UIView *backview;//时间选择器背景;
     int waifan;//外出返回时间选择器判断;
     NSString* chuankai;
     NSString* chuanjie;
-    
+    UILabel *placeor;
     CGFloat cha;
     int pan;
 }
@@ -35,12 +36,14 @@
     [self tobar];
     [self comeback];
     self.title =@"外勤";
+    [self tttttttttt];
 }
 
 -(void)comeback{
     self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
      UIBarButtonItem*left=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back@2x"] style:UIBarButtonItemStyleDone target:self action:@selector(fanhui)];
     [self.navigationItem setLeftBarButtonItem:left];
+    
 }
 -(void)fanhui{
     XLAttendanceViewController *xln=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"attendance"];
@@ -52,7 +55,7 @@
 }
 
 
-
+#pragma mark---完成
 -(void)tobar{
 
     
@@ -77,6 +80,25 @@
     [_textview resignFirstResponder];
 }
 
+#pragma mark----备注
+-(void)tttttttttt{
+
+    _textview.textContainerInset = UIEdgeInsetsMake(0, 0, 5, 15);
+    placeor = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 150, 20)];
+    placeor.text = @"备注:";
+    [_textview addSubview:placeor];
+    placeor.font =[UIFont systemFontOfSize:14];
+    placeor.backgroundColor = [UIColor clearColor];
+    placeor.textColor = [UIColor colorWithRed:213.0/255 green:213.0/255 blue:218.0/255 alpha:1.0];
+}
+-(void)textViewDidChange:(UITextView *)textView {
+    if (textView.text.length==0) {
+        placeor.text = @"备注:";
+    }
+    else {
+        placeor.text = @" ";
+    }
+}
 
 -(void)tupianfangfa{
     _imagev.userInteractionEnabled=YES;
@@ -84,6 +106,9 @@
     [_imagev addGestureRecognizer:ss];
     
 }
+
+
+
 #pragma  mark------时间选择器
 -(void)shijianxuanze{
         //时间选择器
@@ -95,32 +120,55 @@
     // 获取用户通过UIDatePicker设置的日期和时间
     NSDate *selected = [_picker date];
     // 创建一个日期格式器
-    NSDateFormatter*datefff=[[NSDateFormatter alloc] init];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    // 为日期格式器设置格式字符串
-    [dateFormatter setDateFormat:@"yyyy年MM月dd日 HH:mm"];
+    NSDateFormatter*dateFormatter=[[NSDateFormatter alloc] init];
     
-    [datefff setDateFormat:@"yyyy-MM-dd HH:mm"];
+    // 为日期格式器设置格式字符串
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    
+   
     // 使用日期格式器格式化日期、时间
     NSString *destDateString = [dateFormatter stringFromDate:selected];
-    NSString *message =  [NSString stringWithFormat:
-                          @"%@", destDateString];
-    NSString*darr=[datefff stringFromDate:selected];
-    NSString*msg=[NSString stringWithFormat:@"%@",darr];
+    NSString *message =[NSString stringWithFormat:@"%@", destDateString];
+    
+    NSDate *date = [NSDate date];
+    NSDateFormatter *dateForm = [[NSDateFormatter alloc] init];
+    [dateForm setDateFormat:@"yyyy-MM-dd HH:mm"];
+    NSString *nowdate =[dateForm stringFromDate:date];
+    
+   
+    
     
     if (waifan==1) {
-        _outTime.text=message;
-        chuankai=msg;
+     
+        int ixi =[XLDateCompare compareDate:message withDate:nowdate];
+        if (ixi==-1){
+            _outTime.text=message;
+            chuankai=message;
+        }
+        else{
+            [WarningBox warningBoxModeText:@"外出时间应大于当前时间" andView:self.view];
+        }
+        
     }else{
-        _backTime.text=message;
-        chuanjie=msg;
+    
+        int ixix =[XLDateCompare compareDate:_outTime.text withDate:message];
+        if (ixix==1){
+            _backTime.text=message;
+            chuanjie=message;
+        }else{
+            [WarningBox warningBoxModeText:@"返回时间必须大于外出时间" andView:self.view];
+        }
     }
+   
     [self xiaoshi];
 }
 -(void)xiaoshi{
     [self.view endEditing:YES];
     backview.hidden=YES;
 }
+
+
+
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     backview.hidden=NO;
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
