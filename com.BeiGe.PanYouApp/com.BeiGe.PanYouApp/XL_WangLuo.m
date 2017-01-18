@@ -10,9 +10,10 @@
 #import "XL_Header.h"
 #import "SBJsonWriter.h"
 #import "AFNetworking.h"
+#import "ViewController.h"
 @implementation XL_WangLuo
 /*
- * 登陆专用 
+ * 登陆专用
  * 这个接口是单机版的登录；
  */
 +(void)WaiwangQingqiuwithBizMethod:(NSString*)BizMetho Rucan:(NSDictionary*)BizParamSt type:(Post_or_Get)type success:(void (^)(id responseObject))success
@@ -32,8 +33,8 @@
     
     NSString *Rucan=[writer stringWithObject:BizParamStr];
     NSDictionary *ChuanCan=[NSDictionary dictionaryWithObjectsAndKeys:Appkey,@"appkey",UserID,@"userid",vaildToken,@"vaildToken",accessToken,@"accessToken",Rucan,@"params", nil];
-//    NSLog(@"-*-*-*-*-%@",Url);
-//    NSLog(@"\n－－－－－请求－－－－－\n%@",ChuanCan);
+    //    NSLog(@"-*-*-*-*-%@",Url);
+    //    NSLog(@"\n－－－－－请求－－－－－\n%@",ChuanCan);
     AFHTTPSessionManager *manager=[AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
     
@@ -84,9 +85,9 @@
     NSString *BizMethod=BizMetho;
     
     NSString *Url=[NSString stringWithFormat:@"%@%@",JuYuwang,BizMethod];
-//    NSLog(@"\n\n*********\n\n%@",Url);
+    //    NSLog(@"\n\n*********\n\n%@",Url);
     NSString *UserID=[shuju objectForKey:@"UserID"];//登陆不用传
-//    NSLog(@"%@",UserID);
+    //    NSLog(@"%@",UserID);
     NSString *vaildToken=@"";//传空或非空
     NSString *accessToken=[shuju objectForKey:@"accessToken"];//登陆不用传
     SBJsonWriter *writer=[[SBJsonWriter alloc] init];
@@ -95,7 +96,7 @@
     
     NSString *Rucan=[writer stringWithObject:BizParamStr];
     NSDictionary *ChuanCan=[NSDictionary dictionaryWithObjectsAndKeys:Appkey,@"appkey",vaildToken,@"vaildToken",UserID,@"userid",accessToken,@"accessToken",Rucan,@"params", nil];
-//    NSLog(@"%@",ChuanCan);
+    //    NSLog(@"%@",ChuanCan);
     AFHTTPSessionManager *manager=[AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
     
@@ -142,7 +143,7 @@
 
 
 +(void)QianWaiwangQingqiuwithBizMethod:(NSString*)BizMetho Rucan:(NSDictionary*)BizParamSt type:(Post_or_Get)type success:(void (^)(id responseObject))success
-                           failure:(void (^)(NSError *error))failure{
+                               failure:(void (^)(NSError *error))failure{
     
     NSString *Waiwang=QianWaiWang;
     NSString *BizMethod=BizMetho;
@@ -158,8 +159,8 @@
     
     NSString *Rucan=[writer stringWithObject:BizParamStr];
     NSDictionary *ChuanCan=[NSDictionary dictionaryWithObjectsAndKeys:Appkey,@"appkey",UserID,@"userid",vaildToken,@"vaildToken",accessToken,@"accessToken",Rucan,@"params", nil];
-//    NSLog(@"-*-*-*-*-%@",Url);
-//    NSLog(@"\n－－－－－请求－－－－－\n%@",ChuanCan);
+    //    NSLog(@"-*-*-*-*-%@",Url);
+    //    NSLog(@"\n－－－－－请求－－－－－\n%@",ChuanCan);
     AFHTTPSessionManager *manager=[AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
     
@@ -203,15 +204,15 @@
 
 
 +(void)QianWaiWangQingqiuwithBizMethod:(NSString*)BizMetho Rucan:(NSDictionary*)BizParamSt type:(Post_or_Get)type success:(void (^)(id responseObject))success
-                            failure:(void (^)(NSError *error))failure{
+                               failure:(void (^)(NSError *error))failure{
     NSUserDefaults * shuju=[NSUserDefaults standardUserDefaults];//非登录接口用
     NSString *QianWaiwang=QianWaiWang;//登录接口不用
     NSString *BizMethod=BizMetho;
     
     NSString *Url=[NSString stringWithFormat:@"%@%@",QianWaiwang,BizMethod];
-//    NSLog(@"\n\n*********\n\n%@",Url);
+    //    NSLog(@"\n\n*********\n\n%@",Url);
     NSString *UserID=[shuju objectForKey:@"userId"];//登陆不用传
-//    NSLog(@"%@",UserID);
+    //    NSLog(@"%@",UserID);
     NSString *vaildToken=@"";//传空或非空
     NSString *accessToken=[shuju objectForKey:@"accesstoken"];//登陆不用传
     SBJsonWriter *writer=[[SBJsonWriter alloc] init];
@@ -220,7 +221,7 @@
     
     NSString *Rucan=[writer stringWithObject:BizParamStr];
     NSDictionary *ChuanCan=[NSDictionary dictionaryWithObjectsAndKeys:Appkey,@"appkey",vaildToken,@"vaildToken",UserID,@"userid",accessToken,@"accessToken",Rucan,@"params", nil];
-//    NSLog(@"%@",ChuanCan);
+    //    NSLog(@"%@",ChuanCan);
     AFHTTPSessionManager *manager=[AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
     
@@ -265,25 +266,25 @@
 }
 
 +(void)ShangChuanTuPianwithBizMethod:(NSString*)BizMetho Rucan:(NSDictionary*)BizParamSt type:(Post_or_Get)type image:(UIImage*)image key:(NSString*)key success:(void (^)(id responseObject))success
-                            failure:(void (^)(NSError *error))failure{
+                             failure:(void (^)(NSError *error))failure{
     NSString *JuYuwang=QianWaiWang;//登录接口不用
     NSString *BizMethod=BizMetho;
     
     NSString *Url=[NSString stringWithFormat:@"%@%@",JuYuwang,BizMethod];
-//    NSLog(@"\n\n*********\n\n%@",Url);
+    //    NSLog(@"\n\n*********\n\n%@",Url);
     
     
-   
-//    NSString *vaildToken=@"";//传空或非空
-   
-//    SBJsonWriter *writer=[[SBJsonWriter alloc] init];
+    
+    //    NSString *vaildToken=@"";//传空或非空
+    
+    //    SBJsonWriter *writer=[[SBJsonWriter alloc] init];
     
     NSDictionary*BizParamStr=BizParamSt;
     
-//    NSString *Rucan=[writer stringWithObject:BizParamStr];
-//    
-//    NSDictionary *ChuanCan=[NSDictionary dictionaryWithObjectsAndKeys:Appkey,@"appkey",vaildToken,@"vaildToken",UserID,@"userid",accessToken,@"accessToken",Rucan,@"params", nil];
-//    NSLog(@"%@",ChuanCan);
+    //    NSString *Rucan=[writer stringWithObject:BizParamStr];
+    //
+    //    NSDictionary *ChuanCan=[NSDictionary dictionaryWithObjectsAndKeys:Appkey,@"appkey",vaildToken,@"vaildToken",UserID,@"userid",accessToken,@"accessToken",Rucan,@"params", nil];
+    //    NSLog(@"%@",ChuanCan);
     AFHTTPSessionManager *manager=[AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
     
@@ -308,6 +309,22 @@
         }
         
     }];
-
+    
+}
++(void)sigejiu:(UIViewController*)vv{
+    
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"注意" message:@"您的账号已在其他手机登录，请重新登录..." preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        //具体实现逻辑代码
+        ViewController*view=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"llogin"];
+        [view setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+        [vv presentViewController:view animated:YES completion:nil];
+    }];
+    [alert addAction:cancel];
+    //显示提示框
+    [vv presentViewController:alert animated:YES completion:nil];
+    
 }
 @end

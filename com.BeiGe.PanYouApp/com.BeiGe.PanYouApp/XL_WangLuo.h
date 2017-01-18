@@ -46,4 +46,5 @@ typedef NS_ENUM(NSUInteger,Post_or_Get) {
  */
 +(void)QianWaiWangQingqiuwithBizMethod:(NSString*)BizMetho Rucan:(NSDictionary*)BizParamSt type:(Post_or_Get)type success:(void (^)(id responseObject))success
                             failure:(void (^)(NSError *error))failure;
++(void)sigejiu:(UIViewController*)vv;
 @end
