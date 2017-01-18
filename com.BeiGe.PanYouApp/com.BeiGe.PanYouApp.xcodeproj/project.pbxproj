@@ -277,6 +277,8 @@
 		D7E80F631E2F02900025D9D0 /* XLKaoQinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E80F621E2F02900025D9D0 /* XLKaoQinViewController.m */; };
 		D7E80FAF1E2F376C0025D9D0 /* TianTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E80FAB1E2F376C0025D9D0 /* TianTableViewCell.m */; };
 		D7E80FB01E2F376C0025D9D0 /* DurgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E80FAE1E2F376C0025D9D0 /* DurgTableViewCell.m */; };
+		D7E80FB31E2F52870025D9D0 /* 7008.wav in Resources */ = {isa = PBXBuildFile; fileRef = D7E80FB21E2F52870025D9D0 /* 7008.wav */; };
+		D7E80FB51E2F53F20025D9D0 /* icon_notice_time.png in Resources */ = {isa = PBXBuildFile; fileRef = D7E80FB41E2F53F20025D9D0 /* icon_notice_time.png */; };
 		D7FB4E361E2DE8B3001398CA /* XLDateCompare.m in Sources */ = {isa = PBXBuildFile; fileRef = D7FB4E351E2DE8B3001398CA /* XLDateCompare.m */; };
 /* End PBXBuildFile section */
 
@@ -664,6 +666,8 @@
 		D7E80FAC1E2F376C0025D9D0 /* TianTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TianTableViewCell.h; sourceTree = "<group>"; };
 		D7E80FAD1E2F376C0025D9D0 /* DurgTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DurgTableViewCell.h; sourceTree = "<group>"; };
 		D7E80FAE1E2F376C0025D9D0 /* DurgTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DurgTableViewCell.m; sourceTree = "<group>"; };
+		D7E80FB21E2F52870025D9D0 /* 7008.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 7008.wav; sourceTree = "<group>"; };
+		D7E80FB41E2F53F20025D9D0 /* icon_notice_time.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_notice_time.png; sourceTree = "<group>"; };
 		D7FB4E341E2DE8B3001398CA /* XLDateCompare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLDateCompare.h; sourceTree = "<group>"; };
 		D7FB4E351E2DE8B3001398CA /* XLDateCompare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLDateCompare.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -780,6 +784,7 @@
 		D2C1AC811DC97D8C00092F44 /* com.BeiGe.PanYouApp */ = {
 			isa = PBXGroup;
 			children = (
+				D7E80FB21E2F52870025D9D0 /* 7008.wav */,
 				D772CCB81DC9BE1C00BB28D9 /* Image */,
 				D2C1ACBA1DC97E2400092F44 /* Basis */,
 				D2C1ACB91DC97E2200092F44 /* Farmework */,
@@ -1150,6 +1155,7 @@
 		D772CCB81DC9BE1C00BB28D9 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				D7E80FB41E2F53F20025D9D0 /* icon_notice_time.png */,
 				D7029C781E28B42600807D8F /* downloads@2x.png */,
 				D7029C741E28AF8600807D8F /* 下拉@2x.png */,
 				D7029C6A1E28664600807D8F /* back@2x.png */,
@@ -1621,6 +1627,7 @@
 				D76B34BF1DC9925F00E285AB /* DSLetterKeyboard.xib in Resources */,
 				D772CCFC1DC9BE3100BB28D9 /* 统计-外出天数.png in Resources */,
 				D77487C71DD9652B007A92E3 /* icon_02_18.png in Resources */,
+				D7E80FB31E2F52870025D9D0 /* 7008.wav in Resources */,
 				D77488091DD9652B007A92E3 /* 助记码.png in Resources */,
 				D77487F61DD9652B007A92E3 /* jianpan_haha_25.png in Resources */,
 				D77487AC1DD9652B007A92E3 /* actionbar_back.png in Resources */,
@@ -1674,6 +1681,7 @@
 				D7472E3E1E1F7ACC008D228F /* icon_xiaoxi.png in Resources */,
 				D77488081DD9652B007A92E3 /* wifi.png in Resources */,
 				D77487EB1DD9652B007A92E3 /* jianpan_mr_21.png in Resources */,
+				D7E80FB51E2F53F20025D9D0 /* icon_notice_time.png in Resources */,
 				D77487F01DD9652B007A92E3 /* jianpan_mr_36.png in Resources */,
 				D772CCED1DC9BE3100BB28D9 /* 考勤-04.png in Resources */,
 				D77487E61DD9652B007A92E3 /* jianpan_mr_05.png in Resources */,

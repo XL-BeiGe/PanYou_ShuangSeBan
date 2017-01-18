@@ -54,8 +54,9 @@
     
     shu=0;
     //时间数组
-   
+    _tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
         shuju=[[NSMutableArray alloc] init];
+
         [shuju addObject:@"0:00"];
         [shuju addObject:@"0:30"];
         [shuju addObject:@"1:00"];
@@ -221,7 +222,7 @@
     
     NSDictionary *dic=@{@"title":tit,@"riqi":riqi,@"ison":@"0"};
     
-    NSString *yhidString = [NSString stringWithFormat:@"%d",[[[NSUserDefaults standardUserDefaults]objectForKey:@"hyid"] intValue]];
+    NSString *yhidString = [NSString stringWithFormat:@"%d",[[[NSUserDefaults standardUserDefaults]objectForKey:@"userId"] intValue]];
     
     NSDictionary *asdd=@{@"yhid":yhidString,@"neirong":dic};
     
@@ -291,7 +292,7 @@
     
     //获取用户id
     
-    NSString *yhidString = [NSString stringWithFormat:@"%d",[[[NSUserDefaults standardUserDefaults]objectForKey:@"hyid"] intValue]];
+    NSString *yhidString = [NSString stringWithFormat:@"%d",[[[NSUserDefaults standardUserDefaults]objectForKey:@"userId"] intValue]];
     
     [pathArray removeAllObjects];
     

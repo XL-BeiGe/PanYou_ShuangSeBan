@@ -191,6 +191,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 #pragma mark ----本地通知
 -(void)localNotification
 {
+    NSLog(@"4234234234234234234234234");
     [[UIApplication sharedApplication]cancelAllLocalNotifications];
     NSString * path1 = [NSHomeDirectory() stringByAppendingString:@"/Documents/durgRemindList.plist"];
     
@@ -199,7 +200,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
     //获取用户id
     
-    NSString *yhidString = [NSString stringWithFormat:@"%d",[[[NSUserDefaults standardUserDefaults]objectForKey:@"hyid"] intValue]];
+    NSString *yhidString = [NSString stringWithFormat:@"%d",[[[NSUserDefaults standardUserDefaults]objectForKey:@"userId"] intValue]];
     
     //获取某一个id的内容
     for (int i = 0 ; i < array.count; i++) {
@@ -280,7 +281,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         
         // 设置提醒的文字内容
         
-        notification.alertBody   = @"用药时间到！您该用药了！";
+        notification.alertBody   = @"您该去考勤了";
         
         notification.alertAction = @"打开";
         

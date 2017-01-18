@@ -38,7 +38,7 @@
         [self addSubview:self.ll1];
         
         //闹钟图片
-        self.nao = [[UIImageView alloc]initWithFrame:CGRectMake(16, 50, 10, 10)];
+        self.nao = [[UIImageView alloc]initWithFrame:CGRectMake(16, 45, 20, 20)];
         self.nao.image = [UIImage imageNamed:@"icon_notice_time.png"];
         [self addSubview:self.nao];
         
