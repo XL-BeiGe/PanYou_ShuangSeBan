@@ -46,9 +46,9 @@
     UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"店小二" style:UIBarButtonItemStyleDone target:self action:@selector(huilaojia)];
     [self.navigationItem setLeftBarButtonItem:left];
     
-    UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"cehua_12.png"] style:UIBarButtonItemStyleDone target:self action:@selector(set:)];
-    
-    [self.navigationItem setRightBarButtonItem:right];
+//    UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"cehua_12.png"] style:UIBarButtonItemStyleDone target:self action:@selector(set:)];
+//    
+//    [self.navigationItem setRightBarButtonItem:right];
 }
 -(void)huilaojia{
     [self.navigationController popToRootViewControllerAnimated:YES];
