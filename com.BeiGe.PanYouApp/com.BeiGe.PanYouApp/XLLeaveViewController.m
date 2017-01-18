@@ -17,7 +17,7 @@
     NSString*kaishi;
     NSString*jieshi;
     NSString*chuannima;
-     UILabel *placeor;
+    UILabel *placeor;
 }
 @property(strong,nonatomic) UIDatePicker *picker;
 @end
@@ -38,7 +38,7 @@
 
 -(void)comeback{
     self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
-     UIBarButtonItem*left=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back@2x"] style:UIBarButtonItemStyleDone target:self action:@selector(fanhui)];
+    UIBarButtonItem*left=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back@2x"] style:UIBarButtonItemStyleDone target:self action:@selector(fanhui)];
     [self.navigationItem setLeftBarButtonItem:left];
 }
 -(void)fanhui{
@@ -82,7 +82,7 @@
     NSArray * buttonsArray = [NSArray arrayWithObjects:btnSpace,doneBtn,nil];
     [topView setItems:buttonsArray];
     [self.reason setInputAccessoryView:topView];
-
+    
 }
 -(void)wancheng {
     [_reason resignFirstResponder];
@@ -126,9 +126,9 @@
             _endTime.text=message;
             jieshi=message;
         }else{
-        [WarningBox warningBoxModeText:@"结束时间必须大于开始时间" andView:self.view];
+            [WarningBox warningBoxModeText:@"结束时间必须大于开始时间" andView:self.view];
         }
-   
+        
         
         
     }
@@ -212,7 +212,7 @@
     return arr;
 }
 -(void)tan{
-       UIActionSheet *sheet=[[UIActionSheet alloc] initWithTitle:@"请假原因：" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"病假",@"产假",@"婚假",@"工伤假",@"事假",@"丧假",@"调休",@"年假",@"其他", nil];
+    UIActionSheet *sheet=[[UIActionSheet alloc] initWithTitle:@"请假原因：" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"病假",@"产假",@"婚假",@"工伤假",@"事假",@"丧假",@"调休",@"年假",@"其他", nil];
     
     [sheet showInView:self.view];
 }
@@ -228,12 +228,12 @@
     //方式:t=attendance/leave
     /*
      用户ID
-    _reason.text;    原因
-    _endTime.text;   结束时间
-    _beginTime.text; 开始时间
-    _leaveType.text; 请假类型
+     _reason.text;    原因
+     _endTime.text;   结束时间
+     _beginTime.text; 开始时间
+     _leaveType.text; 请假类型
      _reason.text;
-    */
+     */
     NSString *fangshi=@"/attendance/leave";
     NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"];
     NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userId",kaishi,@"beginTime",jieshi,@"endTime",chuannima,@"leaveType",_reason.text,@"leaveReason", nil];

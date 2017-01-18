@@ -11,7 +11,7 @@
 #import "XL_Header.h"
 #import "XL_WangLuo.h"
 #import "XLHomeViewController.h"
-
+#import "XLMainViewController.h"
 @interface XLLogin_ViewController (){
     CGFloat cha;
     int pan;
@@ -25,15 +25,34 @@
         [[NSUserDefaults standardUserDefaults]setObject:@"www.yaopandian.com" forKey:@"JuYuWang"];
     }
     if (NULL !=[[NSUserDefaults standardUserDefaults] objectForKey:@"Name"]) {
-        _Name.text=[[NSUserDefaults standardUserDefaults] objectForKey:@"Name"];
-        _Password.text=[[NSUserDefaults standardUserDefaults] objectForKey:@"Password"];
+        _Name.text=[[NSUserDefaults standardUserDefaults] objectForKey:@"uName"];
+        _Password.text=[[NSUserDefaults standardUserDefaults] objectForKey:@"pPassword"];
+    }
+    
+}
+
+-(void)comeback{
+    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
+    // UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self  action:@selector(fanhui)];
+    UIBarButtonItem*left=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back@2x"] style:UIBarButtonItemStyleDone target:self action:@selector(fanhui)];
+    [self.navigationItem setLeftBarButtonItem:left];
+}
+-(void)fanhui{
+    XLMainViewController *xln=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xlmain"];
+    for (UIViewController *controller in self.navigationController.viewControllers) {
+        if ([controller isKindOfClass:[xln class]]) {
+            [self.navigationController popToViewController:controller animated:YES];
+        }
     }
 }
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSUserDefaults standardUserDefaults]setObject:@"www.yaopandian.com" forKey:@"JuYuWang"];
     [self delegate];
     [self registerForKeyboardNotifications];
+    [self comeback];
 }
 #pragma  mark ---注册通知
 - (void) registerForKeyboardNotifications
@@ -84,7 +103,6 @@
         _Password.keyboardType=UIKeyboardTypeNamePhonePad;
     }
 }
-
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     if (textField ==_Name) {
         [_Name resignFirstResponder];
@@ -115,8 +133,8 @@
             @try {
                 if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
                     NSUserDefaults *user=[NSUserDefaults standardUserDefaults];
-                    [user setObject:[NSString stringWithFormat:@"%@",_Name.text] forKey:@"Name"];
-                    [user setObject:[NSString stringWithFormat:@"%@",_Password.text] forKey:@"Password"];
+                    [user setObject:[NSString stringWithFormat:@"%@",_Name.text] forKey:@"uName"];
+                    [user setObject:[NSString stringWithFormat:@"%@",_Password.text] forKey:@"pPassword"];
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data" ] objectForKey:@"accessToken"]] forKey:@"accessToken"];
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"mac"]] forKey:@"Mac"];
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"userId"]] forKey:@"UserID"];
