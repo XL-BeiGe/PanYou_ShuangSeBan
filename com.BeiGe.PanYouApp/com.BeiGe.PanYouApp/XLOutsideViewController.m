@@ -306,7 +306,11 @@
         if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
             [WarningBox warningBoxModeText:[NSString stringWithFormat:@"打卡成功!"] andView:self.navigationController.view];
             [self.navigationController popViewControllerAnimated:YES];
-        }else{
+        }else if([[responseObject objectForKey:@"code"]isEqual:@"9999"]){
+            //账号在其他手机登录，请重新登录。
+            [XL_WangLuo sigejiu:self];
+        }
+        else{
             [WarningBox warningBoxModeText:@"打卡失败了哟～请重试..." andView:self.view];
         }
     } failure:^(NSError *error) {

@@ -532,6 +532,9 @@
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self fanhui];
             });
+        }else if([[responseObject objectForKey:@"code"]isEqual:@"9999"]){
+            //账号在其他手机登录，请重新登录。
+            [XL_WangLuo sigejiu:self];
         }
         else{
             
@@ -562,6 +565,9 @@
                 [self fanhui];
             });
             
+        }else if([[responseObject objectForKey:@"code"]isEqual:@"9999"]){
+            //账号在其他手机登录，请重新登录。
+            [XL_WangLuo sigejiu:self];
         }
         else{
             [WarningBox warningBoxModeText:@"提交重做答案失败，请重试!" andView:self.view];

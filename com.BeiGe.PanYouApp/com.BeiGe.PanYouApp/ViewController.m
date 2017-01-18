@@ -134,6 +134,10 @@
                     [[AppDelegate appDelegate] method];
                     [self jumpHome];
                 }
+                else if([[responseObject objectForKey:@"code"]isEqual:@"9999"]){
+                    //账号在其他手机登录，请重新登录。
+                    [XL_WangLuo sigejiu:self];
+                }
                 else{
                     [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.view];
                 }

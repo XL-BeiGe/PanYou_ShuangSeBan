@@ -244,6 +244,9 @@
         if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
             [WarningBox warningBoxModeText:@"请假成功!" andView:self.navigationController.view];
             [self.navigationController popViewControllerAnimated:YES];
+        }else if([[responseObject objectForKey:@"code"]isEqual:@"9999"]){
+            //账号在其他手机登录，请重新登录。
+            [XL_WangLuo sigejiu:self];
         }
     } failure:^(NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];

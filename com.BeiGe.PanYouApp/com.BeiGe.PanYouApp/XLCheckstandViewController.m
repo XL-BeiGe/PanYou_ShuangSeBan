@@ -146,6 +146,9 @@
           [WarningBox warningBoxModeText:@"药品信息已下载 😊" andView:self.view];
         }
        
+        }else if([[responseObject objectForKey:@"code"]isEqual:@"9999"]){
+            //账号在其他手机登录，请重新登录。
+            [XL_WangLuo sigejiu:self];
         }
     } failure:^(NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
@@ -392,6 +395,9 @@
                 _checkimg.image = [UIImage imageNamed:@"cuo.png"];
                 type = @"3";
             }
+        }else if([[responseObject objectForKey:@"code"]isEqual:@"9999"]){
+            //账号在其他手机登录，请重新登录。
+            [XL_WangLuo sigejiu:self];
         }
     } failure:^(NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
