@@ -25,6 +25,7 @@
     [self xianzhi];
     [self navigatio];
     [self delegate];
+    self.title =@"修改密码";
     // Do any additional setup after loading the view.
 }
 -(void)navigatio{
@@ -33,6 +34,10 @@
     [self.navigationItem setLeftBarButtonItem:left];
     
 }
+-(void)fanhui{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 -(void)delegate{
     //按钮圆角
     self.QueRen_Button.layer.cornerRadius = 5.0;
@@ -47,9 +52,7 @@
     _Newpass_Field.autocorrectionType = UITextAutocorrectionTypeNo;
     _Newpass_Field_2.autocorrectionType = UITextAutocorrectionTypeNo;
 }
--(void)fanhui{
-    [self.navigationController popViewControllerAnimated:YES];
-}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -137,7 +140,7 @@
     NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
     if (self.Oldpass_Field.text.length > 0 && self.Newpass_Field.text.length > 0 && self.Newpass_Field_2.text.length > 0)
     {
-        if(self.Oldpass_Field.text != [NSString stringWithFormat:@"%@",[defaults objectForKey:@"Password"]])
+        if(self.Oldpass_Field.text != [NSString stringWithFormat:@"%@",[defaults objectForKey:@"password"]])
         {
             [WarningBox warningBoxModeText:@"原密码不正确" andView:self.view];
         }
@@ -153,7 +156,7 @@
         {
             [WarningBox warningBoxModeIndeterminate:@"正在修改密码...." andView:self.view];
             NSString *fangshi=@"/sys/modpass";
-            NSString * name=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"Name"]];
+            NSString * name=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"name"]];
             NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:name,@"loginName",_Oldpass_Field.text,@"oldpassword", _Newpass_Field.text,@"newspassword",nil];
             //自己写的网络请求    请求外网地址
             [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Get success:^(id responseObject) {
@@ -162,7 +165,7 @@
                     NSLog(@"the xiugai\n\n\n%@\n\n\n",responseObject);
                         [WarningBox warningBoxModeText:[responseObject objectForKey:@"msg"] andView:self.navigationController.view];
                     if ([[responseObject objectForKey:@"code"]isEqualToString:@"0000"]) {
-                        [[NSUserDefaults standardUserDefaults]setObject:@"" forKey:@"Password"];
+                        [[NSUserDefaults standardUserDefaults]setObject:@"" forKey:@"password"];
                         [self.navigationController popToRootViewControllerAnimated:YES];
                     }
                 } @catch (NSException *exception) {

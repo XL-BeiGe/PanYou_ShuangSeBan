@@ -175,8 +175,17 @@
     NSLog(@"%@",path);
     pathArray = [[NSMutableArray alloc]init];
     
-    
+    [self comeback];
     // Do any additional setup after loading the view.
+}
+
+-(void)comeback{
+    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
+    UIBarButtonItem*left=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back@2x"] style:UIBarButtonItemStyleDone target:self action:@selector(fanhui)];
+    [self.navigationItem setLeftBarButtonItem:left];
+}
+-(void)fanhuii{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 #pragma mark---设置提醒的确定
 -(void)choossok{

@@ -50,6 +50,7 @@
 		D7029C731E28AE5F00807D8F /* right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D7029C721E28AE5F00807D8F /* right@2x.png */; };
 		D7029C751E28AF8600807D8F /* 下拉@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D7029C741E28AF8600807D8F /* 下拉@2x.png */; };
 		D7029C791E28B42600807D8F /* downloads@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D7029C781E28B42600807D8F /* downloads@2x.png */; };
+		D70B98091E31A2560026D3D1 /* shouye_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D70B98081E31A2560026D3D1 /* shouye_bg.png */; };
 		D72755A21E208FE400B0AFE8 /* 新消息提示-2.png in Resources */ = {isa = PBXBuildFile; fileRef = D72755A11E208FE400B0AFE8 /* 新消息提示-2.png */; };
 		D72F30C41DD1BD13007F754F /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = D72F30C31DD1BD13007F754F /* camera.png */; };
 		D730F89C1DCACFB100F07053 /* XLLeaveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D730F89B1DCACFB000F07053 /* XLLeaveViewController.m */; };
@@ -357,6 +358,7 @@
 		D7029C721E28AE5F00807D8F /* right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right@2x.png"; sourceTree = "<group>"; };
 		D7029C741E28AF8600807D8F /* 下拉@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "下拉@2x.png"; sourceTree = "<group>"; };
 		D7029C781E28B42600807D8F /* downloads@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "downloads@2x.png"; sourceTree = "<group>"; };
+		D70B98081E31A2560026D3D1 /* shouye_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shouye_bg.png; sourceTree = "<group>"; };
 		D72755A11E208FE400B0AFE8 /* 新消息提示-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "新消息提示-2.png"; sourceTree = "<group>"; };
 		D72F30C31DD1BD13007F754F /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
 		D730F89A1DCACFB000F07053 /* XLLeaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLLeaveViewController.h; sourceTree = "<group>"; };
@@ -1155,6 +1157,7 @@
 		D772CCB81DC9BE1C00BB28D9 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				D70B98081E31A2560026D3D1 /* shouye_bg.png */,
 				D7E80FB41E2F53F20025D9D0 /* icon_notice_time.png */,
 				D7029C781E28B42600807D8F /* downloads@2x.png */,
 				D7029C741E28AF8600807D8F /* 下拉@2x.png */,
@@ -1580,6 +1583,7 @@
 				D77487B31DD9652B007A92E3 /* change2.png in Resources */,
 				D77487B01DD9652B007A92E3 /* btn_save.png in Resources */,
 				D77487FE1DD9652B007A92E3 /* jianpanhaha33.png in Resources */,
+				D70B98091E31A2560026D3D1 /* shouye_bg.png in Resources */,
 				D77487E21DD9652B007A92E3 /* jianpan_dk_04_03.png in Resources */,
 				D77488051DD9652B007A92E3 /* verson.png in Resources */,
 				D772CD061DC9BE3100BB28D9 /* C3.png in Resources */,

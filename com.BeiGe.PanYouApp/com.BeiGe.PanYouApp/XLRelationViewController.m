@@ -20,6 +20,7 @@
     [self shezhi];
     // Do any additional setup after loading the view.
     [self navigatio];
+    self.title =@"联系我们";
 }
 -(void)navigatio{
     self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
