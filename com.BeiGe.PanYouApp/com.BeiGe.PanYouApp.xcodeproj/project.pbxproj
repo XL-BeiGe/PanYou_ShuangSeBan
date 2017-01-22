@@ -838,14 +838,6 @@
 				D774872B1DD964B0007A92E3 /* XLNetworkViewController.m */,
 				D774872C1DD964B0007A92E3 /* XLHomeViewController.h */,
 				D774872D1DD964B0007A92E3 /* XLHomeViewController.m */,
-				D774872E1DD964B0007A92E3 /* XLSettingViewController.h */,
-				D774872F1DD964B0007A92E3 /* XLSettingViewController.m */,
-				D77487301DD964B0007A92E3 /* XLChangeViewController.h */,
-				D77487311DD964B0007A92E3 /* XLChangeViewController.m */,
-				D77487321DD964B0007A92E3 /* XLRelationViewController.h */,
-				D77487331DD964B0007A92E3 /* XLRelationViewController.m */,
-				D77487341DD964B0007A92E3 /* XLExplainViewController.h */,
-				D77487351DD964B0007A92E3 /* XLExplainViewController.m */,
 				D77487361DD964B0007A92E3 /* XL_SearchViewController.h */,
 				D77487371DD964B0007A92E3 /* XL_SearchViewController.m */,
 			);
@@ -855,7 +847,7 @@
 		D2C1ACB71DC97E1E00092F44 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				D7E80FB11E2F37FE0025D9D0 /* 设置考勤 */,
+				D70B980A1E31D7BB0026D3D1 /* 设置 */,
 				D739C8E31DE7CD4C00942CD6 /* 登录 */,
 				D24EC07C1DDAA40700A043A8 /* 主页 */,
 				D24EC07B1DDAA3EB00A043A8 /* 答题 */,
@@ -911,6 +903,46 @@
 				D2CF97F91DEBFC21002782F9 /* XLtongxiangqingViewController.m */,
 			);
 			name = "统计详情";
+			sourceTree = "<group>";
+		};
+		D70B980A1E31D7BB0026D3D1 /* 设置 */ = {
+			isa = PBXGroup;
+			children = (
+				D774872E1DD964B0007A92E3 /* XLSettingViewController.h */,
+				D774872F1DD964B0007A92E3 /* XLSettingViewController.m */,
+				D70B980D1E31D7DB0026D3D1 /* 软件说明 */,
+				D70B980C1E31D7D40026D3D1 /* 联系我们 */,
+				D70B980B1E31D7C90026D3D1 /* 修改密码 */,
+				D7E80FB11E2F37FE0025D9D0 /* 设置考勤 */,
+			);
+			name = "设置";
+			sourceTree = "<group>";
+		};
+		D70B980B1E31D7C90026D3D1 /* 修改密码 */ = {
+			isa = PBXGroup;
+			children = (
+				D77487301DD964B0007A92E3 /* XLChangeViewController.h */,
+				D77487311DD964B0007A92E3 /* XLChangeViewController.m */,
+			);
+			name = "修改密码";
+			sourceTree = "<group>";
+		};
+		D70B980C1E31D7D40026D3D1 /* 联系我们 */ = {
+			isa = PBXGroup;
+			children = (
+				D77487321DD964B0007A92E3 /* XLRelationViewController.h */,
+				D77487331DD964B0007A92E3 /* XLRelationViewController.m */,
+			);
+			name = "联系我们";
+			sourceTree = "<group>";
+		};
+		D70B980D1E31D7DB0026D3D1 /* 软件说明 */ = {
+			isa = PBXGroup;
+			children = (
+				D77487341DD964B0007A92E3 /* XLExplainViewController.h */,
+				D77487351DD964B0007A92E3 /* XLExplainViewController.m */,
+			);
+			name = "软件说明";
 			sourceTree = "<group>";
 		};
 		D730F8A01DCAD93900F07053 /* 考勤 */ = {

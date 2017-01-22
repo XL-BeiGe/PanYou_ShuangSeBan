@@ -191,7 +191,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 #pragma mark ----本地通知
 -(void)localNotification
 {
-    NSLog(@"4234234234234234234234234");
+   
     [[UIApplication sharedApplication]cancelAllLocalNotifications];
     NSString * path1 = [NSHomeDirectory() stringByAppendingString:@"/Documents/durgRemindList.plist"];
     

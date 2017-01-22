@@ -11,6 +11,7 @@
 #import "WarningBox.h"
 #import "XLtongxiangqingViewController.h"
 #import "XLAttendanceViewController.h"
+#import "Color+Hex.h"
 @interface XLStatisticsViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     NSString*nian,*yue;
@@ -30,6 +31,7 @@
     [self delegate];
     [self comeback];
     self.title =@"统计";
+    _tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 -(void)comeback{
@@ -87,7 +89,7 @@
     NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userId",date,@"currentDate", nil];
     [WarningBox warningBoxModeIndeterminate:@"加载界面..." andView:self.view];
     [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
-//        NSLog(@"%@",responseObject);
+        NSLog(@"%@",responseObject);
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
             NSDictionary*data=[responseObject objectForKey:@"data"];
@@ -100,6 +102,9 @@
                     [waiqinlist addObject:dd];
                 }
             }
+            
+           
+           
             [_tableview reloadData];
         }
         else if([[responseObject objectForKey:@"code"]isEqual:@"9999"]){
@@ -134,20 +139,48 @@
     NSString*tian=[[NSString alloc] init];
     if (indexPath.row==0) {
         image=[UIImage imageNamed:@"统计-工作天数.png"];
-        biao=@"工作天数";
+        biao=@"工作班次";
+        if(qiandaotuilist.count==0){
+        tian=@"0";
+        }else{
         tian=[NSString stringWithFormat:@"%lu",(unsigned long)qiandaotuilist.count];
+        }
+        
+        
     }else if (indexPath.row==1){
         image=[UIImage imageNamed:@"统计-外出天数.png"];
         biao=@"外出次数";
-        tian=[NSString stringWithFormat:@"%lu",(unsigned long)waiqinlist.count];
+        if(waiqinlist.count==0){
+         tian=@"0";
+        }else{
+         tian=[NSString stringWithFormat:@"%lu",(unsigned long)waiqinlist.count];
+        }
+       
+        
     }else if (indexPath.row==2){
+       tianshu.textColor =[UIColor colorWithHexString:@"fd8f30"];
         image=[UIImage imageNamed:@"统计-请假次数.png"];
-        biao=@"请假次数";
-        tian=[NSString stringWithFormat:@"%lu",(unsigned long)qingjialist.count];
+        biao=@"请假天数";
+        //tian=[NSString stringWithFormat:@"%lu",(unsigned long)qingjialist.count];
+        if(qingjialist.count==0){
+        tian=@"0";
+        }else{
+            float jia=0;
+            float jj=0;
+            for (int i=0;i<qingjialist.count; i++) {
+               jj=[[qingjialist[i]objectForKey:@"fieldDay"]floatValue];
+                jia=jj+jia;
+            }
+            tian=[NSString stringWithFormat:@"%.1f",jia];
+        }
+     
+        
     }
     beijing.image=image;
     biaoti.text=biao;
     tianshu.text=tian;
+    
+   cell.selectionStyle =UITableViewCellSelectionStyleNone; 
     return cell;
 }
 - (IBAction)Left:(id)sender {

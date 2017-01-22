@@ -24,7 +24,7 @@
     if (NULL == JuyuwangIP) {
         [[NSUserDefaults standardUserDefaults]setObject:@"www.yaopandian.com" forKey:@"JuYuWang"];
     }
-    if (NULL !=[[NSUserDefaults standardUserDefaults] objectForKey:@"Name"]) {
+    if (NULL !=[[NSUserDefaults standardUserDefaults] objectForKey:@"uName"]) {
         _Name.text=[[NSUserDefaults standardUserDefaults] objectForKey:@"uName"];
         _Password.text=[[NSUserDefaults standardUserDefaults] objectForKey:@"pPassword"];
     }
