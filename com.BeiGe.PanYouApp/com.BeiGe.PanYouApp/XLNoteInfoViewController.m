@@ -29,7 +29,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"%@",_zhT);
+    //NSLog(@"%@",_zhT);
     caca=0;
   [self registerForKeyboardNotifications];
     
@@ -71,7 +71,7 @@
 
 - (void)magnifyImage
 {
-    NSLog(@"局部放大");
+    //NSLog(@"局部放大");
     [XLImageShow showImage:_Image];//调用方法
 }
 
@@ -175,11 +175,11 @@
     NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:_pushInfoId,@"pushInfoId", nil];
     [WarningBox warningBoxModeIndeterminate:@"加载界面..." andView:self.view];
     [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
-        NSLog(@"%@",responseObject);
+        //NSLog(@"%@",responseObject);
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
             pushTemplate=[[responseObject objectForKey:@"data"] objectForKey:@"pushTemplate"];
-            NSLog(@"-------%@",pushTemplate);
+            //NSLog(@"-------%@",pushTemplate);
             
             if([pushTemplate isEqual:@""]){
                 _view1.hidden=YES;
@@ -187,7 +187,7 @@
                 _imp.hidden =YES;
                 _renwuanniu.hidden = YES;
                 _backimg.hidden =NO;
-                NSLog(@"应该都隐藏");
+               // NSLog(@"应该都隐藏");
             }else{
                 _view1.hidden=NO;
                 _view2.hidden=NO;
@@ -195,7 +195,7 @@
                 _renwuanniu.hidden =NO;
                 _backimg.hidden =YES;
               [self jiemian];
-                NSLog(@"应该都显示");
+               // NSLog(@"应该都显示");
             }
             
             

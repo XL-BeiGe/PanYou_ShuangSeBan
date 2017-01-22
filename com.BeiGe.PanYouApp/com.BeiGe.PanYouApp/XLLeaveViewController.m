@@ -239,7 +239,7 @@
     NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userId",kaishi,@"beginTime",jieshi,@"endTime",chuannima,@"leaveType",_reason.text,@"leaveReason", nil];
     [WarningBox warningBoxModeIndeterminate:@"正在请假..." andView:self.view];
     [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
-        NSLog(@"%@",responseObject);
+       // NSLog(@"%@",responseObject);
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
             [WarningBox warningBoxModeText:@"请假成功!" andView:self.navigationController.view];

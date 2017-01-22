@@ -297,7 +297,7 @@
     
     
     NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:accessToken,@"accessToken",userID,@"userid",UserID,@"userId",chuankai,@"beginTime",chuanjie,@"endTime",_textview.text,@"fieldReason", nil];
-    NSLog(@"%@",rucan);
+    //NSLog(@"%@",rucan);
     //自己写的网络请求    请求外网地址
    
     [WarningBox warningBoxModeIndeterminate:[NSString stringWithFormat:@"正在打卡..."] andView:self.view];

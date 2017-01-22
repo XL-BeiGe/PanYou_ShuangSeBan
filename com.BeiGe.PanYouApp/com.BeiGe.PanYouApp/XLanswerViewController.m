@@ -55,7 +55,7 @@
     iii=0;
     duicuo=1;
     dianjicishu=0;
-    NSLog(@"%@",_timuarr);
+    //NSLog(@"%@",_timuarr);
     //以下两个的顺序千万不要反
     [self chuangjiantable];
     [self quxuanxiang:_timuarr[iii]];
@@ -409,7 +409,7 @@
     if (duodaan.length!=0)
     {
         button.hidden=YES;
-    NSLog(@"我是确定按钮");
+   // NSLog(@"我是确定按钮");
     NSString*zhengda= [[NSString stringWithFormat:@"%@",[_timuarr[iii] objectForKey:@"answer"]] uppercaseString];
     if (duodaan.length == zhengda.length) {
         NSMutableArray *stringArray = [[NSMutableArray alloc] init];
@@ -421,7 +421,7 @@
             [stringArray addObject:tempString];
         }        int q=0;
         for (NSString*ss in stringArray) {
-            NSLog(@"%@-----%@",zhengda,ss);
+           // NSLog(@"%@-----%@",zhengda,ss);
             if (![zhengda containsString:[NSString stringWithFormat:@"%@",ss]]) {
                 
                 q=1;
@@ -520,11 +520,11 @@
     NSString *fangshi=@"/exam/answerAll";
     NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"];
     NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userId",_mobanID,@"templateId",tijiaodaan,@"examList",_templateAssignId,@"templateAssignId",  nil];
-    NSLog(@"%@",rucan);
+    //NSLog(@"%@",rucan);
     //自己写的网络请求    请求外网地址
     
     [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
-        NSLog(@"%@",responseObject);
+        //NSLog(@"%@",responseObject);
         
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
@@ -552,12 +552,12 @@
     NSString *fangshi=@"/exam/answerError";
     NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"];
     NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userId",_mobanID,@"templateId",tijiaodaan,@"examList",_templateAssignId,@"templateAssignId", nil];
-    NSLog(@"%@",rucan);
+    //NSLog(@"%@",rucan);
     
     //自己写的网络请求    请求外网地址
     
     [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
-        NSLog(@"%@",responseObject);
+       // NSLog(@"%@",responseObject);
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
             [WarningBox warningBoxModeText:@"提交重做答案成功" andView:self.view];

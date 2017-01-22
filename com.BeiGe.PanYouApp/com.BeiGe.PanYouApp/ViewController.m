@@ -105,7 +105,7 @@
         //自己写的网络请求    请求外网地址
         [XL_WangLuo QianWaiwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
             [WarningBox warningBoxHide:YES andView:self.view];
-            NSLog(@"%@",responseObject);
+            //NSLog(@"%@",responseObject);
             @try {//DD000101    admin
                 if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
                     NSUserDefaults *user=[NSUserDefaults standardUserDefaults];
@@ -174,7 +174,7 @@
 -(void)jumpHome{
     XLxixixihahaViewController *home=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xixixihaha"];
     [self presentViewController:home animated:YES completion:^{
-        NSLog(@"么么哒");
+       // NSLog(@"么么哒");
     }];
 }
 

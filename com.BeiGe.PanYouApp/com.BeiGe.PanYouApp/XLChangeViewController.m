@@ -162,7 +162,7 @@
             [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Get success:^(id responseObject) {
                 [WarningBox warningBoxHide:YES andView:self.view];
                 @try {
-                    NSLog(@"the xiugai\n\n\n%@\n\n\n",responseObject);
+                   // NSLog(@"the xiugai\n\n\n%@\n\n\n",responseObject);
                         [WarningBox warningBoxModeText:[responseObject objectForKey:@"msg"] andView:self.navigationController.view];
                     if ([[responseObject objectForKey:@"code"]isEqualToString:@"0000"]) {
                         [[NSUserDefaults standardUserDefaults]setObject:@"" forKey:@"password"];

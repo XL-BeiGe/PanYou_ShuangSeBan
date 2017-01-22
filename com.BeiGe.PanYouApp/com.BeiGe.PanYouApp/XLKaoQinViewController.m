@@ -172,7 +172,7 @@
     
     
     path = [NSHomeDirectory() stringByAppendingString:@"/Documents/durgRemindList.plist"];
-    NSLog(@"%@",path);
+    //NSLog(@"%@",path);
     pathArray = [[NSMutableArray alloc]init];
     
     [self comeback];

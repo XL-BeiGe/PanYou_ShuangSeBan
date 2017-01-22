@@ -65,10 +65,10 @@
 
 
 - (IBAction)WeiXin_Button:(id)sender {
-     NSLog(@"Wechat");
+     //NSLog(@"Wechat");
 }
 - (IBAction)QQ_Button:(id)sender {
-     NSLog(@"QQ");
+     //NSLog(@"QQ");
 }
 - (IBAction)DianHua_Button:(id)sender {
    // NSLog(@"这里要写一个判断   提示框");

@@ -39,7 +39,7 @@
     
     [self tableviewdelegate];
     
-    NSLog(@"传过来的状态%@",_sctype);
+    //NSLog(@"传过来的状态%@",_sctype);
     
     
     [ZYCustomKeyboardTypeNumberView customKeyboardViewWithServiceTextField:_couprice Delegate:self];
@@ -97,7 +97,7 @@
     
     [WarningBox warningBoxModeIndeterminate:@"正在计算总价..." andView:self.view];
     [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
-        NSLog(@"%@",responseObject);
+        //NSLog(@"%@",responseObject);
         [WarningBox warningBoxHide:YES andView:self.view];
         if([[responseObject objectForKey:@"code"]isEqualToString:@"0000"]){
             NSString *drugAmount=[[responseObject objectForKey:@"data"] objectForKey:@"drugAmount"];
@@ -240,7 +240,7 @@
         theTextField.text = [szText substringToIndex:MaxLen];
         return NO;
     }
-    NSLog(@"限制长度");
+   // NSLog(@"限制长度");
     
     return YES;
 }
@@ -261,7 +261,7 @@
     
     NSUInteger mm=theTextField.tag-600;
     
-    NSLog(@"修改数量");
+    //NSLog(@"修改数量");
     
     if ([self NumberLength:oo]) {
         [shoparr[mm] setObject:qw forKey:@"drugCount"];
@@ -326,7 +326,7 @@
 }
 -(void)customKeyboardTypeNumberView_changeTextFieldWithText:(UITextField *)string{
     if (string.tag>=600&&string.tag<700) {
-        NSLog(@"麻辣隔壁    ");
+       // NSLog(@"麻辣隔壁    ");
         [self textFieldDidChange:string];
 //        nasnflakjfkaslfmel
     }

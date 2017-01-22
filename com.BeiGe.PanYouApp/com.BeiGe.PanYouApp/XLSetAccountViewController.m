@@ -80,7 +80,7 @@
     [self.view endEditing:YES];
     NSString *fangshi=@"/drug/postDrug";
     
-    NSLog(@"付款类型%@",chuannima);
+    //NSLog(@"付款类型%@",chuannima);
     NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:_consumptionInfoId,@"consumptionInfoId",_fumoney.text,@"drugAmountReceive",chuannima,@"drugAmountType",_zlmoney.text,@"drugAmountBack", nil];
     if (_fumoney.text.length<1) {
         [WarningBox warningBoxModeText:@"请输入付款总额！" andView:self.view];
@@ -90,7 +90,7 @@
     {
         [WarningBox warningBoxModeIndeterminate:@"正在结账..." andView:self.view];
         [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
-            NSLog(@"%@",responseObject);
+           // NSLog(@"%@",responseObject);
             
             [WarningBox warningBoxHide:YES andView:self.view];
             

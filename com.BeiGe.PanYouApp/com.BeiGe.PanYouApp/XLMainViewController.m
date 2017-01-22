@@ -87,7 +87,7 @@
     //添加取消按钮
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"网络盘点" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         //具体实现逻辑代码
-        NSLog(@"网络盘点");
+        //NSLog(@"网络盘点");
         [[NSUserDefaults standardUserDefaults] setObject:QianWaiWangIP forKey:@"JuYuWang"];
         [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"isPandian"];
         XLHomeViewController*xx;
@@ -96,7 +96,7 @@
     [alert addAction:cancel];
     
     UIAlertAction *bendi = [UIAlertAction actionWithTitle:@"本地盘点" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        NSLog(@"本地盘点");
+       // NSLog(@"本地盘点");
         [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"isPandian"];
         XLLogin_ViewController*xx;
         [self tiaoye:xx mingzi:@"login"];
