@@ -3312,6 +3312,7 @@
                         <color key="backgroundColor" red="0.95675891637802124" green="0.95692259073257446" blue="0.95674854516983032" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="WtR-lf-17d" firstAttribute="height" secondItem="gUY-Lw-8cM" secondAttribute="height" id="4Ba-U8-v1c"/>
+                            <constraint firstItem="gUY-Lw-8cM" firstAttribute="top" secondItem="zm1-Nb-Hap" secondAttribute="bottom" constant="8" id="6ED-U7-aV2"/>
                             <constraint firstItem="WtR-lf-17d" firstAttribute="trailing" secondItem="gUY-Lw-8cM" secondAttribute="trailing" id="6NI-Qs-eD3"/>
                             <constraint firstItem="WtR-lf-17d" firstAttribute="trailing" secondItem="rz9-v5-Wa9" secondAttribute="trailing" id="93P-C5-S0h"/>
                             <constraint firstItem="WtR-lf-17d" firstAttribute="leading" secondItem="OQO-LL-tJd" secondAttribute="leading" id="Mzz-5A-0Ai"/>
@@ -3320,7 +3321,6 @@
                             <constraint firstItem="WtR-lf-17d" firstAttribute="leading" secondItem="gUY-Lw-8cM" secondAttribute="leading" id="aik-9T-g7j"/>
                             <constraint firstItem="WtR-lf-17d" firstAttribute="leading" secondItem="rz9-v5-Wa9" secondAttribute="leading" id="hPj-v7-E69"/>
                             <constraint firstItem="rz9-v5-Wa9" firstAttribute="top" secondItem="WtR-lf-17d" secondAttribute="bottom" constant="10" id="tT0-1Z-8zg"/>
-                            <constraint firstItem="WtR-lf-17d" firstAttribute="top" secondItem="OQO-LL-tJd" secondAttribute="top" constant="78" id="txq-3I-Kon"/>
                             <constraint firstItem="WtR-lf-17d" firstAttribute="top" secondItem="gUY-Lw-8cM" secondAttribute="bottom" constant="10" id="wRT-qM-g2p"/>
                         </constraints>
                     </view>

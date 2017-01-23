@@ -54,7 +54,7 @@
 		D70B98091E31A2560026D3D1 /* shouye_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D70B98081E31A2560026D3D1 /* shouye_bg.png */; };
 		D72755A21E208FE400B0AFE8 /* 新消息提示-2.png in Resources */ = {isa = PBXBuildFile; fileRef = D72755A11E208FE400B0AFE8 /* 新消息提示-2.png */; };
 		D72EB0EE1E35D3CC002D93E8 /* XLSettsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D72EB0ED1E35D3CC002D93E8 /* XLSettsViewController.m */; };
-		D72EB0F01E35D6A9002D93E8 /* settt.png in Resources */ = {isa = PBXBuildFile; fileRef = D72EB0EF1E35D6A9002D93E8 /* settt.png */; };
+		D72EB0F21E35D8C8002D93E8 /* settt.png in Resources */ = {isa = PBXBuildFile; fileRef = D72EB0F11E35D8C8002D93E8 /* settt.png */; };
 		D72F30C41DD1BD13007F754F /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = D72F30C31DD1BD13007F754F /* camera.png */; };
 		D730F89C1DCACFB100F07053 /* XLLeaveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D730F89B1DCACFB000F07053 /* XLLeaveViewController.m */; };
 		D730F89F1DCAD93200F07053 /* XLStatisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D730F89E1DCAD93200F07053 /* XLStatisticsViewController.m */; };
@@ -367,7 +367,7 @@
 		D72755A11E208FE400B0AFE8 /* 新消息提示-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "新消息提示-2.png"; sourceTree = "<group>"; };
 		D72EB0EC1E35D3CC002D93E8 /* XLSettsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XLSettsViewController.h; path = "图片/XLSettsViewController.h"; sourceTree = "<group>"; };
 		D72EB0ED1E35D3CC002D93E8 /* XLSettsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XLSettsViewController.m; path = "图片/XLSettsViewController.m"; sourceTree = "<group>"; };
-		D72EB0EF1E35D6A9002D93E8 /* settt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settt.png; sourceTree = "<group>"; };
+		D72EB0F11E35D8C8002D93E8 /* settt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settt.png; sourceTree = "<group>"; };
 		D72F30C31DD1BD13007F754F /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
 		D730F89A1DCACFB000F07053 /* XLLeaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLLeaveViewController.h; sourceTree = "<group>"; };
 		D730F89B1DCACFB000F07053 /* XLLeaveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLLeaveViewController.m; sourceTree = "<group>"; };
@@ -1283,7 +1283,7 @@
 		D77487481DD9652B007A92E3 /* 图片 */ = {
 			isa = PBXGroup;
 			children = (
-				D72EB0EF1E35D6A9002D93E8 /* settt.png */,
+				D72EB0F11E35D8C8002D93E8 /* settt.png */,
 				D77487491DD9652B007A92E3 /* about.png */,
 				D774874A1DD9652B007A92E3 /* actionbar_back.png */,
 				D774874B1DD9652B007A92E3 /* bar.png */,
@@ -1642,7 +1642,7 @@
 				D77487B51DD9652B007A92E3 /* Default-568.png in Resources */,
 				D77487BC1DD9652B007A92E3 /* ic_qq.png in Resources */,
 				D20954C11DE583F40091790C /* E4.png in Resources */,
-				D72EB0F01E35D6A9002D93E8 /* settt.png in Resources */,
+				D72EB0F21E35D8C8002D93E8 /* settt.png in Resources */,
 				D77487BD1DD9652B007A92E3 /* ic_weixin.png in Resources */,
 				D20954BE1DE583F40091790C /* B4.png in Resources */,
 				D772CCEC1DC9BE3100BB28D9 /* 考勤-03.png in Resources */,
