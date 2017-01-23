@@ -8,7 +8,7 @@
 
 #import "XLHomeViewController.h"
 #import "WarningBox.h"
-#import "XLSettingViewController.h"
+#import "XLSettsViewController.h"
 #import "XL_Header.h"
 #import "XL_WangLuo.h"
 #import "XL_FMDB.h"
@@ -46,9 +46,9 @@
     UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"店小二" style:UIBarButtonItemStyleDone target:self action:@selector(huilaojia)];
     [self.navigationItem setLeftBarButtonItem:left];
     
-//    UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"cehua_12.png"] style:UIBarButtonItemStyleDone target:self action:@selector(set:)];
-//    
-//    [self.navigationItem setRightBarButtonItem:right];
+    UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settt.png"] style:UIBarButtonItemStyleDone target:self action:@selector(set:)];
+    
+    [self.navigationItem setRightBarButtonItem:right];
 }
 -(void)huilaojia{
     [self.navigationController popToRootViewControllerAnimated:YES];
@@ -172,7 +172,7 @@
 
 //跳转设置
 -(void)set:(UIButton*)sender{
-    XLSettingViewController *shezhi=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"set"];
+    XLSettsViewController *shezhi=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"setts"];
     [self.navigationController pushViewController:shezhi animated:YES];
 }
 -(void)tongbushuju{

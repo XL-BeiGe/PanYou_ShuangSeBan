@@ -188,7 +188,8 @@
                s =[NSString stringWithFormat:@"%@",[pushTemplate objectForKey:@"title"]];
            }
             titt=[[UILabel alloc] init];
-            UIFont *font = [UIFont fontWithName:@"Arial" size:15];
+            UIFont *font = [UIFont fontWithName:@"Arial" size:20];
+            titt.textAlignment =NSTextAlignmentCenter;
             NSAttributedString *attributedText =
             [[NSAttributedString alloc]initWithString:s attributes:@{NSFontAttributeName: font}];
             CGRect rect = [attributedText boundingRectWithSize:(CGSize){width-40, CGFLOAT_MAX}
@@ -197,7 +198,7 @@
             
            
             titt.text=s;
-            [titt setFrame:CGRectMake(20,4,rect.size.width, rect.size.height)];
+            [titt setFrame:CGRectMake(20,4,width-40, rect.size.height)];
             return titt.frame.size.height+15>40? titt.frame.size.height+15:40;
             
        }
@@ -224,7 +225,7 @@
            mess.text=ss;
            [mess setFrame:CGRectMake(20,4, rect.size.width, rect.size.height)];
            
-           return mess.frame.size.height+1>40? mess.frame.size.height+1:40;
+           return mess.frame.size.height+15>40? mess.frame.size.height+5:40;
        }
        else{
            return 40;
@@ -270,8 +271,8 @@
         }
         else if (indexPath.row==1){
             titt.numberOfLines=0;
-            titt.textAlignment= NSTextAlignmentCenter;
-            titt.font=[UIFont fontWithName:@"Arial" size:15];
+         
+            titt.font=[UIFont fontWithName:@"Arial" size:20];
             titt.textColor=[UIColor colorWithHexString:@"323232"];
              [cell.contentView addSubview:titt];
         }
@@ -329,11 +330,11 @@
     }
     else if (indexPath.section==1){
         Mview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 130)];
-        UILabel *beiz = [[UILabel alloc]initWithFrame:CGRectMake(15, 5, 50, 20)];
+        UILabel *beiz = [[UILabel alloc]initWithFrame:CGRectMake(15, 5, 40, 20)];
         beiz.textColor =[UIColor colorWithHexString:@"fd8f30"];
         beiz.font= [UIFont systemFontOfSize:14];
         beiz.text =@"备注:";
-        textview = [[UITextView alloc]initWithFrame:CGRectMake(70, 5, width-85, 120)];
+        textview = [[UITextView alloc]initWithFrame:CGRectMake(60, 5, width-85, 120)];
         textview.delegate =self;
         
       
@@ -373,7 +374,12 @@
         }else if ([_zhT isEqualToString:@"3"]){
             [renwuanniu setTitle:@"完成任务" forState:UIControlStateNormal];
         }else{
+            
+            if(nil==[pushTemplate objectForKey:@"remarks"]){
+            textview.text=@"";
+            }else{
             textview.text=[NSString stringWithFormat:@"%@",[pushTemplate objectForKey:@"remarks"]];
+            }
             renwuanniu.hidden=YES;
         }
         
