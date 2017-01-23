@@ -128,13 +128,14 @@
     }else{
      _titlle.text =[NSString stringWithFormat:@"%@",[pushTemplate objectForKey:@"title"]];
     }
-    
+    {
     if(nil==[pushTemplate objectForKey:@"pushSrc"]){
        _compary.text =@"";
     }else{
        _compary.text = [NSString stringWithFormat:@"来源:%@",[pushTemplate objectForKey:@"pushSrc"]];
     }
-    
+    }
+    {
     if(nil==[pushTemplate objectForKey:@"createTime"]){
        _shij.text =@"";
     }else{
@@ -142,7 +143,7 @@
         NSString *sss = [ss substringToIndex:10];
         _shij.text =sss;
     }
-    
+    }
    
     //_neror.text = [NSString stringWithFormat:@"%@",[pushTemplate objectForKey:@"context"]];
     

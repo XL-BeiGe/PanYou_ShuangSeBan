@@ -11,6 +11,7 @@
 #import "WarningBox.h"
 #import "XL_WangLuo.h"
 #import "XLMainViewController.h"
+#import "XLnotifoViewController.h"
 @interface XLNoteViewController ()
 {
     
@@ -194,7 +195,8 @@
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    XLNoteInfoViewController *xl = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"noteinfo"];
+    //XLNoteInfoViewController *xl = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"noteinfo"];
+     XLnotifoViewController *xl = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"nnnn"];
     xl.pushInfoId=[NSString stringWithFormat:@"%@",[pushList[indexPath.row] objectForKey:@"pushInfoId"]];
     xl.zhT= [NSString stringWithFormat:@"%@",[pushList[indexPath.row] objectForKey:@"progressStatus"]];
     
