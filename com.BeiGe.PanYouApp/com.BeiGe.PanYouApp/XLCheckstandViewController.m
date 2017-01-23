@@ -204,9 +204,9 @@
     nnnn = [NSString stringWithFormat:@"%@",[findarr[0] objectForKey:@"manufacturer"]];
     }
     
-     TextFlowView *nameview =  [[TextFlowView alloc] initWithFrame:_ypname.frame Text:mmmm textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];
+     TextFlowView *nameview =  [[TextFlowView alloc] initWithFrame:_ypname.frame Text:mmmm textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:NO];
     
-    TextFlowView *changj =  [[TextFlowView alloc] initWithFrame:_sccomp.frame Text:nnnn textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];
+    TextFlowView *changj =  [[TextFlowView alloc] initWithFrame:_sccomp.frame Text:nnnn textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:NO];
     
     for (UIView *v in [_vivivi subviews]) {
         if (v.tag==110) {
