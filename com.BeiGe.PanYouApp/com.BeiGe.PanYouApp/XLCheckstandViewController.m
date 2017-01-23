@@ -15,7 +15,7 @@
 #import "XL_FMDB.h"
 #import "XLMainViewController.h"
 #import "ZYCustomKeyboardTypeNumberView.h"
-
+#import "TextFlowView.h"
 #define gouwulei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"drugId",@"text",@"drugCount",@"text",@"drugPriceType",@"text",@"salePrice",@"text",@"vipPrice",@"text",@"name",@"text",@"qtmd", nil]
 
 @interface XLCheckstandViewController ()<ZYCustomKeyboardTypeNumberViewDelegate>
@@ -25,6 +25,8 @@
     NSArray *findarr;
     NSString*type;
    int typ;
+    NSString *nnnn;
+    NSString *mmmm;
 }
 @end
 
@@ -98,8 +100,9 @@
 
 -(void)clear{
     _checkyp.text= @"";
-    _ypname.text = @"";
-    _sccomp.text = @"";
+     mmmm =@"";
+     nnnn= @"";
+ 
     _scday.text = @"";
     _price.text =[NSString stringWithFormat:@""];
     _number.text =[NSString stringWithFormat:@""];
@@ -184,16 +187,45 @@
 }
 
 -(void)xianshi{
+    
     if(nil==[findarr[0] objectForKey:@"productName"]){
-    _ypname.text =@"";
+    mmmm =@"";
     }else{
-    _ypname.text =[NSString stringWithFormat:@"%@",[findarr[0] objectForKey:@"productName"]];
+    mmmm =[NSString stringWithFormat:@"%@",[findarr[0] objectForKey:@"productName"]];
     }
+   
+    
+    
+   
     if(nil==[findarr[0] objectForKey:@"manufacturer"]){
-    _sccomp.text =@"";
+     nnnn = @"";
+   
     }else{
-    _sccomp.text = [NSString stringWithFormat:@"%@",[findarr[0] objectForKey:@"manufacturer"]];
+    nnnn = [NSString stringWithFormat:@"%@",[findarr[0] objectForKey:@"manufacturer"]];
     }
+    
+     TextFlowView *nameview =  [[TextFlowView alloc] initWithFrame:_ypname.frame Text:mmmm textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];
+    
+    TextFlowView *changj =  [[TextFlowView alloc] initWithFrame:_sccomp.frame Text:nnnn textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];
+    
+    for (UIView *v in [_vivivi subviews]) {
+        if (v.tag==110) {
+            [v removeFromSuperview];
+        }
+    }
+    for (UIView *v in [_vivivi subviews]) {
+        if (v.tag==123) {
+            [v removeFromSuperview];
+        }
+    }
+    nameview.tag=110;
+    changj.tag=123;
+    [_vivivi addSubview:nameview];
+    [_vivivi addSubview:changj];
+    
+    
+    
+    
     
     if(nil==[findarr[0] objectForKey:@"approvalNumber"]){
     _scday.text =@"";
