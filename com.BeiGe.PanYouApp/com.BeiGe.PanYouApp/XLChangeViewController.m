@@ -159,7 +159,7 @@
             NSString * name=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"name"]];
             NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:name,@"loginName",_Oldpass_Field.text,@"oldpassword", _Newpass_Field.text,@"newspassword",nil];
             //自己写的网络请求    请求外网地址
-            [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Get success:^(id responseObject) {
+            [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Get success:^(id responseObject) {
                 [WarningBox warningBoxHide:YES andView:self.view];
                 @try {
                    // NSLog(@"the xiugai\n\n\n%@\n\n\n",responseObject);

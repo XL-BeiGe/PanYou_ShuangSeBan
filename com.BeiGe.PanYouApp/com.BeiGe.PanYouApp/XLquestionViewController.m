@@ -24,14 +24,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-//    self.view.backgroundColor=[UIColor blackColor];
+    //    self.view.backgroundColor=[UIColor blackColor];
     [self delegate];
     [self comeback];
-     self.title =@"每日答题";
+    self.title =@"每日答题";
 }
 -(void)comeback{
     self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
- UIBarButtonItem*left=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back@2x"] style:UIBarButtonItemStyleDone target:self action:@selector(fanhui)];
+    UIBarButtonItem*left=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back@2x"] style:UIBarButtonItemStyleDone target:self action:@selector(fanhui)];
     [self.navigationItem setLeftBarButtonItem:left];
 }
 -(void)fanhui{
@@ -85,43 +85,43 @@
     UILabel*shengtian=[cell viewWithTag:7];
     //state: 已完成，未完成，进行中，待进行；
     if(nil==[tempLateList[indexPath.section] objectForKey:@"examTemplateName"]){
-    taoti.text =@"";
+        taoti.text =@"";
     }else{
-    taoti.text=[NSString stringWithFormat:@"%@", [tempLateList[indexPath.section] objectForKey:@"examTemplateName"]];
+        taoti.text=[NSString stringWithFormat:@"%@", [tempLateList[indexPath.section] objectForKey:@"examTemplateName"]];
     }
     
     if(nil==[tempLateList[indexPath.section] objectForKey:@"answerTimes"]){
-      daci.text  =@"";
+        daci.text  =@"";
     }else{
-     daci.text =[NSString stringWithFormat:@"%@", [tempLateList[indexPath.section] objectForKey:@"answerTimes"]];
+        daci.text =[NSString stringWithFormat:@"%@", [tempLateList[indexPath.section] objectForKey:@"answerTimes"]];
     }
     
     if(nil==[tempLateList[indexPath.section] objectForKey:@"surplusAnswerTimes"]){
-       shengci.text=@"";
+        shengci.text=@"";
     }else{
-     shengci.text=[NSString stringWithFormat:@"%@", [tempLateList[indexPath.section] objectForKey:@"surplusAnswerTimes"]];
+        shengci.text=[NSString stringWithFormat:@"%@", [tempLateList[indexPath.section] objectForKey:@"surplusAnswerTimes"]];
     }
     
     if(nil==[tempLateList[indexPath.section] objectForKey:@"errorAnswerTimes"]){
         cuoci.text=@"";
     }else{
-      cuoci.text=[NSString stringWithFormat:@"%@", [tempLateList[indexPath.section] objectForKey:@"errorAnswerTimes"]];
+        cuoci.text=[NSString stringWithFormat:@"%@", [tempLateList[indexPath.section] objectForKey:@"errorAnswerTimes"]];
     }
     
     if(nil==[tempLateList[indexPath.section] objectForKey:@"answerDay"]){
-       datian.text=@"";
+        datian.text=@"";
     }else{
-     datian.text=[NSString stringWithFormat:@"%@", [tempLateList[indexPath.section] objectForKey:@"answerDay"]];
+        datian.text=[NSString stringWithFormat:@"%@", [tempLateList[indexPath.section] objectForKey:@"answerDay"]];
     }
     
     
     if(nil==[tempLateList[indexPath.section] objectForKey:@"surplusAnswerDay"]){
-    shengtian.text =@"";
+        shengtian.text =@"";
     }else{
-    shengtian.text=[NSString stringWithFormat:@"%@", [tempLateList[indexPath.section] objectForKey:@"surplusAnswerDay"]];
+        shengtian.text=[NSString stringWithFormat:@"%@", [tempLateList[indexPath.section] objectForKey:@"surplusAnswerDay"]];
     }
     
-   
+    
     
     
     //是否可以回答, 1能，2 不能；
@@ -159,12 +159,17 @@
         if (xla.timuarr.count==0) {
             [WarningBox warningBoxModeText:@"现在还没有题哟～" andView:self.view];
         }else
-        [self.navigationController pushViewController:xla animated:YES];
+            [self.navigationController pushViewController:xla animated:YES];
     }else{
-        [WarningBox warningBoxModeText:@"已经完成了" andView:self.view];
-    }
+        
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        if (cell)
+        {
+            UILabel *text=[cell viewWithTag:2];
+            [WarningBox warningBoxModeText:text.text andView:self.view];
 
-    
+        }
+    }
 }
 
 -(void)jiekou{
@@ -201,7 +206,7 @@
         [WarningBox warningBoxHide:YES andView:self.view];
         NSLog(@"%@",error);
     }];
-
+    
 }
 
 @end

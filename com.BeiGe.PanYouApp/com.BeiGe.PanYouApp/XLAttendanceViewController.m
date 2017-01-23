@@ -45,7 +45,7 @@
     [self wangluolianjie];
     [self anniupanduan];
     [self comeback];
-    [self anniupanduan];
+//    [self anniupanduan];
     self.title = @"考勤";
 }
 -(void)comeback{
@@ -104,7 +104,7 @@
             NSDictionary* data=[responseObject objectForKey:@"data"];
             banci=[data objectForKey:@"attendanceRules"];
             
-            [self anniupanduan];
+//            [self anniupanduan];
         }
         else if([[responseObject objectForKey:@"code"]isEqual:@"1007"]){
             //            [WarningBox warningBoxModeText:@"请重新进入该页面！" andView:self.view];

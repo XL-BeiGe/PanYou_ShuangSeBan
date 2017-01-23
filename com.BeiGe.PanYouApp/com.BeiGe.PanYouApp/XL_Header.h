@@ -12,7 +12,6 @@
 #define Host    @""
 #define Port    @"80"
 
-
 #define Scheme  @"http://"
 #define AppName @"/stockmgr"
 #define apath    @"/api/rest/1.0"
@@ -23,8 +22,7 @@
 #define JuyuwangIP [[NSUserDefaults standardUserDefaults] objectForKey:@"JuYuWang"]
 #define JuYuWang [NSString stringWithFormat:@"%@%@%@%@",Scheme,JuyuwangIP,AppName,apath]
 
-
-//#define QianWaiWangIP @"192.168.1.144:8080"
+//#define QianWaiWangIP @"192.168.1.124:8080"
 #define QianWaiWangIP @"125.211.221.232:60088"
 #define QianWaiWang [NSString stringWithFormat:@"%@%@%@%@",Scheme,QianWaiWangIP,AppName,apath]
 

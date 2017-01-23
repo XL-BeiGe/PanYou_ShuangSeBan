@@ -24,9 +24,10 @@
     if (NULL == JuyuwangIP) {
         [[NSUserDefaults standardUserDefaults]setObject:@"www.yaopandian.com" forKey:@"JuYuWang"];
     }
-    if (NULL !=[[NSUserDefaults standardUserDefaults] objectForKey:@"uName"]) {
-        _Name.text=[[NSUserDefaults standardUserDefaults] objectForKey:@"uName"];
-        _Password.text=[[NSUserDefaults standardUserDefaults] objectForKey:@"pPassword"];
+    NSLog(@"\n\n单机时候的IP：\n\n%@",JuyuwangIP);
+    if (NULL !=[[NSUserDefaults standardUserDefaults] objectForKey:@"Name"]) {
+        _Name.text=[[NSUserDefaults standardUserDefaults] objectForKey:@"Name"];
+        _Password.text=[[NSUserDefaults standardUserDefaults] objectForKey:@"Password"];
     }
     
 }
@@ -133,8 +134,8 @@
             @try {
                 if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
                     NSUserDefaults *user=[NSUserDefaults standardUserDefaults];
-                    [user setObject:[NSString stringWithFormat:@"%@",_Name.text] forKey:@"uName"];
-                    [user setObject:[NSString stringWithFormat:@"%@",_Password.text] forKey:@"pPassword"];
+                    [user setObject:[NSString stringWithFormat:@"%@",_Name.text] forKey:@"Name"];
+                    [user setObject:[NSString stringWithFormat:@"%@",_Password.text] forKey:@"Password"];
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data" ] objectForKey:@"accessToken"]] forKey:@"accessToken"];
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"mac"]] forKey:@"Mac"];
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"userId"]] forKey:@"UserID"];
@@ -168,6 +169,7 @@
 
 -(void)jumpHome{
     XLHomeViewController *home=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"home"];
+    home.biaoji=@"1";
     [self.navigationController pushViewController:home animated:YES];
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
