@@ -10,7 +10,8 @@
 #import "WarningBox.h"
 #import "XL_Header.h"
 #import "XL_WangLuo.h"
-
+#import "ViewController.h"
+#import "XLLogin_ViewController.h"
 @interface XLChangeViewController ()
 
 @end
@@ -20,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-   
+    
     //限制textField位数
     [self xianzhi];
     [self navigatio];
@@ -138,47 +139,109 @@
 - (IBAction)QueRen_Button:(id)sender {
     [self.view endEditing:YES];
     NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
-    if (self.Oldpass_Field.text.length > 0 && self.Newpass_Field.text.length > 0 && self.Newpass_Field_2.text.length > 0)
-    {
-        if(self.Oldpass_Field.text != [NSString stringWithFormat:@"%@",[defaults objectForKey:@"password"]])
+    if ([_panduan isEqual:@"1"]) {
+        if (self.Oldpass_Field.text.length > 0 && self.Newpass_Field.text.length > 0 && self.Newpass_Field_2.text.length > 0)
         {
-            [WarningBox warningBoxModeText:@"原密码不正确" andView:self.view];
-        }
-        else if (![self newpass1:self.Newpass_Field.text])
-        {
-            [WarningBox warningBoxModeText:@"密码长度不够" andView:self.view];
-        }
-        else if (![self newpass_Deng:self.Newpass_Field_2.text])
-        {
-            [WarningBox warningBoxModeText:@"两次密码不一致，请重新输入" andView:self.view];
-        }
-        else
-        {
-            [WarningBox warningBoxModeIndeterminate:@"正在修改密码...." andView:self.view];
-            NSString *fangshi=@"/sys/modpass";
-            NSString * name=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"name"]];
-            NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:name,@"loginName",_Oldpass_Field.text,@"oldpassword", _Newpass_Field.text,@"newspassword",nil];
-            //自己写的网络请求    请求外网地址
-            [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Get success:^(id responseObject) {
-                [WarningBox warningBoxHide:YES andView:self.view];
-                @try {
-                   // NSLog(@"the xiugai\n\n\n%@\n\n\n",responseObject);
+            
+            if(self.Oldpass_Field.text != [NSString stringWithFormat:@"%@",[defaults objectForKey:@"Password"]])
+            {
+                [WarningBox warningBoxModeText:@"原密码不正确" andView:self.view];
+            }
+            else if (![self newpass1:self.Newpass_Field.text])
+            {
+                [WarningBox warningBoxModeText:@"密码长度不够" andView:self.view];
+            }
+            else if (![self newpass_Deng:self.Newpass_Field_2.text])
+            {
+                [WarningBox warningBoxModeText:@"两次密码不一致，请重新输入" andView:self.view];
+            }
+            else
+            {
+                [WarningBox warningBoxModeIndeterminate:@"正在修改密码...." andView:self.view];
+                NSString *fangshi=@"/sys/modpass";
+                NSString * name=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"Name"]];
+                NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:name,@"loginName",_Oldpass_Field.text,@"oldpassword", _Newpass_Field.text,@"newspassword",nil];
+                //自己写的网络请求    请求外网地址
+                [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Get success:^(id responseObject) {
+                    [WarningBox warningBoxHide:YES andView:self.view];
+                    @try {
                         [WarningBox warningBoxModeText:[responseObject objectForKey:@"msg"] andView:self.navigationController.view];
-                    if ([[responseObject objectForKey:@"code"]isEqualToString:@"0000"]) {
-                        [[NSUserDefaults standardUserDefaults]setObject:@"" forKey:@"password"];
-                        [self.navigationController popToRootViewControllerAnimated:YES];
+                        if ([[responseObject objectForKey:@"code"]isEqualToString:@"0000"]) {
+                            if ([panduan isEqual:@"1"]) {
+                                [[NSUserDefaults standardUserDefaults]setObject:@"" forKey:@"password"];
+                                ViewController*view=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"llogin"];
+                                [view setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+                                [self presentViewController:view animated:YES completion:nil];
+                            }else{
+                                [[NSUserDefaults standardUserDefaults]setObject:@"" forKey:@"Password"];
+                                
+                                XLLogin_ViewController *xln=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"login"];
+                                for (UIViewController *controller in self.navigationController.viewControllers) {
+                                    if ([controller isKindOfClass:[xln class]]) {
+                                        [self.navigationController popToViewController:controller animated:YES];
+                                    }
+                                }
+                            }
+                        }
+                    } @catch (NSException *exception) {
+                        [WarningBox warningBoxModeText:@"请仔细检查您的网络" andView:self.view];
                     }
-                } @catch (NSException *exception) {
-                                [WarningBox warningBoxModeText:@"请仔细检查您的网络" andView:self.view];
-                }
-            } failure:^(NSError *error) {
-                [WarningBox warningBoxHide:YES andView:self.view];
-                 [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
-                NSLog(@"%@",error);
-            }];
+                } failure:^(NSError *error) {
+                    [WarningBox warningBoxHide:YES andView:self.view];
+                    [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
+                    NSLog(@"%@",error);
+                }];
+            }
+        }else{
+            [WarningBox warningBoxModeText:@"密码不能为空" andView:self.view];
         }
+
     }else{
-        [WarningBox warningBoxModeText:@"密码不能为空" andView:self.view];
+        
+        if (self.Oldpass_Field.text.length > 0 && self.Newpass_Field.text.length > 0 && self.Newpass_Field_2.text.length > 0)
+        {
+            
+            if(self.Oldpass_Field.text != [NSString stringWithFormat:@"%@",[defaults objectForKey:@"password"]])
+            {
+                [WarningBox warningBoxModeText:@"原密码不正确" andView:self.view];
+            }
+            else if (![self newpass1:self.Newpass_Field.text])
+            {
+                [WarningBox warningBoxModeText:@"密码长度不够" andView:self.view];
+            }
+            else if (![self newpass_Deng:self.Newpass_Field_2.text])
+            {
+                [WarningBox warningBoxModeText:@"两次密码不一致，请重新输入" andView:self.view];
+            }
+            else
+            {
+                [WarningBox warningBoxModeIndeterminate:@"正在修改密码...." andView:self.view];
+                NSString *fangshi=@"/sys/modpass";
+                NSString * name=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"name"]];
+                NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:name,@"loginName",_Oldpass_Field.text,@"oldpassword", _Newpass_Field.text,@"newspassword",nil];
+                //自己写的网络请求    请求外网地址
+                [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Get success:^(id responseObject) {
+                    [WarningBox warningBoxHide:YES andView:self.view];
+                    @try {
+                        // NSLog(@"the xiugai\n\n\n%@\n\n\n",responseObject);
+                        [WarningBox warningBoxModeText:[responseObject objectForKey:@"msg"] andView:self.navigationController.view];
+                        if ([[responseObject objectForKey:@"code"]isEqualToString:@"0000"]) {
+                            [[NSUserDefaults standardUserDefaults]setObject:@"" forKey:@"password"];
+                            ViewController*view=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"llogin"];
+                            [view setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+                            [self presentViewController:view animated:YES completion:nil];
+                        }
+                    } @catch (NSException *exception) {
+                        [WarningBox warningBoxModeText:@"请仔细检查您的网络" andView:self.view];
+                    }
+                } failure:^(NSError *error) {
+                    [WarningBox warningBoxHide:YES andView:self.view];
+                    [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
+                }];
+            }
+        }else{
+            [WarningBox warningBoxModeText:@"密码不能为空" andView:self.view];
+        }
     }
 }
 @end

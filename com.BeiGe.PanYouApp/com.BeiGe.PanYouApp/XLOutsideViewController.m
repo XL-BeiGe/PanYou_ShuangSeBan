@@ -139,9 +139,9 @@
     
     
     if (waifan==1) {
-     
+
         int ixi =[XLDateCompare compareDate:message withDate:nowdate];
-        if (ixi==-1){
+        if (ixi==-1||ixi==0){
             _outTime.text=message;
             chuankai=message;
         }
@@ -159,7 +159,7 @@
             [WarningBox warningBoxModeText:@"返回时间必须大于外出时间" andView:self.view];
         }
     }
-   
+
     [self xiaoshi];
 }
 -(void)xiaoshi{

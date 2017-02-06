@@ -100,7 +100,7 @@
                 NSDate*date=[NSDate date];
                 NSDateFormatter*dateFormatter=[[NSDateFormatter alloc] init];
                 // 为日期格式器设置格式字符串
-                [dateFormatter setDateFormat:@"yyyy-MM-dd- HH:mm"];
+                [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
                 // 使用日期格式器格式化日期、时间
                 NSString *destDateString = [dateFormatter stringFromDate:date];
                 NSString *message =  [NSString stringWithFormat:

@@ -100,9 +100,18 @@
 
 -(void)clear{
     _checkyp.text= @"";
-     mmmm =@"";
-     nnnn= @"";
- 
+    
+    for (UIView *v in [_vivivi subviews]) {
+        if (v.tag==110) {
+            [v removeFromSuperview];
+        }
+    }
+    for (UIView *v in [_vivivi subviews]) {
+        if (v.tag==123) {
+            [v removeFromSuperview];
+        }
+    }
+   
     _scday.text = @"";
     _price.text =[NSString stringWithFormat:@""];
     _number.text =[NSString stringWithFormat:@""];
@@ -123,6 +132,7 @@
 }
 
 -(void)xiazaijiekou{
+    [self.view endEditing:YES];
     [XL clearDatabase:db from:ChaXunBiaoMing];
     NSString *fangshi=@"/drug/drugDataSync";
     NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"];

@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *Newpass_Field;
 @property (weak, nonatomic) IBOutlet UITextField *Newpass_Field_2;
 @property (weak, nonatomic) IBOutlet UIButton *QueRen_Button;
+@property (strong, nonatomic) NSString * panduan;
 - (IBAction)QueRen_Button:(id)sender;
 
 @end

@@ -50,7 +50,7 @@
 - (IBAction)change:(id)sender {
     
     XLChangeViewController *shop = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"change"];
-  
+    shop.panduan=@"1";
     [self.navigationController pushViewController:shop animated:YES];
 }
 

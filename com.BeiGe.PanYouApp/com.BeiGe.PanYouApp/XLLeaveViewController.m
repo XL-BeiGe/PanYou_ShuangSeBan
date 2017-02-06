@@ -105,21 +105,21 @@
     NSString *destDateString = [dateFormatter stringFromDate:selected];
     NSString *message =[NSString stringWithFormat:@"%@", destDateString];
     
-    NSDate *date = [NSDate date];
+//    NSDate *date = [NSDate date];
     NSDateFormatter *dateForm = [[NSDateFormatter alloc] init];
     [dateForm setDateFormat:@"yyyy-MM-dd HH:mm"];
-    NSString *nowdate =[dateForm stringFromDate:date];
+//    NSString *nowdate =[dateForm stringFromDate:date];
     
     
     if (kaijie==1) {
-        int ixi =[XLDateCompare compareDate:message withDate:nowdate];
-        if (ixi==-1){
+//        int ixi =[XLDateCompare compareDate:message withDate:nowdate];
+//        if (ixi==-1){
             _beginTime.text=message;
             kaishi=message;
-        }
-        else{
-            [WarningBox warningBoxModeText:@"开始时间应大于当前时间" andView:self.view];
-        }
+//        }
+//        else{
+//            [WarningBox warningBoxModeText:@"开始时间应大于当前时间" andView:self.view];
+//        }
     }else{
         int ixix =[XLDateCompare compareDate:_beginTime.text withDate:message];
         if (ixix==1){
@@ -128,9 +128,6 @@
         }else{
             [WarningBox warningBoxModeText:@"结束时间必须大于开始时间" andView:self.view];
         }
-        
-        
-        
     }
     [self xiaoshi];
 }

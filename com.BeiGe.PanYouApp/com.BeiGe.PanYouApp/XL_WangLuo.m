@@ -18,8 +18,13 @@
  */
 +(void)WaiwangQingqiuwithBizMethod:(NSString*)BizMetho Rucan:(NSDictionary*)BizParamSt type:(Post_or_Get)type success:(void (^)(id responseObject))success
                            failure:(void (^)(NSError *error))failure{
+    NSString *Waiwang;
+    if([panduan isEqual:@"1"]){
+        Waiwang=waiWaiWang;
+    }else{
+        Waiwang=WaiWang;
+    }
     
-    NSString *Waiwang=WaiWang;
     NSString *BizMethod=BizMetho;
     
     NSString *Url=[NSString stringWithFormat:@"%@%@",Waiwang,BizMethod];
@@ -33,7 +38,7 @@
     
     NSString *Rucan=[writer stringWithObject:BizParamStr];
     NSDictionary *ChuanCan=[NSDictionary dictionaryWithObjectsAndKeys:Appkey,@"appkey",UserID,@"userid",vaildToken,@"vaildToken",accessToken,@"accessToken",Rucan,@"params", nil];
-    //    NSLog(@"-*-*-*-*-%@",Url);
+        NSLog(@"单机版的登录：-*-*-*-*-%@",Url);
     //    NSLog(@"\n－－－－－请求－－－－－\n%@",ChuanCan);
     AFHTTPSessionManager *manager=[AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
@@ -81,11 +86,16 @@
 +(void)JuYuwangQingqiuwithBizMethod:(NSString*)BizMetho Rucan:(NSDictionary*)BizParamSt type:(Post_or_Get)type success:(void (^)(id responseObject))success
                             failure:(void (^)(NSError *error))failure{
     NSUserDefaults * shuju=[NSUserDefaults standardUserDefaults];//非登录接口用
-    NSString *JuYuwang=JuYuWang;//登录接口不用
+    NSString *JuYuwang;//登录接口不用
+    if([panduan isEqual:@"1"]){
+        JuYuwang=JuYuWai;
+    }else{
+        JuYuwang=JuYuWang;
+    }
     NSString *BizMethod=BizMetho;
     
     NSString *Url=[NSString stringWithFormat:@"%@%@",JuYuwang,BizMethod];
-    //    NSLog(@"\n\n*********\n\n%@",Url);
+        NSLog(@"\n\n单机版除了登录*********\n\n%@",Url);
     NSString *UserID=[shuju objectForKey:@"UserID"];//登陆不用传
     //    NSLog(@"%@",UserID);
     NSString *vaildToken=@"";//传空或非空
@@ -159,7 +169,7 @@
     
     NSString *Rucan=[writer stringWithObject:BizParamStr];
     NSDictionary *ChuanCan=[NSDictionary dictionaryWithObjectsAndKeys:Appkey,@"appkey",UserID,@"userid",vaildToken,@"vaildToken",accessToken,@"accessToken",Rucan,@"params", nil];
-    //    NSLog(@"-*-*-*-*-%@",Url);
+        NSLog(@"网络版登录-*-*-*-*-%@",Url);
     //    NSLog(@"\n－－－－－请求－－－－－\n%@",ChuanCan);
     AFHTTPSessionManager *manager=[AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
@@ -210,7 +220,7 @@
     NSString *BizMethod=BizMetho;
     
     NSString *Url=[NSString stringWithFormat:@"%@%@",QianWaiwang,BizMethod];
-    //    NSLog(@"\n\n*********\n\n%@",Url);
+        NSLog(@"\n\n网络版除了登录*********\n\n%@",Url);
     NSString *UserID=[shuju objectForKey:@"userId"];//登陆不用传
     //    NSLog(@"%@",UserID);
     NSString *vaildToken=@"";//传空或非空
@@ -271,7 +281,7 @@
     NSString *BizMethod=BizMetho;
     
     NSString *Url=[NSString stringWithFormat:@"%@%@",JuYuwang,BizMethod];
-    //    NSLog(@"\n\n*********\n\n%@",Url);
+        NSLog(@"\n\n网络上传图片*********\n\n%@",Url);
     
     
     

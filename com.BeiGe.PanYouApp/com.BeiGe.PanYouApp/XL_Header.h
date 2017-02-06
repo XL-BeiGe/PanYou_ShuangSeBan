@@ -17,10 +17,14 @@
 #define apath    @"/api/rest/1.0"
 
 #define WaiWang [NSString stringWithFormat:@"%@%@%@%@",Scheme,JuyuwangIP,AppName,apath]
-
+#define waiWaiWang [NSString stringWithFormat:@"%@%@%@%@",Scheme,juyuwaiwangIP,AppName,apath]
 #define QianWaiWang [NSString stringWithFormat:@"%@%@%@%@",Scheme,QianWaiWangIP,AppName,apath]
 #define JuyuwangIP [[NSUserDefaults standardUserDefaults] objectForKey:@"JuYuWang"]
 #define JuYuWang [NSString stringWithFormat:@"%@%@%@%@",Scheme,JuyuwangIP,AppName,apath]
+#define juyuwaiwangIP  [[NSUserDefaults standardUserDefaults] objectForKey:@"JuYuWai"]
+#define JuYuWai [NSString stringWithFormat:@"%@%@%@%@",Scheme,juyuwaiwangIP,AppName,apath]
+//==1 为网络盘点    ==0为单机盘点
+#define panduan  [[NSUserDefaults standardUserDefaults] objectForKey:@"isPandian"]
 
 //#define QianWaiWangIP @"192.168.1.124:8080"
 #define QianWaiWangIP @"125.211.221.232:60088"

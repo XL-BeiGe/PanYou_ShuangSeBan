@@ -126,7 +126,7 @@
                     //收银台需要显示的名称
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"name"]] forKey:@"CZname"];
                     if(NULL ==[[NSUserDefaults standardUserDefaults] objectForKey:@"JuYuWang"]){
-                        [[NSUserDefaults standardUserDefaults] setObject:QianWaiWangIP forKey:@"JuYuWang"];
+                        [[NSUserDefaults standardUserDefaults] setObject:@"www.yaopandian.com" forKey:@"JuYuWang"];
                     }
                     
                     

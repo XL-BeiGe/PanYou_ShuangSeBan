@@ -21,9 +21,10 @@
 @implementation XLLogin_ViewController
 -(void)viewWillAppear:(BOOL)animated{
    // [self.navigationController setNavigationBarHidden:YES animated:YES];
-    if (NULL == JuyuwangIP) {
-        [[NSUserDefaults standardUserDefaults]setObject:@"www.yaopandian.com" forKey:@"JuYuWang"];
-    }
+//    NSLog(@"%@",JuyuwangIP);
+//    if (NULL == JuyuwangIP) {
+//        [[NSUserDefaults standardUserDefaults]setObject:@"www.yaopandian.com" forKey:@"JuYuWang"];
+//    }
     NSLog(@"\n\n单机时候的IP：\n\n%@",JuyuwangIP);
     if (NULL !=[[NSUserDefaults standardUserDefaults] objectForKey:@"Name"]) {
         _Name.text=[[NSUserDefaults standardUserDefaults] objectForKey:@"Name"];
@@ -50,7 +51,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[NSUserDefaults standardUserDefaults]setObject:@"www.yaopandian.com" forKey:@"JuYuWang"];
+
     [self delegate];
     [self registerForKeyboardNotifications];
     [self comeback];

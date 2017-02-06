@@ -25,9 +25,7 @@
 
 @implementation XLMainViewController
 -(void)viewWillAppear:(BOOL)animated{
-   
-   // [[NSUserDefaults standardUserDefaults] setObject:@"192.168.1.110:8090" forKey:@"JuYuWang"];
-    
+
 }
 
 - (void)viewDidLoad {
@@ -87,8 +85,7 @@
     //添加取消按钮
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"网络盘点" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         //具体实现逻辑代码
-        //NSLog(@"网络盘点");
-        [[NSUserDefaults standardUserDefaults] setObject:QianWaiWangIP forKey:@"JuYuWang"];
+        [[NSUserDefaults standardUserDefaults] setObject:QianWaiWangIP forKey:@"JuYuWai"];
         [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"isPandian"];
         XLHomeViewController*xx;
         [self tiaoye:xx mingzi:@"home"];
@@ -96,7 +93,6 @@
     [alert addAction:cancel];
     
     UIAlertAction *bendi = [UIAlertAction actionWithTitle:@"本地盘点" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-       // NSLog(@"本地盘点");
         [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"isPandian"];
         XLLogin_ViewController*xx;
         [self tiaoye:xx mingzi:@"login"];
