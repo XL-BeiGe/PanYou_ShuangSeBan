@@ -25,6 +25,8 @@
 //    if (NULL == JuyuwangIP) {
 //        [[NSUserDefaults standardUserDefaults]setObject:@"www.yaopandian.com" forKey:@"JuYuWang"];
 //    }
+    self.navigationController.navigationBar.translucent = true;
+
     NSLog(@"\n\n单机时候的IP：\n\n%@",JuyuwangIP);
     if (NULL !=[[NSUserDefaults standardUserDefaults] objectForKey:@"Name"]) {
         _Name.text=[[NSUserDefaults standardUserDefaults] objectForKey:@"Name"];
@@ -32,7 +34,9 @@
     }
     
 }
-
+-(void)viewWillDisappear:(BOOL)animated{
+    self.navigationController.navigationBar.translucent = false;
+}
 -(void)comeback{
     self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
     // UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self  action:@selector(fanhui)];

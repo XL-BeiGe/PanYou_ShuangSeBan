@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "JPUSHService.h"
+#import "Color+Hex.h"
 // iOS10注册APNs所需头文件
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
 #import <UserNotifications/UserNotifications.h>
@@ -30,7 +31,7 @@ static AppDelegate *_appDelegate;
     //添加当前类对象为一个观察者，name和object设置为nil，表示接收一切通知
     [center addObserver:self selector:@selector(notice:) name:@"123" object:nil];
     
-    
+    self.window.backgroundColor=[UIColor colorWithHexString:@"33c383"];
     //Required
     //notice: 3.0.0及以后版本注册可以这样写，也可以继续用之前的注册方式
     JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];

@@ -17,6 +17,7 @@
 #import "XL_WangLuo.h"
 #import "AppDelegate.h"
 #import "XL_Header.h"
+#import "Color+Hex.h"
 #import "XLHomeViewController.h"
 
 @interface XLMainViewController ()
@@ -25,9 +26,12 @@
 
 @implementation XLMainViewController
 -(void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBar.translucent = true;
 
 }
-
+-(void)viewWillDisappear:(BOOL)animated{
+    self.navigationController.navigationBar.translucent = false;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -46,6 +50,11 @@
 }
 //通知
 -(void)tongzhi{
+
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    
     UIButton *btn =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
     [btn setImage:[UIImage imageNamed:@"通知1.png"] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(Note:) forControlEvents:UIControlEventTouchUpInside];

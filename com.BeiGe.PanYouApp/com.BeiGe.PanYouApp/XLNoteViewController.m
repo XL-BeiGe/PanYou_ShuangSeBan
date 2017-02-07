@@ -120,7 +120,11 @@
     
    // NSLog(@"refreshClick: -- 刷新触发");
     // 此处添加刷新tableView数据的代码
+    if ([zhT  isEqual:@"1"]||[zhT  isEqual:@"2"]) {
+        [self tongzhijiekou:@""];
+    }else{
      [self tongzhijiekou:zhT];
+    }
     [refreshControl endRefreshing];
     
    
