@@ -46,17 +46,31 @@
 }
 //通知
 -(void)tongzhi{
-    UIButton *btn =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 25)];
-    [btn setImage:[UIImage imageNamed:@"icon_xiaoxi.png"] forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(Download:) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *btn =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
+    [btn setImage:[UIImage imageNamed:@"通知1.png"] forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(Note:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *right = [[UIBarButtonItem alloc]initWithCustomView:btn];
     self.navigationItem.rightBarButtonItem = right;
+    
+    UIButton *btnn =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
+    [btnn setImage:[UIImage imageNamed:@"设置.png"] forState:UIControlStateNormal];
+    [btnn addTarget:self action:@selector(setttt:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *left = [[UIBarButtonItem alloc]initWithCustomView:btnn];
+    self.navigationItem.leftBarButtonItem =left;
+    
 }
--(void)Download:(UIButton *)button{
+-(void)setttt:(UIButton *)button{
+    XLSettingViewController*xx;
+    [self tiaoye:xx mingzi:@"set"];
+}
+
+
+-(void)Note:(UIButton *)button{
     
     XLNoteViewController*xx;
     [self tiaoye:xx mingzi:@"note"];
 }
+
 //出勤
 - (IBAction)Attend:(id)sender {
     XLAttendanceViewController*xx;
@@ -111,8 +125,9 @@
 }
 //设置
 - (IBAction)Set:(id)sender {
-    XLSettingViewController*xx;
-    [self tiaoye:xx mingzi:@"set"];
+    NSLog(@"知识学习还在路上");
+//    XLSettingViewController*xx;
+//    [self tiaoye:xx mingzi:@"set"];
 }
 //收银
 - (IBAction)CashierDesk:(id)sender {

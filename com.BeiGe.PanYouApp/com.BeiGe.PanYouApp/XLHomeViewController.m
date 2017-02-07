@@ -47,8 +47,13 @@
     [self.navigationItem setLeftBarButtonItem:left];
     
     if([_biaoji isEqual:@"1"]){
-        UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settt.png"] style:UIBarButtonItemStyleDone target:self action:@selector(set:)];
+       
         
+        UIButton *btnn =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
+        [btnn setImage:[UIImage imageNamed:@"设置.png"] forState:UIControlStateNormal];
+        [btnn addTarget:self action:@selector(set:) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *right = [[UIBarButtonItem alloc]initWithCustomView:btnn];
+        self.navigationItem.rightBarButtonItem = right;
         [self.navigationItem setRightBarButtonItem:right];
     }
 }

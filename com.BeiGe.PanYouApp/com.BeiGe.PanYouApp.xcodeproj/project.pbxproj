@@ -68,8 +68,27 @@
 		D7336D131E236B7E0008AAA7 /* XLSizeForLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D7336D121E236B7E0008AAA7 /* XLSizeForLabel.m */; };
 		D7472E3B1E1F7ACC008D228F /* 试题背景.png in Resources */ = {isa = PBXBuildFile; fileRef = D7472E371E1F7ACC008D228F /* 试题背景.png */; };
 		D7472E3C1E1F7ACC008D228F /* 消息背景.png in Resources */ = {isa = PBXBuildFile; fileRef = D7472E381E1F7ACC008D228F /* 消息背景.png */; };
-		D7472E3E1E1F7ACC008D228F /* icon_xiaoxi.png in Resources */ = {isa = PBXBuildFile; fileRef = D7472E3A1E1F7ACC008D228F /* icon_xiaoxi.png */; };
 		D74D98631E29BD8400B4DC83 /* XLImageShow.m in Sources */ = {isa = PBXBuildFile; fileRef = D74D98621E29BD8400B4DC83 /* XLImageShow.m */; };
+		D75846C61E494E7E00D4516F /* 盘点背景.png in Resources */ = {isa = PBXBuildFile; fileRef = D75846C11E494E7E00D4516F /* 盘点背景.png */; };
+		D75846CC1E49569300D4516F /* 蓝背景.png in Resources */ = {isa = PBXBuildFile; fileRef = D75846CB1E49569300D4516F /* 蓝背景.png */; };
+		D75846CE1E4956B600D4516F /* 考勤.png in Resources */ = {isa = PBXBuildFile; fileRef = D75846CD1E4956B600D4516F /* 考勤.png */; };
+		D75846D01E49570600D4516F /* 紫背景.png in Resources */ = {isa = PBXBuildFile; fileRef = D75846CF1E49570600D4516F /* 紫背景.png */; };
+		D75846D21E49576600D4516F /* 答题.png in Resources */ = {isa = PBXBuildFile; fileRef = D75846D11E49576600D4516F /* 答题.png */; };
+		D75846D41E49578400D4516F /* 黄背景.png in Resources */ = {isa = PBXBuildFile; fileRef = D75846D31E49578400D4516F /* 黄背景.png */; };
+		D75846D61E49578C00D4516F /* 蓝色背景2.png in Resources */ = {isa = PBXBuildFile; fileRef = D75846D51E49578C00D4516F /* 蓝色背景2.png */; };
+		D75846D81E49579200D4516F /* 粉色背景.png in Resources */ = {isa = PBXBuildFile; fileRef = D75846D71E49579200D4516F /* 粉色背景.png */; };
+		D75846DA1E49579900D4516F /* 收银台.png in Resources */ = {isa = PBXBuildFile; fileRef = D75846D91E49579900D4516F /* 收银台.png */; };
+		D75846DC1E49579F00D4516F /* 知识学习.png in Resources */ = {isa = PBXBuildFile; fileRef = D75846DB1E49579F00D4516F /* 知识学习.png */; };
+		D75846DE1E4957F300D4516F /* 盘点.png in Resources */ = {isa = PBXBuildFile; fileRef = D75846DD1E4957F300D4516F /* 盘点.png */; };
+		D75846E01E495B1000D4516F /* 首页2_01.png in Resources */ = {isa = PBXBuildFile; fileRef = D75846DF1E495B1000D4516F /* 首页2_01.png */; };
+		D75846E21E495D0100D4516F /* 背景背景.png in Resources */ = {isa = PBXBuildFile; fileRef = D75846E11E495D0100D4516F /* 背景背景.png */; };
+		D75846E71E495D4D00D4516F /* 11.png in Resources */ = {isa = PBXBuildFile; fileRef = D75846E31E495D4D00D4516F /* 11.png */; };
+		D75846E81E495D4D00D4516F /* 22.png in Resources */ = {isa = PBXBuildFile; fileRef = D75846E41E495D4D00D4516F /* 22.png */; };
+		D75846E91E495D4D00D4516F /* 33.png in Resources */ = {isa = PBXBuildFile; fileRef = D75846E51E495D4D00D4516F /* 33.png */; };
+		D75846EA1E495D4D00D4516F /* 44.png in Resources */ = {isa = PBXBuildFile; fileRef = D75846E61E495D4D00D4516F /* 44.png */; };
+		D75846EC1E49614900D4516F /* 设置.png in Resources */ = {isa = PBXBuildFile; fileRef = D75846EB1E49614900D4516F /* 设置.png */; };
+		D75846EF1E49616200D4516F /* 通知1.png in Resources */ = {isa = PBXBuildFile; fileRef = D75846ED1E49616200D4516F /* 通知1.png */; };
+		D75846F01E49616200D4516F /* 通知2.png in Resources */ = {isa = PBXBuildFile; fileRef = D75846EE1E49616200D4516F /* 通知2.png */; };
 		D75D8FAF1DC9D16E00CC3355 /* XLAttendanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D75D8FAE1DC9D16E00CC3355 /* XLAttendanceViewController.m */; };
 		D75D8FB11DC9DC1000CC3355 /* jinru_03.png in Resources */ = {isa = PBXBuildFile; fileRef = D75D8FB01DC9DC1000CC3355 /* jinru_03.png */; };
 		D76B34AC1DC9923500E285AB /* XL_WangLuo.m in Sources */ = {isa = PBXBuildFile; fileRef = D76B34AB1DC9923500E285AB /* XL_WangLuo.m */; };
@@ -389,9 +408,28 @@
 		D7336D121E236B7E0008AAA7 /* XLSizeForLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLSizeForLabel.m; sourceTree = "<group>"; };
 		D7472E371E1F7ACC008D228F /* 试题背景.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "试题背景.png"; sourceTree = "<group>"; };
 		D7472E381E1F7ACC008D228F /* 消息背景.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "消息背景.png"; sourceTree = "<group>"; };
-		D7472E3A1E1F7ACC008D228F /* icon_xiaoxi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_xiaoxi.png; sourceTree = "<group>"; };
 		D74D98611E29BD8400B4DC83 /* XLImageShow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLImageShow.h; sourceTree = "<group>"; };
 		D74D98621E29BD8400B4DC83 /* XLImageShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLImageShow.m; sourceTree = "<group>"; };
+		D75846C11E494E7E00D4516F /* 盘点背景.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "盘点背景.png"; sourceTree = "<group>"; };
+		D75846CB1E49569300D4516F /* 蓝背景.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "蓝背景.png"; sourceTree = "<group>"; };
+		D75846CD1E4956B600D4516F /* 考勤.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "考勤.png"; sourceTree = "<group>"; };
+		D75846CF1E49570600D4516F /* 紫背景.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "紫背景.png"; sourceTree = "<group>"; };
+		D75846D11E49576600D4516F /* 答题.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "答题.png"; sourceTree = "<group>"; };
+		D75846D31E49578400D4516F /* 黄背景.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "黄背景.png"; sourceTree = "<group>"; };
+		D75846D51E49578C00D4516F /* 蓝色背景2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "蓝色背景2.png"; sourceTree = "<group>"; };
+		D75846D71E49579200D4516F /* 粉色背景.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "粉色背景.png"; sourceTree = "<group>"; };
+		D75846D91E49579900D4516F /* 收银台.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "收银台.png"; sourceTree = "<group>"; };
+		D75846DB1E49579F00D4516F /* 知识学习.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "知识学习.png"; sourceTree = "<group>"; };
+		D75846DD1E4957F300D4516F /* 盘点.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "盘点.png"; sourceTree = "<group>"; };
+		D75846DF1E495B1000D4516F /* 首页2_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页2_01.png"; sourceTree = "<group>"; };
+		D75846E11E495D0100D4516F /* 背景背景.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "背景背景.png"; sourceTree = "<group>"; };
+		D75846E31E495D4D00D4516F /* 11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 11.png; sourceTree = "<group>"; };
+		D75846E41E495D4D00D4516F /* 22.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 22.png; sourceTree = "<group>"; };
+		D75846E51E495D4D00D4516F /* 33.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 33.png; sourceTree = "<group>"; };
+		D75846E61E495D4D00D4516F /* 44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 44.png; sourceTree = "<group>"; };
+		D75846EB1E49614900D4516F /* 设置.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "设置.png"; sourceTree = "<group>"; };
+		D75846ED1E49616200D4516F /* 通知1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "通知1.png"; sourceTree = "<group>"; };
+		D75846EE1E49616200D4516F /* 通知2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "通知2.png"; sourceTree = "<group>"; };
 		D75D8FAD1DC9D16E00CC3355 /* XLAttendanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLAttendanceViewController.h; sourceTree = "<group>"; };
 		D75D8FAE1DC9D16E00CC3355 /* XLAttendanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLAttendanceViewController.m; sourceTree = "<group>"; };
 		D75D8FB01DC9DC1000CC3355 /* jinru_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jinru_03.png; sourceTree = "<group>"; };
@@ -1199,6 +1237,26 @@
 		D772CCB81DC9BE1C00BB28D9 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				D75846ED1E49616200D4516F /* 通知1.png */,
+				D75846EE1E49616200D4516F /* 通知2.png */,
+				D75846EB1E49614900D4516F /* 设置.png */,
+				D75846E31E495D4D00D4516F /* 11.png */,
+				D75846E41E495D4D00D4516F /* 22.png */,
+				D75846E51E495D4D00D4516F /* 33.png */,
+				D75846E61E495D4D00D4516F /* 44.png */,
+				D75846E11E495D0100D4516F /* 背景背景.png */,
+				D75846DF1E495B1000D4516F /* 首页2_01.png */,
+				D75846DD1E4957F300D4516F /* 盘点.png */,
+				D75846DB1E49579F00D4516F /* 知识学习.png */,
+				D75846D91E49579900D4516F /* 收银台.png */,
+				D75846D71E49579200D4516F /* 粉色背景.png */,
+				D75846D51E49578C00D4516F /* 蓝色背景2.png */,
+				D75846D31E49578400D4516F /* 黄背景.png */,
+				D75846D11E49576600D4516F /* 答题.png */,
+				D75846CF1E49570600D4516F /* 紫背景.png */,
+				D75846CD1E4956B600D4516F /* 考勤.png */,
+				D75846CB1E49569300D4516F /* 蓝背景.png */,
+				D75846C11E494E7E00D4516F /* 盘点背景.png */,
 				D70B98081E31A2560026D3D1 /* shouye_bg.png */,
 				D7E80FB41E2F53F20025D9D0 /* icon_notice_time.png */,
 				D7029C781E28B42600807D8F /* downloads@2x.png */,
@@ -1209,7 +1267,6 @@
 				D72755A11E208FE400B0AFE8 /* 新消息提示-2.png */,
 				D7472E371E1F7ACC008D228F /* 试题背景.png */,
 				D7472E381E1F7ACC008D228F /* 消息背景.png */,
-				D7472E3A1E1F7ACC008D228F /* icon_xiaoxi.png */,
 				D20954B81DE583F40091790C /* A4.png */,
 				D20954B91DE583F40091790C /* B4.png */,
 				D20954BA1DE583F40091790C /* C4.png */,
@@ -1590,6 +1647,7 @@
 				D20954B41DE580EF0091790C /* B5.png in Resources */,
 				D72755A21E208FE400B0AFE8 /* 新消息提示-2.png in Resources */,
 				D772CD031DC9BE3100BB28D9 /* B3.png in Resources */,
+				D75846D21E49576600D4516F /* 答题.png in Resources */,
 				D20954B61DE580EF0091790C /* D5.png in Resources */,
 				D77487CD1DD9652B007A92E3 /* icon_progress_bar.png in Resources */,
 				D77487E01DD9652B007A92E3 /* jianpan_dk_02_03_03.png in Resources */,
@@ -1610,6 +1668,7 @@
 				D291DD2C1DE42C490044805B /* 答题-背景.png in Resources */,
 				D77487D21DD9652B007A92E3 /* icon_02_14.png in Resources */,
 				D772CCF91DC9BE3100BB28D9 /* 统计-工作天数.png in Resources */,
+				D75846C61E494E7E00D4516F /* 盘点背景.png in Resources */,
 				D72F30C41DD1BD13007F754F /* camera.png in Resources */,
 				D772CD091DC9BE3100BB28D9 /* D3.png in Resources */,
 				D77487D41DD9652B007A92E3 /* icon_07.png in Resources */,
@@ -1617,6 +1676,7 @@
 				D77487CC1DD9652B007A92E3 /* icon_haha.png in Resources */,
 				D20954BD1DE583F40091790C /* A4.png in Resources */,
 				D772CCF21DC9BE3100BB28D9 /* 首页-考勤.png in Resources */,
+				D75846EC1E49614900D4516F /* 设置.png in Resources */,
 				D772CCEE1DC9BE3100BB28D9 /* 考勤-05.png in Resources */,
 				D7029C791E28B42600807D8F /* downloads@2x.png in Resources */,
 				D77487F71DD9652B007A92E3 /* jianpan_mr_08.png in Resources */,
@@ -1634,6 +1694,7 @@
 				D772CD061DC9BE3100BB28D9 /* C3.png in Resources */,
 				D772CD0A1DC9BE3100BB28D9 /* E1.png in Resources */,
 				D77487CE1DD9652B007A92E3 /* bg.png in Resources */,
+				D75846E21E495D0100D4516F /* 背景背景.png in Resources */,
 				D77487C41DD9652B007A92E3 /* icon_02_07.png in Resources */,
 				D77487FD1DD9652B007A92E3 /* jianpan_mr_35.png in Resources */,
 				D77487D51DD9652B007A92E3 /* jianpan_chaxun.png in Resources */,
@@ -1641,6 +1702,7 @@
 				D77487E51DD9652B007A92E3 /* jianpan_mr_03.png in Resources */,
 				D77487B51DD9652B007A92E3 /* Default-568.png in Resources */,
 				D77487BC1DD9652B007A92E3 /* ic_qq.png in Resources */,
+				D75846D01E49570600D4516F /* 紫背景.png in Resources */,
 				D20954C11DE583F40091790C /* E4.png in Resources */,
 				D72EB0F21E35D8C8002D93E8 /* settt.png in Resources */,
 				D77487BD1DD9652B007A92E3 /* ic_weixin.png in Resources */,
@@ -1666,6 +1728,7 @@
 				D77487CF1DD9652B007A92E3 /* icon_01_07.png in Resources */,
 				D730F8B01DCB1DDB00F07053 /* cuo.png in Resources */,
 				D2C1AC921DC97D8C00092F44 /* LaunchScreen.storyboard in Resources */,
+				D75846E81E495D4D00D4516F /* 22.png in Resources */,
 				D75D8FB11DC9DC1000CC3355 /* jinru_03.png in Resources */,
 				D77487E91DD9652B007A92E3 /* jianpan_mr_09_03.png in Resources */,
 				D77487AB1DD9652B007A92E3 /* about.png in Resources */,
@@ -1682,6 +1745,7 @@
 				D77487F61DD9652B007A92E3 /* jianpan_haha_25.png in Resources */,
 				D77487AC1DD9652B007A92E3 /* actionbar_back.png in Resources */,
 				D772CD071DC9BE3100BB28D9 /* D1.png in Resources */,
+				D75846F01E49616200D4516F /* 通知2.png in Resources */,
 				D772CCF81DC9BE3100BB28D9 /* 统计-迟到次数.png in Resources */,
 				D77487C11DD9652B007A92E3 /* icon_01_11.png in Resources */,
 				D77487AD1DD9652B007A92E3 /* bar.png in Resources */,
@@ -1695,7 +1759,10 @@
 				D772CCF41DC9BE3100BB28D9 /* 首页-设置.png in Resources */,
 				D77487D61DD9652B007A92E3 /* jianpan_chaxun_press.png in Resources */,
 				D77487C51DD9652B007A92E3 /* icon_02_11.png in Resources */,
+				D75846DE1E4957F300D4516F /* 盘点.png in Resources */,
+				D75846EF1E49616200D4516F /* 通知1.png in Resources */,
 				D7029C6B1E28664600807D8F /* back@2x.png in Resources */,
+				D75846CE1E4956B600D4516F /* 考勤.png in Resources */,
 				D20954BF1DE583F40091790C /* C4.png in Resources */,
 				D77487B41DD9652B007A92E3 /* cursordrawable.png in Resources */,
 				D77487F31DD9652B007A92E3 /* jianpan_dk_01_03.png in Resources */,
@@ -1706,10 +1773,12 @@
 				D77487B71DD9652B007A92E3 /* dots.png in Resources */,
 				D772CCEF1DC9BE3100BB28D9 /* 考勤-背景.png in Resources */,
 				D772CCFD1DC9BE3100BB28D9 /* 早退次数.png in Resources */,
+				D75846D41E49578400D4516F /* 黄背景.png in Resources */,
 				D20954C01DE583F40091790C /* D4.png in Resources */,
 				D77487E31DD9652B007A92E3 /* jianpan_dk_04_05.png in Resources */,
 				D77487F81DD9652B007A92E3 /* jianpan_mr_11.png in Resources */,
 				D772CCE41DC9BE3100BB28D9 /* 按钮2.png in Resources */,
+				D75846DA1E49579900D4516F /* 收银台.png in Resources */,
 				D76B352A1DC992FE00E285AB /* Info.plist in Resources */,
 				D772CCF31DC9BE3100BB28D9 /* 首页-盘点.png in Resources */,
 				D76B34C21DC9925F00E285AB /* DSSymbolKeyboard.xib in Resources */,
@@ -1719,6 +1788,7 @@
 				D772CCFE1DC9BE3100BB28D9 /* A1.png in Resources */,
 				D774880A1DD9652B007A92E3 /* 助记码2.png in Resources */,
 				D77487B11DD9652B007A92E3 /* cehua_12.png in Resources */,
+				D75846D61E49578C00D4516F /* 蓝色背景2.png in Resources */,
 				D77488031DD9652B007A92E3 /* pd_07.png in Resources */,
 				D77487FB1DD9652B007A92E3 /* jianpan_mr_27.png in Resources */,
 				D730F8B11DCB1DDB00F07053 /* dui.png in Resources */,
@@ -1728,12 +1798,12 @@
 				D772CCF01DC9BE3100BB28D9 /* 收银台-图标.png in Resources */,
 				D77487D31DD9652B007A92E3 /* icon_03.png in Resources */,
 				D77487CA1DD9652B007A92E3 /* icon_07.png in Resources */,
-				D7472E3E1E1F7ACC008D228F /* icon_xiaoxi.png in Resources */,
 				D77488081DD9652B007A92E3 /* wifi.png in Resources */,
 				D77487EB1DD9652B007A92E3 /* jianpan_mr_21.png in Resources */,
 				D7E80FB51E2F53F20025D9D0 /* icon_notice_time.png in Resources */,
 				D77487F01DD9652B007A92E3 /* jianpan_mr_36.png in Resources */,
 				D772CCED1DC9BE3100BB28D9 /* 考勤-04.png in Resources */,
+				D75846DC1E49579F00D4516F /* 知识学习.png in Resources */,
 				D77487E61DD9652B007A92E3 /* jianpan_mr_05.png in Resources */,
 				D77487DE1DD9652B007A92E3 /* jianpan_dk_02.png in Resources */,
 				D2C1AC8F1DC97D8C00092F44 /* Assets.xcassets in Resources */,
@@ -1743,17 +1813,23 @@
 				D2C1AC8D1DC97D8C00092F44 /* Main.storyboard in Resources */,
 				D77487B61DD9652B007A92E3 /* dot.png in Resources */,
 				D77487FF1DD9652B007A92E3 /* lainxi.png in Resources */,
+				D75846E01E495B1000D4516F /* 首页2_01.png in Resources */,
 				D772CD041DC9BE3100BB28D9 /* C1.png in Resources */,
 				D77487C81DD9652B007A92E3 /* icon_02_23.png in Resources */,
 				D77487DC1DD9652B007A92E3 /* 盘点助手_主页.jpg in Resources */,
 				D77487D91DD9652B007A92E3 /* 登录.jpg in Resources */,
 				D772CCFF1DC9BE3100BB28D9 /* A2.png in Resources */,
+				D75846D81E49579200D4516F /* 粉色背景.png in Resources */,
+				D75846EA1E495D4D00D4516F /* 44.png in Resources */,
 				D20954B51DE580EF0091790C /* C5.png in Resources */,
 				D772CCEA1DC9BE3100BB28D9 /* 考勤-01.png in Resources */,
 				D7029C731E28AE5F00807D8F /* right@2x.png in Resources */,
 				D77488011DD9652B007A92E3 /* next.png in Resources */,
 				D772CCF61DC9BE3100BB28D9 /* 通知列表小标.png in Resources */,
 				D772CCE31DC9BE3100BB28D9 /* 按钮.png in Resources */,
+				D75846CC1E49569300D4516F /* 蓝背景.png in Resources */,
+				D75846E71E495D4D00D4516F /* 11.png in Resources */,
+				D75846E91E495D4D00D4516F /* 33.png in Resources */,
 				D772CCFB1DC9BE3100BB28D9 /* 统计-请假次数.png in Resources */,
 				D772CCE81DC9BE3100BB28D9 /* 回答正确.png in Resources */,
 				D772CD001DC9BE3100BB28D9 /* A3.png in Resources */,
