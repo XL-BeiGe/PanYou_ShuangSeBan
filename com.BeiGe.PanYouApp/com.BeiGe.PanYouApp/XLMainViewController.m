@@ -19,6 +19,7 @@
 #import "XL_Header.h"
 #import "Color+Hex.h"
 #import "XLHomeViewController.h"
+#import "XLLearingViewController.h"
 
 @interface XLMainViewController ()
 
@@ -57,6 +58,8 @@
     
     UIButton *btn =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
     [btn setImage:[UIImage imageNamed:@"通知1.png"] forState:UIControlStateNormal];
+    //[btn setImage:[UIImage imageNamed:@"通知2.png"] forState:UIControlStateNormal];
+    
     [btn addTarget:self action:@selector(Note:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *right = [[UIBarButtonItem alloc]initWithCustomView:btn];
     self.navigationItem.rightBarButtonItem = right;
@@ -134,9 +137,9 @@
 }
 //设置
 - (IBAction)Set:(id)sender {
-    NSLog(@"知识学习还在路上");
-//    XLSettingViewController*xx;
-//    [self tiaoye:xx mingzi:@"set"];
+    //NSLog(@"知识学习还在路上");
+   XLLearingViewController*xx;
+    [self tiaoye:xx mingzi:@"learns"];
 }
 //收银
 - (IBAction)CashierDesk:(id)sender {

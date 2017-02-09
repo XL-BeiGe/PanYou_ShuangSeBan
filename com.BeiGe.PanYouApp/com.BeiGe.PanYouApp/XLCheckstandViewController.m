@@ -125,7 +125,10 @@
     [btn addTarget:self action:@selector(Download:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *right = [[UIBarButtonItem alloc]initWithCustomView:btn];
     self.navigationItem.rightBarButtonItem = right;
+  
 }
+
+
 //下载药品
 -(void)Download:(UIButton *)button{
     [self xiazaijiekou];

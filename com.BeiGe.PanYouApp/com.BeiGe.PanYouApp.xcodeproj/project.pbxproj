@@ -53,6 +53,8 @@
 		D7029C791E28B42600807D8F /* downloads@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D7029C781E28B42600807D8F /* downloads@2x.png */; };
 		D70B98091E31A2560026D3D1 /* shouye_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D70B98081E31A2560026D3D1 /* shouye_bg.png */; };
 		D72755A21E208FE400B0AFE8 /* 新消息提示-2.png in Resources */ = {isa = PBXBuildFile; fileRef = D72755A11E208FE400B0AFE8 /* 新消息提示-2.png */; };
+		D72E9B991E4BF14A00DC8C27 /* XLLearingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D72E9B981E4BF14A00DC8C27 /* XLLearingViewController.m */; };
+		D72E9B9C1E4BF16A00DC8C27 /* XLLearnInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D72E9B9B1E4BF16A00DC8C27 /* XLLearnInfoViewController.m */; };
 		D72EB0EE1E35D3CC002D93E8 /* XLSettsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D72EB0ED1E35D3CC002D93E8 /* XLSettsViewController.m */; };
 		D72EB0F21E35D8C8002D93E8 /* settt.png in Resources */ = {isa = PBXBuildFile; fileRef = D72EB0F11E35D8C8002D93E8 /* settt.png */; };
 		D72F30C41DD1BD13007F754F /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = D72F30C31DD1BD13007F754F /* camera.png */; };
@@ -384,6 +386,10 @@
 		D7029C781E28B42600807D8F /* downloads@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "downloads@2x.png"; sourceTree = "<group>"; };
 		D70B98081E31A2560026D3D1 /* shouye_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shouye_bg.png; sourceTree = "<group>"; };
 		D72755A11E208FE400B0AFE8 /* 新消息提示-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "新消息提示-2.png"; sourceTree = "<group>"; };
+		D72E9B971E4BF14A00DC8C27 /* XLLearingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLLearingViewController.h; sourceTree = "<group>"; };
+		D72E9B981E4BF14A00DC8C27 /* XLLearingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLLearingViewController.m; sourceTree = "<group>"; };
+		D72E9B9A1E4BF16A00DC8C27 /* XLLearnInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLLearnInfoViewController.h; sourceTree = "<group>"; };
+		D72E9B9B1E4BF16A00DC8C27 /* XLLearnInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLLearnInfoViewController.m; sourceTree = "<group>"; };
 		D72EB0EC1E35D3CC002D93E8 /* XLSettsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XLSettsViewController.h; path = "图片/XLSettsViewController.h"; sourceTree = "<group>"; };
 		D72EB0ED1E35D3CC002D93E8 /* XLSettsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XLSettsViewController.m; path = "图片/XLSettsViewController.m"; sourceTree = "<group>"; };
 		D72EB0F11E35D8C8002D93E8 /* settt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settt.png; sourceTree = "<group>"; };
@@ -895,6 +901,7 @@
 		D2C1ACB71DC97E1E00092F44 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D72E9B961E4BF12900DC8C27 /* 知识学习 */,
 				D70B980A1E31D7BB0026D3D1 /* 设置 */,
 				D739C8E31DE7CD4C00942CD6 /* 登录 */,
 				D24EC07C1DDAA40700A043A8 /* 主页 */,
@@ -991,6 +998,17 @@
 				D77487351DD964B0007A92E3 /* XLExplainViewController.m */,
 			);
 			name = "软件说明";
+			sourceTree = "<group>";
+		};
+		D72E9B961E4BF12900DC8C27 /* 知识学习 */ = {
+			isa = PBXGroup;
+			children = (
+				D72E9B971E4BF14A00DC8C27 /* XLLearingViewController.h */,
+				D72E9B981E4BF14A00DC8C27 /* XLLearingViewController.m */,
+				D72E9B9A1E4BF16A00DC8C27 /* XLLearnInfoViewController.h */,
+				D72E9B9B1E4BF16A00DC8C27 /* XLLearnInfoViewController.m */,
+			);
+			name = "知识学习";
 			sourceTree = "<group>";
 		};
 		D730F8A01DCAD93900F07053 /* 考勤 */ = {
@@ -1863,10 +1881,12 @@
 				D76B34AF1DC9924900E285AB /* Color+Hex.m in Sources */,
 				D76B34F01DC992ED00E285AB /* MBProgressHUD.m in Sources */,
 				D77487471DD9651E007A92E3 /* ZYCustomKeyboardTypeNumberView.m in Sources */,
+				D72E9B9C1E4BF16A00DC8C27 /* XLLearnInfoViewController.m in Sources */,
 				D76B35111DC992F400E285AB /* SBJsonStreamParserState.m in Sources */,
 				D2C1AC8A1DC97D8C00092F44 /* ViewController.m in Sources */,
 				D76B34BD1DC9925F00E285AB /* DSKyeboard.m in Sources */,
 				D7959B731DCC5A2600985309 /* XLNoteViewController.m in Sources */,
+				D72E9B991E4BF14A00DC8C27 /* XLLearingViewController.m in Sources */,
 				D76B350E1DC992F400E285AB /* SBJsonStreamParser.m in Sources */,
 				D76B34DD1DC9927C00E285AB /* XL_FMDB.m in Sources */,
 				D7FB4E361E2DE8B3001398CA /* XLDateCompare.m in Sources */,
