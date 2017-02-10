@@ -18,6 +18,8 @@
 		D20954C01DE583F40091790C /* D4.png in Resources */ = {isa = PBXBuildFile; fileRef = D20954BB1DE583F40091790C /* D4.png */; };
 		D20954C11DE583F40091790C /* E4.png in Resources */ = {isa = PBXBuildFile; fileRef = D20954BC1DE583F40091790C /* E4.png */; };
 		D23B407A1DCC792B00CDACCB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23B40791DCC792B00CDACCB /* CoreLocation.framework */; };
+		D24129971E4D558D00306120 /* XLmemedaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D24129961E4D558D00306120 /* XLmemedaViewController.m */; };
+		D24129991E4D5E2B00306120 /* icon_hahaha1.png in Resources */ = {isa = PBXBuildFile; fileRef = D24129981E4D5E2B00306120 /* icon_hahaha1.png */; };
 		D24793FC1E1F75540063E6C6 /* XLxixixihahaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D24793FB1E1F75540063E6C6 /* XLxixixihahaViewController.m */; };
 		D24EC0801DDAA4BF00A043A8 /* XLquestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D24EC07F1DDAA4BF00A043A8 /* XLquestionViewController.m */; };
 		D24EC0841DDAA50000A043A8 /* XLanswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D24EC0831DDAA50000A043A8 /* XLanswerViewController.m */; };
@@ -336,6 +338,9 @@
 		D20954BB1DE583F40091790C /* D4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = D4.png; sourceTree = "<group>"; };
 		D20954BC1DE583F40091790C /* E4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = E4.png; sourceTree = "<group>"; };
 		D23B40791DCC792B00CDACCB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		D24129951E4D558D00306120 /* XLmemedaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLmemedaViewController.h; sourceTree = "<group>"; };
+		D24129961E4D558D00306120 /* XLmemedaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLmemedaViewController.m; sourceTree = "<group>"; };
+		D24129981E4D5E2B00306120 /* icon_hahaha1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_hahaha1.png; sourceTree = "<group>"; };
 		D24793FA1E1F75540063E6C6 /* XLxixixihahaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLxixixihahaViewController.h; sourceTree = "<group>"; };
 		D24793FB1E1F75540063E6C6 /* XLxixixihahaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLxixixihahaViewController.m; sourceTree = "<group>"; };
 		D24EC07E1DDAA4BF00A043A8 /* XLquestionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLquestionViewController.h; sourceTree = "<group>"; };
@@ -1097,6 +1102,8 @@
 				D2C1AC891DC97D8C00092F44 /* ViewController.m */,
 				D24793FA1E1F75540063E6C6 /* XLxixixihahaViewController.h */,
 				D24793FB1E1F75540063E6C6 /* XLxixixihahaViewController.m */,
+				D24129951E4D558D00306120 /* XLmemedaViewController.h */,
+				D24129961E4D558D00306120 /* XLmemedaViewController.m */,
 			);
 			name = "登录";
 			sourceTree = "<group>";
@@ -1358,6 +1365,7 @@
 		D77487481DD9652B007A92E3 /* 图片 */ = {
 			isa = PBXGroup;
 			children = (
+				D24129981E4D5E2B00306120 /* icon_hahaha1.png */,
 				D72EB0F11E35D8C8002D93E8 /* settt.png */,
 				D77487491DD9652B007A92E3 /* about.png */,
 				D774874A1DD9652B007A92E3 /* actionbar_back.png */,
@@ -1684,6 +1692,7 @@
 				D772CD0B1DC9BE3100BB28D9 /* E2.png in Resources */,
 				D77487BB1DD9652B007A92E3 /* ic_launcher.png in Resources */,
 				D291DD2C1DE42C490044805B /* 答题-背景.png in Resources */,
+				D24129991E4D5E2B00306120 /* icon_hahaha1.png in Resources */,
 				D77487D21DD9652B007A92E3 /* icon_02_14.png in Resources */,
 				D772CCF91DC9BE3100BB28D9 /* 统计-工作天数.png in Resources */,
 				D75846C61E494E7E00D4516F /* 盘点背景.png in Resources */,
@@ -1901,6 +1910,7 @@
 				D7C8CE501E14F9D000062F00 /* UIImageView+HighlightedWebCache.m in Sources */,
 				D7959B761DCC5A4200985309 /* XLNoteInfoViewController.m in Sources */,
 				D7E80FAF1E2F376C0025D9D0 /* TianTableViewCell.m in Sources */,
+				D24129971E4D558D00306120 /* XLmemedaViewController.m in Sources */,
 				D76B34BC1DC9925F00E285AB /* DSBaseKeyboard.m in Sources */,
 				D76B35171DC992F400E285AB /* SBJsonWriter.m in Sources */,
 				D76B35261DC992FE00E285AB /* FMDatabaseAdditions.m in Sources */,

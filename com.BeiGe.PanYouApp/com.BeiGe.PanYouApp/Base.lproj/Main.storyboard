@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -82,6 +82,20 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ano-2w-uWA">
+                                <rect key="frame" x="209" y="520" width="140" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="140" id="Gkr-W4-TLw"/>
+                                    <constraint firstAttribute="height" constant="30" id="Vah-0H-pAd"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <state key="normal" title="盘点单机版入口">
+                                    <color key="titleColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="danji:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Egi-rK-nr0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -89,6 +103,7 @@
                             <constraint firstItem="5Yy-6p-fAq" firstAttribute="width" secondItem="590-Mh-5nL" secondAttribute="width" id="1Hc-VS-CDf"/>
                             <constraint firstItem="Yxt-US-AX5" firstAttribute="leading" secondItem="MiO-iH-ocl" secondAttribute="leading" id="4N3-VZ-jSo"/>
                             <constraint firstItem="bSJ-6u-qBr" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="8FX-32-HmF"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ano-2w-uWA" secondAttribute="trailing" constant="10" id="DXc-lv-ciP"/>
                             <constraint firstItem="MiO-iH-ocl" firstAttribute="leading" secondItem="590-Mh-5nL" secondAttribute="trailing" constant="8" id="Ero-1e-LMX"/>
                             <constraint firstItem="590-Mh-5nL" firstAttribute="centerY" secondItem="cqX-N8-sDa" secondAttribute="centerY" id="GIn-77-F2s"/>
                             <constraint firstItem="vkM-oO-cUK" firstAttribute="centerX" secondItem="cqX-N8-sDa" secondAttribute="centerX" id="GZd-gt-FoM"/>
@@ -106,6 +121,7 @@
                             <constraint firstItem="vkM-oO-cUK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fD5-2I-Wu9"/>
                             <constraint firstItem="4VP-vo-qcM" firstAttribute="top" secondItem="cqX-N8-sDa" secondAttribute="bottom" constant="25" id="k0x-Qo-fWz"/>
                             <constraint firstItem="vkM-oO-cUK" firstAttribute="centerX" secondItem="yAI-qs-2u1" secondAttribute="centerX" id="mNp-lw-hpA"/>
+                            <constraint firstItem="ano-2w-uWA" firstAttribute="top" secondItem="yAI-qs-2u1" secondAttribute="bottom" constant="8" id="mZ9-Nz-Gtg"/>
                             <constraint firstItem="yAI-qs-2u1" firstAttribute="height" secondItem="4VP-vo-qcM" secondAttribute="height" id="nSr-CO-ILB"/>
                             <constraint firstItem="Yxt-US-AX5" firstAttribute="centerY" secondItem="4VP-vo-qcM" secondAttribute="centerY" id="pCl-j4-gxz"/>
                             <constraint firstItem="5Yy-6p-fAq" firstAttribute="height" secondItem="590-Mh-5nL" secondAttribute="height" id="qfr-Q0-ebn"/>
@@ -125,7 +141,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="491" y="144"/>
+            <point key="canvasLocation" x="490.39999999999998" y="143.47826086956522"/>
         </scene>
         <!--Note View Controller-->
         <scene sceneID="Nlb-vr-Ro5">
@@ -1230,7 +1246,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TIx-ZQ-a7T" id="3PK-qt-ggq">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="119"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="流水号:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TID-eh-HMU">
@@ -3020,10 +3036,10 @@
             </objects>
             <point key="canvasLocation" x="3821.739130434783" y="140.21739130434784"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Lxixixihaha View Controller-->
         <scene sceneID="hpE-ry-dC2">
             <objects>
-                <navigationController storyboardIdentifier="xixixihaha" id="N7G-O5-yU5" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="xixixihaha" id="N7G-O5-yU5" customClass="XLxixixihahaViewController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="yA4-sT-zFb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -3083,7 +3099,7 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vnc-6J-fij">
                                 <rect key="frame" x="30" y="472" width="315" height="40"/>
-                                <state key="normal" backgroundImage="icon_haha.png"/>
+                                <state key="normal" backgroundImage="icon_hahaha1.png"/>
                                 <connections>
                                     <action selector="Login:" destination="o3G-OB-pob" eventType="touchUpInside" id="Yjr-Sp-q4b"/>
                                 </connections>
@@ -3172,6 +3188,23 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="joe-Oa-api" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="180" y="3126"/>
+        </scene>
+        <!--Lmemeda View Controller-->
+        <scene sceneID="pXB-cj-WKj">
+            <objects>
+                <navigationController storyboardIdentifier="memeda" id="jaS-bj-pNd" customClass="XLmemedaViewController" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ppn-iQ-Qjh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.20000000000000001" green="0.76470588240000004" blue="0.51372549020000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="o3G-OB-pob" kind="relationship" relationship="rootViewController" id="q3c-8k-DL1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r4E-cB-HRg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-601" y="3126"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="3d4-wg-T38">
@@ -4993,6 +5026,7 @@
         <image name="icon_03.png" width="40" height="66"/>
         <image name="icon_07.png" width="42" height="67"/>
         <image name="icon_haha.png" width="900" height="130"/>
+        <image name="icon_hahaha1.png" width="900" height="130"/>
         <image name="jianpan_dk_01_03.png" width="190" height="151"/>
         <image name="jianpan_dk_01_03_03.png" width="190" height="151"/>
         <image name="jianpan_dk_02.png" width="190" height="151"/>

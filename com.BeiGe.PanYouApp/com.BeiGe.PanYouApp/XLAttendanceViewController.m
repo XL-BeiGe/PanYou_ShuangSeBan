@@ -34,12 +34,18 @@
 
 @implementation XLAttendanceViewController
 -(void)viewWillAppear:(BOOL)animated{
-    [self dingwei];
+    [self dingwei];self.navigationController.navigationBar.translucent = true;
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    self.navigationController.navigationBar.translucent = false;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
     nage=99;
     [self riqixianshi];
     [self wangluolianjie];

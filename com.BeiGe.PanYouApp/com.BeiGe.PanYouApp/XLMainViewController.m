@@ -96,43 +96,58 @@
 }
 
 - (IBAction)PanDian:(id)sender {
-    /*
-     UIAlertControllerStyleActionSheet: UIActionSheet样式
-     UIAlertControllerStyleAlert: UIAlertView样式
-     */
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"注意" message:@"请选择盘点方式" preferredStyle:UIAlertControllerStyleActionSheet];
-    
-    
-    /*按钮样式选择:
-     UIAlertActionStyleDefault 默认
-     UIAlertActionStyleCancel 取消
-     UIAlertActionStyleDestructive 确认毁灭性的操作
-     */
-    //添加取消按钮
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"网络盘点" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        //具体实现逻辑代码
+    NSUserDefaults*user=[NSUserDefaults standardUserDefaults];
+    if ([[user objectForKey:@"isDanji"] isEqualToString:@"1"]) {
         [[NSUserDefaults standardUserDefaults] setObject:QianWaiWangIP forKey:@"JuYuWai"];
         [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"isPandian"];
         XLHomeViewController*xx;
         [self tiaoye:xx mingzi:@"home"];
-    }];
-    [alert addAction:cancel];
-    
-    UIAlertAction *bendi = [UIAlertAction actionWithTitle:@"本地盘点" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    }else{
         [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"isPandian"];
+        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"rukou"];
         XLLogin_ViewController*xx;
         [self tiaoye:xx mingzi:@"login"];
-    }];
-    [alert addAction:bendi];
+    }
     
-    //添加确定按钮
-    UIAlertAction *destructive = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        //具体实现逻辑代码
-    }];
-    [alert addAction:destructive];
+   //UIAlertController 的使用
     
-    //显示提示框
-    [self presentViewController:alert animated:YES completion:nil];
+//    /*
+//     UIAlertControllerStyleActionSheet: UIActionSheet样式
+//     UIAlertControllerStyleAlert: UIAlertView样式
+//     */
+//    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"注意" message:@"请选择盘点方式" preferredStyle:UIAlertControllerStyleActionSheet];
+//    
+//    
+//    /*按钮样式选择:
+//     UIAlertActionStyleDefault 默认
+//     UIAlertActionStyleCancel 取消
+//     UIAlertActionStyleDestructive 确认毁灭性的操作
+//     */
+//    //添加取消按钮
+//    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"网络盘点" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+//        //具体实现逻辑代码
+//        [[NSUserDefaults standardUserDefaults] setObject:QianWaiWangIP forKey:@"JuYuWai"];
+//        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"isPandian"];
+//        XLHomeViewController*xx;
+//        [self tiaoye:xx mingzi:@"home"];
+//    }];
+//    [alert addAction:cancel];
+//    
+//    UIAlertAction *bendi = [UIAlertAction actionWithTitle:@"本地盘点" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//        [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"isPandian"];
+//        XLLogin_ViewController*xx;
+//        [self tiaoye:xx mingzi:@"login"];
+//    }];
+//    [alert addAction:bendi];
+//    
+//    //添加确定按钮
+//    UIAlertAction *destructive = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+//        //具体实现逻辑代码
+//    }];
+//    [alert addAction:destructive];
+//    
+//    //显示提示框
+//    [self presentViewController:alert animated:YES completion:nil];
 
 }
 //设置

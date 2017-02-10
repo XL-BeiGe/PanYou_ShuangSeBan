@@ -12,6 +12,7 @@
 #import "XL_WangLuo.h"
 #import "XLHomeViewController.h"
 #import "XLMainViewController.h"
+#import "ViewController.h"
 @interface XLLogin_ViewController (){
     CGFloat cha;
     int pan;
@@ -20,13 +21,13 @@
 
 @implementation XLLogin_ViewController
 -(void)viewWillAppear:(BOOL)animated{
-   // [self.navigationController setNavigationBarHidden:YES animated:YES];
-//    NSLog(@"%@",JuyuwangIP);
-//    if (NULL == JuyuwangIP) {
-//        [[NSUserDefaults standardUserDefaults]setObject:@"www.yaopandian.com" forKey:@"JuYuWang"];
-//    }
+    // [self.navigationController setNavigationBarHidden:YES animated:YES];
+    //    NSLog(@"%@",JuyuwangIP);
+    //    if (NULL == JuyuwangIP) {
+    //        [[NSUserDefaults standardUserDefaults]setObject:@"www.yaopandian.com" forKey:@"JuYuWang"];
+    //    }
     self.navigationController.navigationBar.translucent = true;
-
+    
     NSLog(@"\n\n单机时候的IP：\n\n%@",JuyuwangIP);
     if (NULL !=[[NSUserDefaults standardUserDefaults] objectForKey:@"Name"]) {
         _Name.text=[[NSUserDefaults standardUserDefaults] objectForKey:@"Name"];
@@ -44,10 +45,18 @@
     [self.navigationItem setLeftBarButtonItem:left];
 }
 -(void)fanhui{
-    XLMainViewController *xln=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xlmain"];
-    for (UIViewController *controller in self.navigationController.viewControllers) {
-        if ([controller isKindOfClass:[xln class]]) {
-            [self.navigationController popToViewController:controller animated:YES];
+    
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"rukou"] isEqualToString:@"0"]) {
+        //跳回首页登录
+        ViewController *view=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"llogin"];
+        [ self presentViewController:view animated: NO completion:nil];
+        
+    }else{
+        XLMainViewController *xln=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xlmain"];
+        for (UIViewController *controller in self.navigationController.viewControllers) {
+            if ([controller isKindOfClass:[xln class]]) {
+                [self.navigationController popToViewController:controller animated:YES];
+            }
         }
     }
 }
@@ -55,7 +64,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
     [self delegate];
     [self registerForKeyboardNotifications];
     [self comeback];
@@ -128,14 +139,14 @@
     }else if (NULL ==JuyuwangIP){
         [WarningBox warningBoxModeText:@"请先设置网络连接" andView:self.view];
     }else{
-    
+        
         [WarningBox warningBoxModeIndeterminate:@"登录中..." andView:self.view];
         NSString *fangshi=@"/sys/login";
         NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:[_Name.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],@"loginName",[_Password.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],@"password", nil];
-//自己写的网络请求    请求外网地址
-            [XL_WangLuo WaiwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
+        //自己写的网络请求    请求外网地址
+        [XL_WangLuo WaiwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
             [WarningBox warningBoxHide:YES andView:self.view];
-                NSLog(@"%@",responseObject);
+            NSLog(@"%@",responseObject);
             @try {
                 if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
                     NSUserDefaults *user=[NSUserDefaults standardUserDefaults];
@@ -144,8 +155,8 @@
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data" ] objectForKey:@"accessToken"]] forKey:@"accessToken"];
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"mac"]] forKey:@"Mac"];
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"userId"]] forKey:@"UserID"];
-    
-                   [self jumpHome];
+                    
+                    [self jumpHome];
                 }
                 else{
                     [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.view];
@@ -156,9 +167,9 @@
         } failure:^(NSError *error) {
             [WarningBox warningBoxHide:YES andView:self.view];
             [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
-    NSLog(@"%@",error);
+            NSLog(@"%@",error);
         }];
-   }
+    }
 }
 
 

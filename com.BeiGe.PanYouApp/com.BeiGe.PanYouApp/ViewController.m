@@ -12,11 +12,13 @@
 #import "XL_Header.h"
 #import "AppDelegate.h"
 #import "XLxixixihahaViewController.h"
+#import "XLmemedaViewController.h"
 @interface ViewController ()<UITextFieldDelegate>
 {
     CGFloat cha;
     int pan;
 }
+- (IBAction)danji:(id)sender;
 @end
 
 @implementation ViewController
@@ -70,7 +72,7 @@
 -(void)delegate{
     _username.delegate=self;
     _password.delegate=self;
-    _username.keyboardType=UIKeyboardTypeNamePhonePad;
+    _username.keyboardType=UIKeyboardTypeASCIICapable;
     _username.autocorrectionType = UITextAutocorrectionTypeNo;
     [_username setClearButtonMode:UITextFieldViewModeWhileEditing];
     [_password setClearButtonMode:UITextFieldViewModeWhileEditing];
@@ -125,10 +127,11 @@
                     [user setObject:[NSString stringWithFormat:@"%@",[[[responseObject objectForKey:@"data"] objectForKey:@"office"] objectForKey:@"id"]] forKey:@"mendian"];
                     //收银台需要显示的名称
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"name"]] forKey:@"CZname"];
+                    //1是网络盘点   2是单机盘点
+                    [user setObject:[NSString stringWithFormat:@"%@",[[[responseObject objectForKey:@"data"] objectForKey:@"office"] objectForKey:@"edition"]] forKey:@"isDanji"];
                     if(NULL ==[[NSUserDefaults standardUserDefaults] objectForKey:@"JuYuWang"]){
                         [[NSUserDefaults standardUserDefaults] setObject:@"www.yaopandian.com" forKey:@"JuYuWang"];
                     }
-                    
                     
                     //登陆成功后重新注册一次极光的标签和别名
                     [[AppDelegate appDelegate] method];
@@ -176,5 +179,18 @@
 
 - (IBAction)LLogin:(id)sender {
     [self denglu];
+}
+- (IBAction)danji:(id)sender {
+    
+    if(NULL ==[[NSUserDefaults standardUserDefaults] objectForKey:@"JuYuWang"]){
+        [[NSUserDefaults standardUserDefaults] setObject:@"www.yaopandian.com" forKey:@"JuYuWang"];
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"isPandian"];
+    [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"rukou"];
+    XLmemedaViewController *home=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"memeda"];
+    [self presentViewController:home animated:NO completion:^{
+        // NSLog(@"么么哒");
+    }];
 }
 @end
