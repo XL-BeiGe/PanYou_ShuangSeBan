@@ -12,7 +12,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *titl;
 @property (weak, nonatomic) IBOutlet UILabel *laiy;
 @property (weak, nonatomic) IBOutlet UILabel *time;
-@property (weak, nonatomic) IBOutlet UIImageView *IMG;
+
+@property (weak, nonatomic) IBOutlet UIWebView *webvie;
 
 
 

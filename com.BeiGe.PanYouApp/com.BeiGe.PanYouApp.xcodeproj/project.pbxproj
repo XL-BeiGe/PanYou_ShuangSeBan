@@ -70,6 +70,7 @@
 		D730F8BC1DCB31C200F07053 /* XLSetAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D730F8BB1DCB31C200F07053 /* XLSetAccountViewController.m */; };
 		D730F8BF1DCB31DC00F07053 /* XLAccSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D730F8BE1DCB31DC00F07053 /* XLAccSuccessViewController.m */; };
 		D7336D131E236B7E0008AAA7 /* XLSizeForLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D7336D121E236B7E0008AAA7 /* XLSizeForLabel.m */; };
+		D744F9E01E5189E800B4E91F /* zixun.png in Resources */ = {isa = PBXBuildFile; fileRef = D744F9DF1E5189E800B4E91F /* zixun.png */; };
 		D7472E3B1E1F7ACC008D228F /* 试题背景.png in Resources */ = {isa = PBXBuildFile; fileRef = D7472E371E1F7ACC008D228F /* 试题背景.png */; };
 		D7472E3C1E1F7ACC008D228F /* 消息背景.png in Resources */ = {isa = PBXBuildFile; fileRef = D7472E381E1F7ACC008D228F /* 消息背景.png */; };
 		D74D98631E29BD8400B4DC83 /* XLImageShow.m in Sources */ = {isa = PBXBuildFile; fileRef = D74D98621E29BD8400B4DC83 /* XLImageShow.m */; };
@@ -417,6 +418,7 @@
 		D730F8BE1DCB31DC00F07053 /* XLAccSuccessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLAccSuccessViewController.m; sourceTree = "<group>"; };
 		D7336D111E236B7E0008AAA7 /* XLSizeForLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLSizeForLabel.h; sourceTree = "<group>"; };
 		D7336D121E236B7E0008AAA7 /* XLSizeForLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLSizeForLabel.m; sourceTree = "<group>"; };
+		D744F9DF1E5189E800B4E91F /* zixun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zixun.png; sourceTree = "<group>"; };
 		D7472E371E1F7ACC008D228F /* 试题背景.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "试题背景.png"; sourceTree = "<group>"; };
 		D7472E381E1F7ACC008D228F /* 消息背景.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "消息背景.png"; sourceTree = "<group>"; };
 		D74D98611E29BD8400B4DC83 /* XLImageShow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLImageShow.h; sourceTree = "<group>"; };
@@ -1262,6 +1264,7 @@
 		D772CCB81DC9BE1C00BB28D9 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				D744F9DF1E5189E800B4E91F /* zixun.png */,
 				D75846ED1E49616200D4516F /* 通知1.png */,
 				D75846EE1E49616200D4516F /* 通知2.png */,
 				D75846EB1E49614900D4516F /* 设置.png */,
@@ -1805,6 +1808,7 @@
 				D77487E31DD9652B007A92E3 /* jianpan_dk_04_05.png in Resources */,
 				D77487F81DD9652B007A92E3 /* jianpan_mr_11.png in Resources */,
 				D772CCE41DC9BE3100BB28D9 /* 按钮2.png in Resources */,
+				D744F9E01E5189E800B4E91F /* zixun.png in Resources */,
 				D75846DA1E49579900D4516F /* 收银台.png in Resources */,
 				D76B352A1DC992FE00E285AB /* Info.plist in Resources */,
 				D772CCF31DC9BE3100BB28D9 /* 首页-盘点.png in Resources */,

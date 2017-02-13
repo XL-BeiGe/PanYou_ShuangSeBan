@@ -10,6 +10,8 @@
 #import "WarningBox.h"
 #import "XL_WangLuo.h"
 #import "XLLearnInfoViewController.h"
+#import "Color+Hex.h"
+
 @interface XLLearingViewController ()
 {
     float width;
@@ -27,14 +29,42 @@
     [self tableviewdelegat];
     width =[UIScreen mainScreen].bounds.size.width;
     heigh =[UIScreen mainScreen].bounds.size.height;
-   
+    _table.hidden = YES;
+    self.title =@"知识学习";
+    [self navigatio];
     // Do any additional setup after loading the view.
 }
+-(void)navigatio{
+    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
+    UIBarButtonItem*left=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back@2x"] style:UIBarButtonItemStyleDone target:self action:@selector(fanhui)];
+    [self.navigationItem setLeftBarButtonItem:left];
+    
+}
+-(void)fanhui{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 -(void)viewWillAppear:(BOOL)animated{
     [self jiekou];
     
 }
 -(void)typs:(UIButton*)btn{
+ 
+    for (UIButton * vv in _scrollview.subviews) {
+                if (vv.tag==btn.tag) {
+                    [vv setTitleColor:[UIColor colorWithHexString:@"34C083"] forState:UIControlStateNormal];
+                  
+                }
+                else{
+                   [vv setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                   
+                }
+       
+      
+    }
+
+    
+    
     
     xxxxx=(int)btn.tag-100;
     [self jiekou1];
@@ -42,32 +72,29 @@
 
 -(void)Scrollv{
     for (int i=0; i<arr.count; i++) {
-        UIButton  *btn =[[UIButton alloc]initWithFrame:CGRectMake(0+(width/3)*i, 0,width/3, 40)];
+        UIButton  *btn =[[UIButton alloc]init];
         [btn setTitle:[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"knowledgeTypeName"]] forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        btn.titleLabel.font =[UIFont systemFontOfSize:15];
         btn.tag =100+i;
         [btn addTarget:self action:@selector(typs:) forControlEvents:UIControlEventTouchUpInside];
         
+        btn.frame =CGRectMake(1+(width/3)*i,0,width/3-10, 40);
+        btn.titleLabel.adjustsFontSizeToFitWidth =YES;
         [_scrollview addSubview:btn];
     }
     _scrollview.delegate= self;
     //设置scrollview的滚动范围（内容大小）
-    _scrollview.contentSize = CGSizeMake(width*3,40);
-    
+    _scrollview.contentSize = CGSizeMake((width/3)*arr.count,40);
     // 隐藏水平滚动条
     _scrollview.showsHorizontalScrollIndicator = NO;
     _scrollview.showsVerticalScrollIndicator = NO;
-    
     // 用来记录scrollview滚动的位置(****)
     //_scrollview.contentOffset = CGPointMake(width, 0);
-    
     //去掉弹簧效果
     _scrollview.bounces = NO;
-    
-    
     // 增加额外的滚动区域（逆时针，上、左、下、右）
     //_scrollview.contentInset = UIEdgeInsetsMake(0,0,0,0);
-    
     //设置是否可以进行画面切换
     //_scrollview.pagingEnabled =YES;
 }
@@ -90,6 +117,7 @@
 -(void)tableviewdelegat{
     _table.dataSource =self;
     _table.delegate =self;
+    _table.backgroundColor = [UIColor clearColor];
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return arr1.count;
@@ -97,8 +125,12 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 50;
+    return 60;
  
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+
+    return  5;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -108,21 +140,30 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:id1];
     }
-    UIImageView *img =[[UIImageView alloc]initWithFrame:CGRectMake(10, 5, 40, 40)];
-    UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(60, 5, width-80, 20)];
-    UILabel *laa = [[UILabel alloc]initWithFrame:CGRectMake(60, 28,width-80, 20)];
+    UIImageView *img =[[UIImageView alloc]initWithFrame:CGRectMake(10,10, 40, 40)];
+    UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(60, 10, width-80, 20)];
+    UILabel *laa = [[UILabel alloc]initWithFrame:CGRectMake(60, 33,width-80, 20)];
     [img.layer setCornerRadius:10];
-    [img.layer setBorderWidth:1];
+  
     lab.font =[UIFont systemFontOfSize:15];
     laa.font =[UIFont systemFontOfSize:15];
-    img.image= [UIImage imageNamed:@"首页2_01.png"];
-    laa.text =[NSString stringWithFormat:@"%@",[arr1[indexPath.row] objectForKey:@"title"]];
+    laa.textColor =[UIColor lightGrayColor];
+    img.image= [UIImage imageNamed:@"zixun.png"];
     lab.text =[NSString stringWithFormat:@"%@",[arr1[indexPath.row] objectForKey:@"title"]];
+    laa.text =[NSString stringWithFormat:@"资讯类别:%@",[arr[xxxxx]objectForKey:@"knowledgeTypeName"]];
+    UIView *backview = [[UIView alloc]initWithFrame:CGRectMake(0, 0,_table.frame.size.width, 60)];
+    backview.backgroundColor =[UIColor whiteColor];
+    backview.layer.cornerRadius =10;
     
+    [backview addSubview:img];
+    [backview addSubview:lab];
+    [backview addSubview:laa];
+    [cell.contentView addSubview:backview];
+
     
-    [cell.contentView addSubview:img];
-    [cell.contentView addSubview:lab];
-    [cell.contentView addSubview:laa];
+    cell.selectionStyle =UITableViewCellSelectionStyleNone;
+    cell.backgroundColor = [UIColor clearColor];
+    
     return  cell;
 }
 
@@ -149,7 +190,7 @@
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
            arr=[[responseObject objectForKey:@"data"] objectForKey:@"knowledgeTypeInfoList"];
-            NSLog(@"%@",arr);
+          
             [self Scrollv];
             [WarningBox warningBoxHide:YES andView:self.view];
         }
@@ -172,12 +213,13 @@
     NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userId",KnowID,@"knowledgeTypeId",nil];
     [WarningBox warningBoxModeIndeterminate:@"加载界面..." andView:self.view];
     [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
-         NSLog(@"%@",responseObject);
+        // NSLog(@"%@",responseObject);
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
             arr1=[[responseObject objectForKey:@"data"] objectForKey:@"knowledgeInfoList"];
             //NSLog(@"%@",arr);
             [_table reloadData];
+            _table.hidden =NO;
             [WarningBox warningBoxHide:YES andView:self.view];
         }
         else if([[responseObject objectForKey:@"code"]isEqual:@"9999"]){
