@@ -155,6 +155,7 @@
 - (IBAction)Set:(id)sender {
     //NSLog(@"知识学习还在路上");
    XLLearingViewController*xx;
+    [[NSUserDefaults standardUserDefaults] setObject:@"100" forKey:@"btntag"];
     [self tiaoye:xx mingzi:@"learns"];
 }
 //收银

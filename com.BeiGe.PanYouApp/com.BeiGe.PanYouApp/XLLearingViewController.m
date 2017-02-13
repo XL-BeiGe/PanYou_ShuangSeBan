@@ -19,6 +19,9 @@
     NSMutableArray*arr;
     NSMutableArray *arr1;
     int xxxxx;
+    int fanpan;
+    NSUserDefaults *def;
+    UIButton  *btnn;
 }
 @end
 
@@ -31,6 +34,7 @@
     heigh =[UIScreen mainScreen].bounds.size.height;
     _table.hidden = YES;
     self.title =@"知识学习";
+      def =[NSUserDefaults standardUserDefaults];
     [self navigatio];
     // Do any additional setup after loading the view.
 }
@@ -47,41 +51,37 @@
 -(void)viewWillAppear:(BOOL)animated{
     [self jiekou];
     
+
 }
 -(void)typs:(UIButton*)btn{
- 
+    
+    NSString*ss =[NSString stringWithFormat:@"%ld",btn.tag];
+    [[NSUserDefaults standardUserDefaults]setObject:ss forKey:@"btntag"];
     for (UIButton * vv in _scrollview.subviews) {
-                if (vv.tag==btn.tag) {
-                    [vv setTitleColor:[UIColor colorWithHexString:@"34C083"] forState:UIControlStateNormal];
-                  
-                }
-                else{
-                   [vv setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                   
-                }
-       
-      
+        if (vv.tag==btn.tag) {
+         [vv setTitleColor:[UIColor colorWithHexString:@"34C083"] forState:UIControlStateNormal];
+        }
+        else{
+          [vv setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        }
     }
 
-    
-    
-    
     xxxxx=(int)btn.tag-100;
     [self jiekou1];
 }
 
 -(void)Scrollv{
     for (int i=0; i<arr.count; i++) {
-        UIButton  *btn =[[UIButton alloc]init];
-        [btn setTitle:[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"knowledgeTypeName"]] forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        btn.titleLabel.font =[UIFont systemFontOfSize:15];
-        btn.tag =100+i;
-        [btn addTarget:self action:@selector(typs:) forControlEvents:UIControlEventTouchUpInside];
+        btnn =[[UIButton alloc]init];
+        [btnn setTitle:[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"knowledgeTypeName"]] forState:UIControlStateNormal];
+        [btnn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        btnn.titleLabel.font =[UIFont systemFontOfSize:15];
+        btnn.tag =100+i;
+        [btnn addTarget:self action:@selector(typs:) forControlEvents:UIControlEventTouchUpInside];
         
-        btn.frame =CGRectMake(1+(width/3)*i,0,width/3-10, 40);
-        btn.titleLabel.adjustsFontSizeToFitWidth =YES;
-        [_scrollview addSubview:btn];
+        btnn.frame =CGRectMake(1+(width/3)*i,0,width/3-10, 40);
+        btnn.titleLabel.adjustsFontSizeToFitWidth =YES;
+        [_scrollview addSubview:btnn];
     }
     _scrollview.delegate= self;
     //设置scrollview的滚动范围（内容大小）
@@ -97,6 +97,15 @@
     //_scrollview.contentInset = UIEdgeInsetsMake(0,0,0,0);
     //设置是否可以进行画面切换
     //_scrollview.pagingEnabled =YES;
+    for (UIButton * vv in _scrollview.subviews) {
+        if (vv.tag==[[def objectForKey:@"btntag"] intValue]) {
+            [vv setTitleColor:[UIColor colorWithHexString:@"34C083"] forState:UIControlStateNormal];
+        }
+        else{
+            [vv setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        }
+        
+    }
 }
 
 
@@ -169,6 +178,8 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
+    
+    
     XLLearnInfoViewController *xl = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"learninfo"];
     xl.idid=[NSString stringWithFormat:@"%@",[arr1[indexPath.row] objectForKey:@"knowledgeInfoId"]];
     
@@ -192,6 +203,9 @@
            arr=[[responseObject objectForKey:@"data"] objectForKey:@"knowledgeTypeInfoList"];
           
             [self Scrollv];
+            if ([[def objectForKey:@"btntag"] isEqualToString:@"100"]) {
+                [self jiekou1];
+            }
             [WarningBox warningBoxHide:YES andView:self.view];
         }
         else if([[responseObject objectForKey:@"code"]isEqual:@"9999"]){
