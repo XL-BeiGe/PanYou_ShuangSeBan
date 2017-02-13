@@ -13,5 +13,10 @@
 @property (weak, nonatomic) IBOutlet UITextField *Name;
 @property (weak, nonatomic) IBOutlet UITextField *Password;
 - (IBAction)Login:(UIButton *)sender;
+@property (weak, nonatomic) IBOutlet UITextField *NetText1;
+@property (weak, nonatomic) IBOutlet UITextField *NetText2;
+@property (weak, nonatomic) IBOutlet UITextField *NetText3;
+@property (weak, nonatomic) IBOutlet UITextField *NetText4;
+@property (weak, nonatomic) IBOutlet UITextField *NetText5;
 
 @end

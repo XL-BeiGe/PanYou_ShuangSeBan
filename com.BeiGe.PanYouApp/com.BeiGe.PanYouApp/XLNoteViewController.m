@@ -27,6 +27,7 @@
     [self tableviewdelegate];
     [self refrish];
     [self comeback];
+    [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"xiaohongdian"];
     _segment.layer.cornerRadius = 0;
     _segment.layer.masksToBounds = NO;
     zhT=@"2";

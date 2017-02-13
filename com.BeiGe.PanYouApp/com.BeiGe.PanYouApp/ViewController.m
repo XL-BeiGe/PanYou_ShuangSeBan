@@ -189,7 +189,7 @@
     [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"isPandian"];
     [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"rukou"];
     XLmemedaViewController *home=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"memeda"];
-    [self presentViewController:home animated:NO completion:^{
+    [self presentViewController:home animated:YES completion:^{
         // NSLog(@"么么哒");
     }];
 }

@@ -28,7 +28,7 @@
 @implementation XLMainViewController
 -(void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBar.translucent = true;
-
+    [self tongzhi];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     self.navigationController.navigationBar.translucent = false;
@@ -38,10 +38,6 @@
     
     self.title  =@"盘优";
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    [self tongzhi];
-    
-    // Do any additional setup after loading the view.
-    
     
 }
 
@@ -55,10 +51,15 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
                                                   forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
+    NSString*xiaohongdian=[[NSUserDefaults standardUserDefaults] objectForKey:@"xiaohongdian"];
     
     UIButton *btn =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
-    [btn setImage:[UIImage imageNamed:@"通知1.png"] forState:UIControlStateNormal];
-    //[btn setImage:[UIImage imageNamed:@"通知2.png"] forState:UIControlStateNormal];
+    
+    if ([xiaohongdian isEqualToString:@"1"]) {
+        [btn setImage:[UIImage imageNamed:@"通知2.png"] forState:UIControlStateNormal];
+    }else{
+        [btn setImage:[UIImage imageNamed:@"通知1.png"] forState:UIControlStateNormal];
+    }
     
     [btn addTarget:self action:@selector(Note:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *right = [[UIBarButtonItem alloc]initWithCustomView:btn];
