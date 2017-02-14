@@ -73,7 +73,7 @@
         _titl.text =[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"title"]];
         _laiy.text =[NSString stringWithFormat:@"资讯来源:%@",[[responseObject objectForKey:@"data"] objectForKey:@"userName"]];
         _time.text =[NSString stringWithFormat:@"发布时间:%@",[[responseObject objectForKey:@"data"] objectForKey:@"created"]];
-        NSLog(@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"comments"]);
+       
             NSString *urlstr=[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"comments"]];
        NSString *transString = [NSString stringWithString:[urlstr stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
    
@@ -82,7 +82,7 @@
 
             NSString*ssss =[NSString stringWithFormat:@"%@%@%@",Scheme,QianWaiWangIP,AppName];
             transString =[transString stringByReplacingOccurrencesOfString:stor withString:ssss];
-            NSLog(@"urlstring-------%@",transString);
+           // NSLog(@"urlstring-------%@",transString);
             }
             
             
