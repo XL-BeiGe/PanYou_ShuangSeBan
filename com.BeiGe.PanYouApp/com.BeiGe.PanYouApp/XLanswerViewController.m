@@ -74,14 +74,12 @@
         }
     }
 }
-
-
-
 -(void)chuangjiantable{
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
     
-    button=[[UIButton alloc] initWithFrame:CGRectMake(80, height-100, width-160, 44)];
+    button=[[UIButton alloc] initWithFrame:CGRectMake(80, height-144, width-160, 44)];
+
     button.backgroundColor=[UIColor colorWithHexString:@"2fb870"];
     button.layer.cornerRadius=10;
     [button setTitle:@"确定" forState:UIControlStateNormal];
@@ -89,15 +87,31 @@
     [button addTarget:self action:@selector(queding) forControlEvents:UIControlEventTouchUpInside];
     button.hidden=YES;
     [self.view addSubview:button];
-    
-    _beijing.frame=CGRectMake(0, 64, width, height/3);
+    _beijing.contentMode=UIViewContentModeScaleAspectFit;
+    _beijing.frame=CGRectMake(0, 0, width, height/3-45);
+        if (self.view.bounds.size.width == 375)
+        {
+            _beijing.frame=CGRectMake(0, 0, width, height/3-41);
+        }
+        else if (self.view.bounds.size.width == 320)
+        {
+           _beijing.frame=CGRectMake(0, 0, width, height/3-35);
+        }
     _beijing.backgroundColor=[UIColor blackColor];
     _wenti.frame=CGRectMake(20, CGRectGetMaxY(_beijing.frame), 200, 30);
+    
+    
     _wentizhuti.frame=CGRectMake(40, CGRectGetMaxY(_wenti.frame)+5, width-40, 30);
+    
+    
     _tableview.frame=CGRectMake(20, CGRectGetMaxY(_wentizhuti.frame)+10, width-40, height-CGRectGetMaxY(_wentizhuti.frame)-54);
     _tableview.delegate=self;
     _tableview.dataSource=self;
     _tableview.scrollEnabled =NO;
+    if (self.view.bounds.size.width == 320)
+    {
+        _tableview.scrollEnabled =YES;
+    }
     _tableview.backgroundColor=[UIColor colorWithHexString:@"ededed"];
     _tableview.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [_tishiimage bringSubviewToFront:_tableview];
@@ -106,8 +120,9 @@
     _tishiview.hidden=YES;
     _tishiimage.hidden=YES;
 }
-
 -(void)quxuanxiang :(NSDictionary*)a1{
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat height = [UIScreen mainScreen].bounds.size.height;
     if ([_str isEqual:@"1"]) {
         self.navigationItem.title=[NSString stringWithFormat:@"当前答题进度:%d/%lu",iii+1,(unsigned long)_timuarr.count];
     }else{
@@ -143,7 +158,18 @@
         button.hidden=YES;
         _wenti.text=@"问题:";
     }
+    [_wentizhuti setNumberOfLines:0];
     _wentizhuti.text=[_timuarr[iii] objectForKey:@"quesion"];
+    //初始化段落，设置段落风格
+    NSMutableParagraphStyle *paragraphstyle=[[NSMutableParagraphStyle alloc]init];
+    paragraphstyle.lineBreakMode=NSLineBreakByCharWrapping;
+    //设置label的字体和段落风格
+    NSDictionary *dic=@{NSFontAttributeName:_wentizhuti.font,NSParagraphStyleAttributeName:paragraphstyle.copy};
+    
+    CGRect rect=[_wentizhuti.text boundingRectWithSize:CGSizeMake(self.view.frame.size.width-80, self.view.frame.size.height) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
+
+    _wentizhuti.frame=CGRectMake(40, CGRectGetMaxY(_wenti.frame)+5, rect.size.width,rect.size.height);
+    _tableview.frame = CGRectMake(20, CGRectGetMaxY(_wentizhuti.frame)+10, width-40, height-CGRectGetMaxY(_wentizhuti.frame)-54);
     [_tableview reloadData];
 }
 
