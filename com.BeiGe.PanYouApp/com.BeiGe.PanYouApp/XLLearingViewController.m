@@ -197,7 +197,6 @@
     NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userId", nil];
     [WarningBox warningBoxModeIndeterminate:@"加载界面..." andView:self.view];
     [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
-        // NSLog(@"%@",responseObject);
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
             arr=[[responseObject objectForKey:@"data"] objectForKey:@"knowledgeTypeInfoList"];
@@ -215,7 +214,6 @@
     } failure:^(NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"网络错误,请重试!" andView:self.view];
-        NSLog(@"%@",error);
     }];
     
 }
@@ -230,11 +228,9 @@
         NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userId",KnowID,@"knowledgeTypeId",nil];
         [WarningBox warningBoxModeIndeterminate:@"加载界面..." andView:self.view];
         [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
-            // NSLog(@"%@",responseObject);
             [WarningBox warningBoxHide:YES andView:self.view];
             if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
                 arr1=[[responseObject objectForKey:@"data"] objectForKey:@"knowledgeInfoList"];
-                //NSLog(@"%@",arr);
                 [_table reloadData];
                 _table.hidden =NO;
                 [WarningBox warningBoxHide:YES andView:self.view];
@@ -246,7 +242,6 @@
         } failure:^(NSError *error) {
             [WarningBox warningBoxHide:YES andView:self.view];
             [WarningBox warningBoxModeText:@"网络错误,请重试!" andView:self.view];
-            NSLog(@"%@",error);
         }];
     }
 }

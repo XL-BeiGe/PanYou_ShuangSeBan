@@ -65,7 +65,6 @@
     NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:uudud,@"knowledgeInfoId", nil];
     [WarningBox warningBoxModeIndeterminate:@"加载界面..." andView:self.view];
     [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
-      // NSLog(@"%@",responseObject);
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
             arr=[responseObject objectForKey:@"data"];
@@ -82,7 +81,6 @@
 
             NSString*ssss =[NSString stringWithFormat:@"%@%@%@",Scheme,QianWaiWangIP,AppName];
             transString =[transString stringByReplacingOccurrencesOfString:stor withString:ssss];
-           // NSLog(@"urlstring-------%@",transString);
             }
             
             
@@ -98,7 +96,6 @@
     } failure:^(NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"网络错误,请重试!" andView:self.view];
-        NSLog(@"%@",error);
     }];
     
 }

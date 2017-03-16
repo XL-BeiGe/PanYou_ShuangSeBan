@@ -21,14 +21,7 @@
 
 @implementation XLLogin_ViewController
 -(void)viewWillAppear:(BOOL)animated{
-    // [self.navigationController setNavigationBarHidden:YES animated:YES];
-    //    NSLog(@"%@",JuyuwangIP);
-    //    if (NULL == JuyuwangIP) {
-    //        [[NSUserDefaults standardUserDefaults]setObject:@"www.yaopandian.com" forKey:@"JuYuWang"];
-    //    }
     self.navigationController.navigationBar.translucent = true;
-    
-    //NSLog(@"\n\n单机时候的IP：\n\n%@",JuyuwangIP);
     if (NULL !=[[NSUserDefaults standardUserDefaults] objectForKey:@"Name"]) {
         _Name.text=[[NSUserDefaults standardUserDefaults] objectForKey:@"Name"];
         _Password.text=[[NSUserDefaults standardUserDefaults] objectForKey:@"Password"];
@@ -222,7 +215,6 @@
             //自己写的网络请求    请求外网地址
             [XL_WangLuo WaiwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
                 [WarningBox warningBoxHide:YES andView:self.view];
-               // NSLog(@"%@",responseObject);
                 @try {
                     if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
                         NSUserDefaults *user=[NSUserDefaults standardUserDefaults];
@@ -243,7 +235,6 @@
             } failure:^(NSError *error) {
                 [WarningBox warningBoxHide:YES andView:self.view];
                 [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
-                NSLog(@"%@",error);
             }];
         }
         

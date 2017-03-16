@@ -143,13 +143,11 @@
     [WarningBox warningBoxModeIndeterminate:@"药品信息下载中..." andView:self.view];
     [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         if ([[responseObject objectForKey:@"code"]isEqualToString:@"0000"]){
-       // NSLog(@"%@",responseObject);
         [WarningBox warningBoxHide:YES andView:self.view];
         
         [XL clearDatabase:db from:ChaXunBiaoMing];
         [XL clearDatabase:db from:@"gouwu"];
         NSArray *list=[[responseObject objectForKey:@"data"] objectForKey:@"drugList"];
-      // NSLog(@"%lu",(unsigned long)list.count);
         if (list.count==0){
          [WarningBox warningBoxModeText:@"没有药品信息" andView:self.view];
         }else{
@@ -169,7 +167,6 @@
     } failure:^(NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"网络错误,请重试!" andView:self.view];
-        NSLog(@"%@",error);
     }];
 
 }
@@ -179,9 +176,6 @@
  
 }
 -(void)chazhao{
-    
-    //NSLog(@"会员类型-----%@",type);
-    
     [_checkyp resignFirstResponder];
     NSArray *arr = [XL DataBase:db selectKeyTypes:ChaXunShiTiLei fromTable:ChaXunBiaoMing];
     if (arr.count==0){
@@ -428,7 +422,6 @@
     NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:_vipnum.text,@"no",type,@"type",UserID,@"userId", nil];
     
     [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
-       // NSLog(@"%@",responseObject);
           [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"]isEqualToString:@"0000"]) {
              NSDictionary*data=[responseObject objectForKey:@"data"];
@@ -447,7 +440,6 @@
     } failure:^(NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"网络错误,请重试!" andView:self.view];
-        NSLog(@"%@",error);
     }];
     
 }

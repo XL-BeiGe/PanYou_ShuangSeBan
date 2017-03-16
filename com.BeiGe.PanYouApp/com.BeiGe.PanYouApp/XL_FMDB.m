@@ -38,10 +38,8 @@ static XL_FMDB *fmdb =nil;
 -(FMDatabase *)getDBWithDBName:(NSString *)dbName{
     NSArray *library = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
     NSString *dbPath = [library[0] stringByAppendingPathComponent:dbName];
-   // NSLog(@"%@", dbPath);
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
     if (![db open]) {
-        //NSLog(@"无法获取数据库");
         return nil;
     }
     return db;
@@ -65,7 +63,6 @@ static XL_FMDB *fmdb =nil;
             }
         }
         [sql appendString:@")"];
-       // NSLog(@"%@", sql);
         [db executeUpdate:sql];
     }
    

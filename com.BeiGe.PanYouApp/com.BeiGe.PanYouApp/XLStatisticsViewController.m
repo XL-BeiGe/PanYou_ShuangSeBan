@@ -89,7 +89,6 @@
     NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userId",date,@"currentDate", nil];
     [WarningBox warningBoxModeIndeterminate:@"加载界面..." andView:self.view];
     [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
-        //NSLog(@"%@",responseObject);
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
             NSDictionary*data=[responseObject objectForKey:@"data"];
@@ -102,9 +101,6 @@
                     [waiqinlist addObject:dd];
                 }
             }
-            
-           
-           
             [_tableview reloadData];
         }
         else if([[responseObject objectForKey:@"code"]isEqual:@"9999"]){
@@ -116,7 +112,6 @@
     } failure:^(NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"网络错误,请重试!" andView:self.view];
-        NSLog(@"%@",error);
     }];
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

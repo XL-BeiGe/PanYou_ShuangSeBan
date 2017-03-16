@@ -79,8 +79,6 @@
 -(void)quedingwangluo{
     [self.view endEditing:YES];
     NSString *fangshi=@"/drug/postDrug";
-    
-    //NSLog(@"付款类型%@",chuannima);
     NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:_consumptionInfoId,@"consumptionInfoId",_fumoney.text,@"drugAmountReceive",chuannima,@"drugAmountType",_zlmoney.text,@"drugAmountBack", nil];
     if (_fumoney.text.length<1) {
         [WarningBox warningBoxModeText:@"请输入付款总额！" andView:self.view];
@@ -90,10 +88,7 @@
     {
         [WarningBox warningBoxModeIndeterminate:@"正在结账..." andView:self.view];
         [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
-           // NSLog(@"%@",responseObject);
-            
             [WarningBox warningBoxHide:YES andView:self.view];
-            
             if ( [[responseObject objectForKey:@"code"]isEqualToString:@"0000"]) {
                 [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"consumptionDetailNo"];
                 [XL clearDatabase:db from:@"gouwu"];
@@ -119,7 +114,6 @@
         } failure:^(NSError *error) {
             [WarningBox warningBoxHide:YES andView:self.view];
             [WarningBox warningBoxModeText:@"网络错误,请重试!" andView:self.view];
-            NSLog(@"%@",error);
         }];
     }
 }
@@ -129,7 +123,6 @@
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     NSString *zc = [_accmoney.text substringFromIndex:1];
     float zong = [zc floatValue];
-    // NSLog(@"%@",string);
     float fu;
     
     NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];

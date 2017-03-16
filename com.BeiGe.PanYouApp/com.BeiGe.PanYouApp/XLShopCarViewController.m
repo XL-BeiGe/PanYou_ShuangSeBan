@@ -39,14 +39,10 @@
     
     [self tableviewdelegate];
     
-    //NSLog(@"传过来的状态%@",_sctype);
-    
-    
     [ZYCustomKeyboardTypeNumberView customKeyboardViewWithServiceTextField:_couprice Delegate:self];
     _coupon.delegate=self;
     
     [self comeback];
-    // Do any additional setup after loading the view.
 }
 
 //自定义键盘
@@ -59,7 +55,6 @@
         tf.text = fakePassword;
     } loginBlock:^(NSString *password) {
         [tf resignFirstResponder];
-        //        tf.text = [NSString stringWithFormat:@"%@", password];
     }];
 }
 
@@ -77,11 +72,8 @@
         }
     }
 }
-
-
 -(void)wangluo{
     //网络请求
-    
     [self updatefmdb];
     shoparr = [XL DataBase:db selectKeyTypes:gouwulei fromTable:@"gouwu"];
     for (int i=0;i<shoparr.count;i++) {
@@ -97,15 +89,11 @@
     
     [WarningBox warningBoxModeIndeterminate:@"正在计算总价..." andView:self.view];
     [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
-        //NSLog(@"%@",responseObject);
         [WarningBox warningBoxHide:YES andView:self.view];
         if([[responseObject objectForKey:@"code"]isEqualToString:@"0000"]){
             NSString *drugAmount=[[responseObject objectForKey:@"data"] objectForKey:@"drugAmount"];
             NSString *consumptionInfoId=[[responseObject objectForKey:@"data"] objectForKey:@"consumptionInfoId"];
             [[NSUserDefaults standardUserDefaults] setObject:[[responseObject objectForKey:@"data"] objectForKey:@"consumptionDetailNo"] forKey:@"consumptionDetailNo"];
-            
-            //            [XL clearDatabase:db from:@"gouwu"];
-            
             XLSetAccountViewController *shop = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"setacc"];
             shop.drugAmount=drugAmount;
             shop.consumptionInfoId=consumptionInfoId;
@@ -118,11 +106,7 @@
     } failure:^(NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"网络错误,请重试!" andView:self.view];
-        NSLog(@"%@",error);
     }];
-    
-    
-    
 }
 
 -(void)tableviewdelegate{
@@ -144,9 +128,6 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:id1];
     }
-    //    for (UIView *v in [cell.contentView subviews]) {
-    //        [v removeFromSuperview];
-    //    }
     UILabel *name =[[UILabel alloc]initWithFrame:CGRectMake(15,12,80,25)];
     UILabel *price =[[UILabel alloc]initWithFrame:CGRectMake(15,45,80,25)];
     UILabel *namete =[[UILabel alloc]initWithFrame:CGRectMake(100,12,self.view.frame.size.width-120,25)];
@@ -159,7 +140,6 @@
     price.text = @"药品价格:";
     pricete.textColor = [UIColor colorWithHexString:@"FF6534" alpha:1];
     // 药品名称
-    
     namete.text = [NSString stringWithFormat:@"%@",[shoparr[indexPath.row]objectForKey:@"name"]];
     //药品价格
     if([_sctype isEqualToString:@"3"]){
@@ -167,17 +147,12 @@
     }else{
      pricete.text = [NSString stringWithFormat:@"%@",[shoparr[indexPath.row]objectForKey:@"vipPrice"]];
     }
-    
-   
-    
     number.delegate = self;
     number.textAlignment = NSTextAlignmentCenter;
     number.adjustsFontSizeToFitWidth = YES;
     // number.keyboardType = UIKeyboardTypeNumberPad;
     number.tag = 600+indexPath.row;
     [ZYCustomKeyboardTypeNumberView customKeyboardViewWithServiceTextField:number Delegate:self];
-    
-    
     
     //药品数量
     number.text = [NSString stringWithFormat:@"%@",[shoparr[indexPath.row]objectForKey:@"drugCount"]];
@@ -186,14 +161,9 @@
     [sum setTitle:@"+" forState:UIControlStateNormal];
     [sum setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     [subtrace setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-    
-    
-    
     [number addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-    //    [number addTarget:self action:@selector(NumberLength:) forControlEvents:UIControlEventEditingChanged];
     [sum addTarget:self action:@selector(sum:) forControlEvents:UIControlEventTouchUpInside];
     [subtrace addTarget:self action:@selector(subtrace:) forControlEvents:UIControlEventTouchUpInside];
-    
     
     [cell.contentView addSubview:name];
     [cell.contentView addSubview:price];
@@ -222,10 +192,6 @@
     shoparr = [XL DataBase:db selectKeyTypes:gouwulei fromTable:@"gouwu"];
     [_tabel reloadData];
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    //NSLog(@"*-*-*-*-*%ld",(long)indexPath.row);
-}
-
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [self.view endEditing:YES];
 }
@@ -240,8 +206,6 @@
         theTextField.text = [szText substringToIndex:MaxLen];
         return NO;
     }
-   // NSLog(@"限制长度");
-    
     return YES;
 }
 //修改数量
@@ -260,8 +224,6 @@
     NSString*qw=oo.text;
     
     NSUInteger mm=theTextField.tag-600;
-    
-    //NSLog(@"修改数量");
     
     if ([self NumberLength:oo]) {
         [shoparr[mm] setObject:qw forKey:@"drugCount"];
@@ -290,8 +252,6 @@
     
     //  存入jieshou数组中
     [shoparr[index.row] setObject:qw forKey:@"drugCount"];
-    
-    
 }
 
 -(void)subtrace:(UIButton*)btn{
@@ -326,9 +286,7 @@
 }
 -(void)customKeyboardTypeNumberView_changeTextFieldWithText:(UITextField *)string{
     if (string.tag>=600&&string.tag<700) {
-       // NSLog(@"麻辣隔壁    ");
         [self textFieldDidChange:string];
-//        nasnflakjfkaslfmel
     }
 }
 //视图上移的方法
@@ -357,26 +315,9 @@
     if ( textField == _coupon) {
         [self setupCustomedKeyboard:textField];
     }
-    //    if (textField==number){
-    //        [self textFieldDidChange:textField];
-    ////        [self NumberLength:textField];
-    //        [self animateTextField:-160 up:YES];
-    //    }else{
-    //
-    //    }
-    
     return YES;
 }
-//-(void)textFieldDidEndEditing:(UITextField *)textField{
-//    if (textField==number){
-//        [self textFieldDidChange:textField];
-////        [self NumberLength:textField];
-//        [self animateTextField:-160 up:NO];
-//    }else{
-//
-//    }
-//
-//}
+
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }
@@ -385,7 +326,6 @@
 - (IBAction)SetAccounts:(id)sender {
     //网络请求
     [self wangluo];
-    
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -405,9 +345,6 @@
 -(void)fanhui{
     [_couprice resignFirstResponder];
 }
-
-
-
 #pragma mark--修改数据库
 -(void)updatefmdb{
     
@@ -427,7 +364,6 @@
     XL = [XL_FMDB tool];
     [XL_FMDB allocWithZone:NULL];
     db = [XL getDBWithDBName:@"pandian.sqlite"];
-    
     shoparr =[XL DataBase:db selectKeyTypes:gouwulei fromTable:@"gouwu"];
 }
 

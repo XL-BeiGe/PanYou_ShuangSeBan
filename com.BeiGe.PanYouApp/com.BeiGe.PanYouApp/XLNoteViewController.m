@@ -54,7 +54,6 @@
     NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userId",zhuangtai,@"progressStatus", nil];
     [WarningBox warningBoxModeIndeterminate:@"加载界面..." andView:self.view];
     [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
-        //NSLog(@"%@",responseObject);
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
             pushList = [NSMutableArray array];
@@ -67,7 +66,6 @@
                     if([[ssa[i]objectForKey:@"progressStatus"]isEqualToString:@"1"]||[[ssa[i]objectForKey:@"progressStatus"]isEqualToString:@"2"]){
                         
                         [pushList addObject:ssa[i]];
-                       // NSLog(@"-------------------%@",pushList);
                     }
                 }
             }
@@ -87,7 +85,6 @@
     } failure:^(NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"网络错误,请重试!" andView:self.view];
-        NSLog(@"%@",error);
     }];
     
 }
@@ -96,20 +93,16 @@
     if (sender.selectedSegmentIndex==0){
         zhT=@"1";
         [self tongzhijiekou:@""];
-        //NSLog(@"未接受");
     }else if (sender.selectedSegmentIndex==1){
         zhT=@"3";
         [self tongzhijiekou:@"3"];
-       // NSLog(@"执行中");
     }else if(sender.selectedSegmentIndex==2){
         zhT=@"4";
         [self tongzhijiekou:@"4"];
-       // NSLog(@"已完成");
     }
 }
 #pragma mark--刷新方法
 -(void)refrish{
-    //NSLog(@"setupRefresh -- 下拉刷新");
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refreshClick:) forControlEvents:UIControlEventValueChanged];
     [self.table addSubview:refreshControl];
@@ -119,7 +112,6 @@
     
     [refreshControl beginRefreshing];
     
-   // NSLog(@"refreshClick: -- 刷新触发");
     // 此处添加刷新tableView数据的代码
     if ([zhT  isEqual:@"1"]||[zhT  isEqual:@"2"]) {
         [self tongzhijiekou:@""];

@@ -199,7 +199,6 @@
     NSString *ruleEndTime   = _xiaban.text;
     
     NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:accessToken,@"accessToken",userID,@"userid",UserID,@"userId",jingwei,@"Lonlat",type,@"type",LonlatPlace,@"LonlatPlace",ruleBeginTime,@"ruleBeginTime",ruleEndTime,@"ruleEndTime",ruleId,@"ruleId", nil];
-    //NSLog(@"%@",rucan);
     //自己写的网络请求    请求外网地址
     NSString *str;
     if (haha==1) {
@@ -215,11 +214,9 @@
         }else if ([[responseObject objectForKey:@"code"] isEqualToString:@"1006"]){
             [WarningBox warningBoxModeText:[NSString stringWithFormat:@"已经签%@，不用重复提交",str] andView:self.view];
         }
-       // NSLog(@"%@",responseObject);
     } failure:^(NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"网络错误，请重试!" andView:self.view];
-        NSLog(@"%@",error);
     }];
 }
 
@@ -247,7 +244,6 @@
     jing = [NSString stringWithFormat:@"%lf", newLocation.coordinate.longitude];
     //将纬度现实到label上
     wei = [NSString stringWithFormat:@"%lf", newLocation.coordinate.latitude];
-    //NSLog(@"%@,%@",jing ,wei);
     // 获取当前所在的城市名
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     //根据经纬度反向地理编译出地址信息

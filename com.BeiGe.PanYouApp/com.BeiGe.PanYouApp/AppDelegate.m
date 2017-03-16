@@ -53,11 +53,6 @@ static AppDelegate *_appDelegate;
     
     _appDelegate = self;
     
-    //获取通知中心单例对象
-    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
-    //添加当前类对象为一个观察者，name和object设置为nil，表示接收一切通知
-    [center addObserver:self selector:@selector(notice:) name:@"123" object:nil];
-    
     self.window.backgroundColor=[UIColor colorWithHexString:@"33c383"];
     //Required
     //notice: 3.0.0及以后版本注册可以这样写，也可以继续用之前的注册方式
@@ -75,11 +70,9 @@ static AppDelegate *_appDelegate;
     //2.1.9版本新增获取registration id block接口。
     [JPUSHService registrationIDCompletionHandler:^(int resCode, NSString *registrationID) {
         if(resCode == 0){
-            NSLog(@"registrationID获取成功：%@",registrationID);
             [self method];
         }
         else{
-            NSLog(@"registrationID获取失败，code：%d",resCode);
         }
     }];
     
@@ -117,7 +110,6 @@ static AppDelegate *_appDelegate;
     NSString*alias=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]];
     
     [JPUSHService setTags:tags alias:alias fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias){
-        NSLog(@"\nrescode: %d, \ntags: %@, \nalias: %@\n", iResCode, iTags, iAlias);
     }];
 
 }
@@ -127,8 +119,6 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [JPUSHService registerDeviceToken:deviceToken];
 }
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
-    //Optional
-    NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
 }
 #pragma mark- JPUSHRegisterDelegate
 
@@ -137,24 +127,22 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
     NSDictionary * userInfo = notification.request.content.userInfo;
     
-    UNNotificationRequest *request = notification.request; // 收到推送的请求
-    UNNotificationContent *content = request.content; // 收到推送的消息内容
+//    UNNotificationRequest *request = notification.request; // 收到推送的请求
+//    UNNotificationContent *content = request.content; // 收到推送的消息内容
     
-    NSNumber *badge = content.badge;  // 推送消息的角标
-    NSString *body = content.body;    // 推送消息体
-    UNNotificationSound *sound = content.sound;  // 推送消息的声音
-    NSString *subtitle = content.subtitle;  // 推送消息的副标题
-    NSString *title = content.title;  // 推送消息的标题
+//    NSNumber *badge = content.badge;  // 推送消息的角标
+//    NSString *body = content.body;    // 推送消息体
+//    UNNotificationSound *sound = content.sound;  // 推送消息的声音
+//    NSString *subtitle = content.subtitle;  // 推送消息的副标题
+//    NSString *title = content.title;  // 推送消息的标题
 
     
     // Required
     if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         [JPUSHService handleRemoteNotification:userInfo];
-         NSLog(@"iOS10 前台收到远程通知:%@", [self logDic:userInfo]);
         [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"xiaohongdian"];
         [[NSNotificationCenter defaultCenter]postNotificationName:@"111" object:nil];
     }else
-     NSLog(@"iOS10 前台收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
     completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以选择设置
 }
 
@@ -164,7 +152,6 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     NSDictionary * userInfo = response.notification.request.content.userInfo;
     if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         [JPUSHService handleRemoteNotification:userInfo];
-        NSLog(@"iOS10 收到远程通知:%@", [self logDic:userInfo]);
         NSString *message = [NSString stringWithFormat:@"%@", [userInfo[@"aps"] objectForKey:@"alert"]];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil ,nil];
         [alert show];
@@ -176,20 +163,13 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
     // Required, iOS 7 Support
     [JPUSHService handleRemoteNotification:userInfo];
-//    NSString *message = [NSString stringWithFormat:@"%@", [userInfo[@"aps"] objectForKey:@"alert"]];
-//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil ,nil];
-    //    [alert show];
+
     [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"xiaohongdian"];
-    NSLog(@"iOS7及以上系统，收到通知:%@", [self logDic:userInfo]);
     completionHandler(UIBackgroundFetchResultNewData);
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-//    NSString *message = [NSString stringWithFormat:@"%@", [userInfo[@"aps"] objectForKey:@"alert"]];
-//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil ,nil];
-//    [alert show];
     [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"xiaohongdian"];
-    NSLog(@"iOS6及以下系统，收到通知:%@", [self logDic:userInfo]);
     // Required,For systems with less than or equal to iOS6
     [JPUSHService handleRemoteNotification:userInfo];
 }

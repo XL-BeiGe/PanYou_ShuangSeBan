@@ -189,7 +189,6 @@
                 } failure:^(NSError *error) {
                     [WarningBox warningBoxHide:YES andView:self.view];
                     [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
-                    NSLog(@"%@",error);
                 }];
             }
         }else{
@@ -223,7 +222,6 @@
                 [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Get success:^(id responseObject) {
                     [WarningBox warningBoxHide:YES andView:self.view];
                     @try {
-                        // NSLog(@"the xiugai\n\n\n%@\n\n\n",responseObject);
                         [WarningBox warningBoxModeText:[responseObject objectForKey:@"msg"] andView:self.navigationController.view];
                         if ([[responseObject objectForKey:@"code"]isEqualToString:@"0000"]) {
                             [[NSUserDefaults standardUserDefaults]setObject:@"" forKey:@"password"];

@@ -150,9 +150,7 @@
     if ([isAnswser isEqualToString:@"1"]&&![shengtian isEqualToString:@"0"]) {
         XLanswerViewController*xla=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"answer"];
         xla.timuarr=[tempLateList[indexPath.section] objectForKey:@"examList"];
-        //NSLog(@"%@",tempLateList[indexPath.section]);
         xla.mobanID=[tempLateList[indexPath.section] objectForKey:@"examTempLateId"];
-        //NSLog(@"%@",[tempLateList[indexPath.section] objectForKey:@"examTempLateId"]);
         xla.str=[NSString stringWithFormat:@"%@",[tempLateList[indexPath.section] objectForKey:@"isNormal"]];
         xla.xunhuan=[NSString stringWithFormat:@"%@",[tempLateList[indexPath.section] objectForKey:@"errorAnswerTimes"]];
         xla.templateAssignId=[NSString stringWithFormat:@"%@",[tempLateList[indexPath.section] objectForKey:@"templateAssignId"]];
@@ -180,7 +178,6 @@
     //自己写的网络请求    请求外网地址
     
     [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
-        //NSLog(@"%@",responseObject);
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
             NSDictionary* data=[responseObject objectForKey:@"data"];
@@ -204,7 +201,6 @@
         
     } failure:^(NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
-        NSLog(@"%@",error);
     }];
     
 }

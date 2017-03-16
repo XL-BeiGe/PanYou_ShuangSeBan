@@ -166,13 +166,9 @@
         remindTable.tableFooterView = [[UIView alloc] init];
         [self.view addSubview:remindTable];
 
-    
-    
     [self.view addSubview:popview];
     
-    
     path = [NSHomeDirectory() stringByAppendingString:@"/Documents/durgRemindList.plist"];
-    //NSLog(@"%@",path);
     pathArray = [[NSMutableArray alloc]init];
     
     [self comeback];
