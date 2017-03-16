@@ -35,6 +35,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(tongzhi) name:@"111" object:nil];
     
     self.title  =@"盘优";
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[UIColor whiteColor]}];
@@ -57,6 +58,7 @@
     
     if ([xiaohongdian isEqualToString:@"1"]) {
         [btn setImage:[UIImage imageNamed:@"通知2.png"] forState:UIControlStateNormal];
+        [self alart];
     }else{
         [btn setImage:[UIImage imageNamed:@"通知1.png"] forState:UIControlStateNormal];
     }
@@ -71,6 +73,20 @@
     UIBarButtonItem *left = [[UIBarButtonItem alloc]initWithCustomView:btnn];
     self.navigationItem.leftBarButtonItem =left;
     
+}
+-(void)alart{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"您有新的消息，请注意查看" preferredStyle:UIAlertControllerStyleAlert];
+    
+    // 添加按钮
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+        [self Note:nil];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        NSLog(@"点击了取消按钮");
+    }]];
+
+    [self presentViewController:alert animated:YES completion:nil];
 }
 -(void)setttt:(UIButton *)button{
     XLSettingViewController*xx;

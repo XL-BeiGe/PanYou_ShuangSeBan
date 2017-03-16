@@ -34,7 +34,7 @@
     heigh =[UIScreen mainScreen].bounds.size.height;
     _table.hidden = YES;
     self.title =@"知识学习";
-      def =[NSUserDefaults standardUserDefaults];
+    def =[NSUserDefaults standardUserDefaults];
     [self navigatio];
     // Do any additional setup after loading the view.
 }
@@ -51,7 +51,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [self jiekou];
     
-
+    
 }
 -(void)typs:(UIButton*)btn{
     
@@ -59,13 +59,13 @@
     [[NSUserDefaults standardUserDefaults]setObject:ss forKey:@"btntag"];
     for (UIButton * vv in _scrollview.subviews) {
         if (vv.tag==btn.tag) {
-         [vv setTitleColor:[UIColor colorWithHexString:@"34C083"] forState:UIControlStateNormal];
+            [vv setTitleColor:[UIColor colorWithHexString:@"34C083"] forState:UIControlStateNormal];
         }
         else{
-          [vv setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [vv setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         }
     }
-
+    
     xxxxx=(int)btn.tag-100;
     [self jiekou1];
 }
@@ -115,14 +115,14 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 -(void)tableviewdelegat{
     _table.dataSource =self;
     _table.delegate =self;
@@ -135,10 +135,10 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 60;
- 
+    
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-
+    
     return  5;
 }
 
@@ -153,7 +153,7 @@
     UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(60, 10, width-80, 20)];
     UILabel *laa = [[UILabel alloc]initWithFrame:CGRectMake(60, 33,width-80, 20)];
     [img.layer setCornerRadius:10];
-  
+    
     lab.font =[UIFont systemFontOfSize:15];
     laa.font =[UIFont systemFontOfSize:15];
     laa.textColor =[UIColor lightGrayColor];
@@ -168,7 +168,7 @@
     [backview addSubview:lab];
     [backview addSubview:laa];
     [cell.contentView addSubview:backview];
-
+    
     
     cell.selectionStyle =UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor clearColor];
@@ -177,13 +177,13 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
+    
     
     
     XLLearnInfoViewController *xl = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"learninfo"];
     xl.idid=[NSString stringWithFormat:@"%@",[arr1[indexPath.row] objectForKey:@"knowledgeInfoId"]];
     
-  
+    
     
     [self.navigationController pushViewController:xl animated:YES];
 }
@@ -197,11 +197,11 @@
     NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userId", nil];
     [WarningBox warningBoxModeIndeterminate:@"加载界面..." andView:self.view];
     [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
-       // NSLog(@"%@",responseObject);
+        // NSLog(@"%@",responseObject);
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
-           arr=[[responseObject objectForKey:@"data"] objectForKey:@"knowledgeTypeInfoList"];
-          
+            arr=[[responseObject objectForKey:@"data"] objectForKey:@"knowledgeTypeInfoList"];
+            
             [self Scrollv];
             if ([[def objectForKey:@"btntag"] isEqualToString:@"100"]) {
                 [self jiekou1];
@@ -217,34 +217,37 @@
         [WarningBox warningBoxModeText:@"网络错误,请重试!" andView:self.view];
         NSLog(@"%@",error);
     }];
-
+    
 }
 -(void)jiekou1{
-    arr1 = [NSMutableArray array];
-    NSString *fangshi=@"/knowledge/title";
-    NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"];
-    NSString *KnowID=[NSString stringWithFormat:@"%@",[arr[xxxxx] objectForKey:@"knowledgeTypeId"]];
-    NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userId",KnowID,@"knowledgeTypeId",nil];
-    [WarningBox warningBoxModeIndeterminate:@"加载界面..." andView:self.view];
-    [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
-        // NSLog(@"%@",responseObject);
-        [WarningBox warningBoxHide:YES andView:self.view];
-        if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
-            arr1=[[responseObject objectForKey:@"data"] objectForKey:@"knowledgeInfoList"];
-            //NSLog(@"%@",arr);
-            [_table reloadData];
-            _table.hidden =NO;
+    if (arr.count == 0) {
+        
+    }else{
+        arr1 = [NSMutableArray array];
+        NSString *fangshi=@"/knowledge/title";
+        NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"];
+        NSString *KnowID=[NSString stringWithFormat:@"%@",[arr[xxxxx] objectForKey:@"knowledgeTypeId"]];
+        NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"userId",KnowID,@"knowledgeTypeId",nil];
+        [WarningBox warningBoxModeIndeterminate:@"加载界面..." andView:self.view];
+        [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
+            // NSLog(@"%@",responseObject);
             [WarningBox warningBoxHide:YES andView:self.view];
-        }
-        else if([[responseObject objectForKey:@"code"]isEqual:@"9999"]){
-            //账号在其他手机登录，请重新登录。
-            [XL_WangLuo sigejiu:self];
-        }
-    } failure:^(NSError *error) {
-        [WarningBox warningBoxHide:YES andView:self.view];
-        [WarningBox warningBoxModeText:@"网络错误,请重试!" andView:self.view];
-        NSLog(@"%@",error);
-    }];
-
+            if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
+                arr1=[[responseObject objectForKey:@"data"] objectForKey:@"knowledgeInfoList"];
+                //NSLog(@"%@",arr);
+                [_table reloadData];
+                _table.hidden =NO;
+                [WarningBox warningBoxHide:YES andView:self.view];
+            }
+            else if([[responseObject objectForKey:@"code"]isEqual:@"9999"]){
+                //账号在其他手机登录，请重新登录。
+                [XL_WangLuo sigejiu:self];
+            }
+        } failure:^(NSError *error) {
+            [WarningBox warningBoxHide:YES andView:self.view];
+            [WarningBox warningBoxModeText:@"网络错误,请重试!" andView:self.view];
+            NSLog(@"%@",error);
+        }];
+    }
 }
 @end

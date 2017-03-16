@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "JPUSHService.h"
 #import "Color+Hex.h"
+#import "SDWebImage/UIImageView+WebCache.h"
 // iOS10注册APNs所需头文件
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
 #import <UserNotifications/UserNotifications.h>
@@ -18,12 +19,38 @@
 #define channell @""
 #define isProduction @"0"
 
-@interface AppDelegate ()<JPUSHRegisterDelegate>
 
+#define UISCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
+#define UISCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
+
+@interface AppDelegate ()<JPUSHRegisterDelegate>
+//@property (strong, nonatomic) UIView *ADView;
+@property (strong, nonatomic) UIView *lunchView;
 @end
+
 @implementation AppDelegate
+@synthesize lunchView;
+
 static AppDelegate *_appDelegate;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [self.window makeKeyAndVisible];
+    UIViewController *viewController = [[UIStoryboard storyboardWithName:@"LaunchScreen" bundle:nil] instantiateViewControllerWithIdentifier:@"LaunchScreen"];
+    
+    lunchView = viewController.view;
+//    lunchView = [[NSBundle mainBundle ]][0];
+    lunchView.frame = CGRectMake(0, 0, self.window.screen.bounds.size.width, self.window.screen.bounds.size.height);
+    [self.window addSubview:lunchView];
+    
+    UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, UISCREEN_WIDTH, UISCREEN_HEIGHT)];
+    NSString *str = @"http://pic.nipic.com/2008-04-01/20084113367207_2.jpg";
+    [imageV sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"试题背景.png"]];
+    [lunchView addSubview:imageV];
+    
+    [self.window bringSubviewToFront:lunchView];
+    
+    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(removeLun) userInfo:nil repeats:NO];
+    
     _appDelegate = self;
     
     //获取通知中心单例对象
@@ -70,7 +97,15 @@ static AppDelegate *_appDelegate;
     
     return YES;
 }
-
+-(void)removeLun{
+    [UIView animateWithDuration:1.0f delay:0.5f options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        lunchView.alpha = 0.0f;
+        lunchView.layer.transform = CATransform3DScale(CATransform3DIdentity, 1.5f, 1.5f, 1.0f);
+    } completion:^(BOOL finished) {
+        [lunchView removeFromSuperview];
+    }];
+//     [lunchView removeFromSuperview];
+}
 
 + (AppDelegate *)appDelegate {
     return _appDelegate;
@@ -116,10 +151,8 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         [JPUSHService handleRemoteNotification:userInfo];
          NSLog(@"iOS10 前台收到远程通知:%@", [self logDic:userInfo]);
-//        NSString *message = [NSString stringWithFormat:@"%@", [userInfo[@"aps"] objectForKey:@"alert"]];
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil ,nil];
-//        [alert show];
         [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"xiaohongdian"];
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"111" object:nil];
     }else
      NSLog(@"iOS10 前台收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
     completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以选择设置
@@ -336,7 +369,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     min *=60;
     return min;
 }
-
-
-
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"111" object:nil];
+}
 @end

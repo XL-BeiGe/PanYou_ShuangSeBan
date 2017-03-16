@@ -17,6 +17,9 @@
 @interface XLHomeViewController (){
     XL_FMDB  *XL;//数据库调用者
     FMDatabase *db;//数据库
+    
+    NSArray *quanbulist;
+    NSMutableArray *xiazailist;
 }
 
 @end
@@ -197,33 +200,21 @@
         //        NSLog(@"%@",responseObject);
         @try {
             if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
-                NSArray *list=[[responseObject objectForKey:@"data"] objectForKey:@"list"];
+                quanbulist=[[responseObject objectForKey:@"data"] objectForKey:@"list"];
                 //                NSLog(@"同步数据-*-*-*-\n\n\n%lu",(unsigned long)list.count);
                 //                NSLog(@"同步数据-*-*-*-\n\n\n%@",list);
                 //清空数据
                 [XL clearDatabase:db from:TongBuBiaoMing];
                 
-                dispatch_queue_t queue =  dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-                //2.添加任务到队列中，就可以执行任务
-                //异步函数：具备开启新线程的能力
-                dispatch_async(queue, ^{
-                    for (int i=0; i<list.count; i++) {
-                        
-                        NSString *barcode =[list[i]objectForKey:@"barCode"];
-                        if (NULL==barcode){
-                            barcode = @"";
-                        }
-                        NSString  *code = [NSString stringWithFormat:@"%@,%@",barcode,[list[i]objectForKey:@"productCode"]];
-                        NSMutableDictionary * dd=[NSMutableDictionary dictionaryWithDictionary:list[i]];
-                        if (NULL != [dd objectForKey:@"office"]) {
-                            [dd removeObjectForKey:@"office"];
-                        }
-                        
-                        [dd setObject:[NSString stringWithFormat:@"%@", code ] forKey:@"barCode"];
-                        [XL DataBase:db insertKeyValues:dd intoTable:TongBuBiaoMing];
-                        
-                    }
-                });
+                NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(hehe) object:nil];
+                
+                [thread start];
+                
+                //                dispatch_queue_t queue =  dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+                //                //2.添加任务到队列中，就可以执行任务
+                //                //异步函数：具备开启新线程的能力
+                //                dispatch_async(queue, ^{
+                //                });
             }else{
                 [WarningBox warningBoxModeText:@"同步库存失败，请与管理员联系！" andView:self.view];
             }
@@ -234,6 +225,25 @@
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
     }];
+    
+}
+-(void)hehe{
+    for (int i=0; i<quanbulist.count; i++) {
+        
+        NSString *barcode =[quanbulist[i]objectForKey:@"barCode"];
+        if (NULL==barcode){
+            barcode = @"";
+        }
+        NSString  *code = [NSString stringWithFormat:@"%@,%@",barcode,[quanbulist[i]objectForKey:@"productCode"]];
+        NSMutableDictionary * dd=[NSMutableDictionary dictionaryWithDictionary:quanbulist[i]];
+        if (NULL != [dd objectForKey:@"office"]) {
+            [dd removeObjectForKey:@"office"];
+        }
+        
+        [dd setObject:[NSString stringWithFormat:@"%@", code ] forKey:@"barCode"];
+        [XL DataBase:db insertKeyValues:dd intoTable:TongBuBiaoMing];
+        
+    }
     
 }
 -(void)xiazaishuju:(NSString *)str :(NSString *)ss{
@@ -262,19 +272,19 @@
                     [[NSUserDefaults standardUserDefaults] setObject:hebing forKey:@"megBatchNoFlag"];
                 }
                 
-                NSMutableArray *list=[dataa objectForKey:@"list"];
+                xiazailist=[dataa objectForKey:@"list"];
                 //                NSLog(@"\n\n下载数据*******\n\n%lu",(unsigned long)list.count);
                 //                NSLog(@"\n\n下载数据*******\n\n%@",list);
-                if(list.count == 0){
+                if(xiazailist.count == 0){
                     [WarningBox warningBoxModeText:@"后台数据为空，请联系管理员添加数据......" andView:self.view];
                 }else{
-                    [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@同步成功%lu条数据!",str,(unsigned long)list.count] andView:self.view];
-                    [[NSUserDefaults standardUserDefaults] setObject:[list[0] objectForKey:@"checkId"] forKey:@"checkId"];
+                    [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@同步成功%lu条数据!",str,(unsigned long)xiazailist.count] andView:self.view];
+                    [[NSUserDefaults standardUserDefaults] setObject:[xiazailist[0] objectForKey:@"checkId"] forKey:@"checkId"];
                     [XL clearDatabase:db from:ShangChuanBiaoMing];
                     [XL clearDatabase:db from:XiaZaiBiaoMing];
                     NSArray*akl=[[NSArray alloc] init];
                     NSMutableDictionary*dict=[[NSMutableDictionary alloc] init];
-                    for (NSDictionary*dd in list) {
+                    for (NSDictionary*dd in xiazailist) {
                         [dict setObject:dd forKey:[NSString stringWithFormat:@"%@%@",[dd objectForKey:@"productCode"],[dd objectForKey:@"prodBatchNo"]]];
                     }
                     akl = [dict allValues];
@@ -300,6 +310,7 @@
         [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
     }];
 }
+
 -(void)shangchuan:(NSDictionary*)rucan{
     NSString *fangshi=@"/sys/upload";
     [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
