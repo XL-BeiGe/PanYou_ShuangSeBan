@@ -43,7 +43,9 @@ static AppDelegate *_appDelegate;
     [self.window addSubview:lunchView];
     
     UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, UISCREEN_WIDTH, UISCREEN_HEIGHT)];
-    NSString *str = @"http://pic.nipic.com/2008-04-01/20084113367207_2.jpg";
+//    NSString *str = @"http://i.meizitu.net/2014/09/28mt01.jpg";
+//    NSString *str = @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1489727846136&di=a9c02fcc57416bdc7b619ffc0fd25c3c&imgtype=0&src=http%3A%2F%2Fc.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2Fa2cc7cd98d1001e98b58e4d0bc0e7bec55e7978d.jpg";
+    NSString *str = @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490322357&di=41a07a09e62f75400dade1b603142199&imgtype=jpg&er=1&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F7acb0a46f21fbe09359315d16f600c338644ad22.jpg";
     [imageV sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"试题背景.png"]];
     [lunchView addSubview:imageV];
     
@@ -86,8 +88,6 @@ static AppDelegate *_appDelegate;
         [[UIApplication sharedApplication]registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound  categories:nil]];
     }
     
-    
-    
     return YES;
 }
 -(void)removeLun{
@@ -97,7 +97,6 @@ static AppDelegate *_appDelegate;
     } completion:^(BOOL finished) {
         [lunchView removeFromSuperview];
     }];
-//     [lunchView removeFromSuperview];
 }
 
 + (AppDelegate *)appDelegate {
@@ -127,21 +126,11 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
     NSDictionary * userInfo = notification.request.content.userInfo;
     
-//    UNNotificationRequest *request = notification.request; // 收到推送的请求
-//    UNNotificationContent *content = request.content; // 收到推送的消息内容
-    
-//    NSNumber *badge = content.badge;  // 推送消息的角标
-//    NSString *body = content.body;    // 推送消息体
-//    UNNotificationSound *sound = content.sound;  // 推送消息的声音
-//    NSString *subtitle = content.subtitle;  // 推送消息的副标题
-//    NSString *title = content.title;  // 推送消息的标题
-
-    
     // Required
     if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         [JPUSHService handleRemoteNotification:userInfo];
         [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"xiaohongdian"];
-        [[NSNotificationCenter defaultCenter]postNotificationName:@"111" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"111" object:nil];
     }else
     completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以选择设置
 }
@@ -152,9 +141,8 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     NSDictionary * userInfo = response.notification.request.content.userInfo;
     if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         [JPUSHService handleRemoteNotification:userInfo];
-        NSString *message = [NSString stringWithFormat:@"%@", [userInfo[@"aps"] objectForKey:@"alert"]];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil ,nil];
-        [alert show];
+        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"xiaohongdian"];
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"111" object:nil];
     }
     completionHandler();  // 系统要求执行这个方法
 }
@@ -165,20 +153,20 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [JPUSHService handleRemoteNotification:userInfo];
 
     [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"xiaohongdian"];
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"111" object:nil];
     completionHandler(UIBackgroundFetchResultNewData);
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"xiaohongdian"];
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"111" object:nil];
     // Required,For systems with less than or equal to iOS6
     [JPUSHService handleRemoteNotification:userInfo];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
-    
 }
-
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     [application setApplicationIconBadgeNumber:0];
     [application cancelAllLocalNotifications];

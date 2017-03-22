@@ -211,15 +211,30 @@
     XLtongxiangqingViewController*xltjxq=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"tongxiangqing"];
     if (indexPath.row==0) {
         xltjxq.ll=@"0";
-        xltjxq.arr=qiandaotuilist;
+        if (qiandaotuilist.count != 0) {
+            xltjxq.arr=qiandaotuilist;
+            [self.navigationController pushViewController:xltjxq animated:YES];
+        }else{
+            [WarningBox warningBoxModeText:@"暂无工作信息" andView:self.view];
+        }
     }else if (indexPath.row==1){
         xltjxq.ll=@"1";
-        xltjxq.arr=waiqinlist;
+        if (waiqinlist.count != 0) {
+            xltjxq.arr=waiqinlist;
+            [self.navigationController pushViewController:xltjxq animated:YES];
+        }else{
+            [WarningBox warningBoxModeText:@"暂无外勤信息" andView:self.view];
+        }
     }else if (indexPath.row==2){
         xltjxq.ll=@"2";
-        xltjxq.arr=qingjialist;
+        if (qingjialist.count != 0) {
+            xltjxq.arr=qingjialist;
+            [self.navigationController pushViewController:xltjxq animated:YES];
+        }else{
+            [WarningBox warningBoxModeText:@"暂无请假信息" andView:self.view];
+        }
     }
-    [self.navigationController pushViewController:xltjxq animated:YES];
+    
     
 }
 @end

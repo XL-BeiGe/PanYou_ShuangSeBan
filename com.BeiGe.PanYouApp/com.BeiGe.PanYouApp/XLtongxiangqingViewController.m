@@ -79,9 +79,9 @@
     if (indexPath.row==0) {
         UIImageView*imageview=[[UIImageView alloc] initWithFrame:CGRectMake(10, (cell.frame.size.height-20)/2-5, 20, 20)];
         UIImage*image=[[UIImage alloc] init];
-        UILabel*qjlabel =[[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(imageview.frame)+10, 6,90, 20)];
+        UILabel*qjlabel =[[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(imageview.frame)+20, 6,90, 20)];
         
-        UILabel*lable=[[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(qjlabel.frame)+10, 6, 350, 20)];
+        UILabel*lable=[[UILabel alloc] initWithFrame:CGRectMake(self.tableview.frame.size.width-169, 3, 180, 20)];
         qjlabel.font= [UIFont systemFontOfSize:15];
         lable.font= [UIFont systemFontOfSize:15];
         if ([_ll isEqualToString:@"0"]) {
