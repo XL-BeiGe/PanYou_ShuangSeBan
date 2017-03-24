@@ -10,6 +10,9 @@
 #import "JPUSHService.h"
 #import "Color+Hex.h"
 #import "SDWebImage/UIImageView+WebCache.h"
+#import "AFNetworking.h"
+#import "XL_Header.h"
+#import "SBJsonWriter.h"
 // iOS10注册APNs所需头文件
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
 #import <UserNotifications/UserNotifications.h>
@@ -33,29 +36,27 @@
 
 static AppDelegate *_appDelegate;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    _appDelegate = self;
     
+    self.window.backgroundColor=[UIColor colorWithHexString:@"33c383"];
     [self.window makeKeyAndVisible];
     UIViewController *viewController = [[UIStoryboard storyboardWithName:@"LaunchScreen" bundle:nil] instantiateViewControllerWithIdentifier:@"LaunchScreen"];
     
     lunchView = viewController.view;
-//    lunchView = [[NSBundle mainBundle ]][0];
     lunchView.frame = CGRectMake(0, 0, self.window.screen.bounds.size.width, self.window.screen.bounds.size.height);
     [self.window addSubview:lunchView];
     
     UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, UISCREEN_WIDTH, UISCREEN_HEIGHT)];
-//    NSString *str = @"http://i.meizitu.net/2014/09/28mt01.jpg";
-//    NSString *str = @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1489727846136&di=a9c02fcc57416bdc7b619ffc0fd25c3c&imgtype=0&src=http%3A%2F%2Fc.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2Fa2cc7cd98d1001e98b58e4d0bc0e7bec55e7978d.jpg";
-    NSString *str = @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490322357&di=41a07a09e62f75400dade1b603142199&imgtype=jpg&er=1&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F7acb0a46f21fbe09359315d16f600c338644ad22.jpg";
-    [imageV sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"试题背景.png"]];
+    NSString *str =[[NSUserDefaults standardUserDefaults] objectForKey:@"tupianqidong"];
+     //str= @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490322357&di=41a07a09e62f75400dade1b603142199&imgtype=jpg&er=1&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F7acb0a46f21fbe09359315d16f600c338644ad22.jpg";
+    [imageV sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"welcome.png"]];
     [lunchView addSubview:imageV];
     
     [self.window bringSubviewToFront:lunchView];
     
     [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(removeLun) userInfo:nil repeats:NO];
-    
-    _appDelegate = self;
-    
-    self.window.backgroundColor=[UIColor colorWithHexString:@"33c383"];
+    [self jjjj];
+   
     //Required
     //notice: 3.0.0及以后版本注册可以这样写，也可以继续用之前的注册方式
     JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
@@ -96,6 +97,25 @@ static AppDelegate *_appDelegate;
         lunchView.layer.transform = CATransform3DScale(CATransform3DIdentity, 1.5f, 1.5f, 1.0f);
     } completion:^(BOOL finished) {
         [lunchView removeFromSuperview];
+    }];
+}
+-(void)jjjj{
+    NSString *JuYuwang=QianWaiWangIP;
+    
+    NSString *BizMethod=@"/HMPhoto/getHMPhoto";
+    
+    NSString *Url=[NSString stringWithFormat:@"%@%@%@%@",Scheme,JuYuwang,apath,BizMethod];
+    AFHTTPSessionManager *manager=[AFHTTPSessionManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
+    __block NSString *str = [NSString string];
+    [manager POST:Url parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if ([[responseObject objectForKey:@"code"] isEqualToString:@"0000"]) {
+            str = [[responseObject objectForKey:@"data"] objectForKey:@"url"];
+            [[NSUserDefaults standardUserDefaults] setObject:str forKey:@"tupianqidong"];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
     }];
 }
 

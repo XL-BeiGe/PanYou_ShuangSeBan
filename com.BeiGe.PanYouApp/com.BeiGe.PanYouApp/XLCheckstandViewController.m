@@ -1,4 +1,4 @@
-//
+	//
 //  XLCheckstandViewController.m
 //  com.BeiGe.PanYouApp
 //
@@ -15,6 +15,7 @@
 #import "XL_FMDB.h"
 #import "XLMainViewController.h"
 #import "ZYCustomKeyboardTypeNumberView.h"
+#import "DSKyeboard.h"
 #import "TextFlowView.h"
 #define gouwulei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"drugId",@"text",@"drugCount",@"text",@"drugPriceType",@"text",@"salePrice",@"text",@"vipPrice",@"text",@"name",@"text",@"qtmd", nil]
 
@@ -41,6 +42,7 @@
     _checkyp.keyboardType=UIKeyboardTypeNamePhonePad;
 //    _checkyp.keyboardType=UIKeyboardTypeNumbersAndPunctuation;
     _checkyp.autocorrectionType = UITextAutocorrectionTypeNo;
+//    [self setupCustomedKeyboard:goodstxt :la];
     _queding.layer.borderWidth = 1;
     _queding.layer.borderColor = [[UIColor colorWithHexString:@"32CC96"] CGColor];
     _queding.layer.cornerRadius=5.0;
@@ -63,6 +65,17 @@
     
     [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"consumptionDetailNo"];
     // Do any additional setup after loading the view.
+}
+#pragma mark-- 自定义键盘
+- (void)setupCustomedKeyboard:(UITextField*)tf :(UILabel *)ss {
+    tf.inputView = [DSKyeboard keyboardWithTextField:tf];
+    
+    [(DSKyeboard *)tf.inputView dsKeyboardTextChangedOutputBlock:^(NSString *fakePassword) {
+        tf.text = fakePassword;
+        ss.text = [NSString stringWithFormat:@"%@", tf.text ];
+    } loginBlock:^(NSString *password) {
+        [tf resignFirstResponder];
+    }];
 }
 -(void)customKeyboardTypeNumberView_shrinkKeyClicked{
 //    [self huiyuanchaxun];

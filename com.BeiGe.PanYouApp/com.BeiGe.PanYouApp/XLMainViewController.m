@@ -37,6 +37,10 @@
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(tongzhi) name:@"111" object:nil];
     
+    NSString *ok = [[NSUserDefaults standardUserDefaults] objectForKey:@"shifoutankuang"];
+    if ([ok isEqualToString:@"1"]) {
+        [self alart];
+    }
     self.title  =@"盘优";
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
@@ -58,7 +62,6 @@
     
     if ([xiaohongdian isEqualToString:@"1"]) {
         [btn setImage:[UIImage imageNamed:@"通知2.png"] forState:UIControlStateNormal];
-        [self alart];
     }else{
         [btn setImage:[UIImage imageNamed:@"通知1.png"] forState:UIControlStateNormal];
     }

@@ -110,12 +110,15 @@
             @try {//DD000101    admin
                 if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
                     NSUserDefaults *user=[NSUserDefaults standardUserDefaults];
+                    
                     //账号密码
                     [user setObject:_username.text forKey:@"name"];
                     [user setObject:_password.text forKey:@"password"];
                     //其他接口必须用
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data" ] objectForKey:@"accessToken"]] forKey:@"accesstoken"];
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data" ] objectForKey:@"accessToken"]] forKey:@"accessToken"];
+                    //1弹    2不弹
+                    [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"status"]] forKey:@"shifoutankuang"];
                     //平台机器码
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"mac"]] forKey:@"Mac"];
                     [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"mac"]] forKey:@"mac"];

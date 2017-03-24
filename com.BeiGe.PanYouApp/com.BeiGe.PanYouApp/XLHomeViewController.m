@@ -14,6 +14,7 @@
 #import "XL_FMDB.h"
 #import "XL_PanDianViewController.h"
 
+
 @interface XLHomeViewController (){
     XL_FMDB  *XL;//数据库调用者
     FMDatabase *db;//数据库
@@ -112,11 +113,6 @@
         [[NSUserDefaults standardUserDefaults]setObject:@"1" forKey:@"zhuangtai"];
         [self xiazaishuju:@"异常数据" :@"8"];
     }
-    
-    
-    
-    
-    
 }
 //提交盘点结果
 - (IBAction)TiJian_Button:(id)sender {
@@ -223,7 +219,6 @@
 }
 -(void)hehe{
     for (int i=0; i<quanbulist.count; i++) {
-        
         NSString *barcode =[quanbulist[i]objectForKey:@"barCode"];
         if (NULL==barcode){
             barcode = @"";
@@ -264,7 +259,6 @@
                     NSString*hebing=[dataa objectForKey:@"megBatchNoFlag"];
                     [[NSUserDefaults standardUserDefaults] setObject:hebing forKey:@"megBatchNoFlag"];
                 }
-                
                 xiazailist=[dataa objectForKey:@"list"];
                 if(xiazailist.count == 0){
                     [WarningBox warningBoxModeText:@"后台数据为空，请联系管理员添加数据......" andView:self.view];
@@ -309,6 +303,8 @@
         if ([[responseObject objectForKey:@"code"] isEqual:@"0000"]) {
             NSString *ss = [NSString stringWithFormat:@"已盘点%lu条数据，成功提交%lu条数据请等待后台处理",[[rucan objectForKey:@"list"]count],[[rucan objectForKey:@"list"]count]];
             [WarningBox warningBoxModeText:ss andView:self.view];
+        }else if ([[responseObject objectForKey:@"code"] isEqual:@"0009"]){
+            [WarningBox warningBoxModeText:@"请先同步异常数据，再盘点药品～" andView:self.view];
         }else
             [WarningBox warningBoxModeText:@"提交盘点结果失败!" andView:self.view];
         
