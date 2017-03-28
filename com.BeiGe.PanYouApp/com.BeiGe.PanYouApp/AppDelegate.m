@@ -47,7 +47,9 @@ static AppDelegate *_appDelegate;
     [self.window addSubview:lunchView];
     
     UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, UISCREEN_WIDTH, UISCREEN_HEIGHT)];
-    NSString *str =[[NSUserDefaults standardUserDefaults] objectForKey:@"tupianqidong"];
+  
+    
+    NSString *str =[NSString stringWithFormat:@"%@%@%@",Scheme,QianWaiWangIP,[[NSUserDefaults standardUserDefaults] objectForKey:@"tupianqidong"]];
      //str= @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490322357&di=41a07a09e62f75400dade1b603142199&imgtype=jpg&er=1&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F7acb0a46f21fbe09359315d16f600c338644ad22.jpg";
     [imageV sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"welcome.png"]];
     [lunchView addSubview:imageV];
@@ -104,13 +106,15 @@ static AppDelegate *_appDelegate;
     
     NSString *BizMethod=@"/HMPhoto/getHMPhoto";
     
-    NSString *Url=[NSString stringWithFormat:@"%@%@%@%@",Scheme,JuYuwang,apath,BizMethod];
+    NSString *Url=[NSString stringWithFormat:@"%@%@%@%@%@",Scheme,JuYuwang,AppName,apath,BizMethod];
+
     AFHTTPSessionManager *manager=[AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
     __block NSString *str = [NSString string];
     [manager POST:Url parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+       
         if ([[responseObject objectForKey:@"code"] isEqualToString:@"0000"]) {
             str = [[responseObject objectForKey:@"data"] objectForKey:@"url"];
             [[NSUserDefaults standardUserDefaults] setObject:str forKey:@"tupianqidong"];
