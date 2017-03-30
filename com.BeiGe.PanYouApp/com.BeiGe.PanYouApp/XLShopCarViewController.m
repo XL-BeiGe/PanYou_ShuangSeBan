@@ -22,7 +22,7 @@
 {
     XL_FMDB  *XL;//数据库调用者
     FMDatabase *db;//数据库
-    
+    BOOL updata;
     NSArray  *shoparr;
     UITextField* number ;
 }
@@ -36,7 +36,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"购物车";
-    
+    updata=NO;
     [self tableviewdelegate];
     
     [ZYCustomKeyboardTypeNumberView customKeyboardViewWithServiceTextField:_couprice Delegate:self];
@@ -64,10 +64,15 @@
     [self.navigationItem setLeftBarButtonItem:left];
 }
 -(void)fanhuii{
+    //[self dismissViewControllerAnimated:YES completion:^{}];
     XLCheckstandViewController *xln=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"checkstand"];
     for (UIViewController *controller in self.navigationController.viewControllers) {
         if ([controller isKindOfClass:[xln class]]) {
-            [self updatefmdb ];
+            if(updata==NO){
+             [self updatefmdb];
+            }else{
+                updata=NO;
+            }
             [self.navigationController popToViewController:controller animated:YES];
         }
     }
@@ -89,6 +94,7 @@
     
     [WarningBox warningBoxModeIndeterminate:@"正在计算总价..." andView:self.view];
     [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
+        NSLog(@"%@",responseObject);
         [WarningBox warningBoxHide:YES andView:self.view];
         if([[responseObject objectForKey:@"code"]isEqualToString:@"0000"]){
             NSString *drugAmount=[[responseObject objectForKey:@"data"] objectForKey:@"drugAmount"];
@@ -98,12 +104,20 @@
             shop.drugAmount=drugAmount;
             shop.consumptionInfoId=consumptionInfoId;
             [self.navigationController pushViewController:shop animated:YES];
+        }else if ([[responseObject objectForKey:@"code"]isEqual:@"1009"]){
+         [WarningBox warningBoxModeText:[responseObject objectForKey:@"msg"] andView:self.view];
+        }
+        else if ([[responseObject objectForKey:@"code"]isEqual:@"1008"]){
+            [WarningBox warningBoxModeText:[responseObject objectForKey:@"msg"] andView:self.view];
         }
         else if([[responseObject objectForKey:@"code"]isEqual:@"9999"]){
             //账号在其他手机登录，请重新登录。
             [XL_WangLuo sigejiu:self];
         }
+        updata=YES;
+        
     } failure:^(NSError *error) {
+        NSLog(@"%@",error);
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"网络错误,请重试!" andView:self.view];
     }];

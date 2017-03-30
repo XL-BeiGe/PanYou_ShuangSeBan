@@ -83,7 +83,7 @@
     if (_fumoney.text.length<1) {
         [WarningBox warningBoxModeText:@"请输入付款总额！" andView:self.view];
     }else if([_zlmoney.text isEqualToString:@"还不够哟"]){
-        [WarningBox warningBoxModeText:@"还不够呢！你想赔钱吗！" andView:self.view];
+        [WarningBox warningBoxModeText:@"请确认付款金额！" andView:self.view];
     }else
     {
         [WarningBox warningBoxModeIndeterminate:@"正在结账..." andView:self.view];
