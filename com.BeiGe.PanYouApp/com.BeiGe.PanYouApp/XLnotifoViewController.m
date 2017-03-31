@@ -41,6 +41,7 @@
    
     _tableview.delegate =self;
     _tableview.dataSource= self;
+    _tableview.bounces =NO;
     [self xiangqingjiekou];
     [self navigation];
     [self registerForKeyboardNotifications];
@@ -272,7 +273,7 @@
             image.clipsToBounds  = YES;//是否剪切掉超出 UIImageView 范围的图片
             [image setContentScaleFactor:[[UIScreen mainScreen] scale]];//缩放图片的分辨率
             NSURL*url=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",Scheme,QianWaiWangIP,[pushTemplate objectForKey:@"image"]]];
-            [image sd_setImageWithURL:url  placeholderImage:[UIImage imageNamed:@"icon_02_07.png"]];
+            [image sd_setImageWithURL:url  placeholderImage:[UIImage imageNamed:@"icon_541234.png"]];
            }
              [self Imageshows];
            [cell.contentView addSubview:image];
@@ -357,9 +358,9 @@
         renwuanniu.backgroundColor =[UIColor colorWithHexString:@"34C083"];
         [renwuanniu addTarget:self action:@selector(vic:) forControlEvents:UIControlEventTouchUpInside];
         if ([_zhT isEqualToString:@"2"]) {
-            [renwuanniu setTitle:@"执行任务" forState:UIControlStateNormal];
+            [renwuanniu setTitle:@"开始执行" forState:UIControlStateNormal];
         }else if ([_zhT isEqualToString:@"3"]){
-            [renwuanniu setTitle:@"完成任务" forState:UIControlStateNormal];
+            [renwuanniu setTitle:@"确认完成" forState:UIControlStateNormal];
         }else{
             
             if(nil==[pushTemplate objectForKey:@"remarks"]){

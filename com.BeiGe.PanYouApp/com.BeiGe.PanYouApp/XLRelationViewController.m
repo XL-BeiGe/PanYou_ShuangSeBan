@@ -59,6 +59,10 @@
     self.DianHuan_View.layer.cornerRadius = 5.0;
     self.DianHuan_View.layer.borderWidth = 1.0;
     self.DianHuan_View.layer.borderColor = [UIColor colorWithHexString:@"00dcb4" alpha:1].CGColor;
+    //固定电话
+    self.GuDing_View.layer.cornerRadius = 5.0;
+    self.GuDing_View.layer.borderWidth = 1.0;
+    self.GuDing_View.layer.borderColor = [UIColor colorWithHexString:@"00dcb4" alpha:1].CGColor;
     
 }
 
@@ -86,6 +90,21 @@
 
     
     
+    
+}
+- (IBAction)GuDing_Buttom:(id)sender {
+    UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"温馨提示" message:@"确定要联系客服吗?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction*action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://18390907126"]];
+        
+    }];
+    UIAlertAction*action2=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    [alert addAction:action1];
+    [alert addAction:action2];
+    [self presentViewController:alert animated:YES completion:^{
+    }];
     
 }
 @end

@@ -71,11 +71,14 @@
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *aa=@"heheda";
-    UITableViewCell *cell=[self.tableview dequeueReusableCellWithIdentifier:aa];
+    UITableViewCell *cell=[self.tableview cellForRowAtIndexPath:indexPath];
     if (cell==nil) {
         cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:aa];
     }
+   
+    
     UIView*shuxian=[[UIView alloc] initWithFrame:CGRectMake(20, 0, 1, cell.frame.size.height)];
+    
     if (indexPath.row==0) {
         UIImageView*imageview=[[UIImageView alloc] initWithFrame:CGRectMake(10, (cell.frame.size.height-20)/2-5, 20, 20)];
         UIImage*image=[[UIImage alloc] init];
@@ -153,8 +156,6 @@
                 shijian.text=arr[i-1];
                
             }
-        
-            
         }
         [cell addSubview:shuxian];
         [cell addSubview:llable];

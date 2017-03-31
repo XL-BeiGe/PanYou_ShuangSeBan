@@ -49,7 +49,8 @@
     [super viewDidLoad];
     
     self.view.backgroundColor=[UIColor colorWithRed:245.0/255 green:245.0/255 blue:245.0/255 alpha:1];
-    
+   // self.navigationController.navigationBar.translucent =NO;
+    self.automaticallyAdjustsScrollViewInsets =NO;
     flagg=0;
     
     shu=0;
@@ -158,7 +159,7 @@
   
     //tableview
    
-        remindTable=[[UITableView alloc] initWithFrame:CGRectMake(0, 64, width, height - 64)];
+        remindTable=[[UITableView alloc] initWithFrame:CGRectMake(0,0, width, height - 64)];
         
         remindTable.backgroundColor = [UIColor clearColor];
         remindTable.delegate = self;
@@ -408,7 +409,7 @@
     
     [UIView animateWithDuration:1 animations:^{
         
-        popview.frame=CGRectMake(0, height-280, width, 280);
+        popview.frame=CGRectMake(0, height-344, width, 280);
         
     }completion:nil];
     

@@ -20,5 +20,10 @@
 @property (weak, nonatomic) IBOutlet UIView *DianHuan_View;
 @property (weak, nonatomic) IBOutlet UIButton *DianHua_Button;
 - (IBAction)DianHua_Button:(id)sender;
+@property (weak, nonatomic) IBOutlet UIView *GuDing_View;
+
+@property (weak, nonatomic) IBOutlet UIButton *GuDing_Button;
+- (IBAction)GuDing_Buttom:(id)sender;
+
 
 @end

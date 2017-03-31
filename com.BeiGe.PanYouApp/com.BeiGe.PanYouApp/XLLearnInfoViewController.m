@@ -45,6 +45,13 @@
     [_webvie setScalesPageToFit:YES];//自动缩放以适应屏幕
     self.webvie.backgroundColor = [UIColor clearColor];
 }
+-(void)webViewDidFinishLoad:(UIWebView *)webView
+{
+   [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '300%'"];//修改百分比即可
+    NSString *meta = [NSString stringWithFormat:@"document.getElementsByName(\"viewport\")[0].content = \"width=self.view.frame.size.width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no\""];
+    [webView stringByEvaluatingJavaScriptFromString:meta];//(initial-scale是初始缩放比,minimum-scale=1.0最小缩放比,maximum-scale=5.0最大缩放比,user-scalable=yes是否支持缩放)
+    
+}
 /*
 #pragma mark - Navigation
 
@@ -65,6 +72,7 @@
     NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:uudud,@"knowledgeInfoId", nil];
     [WarningBox warningBoxModeIndeterminate:@"加载界面..." andView:self.view];
     [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
+        NSLog(@"%@",responseObject);
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
             arr=[responseObject objectForKey:@"data"];
@@ -81,10 +89,13 @@
 
             NSString*ssss =[NSString stringWithFormat:@"%@%@%@",Scheme,QianWaiWangIP,AppName];
             transString =[transString stringByReplacingOccurrencesOfString:stor withString:ssss];
+            
             }
+            NSMutableString *string = [[NSMutableString alloc] initWithString:transString];
+            [string insertString:@"<body style=\"text-indent:2em;line-height: 25px;\">" atIndex:0];
+            [string appendString:@"</body>"];
             
-            
-           [_webvie loadHTMLString:transString baseURL:nil];
+           [_webvie loadHTMLString:string baseURL:nil];
             
             
             [WarningBox warningBoxHide:YES andView:self.view];

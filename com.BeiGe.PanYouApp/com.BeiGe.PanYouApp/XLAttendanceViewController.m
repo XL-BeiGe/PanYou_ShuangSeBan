@@ -57,7 +57,7 @@
 -(void)comeback{
     self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
     UIBarButtonItem*left=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back@2x"] style:UIBarButtonItemStyleDone target:self action:@selector(fanhui)];
-    UIBarButtonItem*right=[[UIBarButtonItem alloc]initWithTitle:@"请选择班次" style:UIBarButtonItemStyleDone target:self action:@selector(tan)];
+    UIBarButtonItem*right=[[UIBarButtonItem alloc]initWithTitle:@"班次选择" style:UIBarButtonItemStyleDone target:self action:@selector(tan)];
     [self.navigationItem setRightBarButtonItem:right];
     [self.navigationItem setLeftBarButtonItem:left];
 }
@@ -172,8 +172,9 @@
 
 - (IBAction)TongJi:(id)sender {
     //tiaoye
-    XLStatisticsViewController*ss;
-    [self tiaoye:ss mingzi:@"statistics"];
+    [WarningBox warningBoxModeText:@"敬请期待" andView:self.view];
+//    XLStatisticsViewController*ss;
+//    [self tiaoye:ss mingzi:@"statistics"];
 }
 -(void)tiaoye:(UIViewController*)controller mingzi:(NSString*)ming{
     controller=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:ming];

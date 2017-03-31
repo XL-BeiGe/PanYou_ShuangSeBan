@@ -1106,6 +1106,7 @@
     //去除多余分割线
     self.table.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     _table.backgroundColor = [UIColor clearColor];
+    _table.bounces =NO;
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return [arr count];
