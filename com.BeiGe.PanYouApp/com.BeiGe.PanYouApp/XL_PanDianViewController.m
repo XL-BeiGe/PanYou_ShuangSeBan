@@ -657,15 +657,19 @@
         if(arr.count==1){
             /*status 不确定上传几*/
             shularr=[[NSMutableArray alloc] init];
-            [shularr addObject:[NSString stringWithFormat:@"%@",_onelabel.text]];
-            if(scarr.count==0){
-                [self sccharu:0];
+            if (_onelabel.text .length == 0) {
+                [WarningBox warningBoxModeText:@"请输入数量!" andView:self.view];
             }else{
-                //修改上传表
-                [self scxiugai:0];
+                [shularr addObject:[NSString stringWithFormat:@"%@",_onelabel.text]];
+                if(scarr.count==0){
+                    [self sccharu:0];
+                }else{
+                    //修改上传表
+                    [self scxiugai:0];
+                }
+                //修改下载表
+                [self xzxiugai:0];
             }
-            //修改下载表
-            [self xzxiugai:0];
         }
         else{
             //拿到列表中的数量 ，shularr 存放填写的数量
@@ -1065,7 +1069,7 @@
             if (kkkk!=0) {
                 status=@"1";
             }
-           
+            
             scdic =[NSDictionary dictionaryWithObjectsAndKeys:status,@"status",barCode,@"barCode",checkId,@"checkId",manufacturer,@"manufacturer",pycode,@"pycode",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",_ypgoods.text,@"newpos",dateString,@"checktime",shularr[i],@"checkNum",prodBatchNo,@"prodBatchNo",yuliuziduan2,@"f2",yuliuziduan1,@"f1", nil];
         }else{
             scdic =[NSDictionary dictionaryWithObjectsAndKeys:status,@"status",barCode,@"barCode",checkId,@"checkId",manufacturer,@"manufacturer",pycode,@"pycode",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",_ypgoods.text,@"newpos",dateString,@"checktime",shularr[i],@"checkNum",prodBatchNo,@"prodBatchNo",yuliuziduan2,@"f2",yuliuziduan1,@"f1", nil];
@@ -1195,7 +1199,7 @@
     if (arr.count==0) {
         
     }else
-    [self yuliuziduanview:arr[0]];
+        [self yuliuziduanview:arr[0]];
 }
 -(void)yuliuziduanview:(NSDictionary*)dd{
     yuliupan=1;
@@ -1216,7 +1220,7 @@
     yuliumian.alpha=1;
     [self.view addSubview:yuliumian];
     yuliumian.hidden=NO;
- 
+    
     //-----
     UILabel*xinxi=[[UILabel alloc] initWithFrame:CGRectMake(5, 2,50, 40)];
     xinxi.font=[UIFont systemFontOfSize:20 weight:1.5];
@@ -1262,7 +1266,7 @@
     }else
         yuliu2.text=[dd objectForKey:@"f2"];
     NSDictionary*tiaa=[NSDictionary dictionaryWithObjectsAndKeys:xinxixi.text,@"prodBatchNo",hehebiao.text,@"productCode", nil];
-   NSArray*nbh=[ XL DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereConditions:tiaa];
+    NSArray*nbh=[ XL DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereConditions:tiaa];
     
     if (NULL == [nbh[0] objectForKey:@"f1"]) {
         yuliu1.text=@"";
@@ -1313,7 +1317,7 @@
 #pragma  mark ----左上、右上的按钮
 -(void)navigation{
     self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
-     UIBarButtonItem*left=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back@2x"] style:UIBarButtonItemStyleDone target:self action:@selector(fanhui)];
+    UIBarButtonItem*left=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back@2x"] style:UIBarButtonItemStyleDone target:self action:@selector(fanhui)];
     [self.navigationItem setLeftBarButtonItem:left];
     
     self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
@@ -1421,8 +1425,8 @@
             if (NULL == [arr[0] objectForKey:@"f1"]) {
                 
             }else{
-            [arr[0] removeObjectForKey:@"f1"];
-            [arr[0] removeObjectForKey:@"f2"];
+                [arr[0] removeObjectForKey:@"f1"];
+                [arr[0] removeObjectForKey:@"f2"];
             }
             abcdefg=1;
             ming1.text =@"";
