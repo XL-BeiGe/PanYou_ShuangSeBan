@@ -669,6 +669,7 @@
                 }
                 //修改下载表
                 [self xzxiugai:0];
+                [self xianshi:nil];
             }
         }
         else{
@@ -699,9 +700,10 @@
                 //修改下载表中的药品数量 （批号prodBatchNo）
                 [self xzxiugai:i];
             }
+            [self xianshi:nil];
         }
         
-        [self xianshi:nil];
+        
         _Search.text=@"🔍扫描或输入药品条形码";
         onepand=1;
         [self firstResponderInSubView];
