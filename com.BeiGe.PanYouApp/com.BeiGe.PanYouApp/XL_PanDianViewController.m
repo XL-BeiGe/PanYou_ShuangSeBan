@@ -670,6 +670,9 @@
                 //修改下载表
                 [self xzxiugai:0];
                 [self xianshi:nil];
+                _Search.text=@"🔍扫描或输入药品条形码";
+                onepand=1;
+                [self firstResponderInSubView];
             }
         }
         else{
@@ -701,12 +704,13 @@
                 [self xzxiugai:i];
             }
             [self xianshi:nil];
+            _Search.text=@"🔍扫描或输入药品条形码";
+            onepand=1;
+            [self firstResponderInSubView];
         }
         
         
-        _Search.text=@"🔍扫描或输入药品条形码";
-        onepand=1;
-        [self firstResponderInSubView];
+       
     }
 }
 #pragma mark 数据库操作
