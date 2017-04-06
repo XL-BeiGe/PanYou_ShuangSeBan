@@ -728,7 +728,8 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy/MM/dd HH:mm:ss"];
     NSString *dateString = [dateFormatter stringFromDate:currentDate];
-    if ([shularr[i] isEqual:@""]) {
+    BOOL ss = [self isNum:shularr[i]];
+    if ([shularr[i] isEqual:@""] || ss == NO) {
         shularr[i]=@"0";
     }
     NSDictionary*tiao1=[NSDictionary dictionaryWithObjectsAndKeys:[arr[i] objectForKey:@"prodBatchNo"],@"prodBatchNo",[arr[i] objectForKey:@"barCode"],@"barCode", nil];
@@ -1005,6 +1006,10 @@
         }else{
             yuliuziduan2= [nbh[0] objectForKey:@"f2"];
         }
+        BOOL ss = [self isNum:_onelabel.text];
+        if (ss == NO) {
+            _onelabel.text=@"0";
+        }
         scdic =[NSDictionary dictionaryWithObjectsAndKeys:barCode,@"barCode",manufacturer,@"manufacturer",pycode,@"pycode",prodBatchNo,@"prodBatchNo",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",huoweihao,@"newpos",dateString,@"checktime",_onelabel.text,@"checkNum",@"1",@"status",[[NSUserDefaults standardUserDefaults] objectForKey:@"checkId"],@"checkId",yuliuziduan2,@"f2",yuliuziduan1,@"f1", nil];
         
     }
@@ -1075,9 +1080,16 @@
             if (kkkk!=0) {
                 status=@"1";
             }
-            
+            BOOL ss = [self isNum:shularr[i]];
+            if (ss == NO) {
+                [shularr replaceObjectAtIndex:i withObject:@"0"];
+            }
             scdic =[NSDictionary dictionaryWithObjectsAndKeys:status,@"status",barCode,@"barCode",checkId,@"checkId",manufacturer,@"manufacturer",pycode,@"pycode",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",_ypgoods.text,@"newpos",dateString,@"checktime",shularr[i],@"checkNum",prodBatchNo,@"prodBatchNo",yuliuziduan2,@"f2",yuliuziduan1,@"f1", nil];
         }else{
+            BOOL ss = [self isNum:shularr[i]];
+            if (ss == NO) {
+                [shularr replaceObjectAtIndex:i withObject:@"0"];
+            }
             scdic =[NSDictionary dictionaryWithObjectsAndKeys:status,@"status",barCode,@"barCode",checkId,@"checkId",manufacturer,@"manufacturer",pycode,@"pycode",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",_ypgoods.text,@"newpos",dateString,@"checktime",shularr[i],@"checkNum",prodBatchNo,@"prodBatchNo",yuliuziduan2,@"f2",yuliuziduan1,@"f1", nil];
             
         }
@@ -1669,5 +1681,13 @@
             iii++;
         }
     }
+}
+
+- (BOOL)isNum:(NSString *)checkedNumString {
+    checkedNumString = [checkedNumString stringByTrimmingCharactersInSet:[NSCharacterSet decimalDigitCharacterSet]];
+    if(checkedNumString.length > 0) {
+        return NO;
+    }
+    return YES;
 }
 @end

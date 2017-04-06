@@ -219,7 +219,6 @@
                     NSDate *endTime = [NSDate date];
                     NSTimeInterval a = [endTime timeIntervalSince1970] - [startTime timeIntervalSince1970];
                     NSLog(@"使用事务------------插入数据用时%.3f秒",a);
-                    
                 }
                 @catch (NSException *exception)
                 {
@@ -256,11 +255,6 @@
     }];
     
 }
--(void)hehe{
-   
-  
-    
-}
 -(void)xiazaishuju:(NSString *)str :(NSString *)ss{
     [WarningBox warningBoxModeIndeterminate:[NSString stringWithFormat:@"正在同步%@",str] andView:self.view];
     NSString *fangshi=@"/sys/download";
@@ -276,7 +270,7 @@
     [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
         @try {
-             NSLog(@"%@",responseObject);
+//             NSLog(@"%@",responseObject);
             if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
                 NSDictionary*dataa=[responseObject objectForKey:@"data"];
                 
@@ -356,7 +350,7 @@
 -(void)shangchuan:(NSDictionary*)rucan{
     NSString *fangshi=@"/sys/upload";
     [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
-        NSLog(@"%@",responseObject);
+//        NSLog(@"%@",responseObject);
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"] isEqual:@"0000"]) {
             NSString *ss = [NSString stringWithFormat:@"已盘点%lu条数据，成功提交%lu条数据请等待后台处理",[[rucan objectForKey:@"list"]count],[[rucan objectForKey:@"list"]count]];
