@@ -128,26 +128,9 @@
     }];
 }
 -(void)shangchuanshujujiexi{
-    NSArray *list1 = [XL DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing];
+    
     NSMutableArray*list = [[NSMutableArray alloc] init];
-    for (NSDictionary*dd in list1) {
-        if (![[dd objectForKey:@"checkNum"] isEqualToString:@"0"]) {
-            NSString * tiaoma=[dd objectForKey:@"barCode"];
-            NSArray * fenge =[tiaoma componentsSeparatedByString:@","];
-            NSString* xintiaoma;
-            if ( NULL== fenge) {
-                xintiaoma = tiaoma;
-            }else{
-                xintiaoma=(NSString*)fenge[0];
-                for (int i=1; i<fenge.count-1; i++) {
-                    xintiaoma=[xintiaoma stringByAppendingFormat:@",%@", fenge[i]];
-                }
-            }
-            //新条码 插入到dd里
-            [dd setValue:xintiaoma forKey:@"barCode"];
-            [list addObject:dd];
-        }
-    }
+    
     if (list.count==0) {
         [WarningBox warningBoxModeText:@"请先盘点数据!" andView:self.view];
     }else{

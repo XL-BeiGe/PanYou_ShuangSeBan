@@ -720,7 +720,20 @@
     if ([shularr[i] isEqual:@""]) {
         shularr[i]=@"0";
     }
-    [XL DataBase:db updateTable:XiaZaiBiaoMing setKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:shularr[i],@"checkNum",_ypgoods.text,@"oldpos", nil] whereConditions:[NSDictionary dictionaryWithObjectsAndKeys:[arr[i] objectForKey:@"prodBatchNo"],@"prodBatchNo",[arr[i] objectForKey:@"barCode"],@"barCode", nil]];
+    NSString*prodBatchNo;
+    if (arr.count==0||NULL ==[arr[i] objectForKey:@"prodBatchNo"]) {
+        prodBatchNo = @"";
+    }else{
+        prodBatchNo=[arr[i] objectForKey:@"prodBatchNo"];
+    }
+    NSString*barCode;
+    if (arr.count==0|| NULL == [arr[i] objectForKey:@"barCode"]) {
+        barCode=@"";
+    }else{
+        barCode=[arr[i] objectForKey:@"barCode"];
+    }
+
+    [XL DataBase:db updateTable:XiaZaiBiaoMing setKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:shularr[i],@"checkNum",_ypgoods.text,@"oldpos", nil] whereConditions:[NSDictionary dictionaryWithObjectsAndKeys:prodBatchNo,@"prodBatchNo",barCode,@"barCode", nil]];
     
 }
 //修改上传表
@@ -733,7 +746,19 @@
     if ([shularr[i] isEqual:@""] || ss == NO) {
         shularr[i]=@"0";
     }
-    NSDictionary*tiao1=[NSDictionary dictionaryWithObjectsAndKeys:[arr[i] objectForKey:@"prodBatchNo"],@"prodBatchNo",[arr[i] objectForKey:@"barCode"],@"barCode", nil];
+    NSString*prodBatchNo;
+    if (arr.count==0||NULL ==[arr[i] objectForKey:@"prodBatchNo"]) {
+        prodBatchNo = @"";
+    }else{
+        prodBatchNo=[arr[i] objectForKey:@"prodBatchNo"];
+    }
+    NSString*barCode;
+    if (arr.count==0|| NULL == [arr[i] objectForKey:@"barCode"]) {
+        barCode=@"";
+    }else{
+        barCode=[arr[i] objectForKey:@"barCode"];
+    }
+    NSDictionary*tiao1=[NSDictionary dictionaryWithObjectsAndKeys:prodBatchNo,@"prodBatchNo",barCode,@"barCode", nil];
     NSArray*nbh=[ XL DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereConditions:tiao1];
     NSDictionary*val1=[NSDictionary dictionaryWithObjectsAndKeys:shularr[i],@"checkNum",_ypgoods.text,@"newpos",dateString,@"checktime",[nbh[0] objectForKey:@"f1"],@"f1", nil];
     [XL DataBase:db updateTable:ShangChuanBiaoMing setKeyValues:val1 whereConditions:tiao1];
@@ -828,13 +853,13 @@
             oldpos= [tianjiade objectForKey:@"oldpos"];
         }
         NSString*yuliuziduan1;
-        if(NULL==[tianjiade objectForKey:@"f1"]){
+        if(tianjiade.count==0||NULL==[tianjiade objectForKey:@"f1"]){
             yuliuziduan1= @"";
         }else{
             yuliuziduan1= [tianjiade objectForKey:@"f1"];
         }
         NSString*yuliuziduan2;
-        if(NULL==[tianjiade objectForKey:@"f2"]){
+        if(tianjiade.count==0|| NULL==[tianjiade objectForKey:@"f2"]){
             yuliuziduan2= @"";
         }else{
             yuliuziduan2= [tianjiade objectForKey:@"f2"];
@@ -913,13 +938,13 @@
             specification=@"";
         }
         NSString*yuliuziduan1;
-        if(NULL==[arr[i] objectForKey:@"f1"]){
+        if(arr.count==0||NULL==[arr[i] objectForKey:@"f1"]){
             yuliuziduan1= @"";
         }else{
             yuliuziduan1= [arr[i] objectForKey:@"f1"];
         }
         NSString*yuliuziduan2;
-        if(NULL==[arr[i] objectForKey:@"f2"]){
+        if(arr.count==0|| NULL==[arr[i] objectForKey:@"f2"]){
             yuliuziduan2= @"";
         }else{
             yuliuziduan2= [arr[i] objectForKey:@"f2"];
@@ -993,16 +1018,16 @@
         }else{
             specification = [tianjiade objectForKey:@"specification"];
         }
-        NSDictionary*tiao1=[NSDictionary dictionaryWithObjectsAndKeys:[arr[i] objectForKey:@"prodBatchNo"],@"prodBatchNo",[arr[i] objectForKey:@"barCode"],@"barCode", nil];
+        NSDictionary*tiao1=[NSDictionary dictionaryWithObjectsAndKeys:prodBatchNo,@"prodBatchNo",barCode,@"barCode", nil];
         NSArray*nbh=[ XL DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereConditions:tiao1];
         NSString*yuliuziduan1;
-        if(NULL==[nbh[0] objectForKey:@"f1"]){
+        if(nbh.count==0|| NULL==[nbh[0] objectForKey:@"f1"]){
             yuliuziduan1= @"";
         }else{
             yuliuziduan1= [nbh[0] objectForKey:@"f1"];
         }
         NSString*yuliuziduan2;
-        if(NULL==[nbh[0] objectForKey:@"f2"]){
+        if(nbh.count==0|| NULL==[nbh[0] objectForKey:@"f2"]){
             yuliuziduan2= @"";
         }else{
             yuliuziduan2= [nbh[0] objectForKey:@"f2"];
@@ -1056,17 +1081,17 @@
             prodBatchNo =@"";
         }
         
-        NSDictionary*tiao1=[NSDictionary dictionaryWithObjectsAndKeys:[arr[i] objectForKey:@"prodBatchNo"],@"prodBatchNo",[arr[i] objectForKey:@"barCode"],@"barCode", nil];
+        NSDictionary*tiao1=[NSDictionary dictionaryWithObjectsAndKeys:prodBatchNo,@"prodBatchNo",barCode,@"barCode", nil];
         NSArray*nbh=[ XL DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereConditions:tiao1];
         NSString*yuliuziduan1;
-        if(NULL==[nbh[0] objectForKey:@"f1"]){
+        if(nbh.count==0 || NULL==[nbh[0] objectForKey:@"f1"]){
             yuliuziduan1= @"";
         }else{
             yuliuziduan1= [nbh[0] objectForKey:@"f1"];
         }
         NSString*yuliuziduan2;
         
-        if(NULL==[arr[i] objectForKey:@"f2"]){
+        if(nbh.count==0||NULL==[arr[i] objectForKey:@"f2"]){
             yuliuziduan2= @"";
         }else{
             yuliuziduan2= [arr[i] objectForKey:@"f2"];
@@ -1120,10 +1145,7 @@
     }
     
 }
--(void)czxiazai{
-//    arr =  [XL  DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_Search.text],@"barCode", nil]];
-    arr = [XL DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing whereConditionzss:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_Search.text],@"barCode",[NSString stringWithFormat:@"%@",_Search.text],@"productCode", nil]];
-}
+
 #pragma mark --- tableview
 -(void)tabledelegate{
     _table.delegate=self;
