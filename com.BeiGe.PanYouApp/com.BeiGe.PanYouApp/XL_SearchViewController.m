@@ -29,7 +29,8 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     
-    arr=[XL  DataBase:db selectKeyTypes:TongBuShiTiLei fromTable:TongBuBiaoMing whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:_str,@"barCode", nil]];
+//    arr=[XL  DataBase:db selectKeyTypes:TongBuShiTiLei fromTable:TongBuBiaoMing whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:_str,@"barCode", nil]];
+    arr = [XL DataBase:db selectKeyTypes:TongBuShiTiLei fromTable:TongBuBiaoMing whereConditionzss:[NSDictionary dictionaryWithObjectsAndKeys:_str,@"barCode",_str,@"productCode", nil]];
     if (arr.count==0) {
         NSArray*diyi;
         diyi =[ XL DataBase:db selectKeyTypes:TongBuShiTiLei fromTable:TongBuBiaoMing whereKey:@"barCode" containStr:@","] ;
