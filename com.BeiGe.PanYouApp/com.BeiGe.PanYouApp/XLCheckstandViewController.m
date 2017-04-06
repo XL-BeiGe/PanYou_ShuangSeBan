@@ -36,6 +36,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _vipnum.delegate= self;
+    self.title =@"收银台";
     [ZYCustomKeyboardTypeNumberView customKeyboardViewWithServiceTextField:_vipnum Delegate:self];
     _checkyp.delegate = self;
     _checkyp.keyboardType=UIKeyboardTypeAlphabet;

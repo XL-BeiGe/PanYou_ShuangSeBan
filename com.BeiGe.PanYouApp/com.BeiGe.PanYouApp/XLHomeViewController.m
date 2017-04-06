@@ -196,9 +196,48 @@
                 //清空数据
                 [XL clearDatabase:db from:TongBuBiaoMing];
                 
-                NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(hehe) object:nil];
+                NSDate *startTime = [NSDate date];
+                [db beginTransaction];
+                BOOL isRollBack = NO;
+                @try
+                {
+                    for (int i=0; i<quanbulist.count; i++) {
+                        NSString *barcode =[quanbulist[i]objectForKey:@"barCode"];
+                        if (NULL==barcode){
+                            barcode = @"";
+                        }
+                        NSString  *code = [NSString stringWithFormat:@"%@,%@",barcode,[quanbulist[i]objectForKey:@"productCode"]];
+                        NSMutableDictionary * dd=[NSMutableDictionary dictionaryWithDictionary:quanbulist[i]];
+                        if (NULL != [dd objectForKey:@"office"]) {
+                            [dd removeObjectForKey:@"office"];
+                        }
+                        
+                        [dd setObject:[NSString stringWithFormat:@"%@", code ] forKey:@"barCode"];
+                        [XL DataBase:db insertKeyValues:dd intoTable:TongBuBiaoMing];
+                        
+                    }
+                    NSDate *endTime = [NSDate date];
+                    NSTimeInterval a = [endTime timeIntervalSince1970] - [startTime timeIntervalSince1970];
+                    NSLog(@"使用事务------------插入数据用时%.3f秒",a);
+                    
+                }
+                @catch (NSException *exception)
+                {
+                    isRollBack = YES;
+                    [db rollback];
+                }
+                @finally
+                {
+                    if (!isRollBack)
+                    {
+                        [db commit];
+                    }
+                }
                 
-                [thread start];
+                
+//                NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(hehe) object:nil];
+//                
+//                [thread start];
                 
                 //                dispatch_queue_t queue =  dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
                 //                //2.添加任务到队列中，就可以执行任务
@@ -218,21 +257,8 @@
     
 }
 -(void)hehe{
-    for (int i=0; i<quanbulist.count; i++) {
-        NSString *barcode =[quanbulist[i]objectForKey:@"barCode"];
-        if (NULL==barcode){
-            barcode = @"";
-        }
-        NSString  *code = [NSString stringWithFormat:@"%@,%@",barcode,[quanbulist[i]objectForKey:@"productCode"]];
-        NSMutableDictionary * dd=[NSMutableDictionary dictionaryWithDictionary:quanbulist[i]];
-        if (NULL != [dd objectForKey:@"office"]) {
-            [dd removeObjectForKey:@"office"];
-        }
-        
-        [dd setObject:[NSString stringWithFormat:@"%@", code ] forKey:@"barCode"];
-        [XL DataBase:db insertKeyValues:dd intoTable:TongBuBiaoMing];
-        
-    }
+   
+  
     
 }
 -(void)xiazaishuju:(NSString *)str :(NSString *)ss{
@@ -250,6 +276,7 @@
     [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
         @try {
+             NSLog(@"%@",responseObject);
             if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
                 NSDictionary*dataa=[responseObject objectForKey:@"data"];
                 
@@ -274,17 +301,47 @@
                     }
                     akl = [dict allValues];
                     
-                    for (int i=0; i<akl.count; i++) {
-                        //向下载表中插入数据
-                        NSString *barcode =[akl[i]objectForKey:@"barCode"];
-                        if (NULL==barcode){
-                            barcode = @"";
+                    
+                    NSDate *startTime = [NSDate date];
+                    [db beginTransaction];
+                    BOOL isRollBack = NO;
+                    @try
+                    {
+                        for (int i=0; i<akl.count; i++) {
+                            //向下载表中插入数据
+                            NSString *barcode =[akl[i]objectForKey:@"barCode"];
+                            if (NULL==barcode){
+                                barcode = @"";
+                            }
+                            NSString  *code = [NSString stringWithFormat:@"%@,%@",barcode,[akl[i]objectForKey:@"productCode"]];
+                            NSMutableDictionary * dd=[NSMutableDictionary dictionaryWithDictionary:akl[i]];
+                            [dd setObject:[NSString stringWithFormat:@"%@", code ] forKey:@"barCode"];
+                            [XL DataBase:db insertKeyValues:dd intoTable:XiaZaiBiaoMing];
+             
                         }
-                        NSString  *code = [NSString stringWithFormat:@"%@,%@",barcode,[akl[i]objectForKey:@"productCode"]];
-                        NSMutableDictionary * dd=[NSMutableDictionary dictionaryWithDictionary:akl[i]];
-                        [dd setObject:[NSString stringWithFormat:@"%@", code ] forKey:@"barCode"];
-                        [XL DataBase:db insertKeyValues:dd intoTable:XiaZaiBiaoMing];
+                        NSDate *endTime = [NSDate date];
+                        NSTimeInterval a = [endTime timeIntervalSince1970] - [startTime timeIntervalSince1970];
+                        NSLog(@"使用事务插入数据用时%.3f秒",a);
+                        
+                    }  
+                    @catch (NSException *exception)  
+                    {  
+                        isRollBack = YES;  
+                        [db rollback];
+                    }  
+                    @finally  
+                    {  
+                        if (!isRollBack)  
+                        {  
+                            [db commit];
+                        }  
                     }
+                    
+                    
+                    
+                    
+                  
+                   
                 }
             }
         } @catch (NSException *exception) {
@@ -299,6 +356,7 @@
 -(void)shangchuan:(NSDictionary*)rucan{
     NSString *fangshi=@"/sys/upload";
     [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
+        NSLog(@"%@",responseObject);
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"] isEqual:@"0000"]) {
             NSString *ss = [NSString stringWithFormat:@"已盘点%lu条数据，成功提交%lu条数据请等待后台处理",[[rucan objectForKey:@"list"]count],[[rucan objectForKey:@"list"]count]];
