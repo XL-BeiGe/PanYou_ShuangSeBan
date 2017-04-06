@@ -38,6 +38,7 @@ static XL_FMDB *fmdb =nil;
 -(FMDatabase *)getDBWithDBName:(NSString *)dbName{
     NSArray *library = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
     NSString *dbPath = [library[0] stringByAppendingPathComponent:dbName];
+    NSLog(@"%@",dbPath);
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
     if (![db open]) {
         return nil;
@@ -153,7 +154,7 @@ static XL_FMDB *fmdb =nil;
         }
     }
 }
-#pragma  mark ----多个条件更新
+#pragma  mark ----AND多个条件更新
 -(void)DataBase:(FMDatabase *)db updateTable:(NSString *)tableName setKeyValues:(NSDictionary *)keyValues whereConditions:(NSDictionary *)conditions{
     if ([self isOpenDatabese:db]) {
         for (NSString *key in keyValues) {
@@ -181,7 +182,17 @@ static XL_FMDB *fmdb =nil;
     }else
         return nil;
 }
-#pragma mark --OR多个条件查询数据库中的数据
+
+#pragma mark --OR两个条件查询数据库中的数据
+-(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName whereConditionzss:(NSDictionary *)conditionss;{
+    if ([self isOpenDatabese:db]) {
+        FMResultSet *result =  [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@ = ? COLLATE NOCASE OR %@ =? COLLATE NOCASE ",tableName,[conditionss allKeys][0],[conditionss allKeys][1]],[conditionss valueForKey:[conditionss allKeys][0]],[conditionss valueForKey:[conditionss allKeys][1]]];
+        return [self getArrWithFMResultSet:result keyTypes:keyTypes];
+    }else
+        return nil;
+}
+
+#pragma mark --OR三个条件查询数据库中的数据
 -(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName whereConditionz:(NSDictionary *)conditions;{
     if ([self isOpenDatabese:db]) {
         FMResultSet *result =  [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@ = ? COLLATE NOCASE OR %@ =? COLLATE NOCASE OR %@ = ? COLLATE NOCASE",tableName,[conditions allKeys][0],[conditions allKeys][1],[conditions allKeys][2]],[conditions valueForKey:[conditions allKeys][0]],[conditions valueForKey:[conditions allKeys][1]],[conditions valueForKey:[conditions allKeys][2]]];
@@ -189,7 +200,7 @@ static XL_FMDB *fmdb =nil;
     }else
         return nil;
 }
-#pragma mark --多个条件查询数据库中的数据
+#pragma mark --AND两个条件查询数据库中的数据
 
 -(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName whereConditions:(NSDictionary *)conditions;{
     if ([self isOpenDatabese:db]) {
