@@ -501,7 +501,8 @@
 #pragma  mark -----搜索方法
 -(void)chazhao{
     buyaoFuyong=[[NSMutableDictionary alloc] init];
-    arr=[XL  DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_Search.text],@"barCode", nil]];
+//    arr=[XL  DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_Search.text],@"barCode", nil]];
+    arr = [XL DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereConditionzss:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_Search.text],@"barCode",[NSString stringWithFormat:@"%@",_Search.text],@"productCode", nil]];
     if (arr.count==0) {
         NSArray*diyi;
         diyi =[ XL DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereKey:@"barCode" containStr:@","] ;
@@ -1099,7 +1100,8 @@
 }
 
 -(void)czshangchuan{
-    scarr =  [XL  DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_Search.text],@"barCode", nil]];
+//    scarr =  [XL  DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_Search.text],@"barCode", nil]];
+    scarr = [XL DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing whereConditionzss:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_Search.text],@"barCode",[NSString stringWithFormat:@"%@",_Search.text],@"productCode", nil]];
     if (scarr.count==0) {
         NSArray*diyi;
         diyi =[ XL DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing whereKey:@"barCode" containStr:@","] ;
@@ -1119,7 +1121,8 @@
     
 }
 -(void)czxiazai{
-    arr =  [XL  DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_Search.text],@"barCode", nil]];
+//    arr =  [XL  DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_Search.text],@"barCode", nil]];
+    arr = [XL DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing whereConditionzss:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_Search.text],@"barCode",[NSString stringWithFormat:@"%@",_Search.text],@"productCode", nil]];
 }
 #pragma mark --- tableview
 -(void)tabledelegate{
