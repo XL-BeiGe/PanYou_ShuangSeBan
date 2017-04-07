@@ -410,7 +410,7 @@
             NSString *ss = [NSString stringWithFormat:@"已盘点%lu条数据，成功提交%lu条数据请等待后台处理",[[rucan objectForKey:@"list"]count],[[rucan objectForKey:@"list"]count]];
             [WarningBox warningBoxModeText:ss andView:self.view];
         }else if ([[responseObject objectForKey:@"code"] isEqual:@"0009"]){
-            [WarningBox warningBoxModeText:@"请先同步异常数据，再盘点药品～" andView:self.view];
+            [WarningBox warningBoxModeText:@"后台已计算，请同步异常数据!" andView:self.view];
         }else
             [WarningBox warningBoxModeText:@"提交盘点结果失败!" andView:self.view];
         
