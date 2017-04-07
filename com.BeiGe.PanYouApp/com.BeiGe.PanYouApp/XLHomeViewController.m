@@ -129,7 +129,7 @@
 }
 -(void)shangchuanshujujiexi{
     
-    NSMutableArray*list = [[NSMutableArray alloc] init];
+    NSArray *list = [XL DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing];
     
     if (list.count==0) {
         [WarningBox warningBoxModeText:@"请先盘点数据!" andView:self.view];

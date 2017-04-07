@@ -25,7 +25,7 @@
     
     /*判断传值*/
     int chuanzhipanduan;
-    int tianjiapanduan;
+    int xinzengpanduan;//新增药品判断
     UITextField *goodstxt;
     int onepand;//判断找到1条数据数量的输入
     int searcpd;//判断是不是搜索条输入
@@ -78,7 +78,7 @@
         [self chazhao];
         chuanzhipanduan=0;
     }
-    else if(tianjiapanduan==1){
+    else if(xinzengpanduan==1){
         arr=[[NSMutableArray alloc] initWithObjects:tianjiade, nil];
         [self xianshi:arr];
         if (NULL==[arr[0] objectForKey:@"checkNum"]){
@@ -92,7 +92,7 @@
         }
         [self xztianjia:0];
         [self sccharu:0];
-        tianjiapanduan=0;
+        xinzengpanduan=0;
     }else{
         [self firstResponderInSubView];
     }
@@ -107,7 +107,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     chuanzhipanduan=0;
-    tianjiapanduan=0;
+    xinzengpanduan=0;
     buyaoFuyong=[[NSMutableDictionary alloc] init];
     shularr = [[NSMutableArray alloc]init];
     tianpihao=0;
@@ -727,13 +727,13 @@
         prodBatchNo=[arr[i] objectForKey:@"prodBatchNo"];
     }
     NSString*barCode;
-    if (arr.count==0|| NULL == [arr[i] objectForKey:@"barCode"]) {
+    if (arr.count==0|| NULL == [arr[i] objectForKey:@"id"]) {
         barCode=@"";
     }else{
-        barCode=[arr[i] objectForKey:@"barCode"];
+        barCode=[arr[i] objectForKey:@"id"];
     }
 
-    [XL DataBase:db updateTable:XiaZaiBiaoMing setKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:shularr[i],@"checkNum",_ypgoods.text,@"oldpos", nil] whereConditions:[NSDictionary dictionaryWithObjectsAndKeys:prodBatchNo,@"prodBatchNo",barCode,@"barCode", nil]];
+    [XL DataBase:db updateTable:XiaZaiBiaoMing setKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:shularr[i],@"checkNum",_ypgoods.text,@"oldpos", nil] whereConditions:[NSDictionary dictionaryWithObjectsAndKeys:prodBatchNo,@"prodBatchNo",barCode,@"id", nil]];
     
 }
 //修改上传表
@@ -752,22 +752,34 @@
     }else{
         prodBatchNo=[arr[i] objectForKey:@"prodBatchNo"];
     }
+    NSString*ID;
+    if (arr.count==0|| NULL == [arr[i] objectForKey:@"id"]) {
+        ID=@" ";
+    }else{
+        ID=[arr[i] objectForKey:@"id"];
+    }
     NSString*barCode;
     if (arr.count==0|| NULL == [arr[i] objectForKey:@"barCode"]) {
         barCode=@"";
     }else{
         barCode=[arr[i] objectForKey:@"barCode"];
     }
-    NSDictionary*tiao1=[NSDictionary dictionaryWithObjectsAndKeys:prodBatchNo,@"prodBatchNo",barCode,@"barCode", nil];
+    
+    NSDictionary*tiao1=[NSDictionary dictionaryWithObjectsAndKeys:prodBatchNo,@"prodBatchNo",ID,@"id", nil];
     NSArray*nbh=[ XL DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereConditions:tiao1];
+    
+     NSDictionary*tiao2=[NSDictionary dictionaryWithObjectsAndKeys:prodBatchNo,@"prodBatchNo",barCode,@"barCode", nil];
     NSDictionary*val1=[NSDictionary dictionaryWithObjectsAndKeys:shularr[i],@"checkNum",_ypgoods.text,@"newpos",dateString,@"checktime",[nbh[0] objectForKey:@"f1"],@"f1", nil];
-    [XL DataBase:db updateTable:ShangChuanBiaoMing setKeyValues:val1 whereConditions:tiao1];
+    [XL DataBase:db updateTable:ShangChuanBiaoMing setKeyValues:val1 whereConditions:tiao2];
 }
 
 //插入下载表
 -(void)xztianjia:(int)i{
     NSDictionary *dic;
-    if (tianjiapanduan==1) {
+  
+   
+    if (xinzengpanduan==1) {
+        
         NSString *approvalNumber;
         if(NULL==[tianjiade objectForKey:@"approvalNumber"]){
             approvalNumber = @"";
@@ -852,6 +864,8 @@
         }else{
             oldpos= [tianjiade objectForKey:@"oldpos"];
         }
+     
+        
         NSString*yuliuziduan1;
         if(tianjiade.count==0||NULL==[tianjiade objectForKey:@"f1"]){
             yuliuziduan1= @"";
@@ -869,6 +883,8 @@
         
         arr=[NSArray arrayWithObject:dic];
     }else{
+        
+        
         
         NSString *approvalNumber=[arr[i] objectForKey:@"approvalNumber"];
         if (NULL ==approvalNumber) {
@@ -937,6 +953,7 @@
         if (NULL ==specification) {
             specification=@"";
         }
+        
         NSString*yuliuziduan1;
         if(arr.count==0||NULL==[arr[i] objectForKey:@"f1"]){
             yuliuziduan1= @"";
@@ -963,62 +980,73 @@
     [dateFormatter setDateFormat:@"yyyy/MM/dd HH:mm:ss"];
     NSString *dateString = [dateFormatter stringFromDate:currentDate];
     NSDictionary  *scdic;
-    if (tianjiapanduan==1) {
-        NSString *huoweihao;
-        if (NULL == [tianjiade objectForKey:@"oldpos"]) {
-            huoweihao=@"";
-        }else{
-            huoweihao=[tianjiade objectForKey:@"oldpos"];
-        }
-        NSString *barCode;
-        if(NULL==[tianjiade objectForKey:@"barCode"]){
-            barCode = @"";
-        }else{
-            barCode =[tianjiade objectForKey:@"barCode"];
-        }
-        NSString *manufacturer;
-        if(NULL==[tianjiade objectForKey:@"manufacturer"]){
-            manufacturer =@"";
-        }else{
-            manufacturer =[tianjiade objectForKey:@"manufacturer"];
-        }
-        NSString *pycode;
-        if(NULL==[tianjiade objectForKey:@"pycode"]){
-            pycode = @"";
-        }else{
-            pycode = [tianjiade objectForKey:@"pycode"];
-        }
-        NSString *prodBatchNo;
-        if(NULL==[tianjiade objectForKey:@"prodBatchNo"]){
-            prodBatchNo = @"";
-        }else{
-            prodBatchNo =[tianjiade objectForKey:@"prodBatchNo"];
-        }
-        NSString *approvalNumber;
-        if(NULL==[tianjiade objectForKey:@"approvalNumber"]){
-            approvalNumber = @"";
-        }else{
-            approvalNumber = [tianjiade objectForKey:@"approvalNumber"];
-        }
-        NSString *productCode;
-        if(NULL==[tianjiade objectForKey:@"productCode"]){
-            productCode = @"";
-        }else{
-            productCode= [tianjiade objectForKey:@"productCode"];
-        }
-        NSString *productName;
-        if(NULL==[tianjiade objectForKey:@"productName"]){
-            productName = @"";
-        }else{
-            productName= [tianjiade objectForKey:@"productName"];
-        }
-        NSString *specification;
-        if(NULL==[tianjiade objectForKey:@"specification"]){
-            specification = @"";
-        }else{
-            specification = [tianjiade objectForKey:@"specification"];
-        }
-        NSDictionary*tiao1=[NSDictionary dictionaryWithObjectsAndKeys:prodBatchNo,@"prodBatchNo",barCode,@"barCode", nil];
+       if (xinzengpanduan==1) {
+ 
+           NSString *huoweihao;
+           if (NULL == [tianjiade objectForKey:@"oldpos"]) {
+               huoweihao=@"";
+           }else{
+               huoweihao=[tianjiade objectForKey:@"oldpos"];
+           }
+           NSString *barCode;
+           if(NULL==[tianjiade objectForKey:@"barCode"]){
+               barCode = @"";
+           }else{
+               barCode =[tianjiade objectForKey:@"barCode"];
+           }
+           NSString *manufacturer;
+           if(NULL==[tianjiade objectForKey:@"manufacturer"]){
+               manufacturer =@"";
+           }else{
+               manufacturer =[tianjiade objectForKey:@"manufacturer"];
+           }
+           NSString *pycode;
+           if(NULL==[tianjiade objectForKey:@"pycode"]){
+               pycode = @"";
+           }else{
+               pycode = [tianjiade objectForKey:@"pycode"];
+           }
+           NSString *prodBatchNo;
+           if(NULL==[tianjiade objectForKey:@"prodBatchNo"]){
+               prodBatchNo = @"";
+           }else{
+               prodBatchNo =[tianjiade objectForKey:@"prodBatchNo"];
+           }
+           NSString *approvalNumber;
+           if(NULL==[tianjiade objectForKey:@"approvalNumber"]){
+               approvalNumber = @"";
+           }else{
+               approvalNumber = [tianjiade objectForKey:@"approvalNumber"];
+           }
+           NSString *productCode;
+           if(NULL==[tianjiade objectForKey:@"productCode"]){
+               productCode = @"";
+           }else{
+               productCode= [tianjiade objectForKey:@"productCode"];
+           }
+           NSString *productName;
+           if(NULL==[tianjiade objectForKey:@"productName"]){
+               productName = @"";
+           }else{
+               productName= [tianjiade objectForKey:@"productName"];
+           }
+           NSString *specification;
+           if(NULL==[tianjiade objectForKey:@"specification"]){
+               specification = @"";
+           }else{
+               specification = [tianjiade objectForKey:@"specification"];
+           }
+           NSString *ID;
+           if(NULL==[tianjiade objectForKey:@"id"]){
+               ID = @"";
+           }else{
+               ID = [tianjiade objectForKey:@"id"];
+           }
+        
+        
+        
+        
+        NSDictionary*tiao1=[NSDictionary dictionaryWithObjectsAndKeys:prodBatchNo,@"prodBatchNo",ID,@"id", nil];
         NSArray*nbh=[ XL DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereConditions:tiao1];
         NSString*yuliuziduan1;
         if(nbh.count==0|| NULL==[nbh[0] objectForKey:@"f1"]){
@@ -1037,9 +1065,9 @@
             _onelabel.text=@"0";
         }
         scdic =[NSDictionary dictionaryWithObjectsAndKeys:barCode,@"barCode",manufacturer,@"manufacturer",pycode,@"pycode",prodBatchNo,@"prodBatchNo",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",huoweihao,@"newpos",dateString,@"checktime",_onelabel.text,@"checkNum",@"1",@"status",[[NSUserDefaults standardUserDefaults] objectForKey:@"checkId"],@"checkId",yuliuziduan2,@"f2",yuliuziduan1,@"f1", nil];
-        
     }
     else{
+        
         NSString *status=[arr[i] objectForKey:@"status"];
         if (NULL ==status) {
             status =@"";
@@ -1080,8 +1108,13 @@
         if (NULL ==prodBatchNo){
             prodBatchNo =@"";
         }
+        NSString *ID=[arr[i]objectForKey:@"id"];
+        if (NULL ==ID){
+            ID =@"";
+        }
         
-        NSDictionary*tiao1=[NSDictionary dictionaryWithObjectsAndKeys:prodBatchNo,@"prodBatchNo",barCode,@"barCode", nil];
+        
+        NSDictionary*tiao1=[NSDictionary dictionaryWithObjectsAndKeys:prodBatchNo,@"prodBatchNo",ID,@"id", nil];
         NSArray*nbh=[ XL DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereConditions:tiao1];
         NSString*yuliuziduan1;
         if(nbh.count==0 || NULL==[nbh[0] objectForKey:@"f1"]){
@@ -1120,6 +1153,7 @@
             
         }
     }
+    
     [XL DataBase:db insertKeyValues:scdic intoTable:ShangChuanBiaoMing];
     
 }
@@ -1465,12 +1499,15 @@
         if (tianpihao==0) {
             [WarningBox warningBoxModeText:@"请先查询药品!" andView:self.view];
         }else{
-            if (NULL == [arr[0] objectForKey:@"f1"]) {
-                
-            }else{
-                [arr[0] removeObjectForKey:@"f1"];
-                [arr[0] removeObjectForKey:@"f2"];
-            }
+//            if (NULL == [arr[0] objectForKey:@"f1"]) {
+//                
+//            }else{
+//                NSMutableDictionary*ddd=[NSMutableDictionary dictionaryWithDictionary:arr[0]];
+//                
+//                [ddd removeObjectForKey:@"f1"];
+//                [ddd removeObjectForKey:@"f2"];
+//                
+//            }
             abcdefg=1;
             ming1.text =@"";
             NSString* aaa;
@@ -1663,7 +1700,7 @@
     UIAlertAction*action2=[UIAlertAction actionWithTitle:@"新增药品" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         XL_SearchViewController *search=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"search"];
         [search passdicValue:^(NSDictionary *dic) {
-            tianjiapanduan=1;
+            xinzengpanduan=1;
             tianjiade=[NSDictionary dictionaryWithDictionary:dic];
         }];
         search.str=[NSString stringWithFormat:@"%@",_Search.text];
@@ -1702,6 +1739,9 @@
             [WarningBox warningBoxModeText:@"已没有上一条了!" andView:self.view];
         }else{
             _Search.text =[NSString stringWithFormat:@"%@",[ato[ato.count - iii-1] objectForKey:@"barCode"]];
+            if (NULL == _Search.text) {
+                _Search.text =[NSString stringWithFormat:@"%@",[ato[ato.count - iii-1] objectForKey:@"productCode"]];
+            }
             [self chazhao];
             iii++;
         }

@@ -79,48 +79,59 @@
 }
 -(void)wangluo{
     //网络请求
-    [self updatefmdb];
-    shoparr = [XL DataBase:db selectKeyTypes:gouwulei fromTable:@"gouwu"];
-    for (int i=0;i<shoparr.count;i++) {
-        [shoparr[i]removeObjectForKey:@"vipPrice"];
-        [shoparr[i]removeObjectForKey:@"salePrice"];
-        [shoparr[i]removeObjectForKey:@"name"];
-        [shoparr[i]removeObjectForKey:@"qtmd"];
-    }
+   
     NSString *fangshi=@"/drug/shoppingCart";
     NSString* UserID=[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"];
     NSString *consumptionDetailNo = [[NSUserDefaults standardUserDefaults] objectForKey:@"consumptionDetailNo"];
-    NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"operateUserId",_scno,@"no",_sctype,@"type",_coupon.text,@"coupon",_couprice.text,@"couponPrice",shoparr,@"drugList",consumptionDetailNo,@"consumptionDetailNo", nil];
     
-    [WarningBox warningBoxModeIndeterminate:@"正在计算总价..." andView:self.view];
-    [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
-        NSLog(@"%@",responseObject);
-        [WarningBox warningBoxHide:YES andView:self.view];
-        if([[responseObject objectForKey:@"code"]isEqualToString:@"0000"]){
-            NSString *drugAmount=[[responseObject objectForKey:@"data"] objectForKey:@"drugAmount"];
-            NSString *consumptionInfoId=[[responseObject objectForKey:@"data"] objectForKey:@"consumptionInfoId"];
-            [[NSUserDefaults standardUserDefaults] setObject:[[responseObject objectForKey:@"data"] objectForKey:@"consumptionDetailNo"] forKey:@"consumptionDetailNo"];
-            XLSetAccountViewController *shop = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"setacc"];
-            shop.drugAmount=drugAmount;
-            shop.consumptionInfoId=consumptionInfoId;
-            [self.navigationController pushViewController:shop animated:YES];
-        }else if ([[responseObject objectForKey:@"code"]isEqual:@"1009"]){
-         [WarningBox warningBoxModeText:[responseObject objectForKey:@"msg"] andView:self.view];
-        }
-        else if ([[responseObject objectForKey:@"code"]isEqual:@"1008"]){
-            [WarningBox warningBoxModeText:[responseObject objectForKey:@"msg"] andView:self.view];
-        }
-        else if([[responseObject objectForKey:@"code"]isEqual:@"9999"]){
-            //账号在其他手机登录，请重新登录。
-            [XL_WangLuo sigejiu:self];
-        }
-        updata=YES;
+    if(_coupon.text.length==0&&_couprice.text.length!=0){
+    [WarningBox warningBoxModeText:@"请输入优惠券" andView:self.view];
+    }else if (_coupon.text.length!=0&&_couprice.text.length==0){
+    [WarningBox warningBoxModeText:@"请输入优惠券金额" andView:self.view];
+    }else{
         
-    } failure:^(NSError *error) {
-        NSLog(@"%@",error);
-        [WarningBox warningBoxHide:YES andView:self.view];
-        [WarningBox warningBoxModeText:@"网络错误,请重试!" andView:self.view];
-    }];
+        [self updatefmdb];
+        shoparr = [XL DataBase:db selectKeyTypes:gouwulei fromTable:@"gouwu"];
+        for (int i=0;i<shoparr.count;i++) {
+            [shoparr[i]removeObjectForKey:@"vipPrice"];
+            [shoparr[i]removeObjectForKey:@"salePrice"];
+            [shoparr[i]removeObjectForKey:@"name"];
+            [shoparr[i]removeObjectForKey:@"qtmd"];
+        }
+        
+        NSDictionary * rucan=[NSDictionary dictionaryWithObjectsAndKeys:UserID,@"operateUserId",_scno,@"no",_sctype,@"type",_coupon.text,@"coupon",_couprice.text,@"couponPrice",shoparr,@"drugList",consumptionDetailNo,@"consumptionDetailNo", nil];
+        
+        [WarningBox warningBoxModeIndeterminate:@"正在计算总价..." andView:self.view];
+        [XL_WangLuo QianWaiWangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
+            NSLog(@"%@",responseObject);
+            [WarningBox warningBoxHide:YES andView:self.view];
+            if([[responseObject objectForKey:@"code"]isEqualToString:@"0000"]){
+                NSString *drugAmount=[[responseObject objectForKey:@"data"] objectForKey:@"drugAmount"];
+                NSString *consumptionInfoId=[[responseObject objectForKey:@"data"] objectForKey:@"consumptionInfoId"];
+                [[NSUserDefaults standardUserDefaults] setObject:[[responseObject objectForKey:@"data"] objectForKey:@"consumptionDetailNo"] forKey:@"consumptionDetailNo"];
+                XLSetAccountViewController *shop = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"setacc"];
+                shop.drugAmount=drugAmount;
+                shop.consumptionInfoId=consumptionInfoId;
+                [self.navigationController pushViewController:shop animated:YES];
+            }else if ([[responseObject objectForKey:@"code"]isEqual:@"1009"]){
+                [WarningBox warningBoxModeText:[responseObject objectForKey:@"msg"] andView:self.view];
+            }
+            else if ([[responseObject objectForKey:@"code"]isEqual:@"1008"]){
+                [WarningBox warningBoxModeText:[responseObject objectForKey:@"msg"] andView:self.view];
+            }
+            else if([[responseObject objectForKey:@"code"]isEqual:@"9999"]){
+                //账号在其他手机登录，请重新登录。
+                [XL_WangLuo sigejiu:self];
+            }
+            updata=YES;
+            
+        } failure:^(NSError *error) {
+            NSLog(@"%@",error);
+            [WarningBox warningBoxHide:YES andView:self.view];
+            [WarningBox warningBoxModeText:@"网络错误,请重试!" andView:self.view];
+        }];
+    }
+    
 }
 
 -(void)tableviewdelegate{
