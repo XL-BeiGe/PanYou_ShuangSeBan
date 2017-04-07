@@ -27,6 +27,7 @@
     //    self.view.backgroundColor=[UIColor blackColor];
     [self delegate];
     [self comeback];
+    [self refrish];
     self.title =@"每日答题";
 }
 -(void)comeback{
@@ -48,6 +49,29 @@
 -(void)viewWillAppear:(BOOL)animated{
     [self jiekou];
 }
+
+
+#pragma mark--刷新方法
+-(void)refrish{
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(refreshClick:) forControlEvents:UIControlEventValueChanged];
+    [self.tableview addSubview:refreshControl];
+    
+}
+- (void)refreshClick:(UIRefreshControl *)refreshControl {
+    
+    [refreshControl beginRefreshing];
+    
+    // 此处添加刷新tableView数据的代码
+    [self jiekou];
+    
+    
+    [refreshControl endRefreshing];
+    
+    
+    //[self.table reloadData];// 刷新tableView即可
+}
+
 -(void)delegate{
     
     _tableview.delegate=self;

@@ -36,6 +36,7 @@
     self.title =@"知识学习";
     def =[NSUserDefaults standardUserDefaults];
     [self navigatio];
+    [self refrish];
     // Do any additional setup after loading the view.
 }
 -(void)navigatio{
@@ -123,6 +124,29 @@
  // Pass the selected object to the new view controller.
  }
  */
+
+#pragma mark--刷新方法
+-(void)refrish{
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(refreshClick:) forControlEvents:UIControlEventValueChanged];
+    [self.table addSubview:refreshControl];
+    
+}
+- (void)refreshClick:(UIRefreshControl *)refreshControl {
+    
+    [refreshControl beginRefreshing];
+    
+    // 此处添加刷新tableView数据的代码
+    [self jiekou1];
+ 
+    
+    [refreshControl endRefreshing];
+    
+    
+    //[self.table reloadData];// 刷新tableView即可
+}
+
+
 -(void)tableviewdelegat{
     _table.dataSource =self;
     _table.delegate =self;
