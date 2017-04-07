@@ -18,7 +18,7 @@
 #import <UserNotifications/UserNotifications.h>
 #endif
 
-#define appkey @"f8c33a34b64f258586c0cdf3"
+#define appkey @"de0c75ab347ade0d27a45eee"
 #define channell @""
 #define isProduction @"0"
 
@@ -36,6 +36,20 @@
 static AppDelegate *_appDelegate;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     _appDelegate = self;
+    //Required
+    //notice: 3.0.0及以后版本注册可以这样写，也可以继续用之前的注册方式
+    JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
+    entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
+    //    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+    //    }
+    [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
+    
+    [JPUSHService setupWithOption:launchOptions appKey:appkey
+                          channel:channell
+                 apsForProduction:isProduction
+            advertisingIdentifier:nil];
+    
+    
     NSString *str=[NSString stringWithFormat:@"%@%@%@",Scheme,QianWaiWangIP,[[NSUserDefaults standardUserDefaults] objectForKey:@"tupianqidong"]];
     self.window.backgroundColor=[UIColor colorWithHexString:@"33c383"];
     [self.window makeKeyAndVisible];
@@ -54,20 +68,9 @@ static AppDelegate *_appDelegate;
     [self.window bringSubviewToFront:lunchView];
     
     [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(removeLun) userInfo:nil repeats:NO];
-    [self jjjj];
-   
-    //Required
-    //notice: 3.0.0及以后版本注册可以这样写，也可以继续用之前的注册方式
-    JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
-    entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
-    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
-    }
-    [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
     
-    [JPUSHService setupWithOption:launchOptions appKey:appkey
-                          channel:channell
-                 apsForProduction:isProduction
-            advertisingIdentifier:nil];
+   
+   
     
     //2.1.9版本新增获取registration id block接口。
     [JPUSHService registrationIDCompletionHandler:^(int resCode, NSString *registrationID) {
@@ -87,7 +90,7 @@ static AppDelegate *_appDelegate;
     }else{
         [[UIApplication sharedApplication]registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound  categories:nil]];
     }
-    
+    [self jjjj];
     return YES;
 }
 -(void)removeLun{
@@ -119,7 +122,6 @@ static AppDelegate *_appDelegate;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
     }];
 }
-
 + (AppDelegate *)appDelegate {
     return _appDelegate;
 }
@@ -130,15 +132,17 @@ static AppDelegate *_appDelegate;
     NSString*alias=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]];
     
     [JPUSHService setTags:tags alias:alias fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias){
+        NSLog(@"\n%d\n%@\n%@",iResCode,iTags,iAlias);
     }];
-
 }
 - (void)application:(UIApplication *)application
 didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     /// Required - 注册 DeviceToken
+    NSLog(@"deviceToken----%@",deviceToken);
     [JPUSHService registerDeviceToken:deviceToken];
 }
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+
 }
 #pragma mark- JPUSHRegisterDelegate
 
