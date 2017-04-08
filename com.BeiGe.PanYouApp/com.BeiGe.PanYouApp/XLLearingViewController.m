@@ -33,6 +33,7 @@
     width =[UIScreen mainScreen].bounds.size.width;
     heigh =[UIScreen mainScreen].bounds.size.height;
     _table.hidden = YES;
+    _Image.hidden =YES;
     self.title =@"知识学习";
     def =[NSUserDefaults standardUserDefaults];
     [self navigatio];
@@ -224,11 +225,22 @@
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
             arr=[[responseObject objectForKey:@"data"] objectForKey:@"knowledgeTypeInfoList"];
-            
-            [self Scrollv];
-            if ([[def objectForKey:@"btntag"] isEqualToString:@"100"]) {
-                [self jiekou1];
+            if(arr.count==0){
+                _scrollview.hidden =YES;
+                _table.hidden =YES;
+                _Image.hidden =NO;
+            }else{
+                _scrollview.hidden =NO;
+                _table.hidden =NO;
+                _Image.hidden =YES;
+                [self Scrollv];
+                if ([[def objectForKey:@"btntag"] isEqualToString:@"100"]) {
+                    [self jiekou1];
+                }
             }
+            
+            
+           
             [WarningBox warningBoxHide:YES andView:self.view];
         }
         else if([[responseObject objectForKey:@"code"]isEqual:@"9999"]){

@@ -1993,6 +1993,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="消息背景.png" translatesAutoresizingMaskIntoConstraints="NO" id="foC-lt-Gzb">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                            </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9lG-Cn-dvw">
                                 <rect key="frame" x="0.0" y="20" width="320" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2010,20 +2013,25 @@
                             <constraint firstAttribute="trailing" secondItem="9uA-LW-904" secondAttribute="trailing" constant="15" id="2iZ-aU-Pp9"/>
                             <constraint firstItem="9uA-LW-904" firstAttribute="top" secondItem="9lG-Cn-dvw" secondAttribute="bottom" constant="10" id="35W-XD-yjP"/>
                             <constraint firstItem="ApW-Hn-nJ0" firstAttribute="top" secondItem="9uA-LW-904" secondAttribute="bottom" id="BOR-oP-ni2"/>
+                            <constraint firstItem="foC-lt-Gzb" firstAttribute="leading" secondItem="wjK-Kz-2Kt" secondAttribute="leading" id="Ed9-rf-OLN"/>
                             <constraint firstItem="9lG-Cn-dvw" firstAttribute="leading" secondItem="wjK-Kz-2Kt" secondAttribute="leading" id="OIS-bP-Stz"/>
+                            <constraint firstAttribute="trailing" secondItem="foC-lt-Gzb" secondAttribute="trailing" id="cc2-of-nDD"/>
+                            <constraint firstItem="foC-lt-Gzb" firstAttribute="top" secondItem="wjK-Kz-2Kt" secondAttribute="top" id="ds9-7H-CjI"/>
+                            <constraint firstItem="ApW-Hn-nJ0" firstAttribute="top" secondItem="foC-lt-Gzb" secondAttribute="bottom" id="g7f-a5-d8b"/>
                             <constraint firstItem="9lG-Cn-dvw" firstAttribute="top" secondItem="L42-mc-3f4" secondAttribute="bottom" id="gec-6B-Alx"/>
                             <constraint firstItem="9uA-LW-904" firstAttribute="leading" secondItem="wjK-Kz-2Kt" secondAttribute="leading" constant="15" id="lNj-Ad-kGS"/>
                             <constraint firstAttribute="trailing" secondItem="9lG-Cn-dvw" secondAttribute="trailing" id="nqS-rE-B0t"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="Image" destination="foC-lt-Gzb" id="sg1-cP-kLE"/>
                         <outlet property="scrollview" destination="9lG-Cn-dvw" id="CS0-oN-1iW"/>
                         <outlet property="table" destination="9uA-LW-904" id="aLN-Bp-e0a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0ju-ou-sAb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1596" y="1612"/>
+            <point key="canvasLocation" x="1595.625" y="1611.25"/>
         </scene>
         <!--Learn Info View Controller-->
         <scene sceneID="8ey-kX-ejH">

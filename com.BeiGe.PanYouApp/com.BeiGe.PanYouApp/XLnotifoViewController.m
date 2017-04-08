@@ -54,7 +54,7 @@
     self.title = @"通知详情";
     self.automaticallyAdjustsScrollViewInsets = NO;
     _tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
-   
+    _tableview.tableFooterView=[[UIView alloc] init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -191,7 +191,14 @@
             
        }
        else if (indexPath.row==2){
+     
+          
            return 150;
+        
+           
+           
+           
+           
        }
        else if(indexPath.row==3){
            //根据lable返回行高
@@ -265,15 +272,17 @@
              [cell.contentView addSubview:titt];
         }
         else if (indexPath.row==2){
-            image = [[UIImageView alloc]init];
+            image =[[UIImageView alloc]init];
             image.frame = CGRectMake(0,0,width,150);
             if([pushTemplate objectForKey:@"image"]!=nil){
+            
             //image.contentMode = UIViewContentModeScaleAspectFill;
             image.contentMode = UIViewContentModeScaleAspectFit;
             image.clipsToBounds  = YES;//是否剪切掉超出 UIImageView 范围的图片
             [image setContentScaleFactor:[[UIScreen mainScreen] scale]];//缩放图片的分辨率
-            NSURL*url=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",Scheme,QianWaiWangIP,[pushTemplate objectForKey:@"image"]]];
-            [image sd_setImageWithURL:url  placeholderImage:[UIImage imageNamed:@"icon_541234.png"]];
+            NSString *url =[NSString stringWithFormat:@"%@%@%@",Scheme,QianWaiWangIP,[pushTemplate objectForKey:@"image"]];
+            url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            [image sd_setImageWithURL:[NSURL URLWithString:url]  placeholderImage:[UIImage imageNamed:@"icon_541234.png"]];
            }
              [self Imageshows];
            [cell.contentView addSubview:image];
@@ -320,11 +329,11 @@
         Mview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 130)];
         UILabel *beiz = [[UILabel alloc]initWithFrame:CGRectMake(15, 5, 40, 20)];
         beiz.textColor =[UIColor colorWithHexString:@"fd8f30"];
-        beiz.font= [UIFont systemFontOfSize:14];
+        beiz.font= [UIFont systemFontOfSize:15];
         beiz.text =@"备注:";
         textview = [[UITextView alloc]initWithFrame:CGRectMake(60, 5, width-85, 120)];
         textview.delegate =self;
-        
+        textview.font =[UIFont systemFontOfSize:15];
       
         [self tobar];
         [Mview addSubview:beiz];

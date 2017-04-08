@@ -286,7 +286,6 @@
 		D77488091DD9652B007A92E3 /* 助记码.png in Resources */ = {isa = PBXBuildFile; fileRef = D77487A91DD9652B007A92E3 /* 助记码.png */; };
 		D774880A1DD9652B007A92E3 /* 助记码2.png in Resources */ = {isa = PBXBuildFile; fileRef = D77487AA1DD9652B007A92E3 /* 助记码2.png */; };
 		D7959B731DCC5A2600985309 /* XLNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7959B721DCC5A2600985309 /* XLNoteViewController.m */; };
-		D7959B761DCC5A4200985309 /* XLNoteInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7959B751DCC5A4200985309 /* XLNoteInfoViewController.m */; };
 		D7C8CE431E14F9D000062F00 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C8CE231E14F9D000062F00 /* MKAnnotationView+WebCache.m */; };
 		D7C8CE441E14F9D000062F00 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C8CE251E14F9D000062F00 /* NSData+ImageContentType.m */; };
 		D7C8CE451E14F9D000062F00 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C8CE271E14F9D000062F00 /* SDImageCache.m */; };
@@ -689,8 +688,6 @@
 		D77487AA1DD9652B007A92E3 /* 助记码2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "助记码2.png"; sourceTree = "<group>"; };
 		D7959B711DCC5A2600985309 /* XLNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLNoteViewController.h; sourceTree = "<group>"; };
 		D7959B721DCC5A2600985309 /* XLNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLNoteViewController.m; sourceTree = "<group>"; };
-		D7959B741DCC5A4200985309 /* XLNoteInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLNoteInfoViewController.h; sourceTree = "<group>"; };
-		D7959B751DCC5A4200985309 /* XLNoteInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLNoteInfoViewController.m; sourceTree = "<group>"; };
 		D7C8CE221E14F9D000062F00 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		D7C8CE231E14F9D000062F00 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
 		D7C8CE241E14F9D000062F00 /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
@@ -1498,8 +1495,6 @@
 				D7959B721DCC5A2600985309 /* XLNoteViewController.m */,
 				D70124A41E349E9E002F662B /* XLnotifoViewController.h */,
 				D70124A51E349E9E002F662B /* XLnotifoViewController.m */,
-				D7959B741DCC5A4200985309 /* XLNoteInfoViewController.h */,
-				D7959B751DCC5A4200985309 /* XLNoteInfoViewController.m */,
 			);
 			name = "通知";
 			sourceTree = "<group>";
@@ -1633,7 +1628,7 @@
 					D2C1AC7E1DC97D8C00092F44 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = GP8BUACAG4;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -1918,7 +1913,6 @@
 				D76B353A1DC9930800E285AB /* AFNetworkReachabilityManager.m in Sources */,
 				D7C8CE501E14F9D000062F00 /* UIImageView+HighlightedWebCache.m in Sources */,
 				D2D329D91E96165100338756 /* XLquanbushitilei.m in Sources */,
-				D7959B761DCC5A4200985309 /* XLNoteInfoViewController.m in Sources */,
 				D7E80FAF1E2F376C0025D9D0 /* TianTableViewCell.m in Sources */,
 				D24129971E4D558D00306120 /* XLmemedaViewController.m in Sources */,
 				D76B34BC1DC9925F00E285AB /* DSBaseKeyboard.m in Sources */,
@@ -2135,9 +2129,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = com.BeiGe.PanYouApp/com.BeiGe.PanYouApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Yulan Zhao (4RSNZMG5V8)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yulan Zhao (4RSNZMG5V8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
-				DEVELOPMENT_TEAM = GP8BUACAG4;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = com.BeiGe.PanYouApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2147,8 +2141,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.BeiGe.PanYouApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "96e16657-1f49-4dad-827c-24228f0939f1";
-				PROVISIONING_PROFILE_SPECIFIER = ceshi_PanYou;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Lib";
 			};
@@ -2160,9 +2154,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = com.BeiGe.PanYouApp/com.BeiGe.PanYouApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Yulan Zhao (4RSNZMG5V8)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yulan Zhao (4RSNZMG5V8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
-				DEVELOPMENT_TEAM = GP8BUACAG4;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = com.BeiGe.PanYouApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2172,8 +2166,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.BeiGe.PanYouApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "96e16657-1f49-4dad-827c-24228f0939f1";
-				PROVISIONING_PROFILE_SPECIFIER = ceshi_PanYou;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Lib";
 			};

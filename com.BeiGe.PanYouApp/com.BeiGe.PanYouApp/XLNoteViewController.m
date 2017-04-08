@@ -7,7 +7,6 @@
 //
 
 #import "XLNoteViewController.h"
-#import "XLNoteInfoViewController.h"
 #import "WarningBox.h"
 #import "XL_WangLuo.h"
 #import "XLMainViewController.h"
