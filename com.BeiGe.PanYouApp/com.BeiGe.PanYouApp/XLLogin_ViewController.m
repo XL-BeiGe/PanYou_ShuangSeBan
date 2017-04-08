@@ -168,9 +168,16 @@
             }
         }else{
             if(textField.text.length>=3){
+                if(textField==_Name||textField==_Password){
                 
-                [self huanhang:string :textField];
+                }else{
+                 [self huanhang:string :textField];
                 return NO;
+                }
+                
+                
+               
+                
             }
         }
     }
