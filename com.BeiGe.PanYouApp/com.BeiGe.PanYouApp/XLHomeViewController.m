@@ -129,8 +129,13 @@
 }
 -(void)shangchuanshujujiexi{
     
-    NSArray *list = [XL DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing];
-    
+    NSArray *list1 = [XL DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing];
+    NSMutableArray*list = [[NSMutableArray alloc] init];
+    for (NSDictionary*dd in list1) {
+        if (![[dd objectForKey:@"checkNum"] isEqualToString:@"0"]) {
+            [list addObject:dd];
+        }
+    }
     if (list.count==0) {
         [WarningBox warningBoxModeText:@"请先盘点数据!" andView:self.view];
     }else{
