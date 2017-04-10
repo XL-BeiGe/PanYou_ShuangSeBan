@@ -132,9 +132,9 @@
 //    UITapGestureRecognizer *labelTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelClick:)];
 //    [_ypgoods addGestureRecognizer:labelTapGestureRecognizer];
 //    _ypgoods.userInteractionEnabled = YES;
-//    _ypgoods.layer.borderWidth=1;
-//    _ypgoods.layer.borderColor=[[UIColor blackColor] CGColor];
-//    _ypgoods.layer.cornerRadius=5;
+    _ypgoods.layer.borderWidth=1;
+    _ypgoods.layer.borderColor=[[UIColor blackColor] CGColor];
+    _ypgoods.layer.cornerRadius=5;
 //    _ypgoods.tag=1001;
     
     UITapGestureRecognizer *TapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shul:)];
