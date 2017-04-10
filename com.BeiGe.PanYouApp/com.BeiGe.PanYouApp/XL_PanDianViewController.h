@@ -46,6 +46,9 @@
 - (IBAction)check:(id)sender;
 - (IBAction)dian:(id)sender;
 - (IBAction)lastone:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *change;
+- (IBAction)Change:(id)sender;
+
 
 
 @end

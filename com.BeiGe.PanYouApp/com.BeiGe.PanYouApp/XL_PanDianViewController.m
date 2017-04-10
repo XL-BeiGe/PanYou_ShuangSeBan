@@ -119,6 +119,9 @@
     [self navigation];
     [self tianjiapihao];
     [self shoushi];
+
+    _change.layer.cornerRadius =5;
+    
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(btnLong:)];
     longPress.minimumPressDuration = 0.8; //定义按的时间
     [_canbtn addGestureRecognizer:longPress];
@@ -126,13 +129,13 @@
 
 
 -(void)shoushi{
-    UITapGestureRecognizer *labelTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelClick:)];
-    [_ypgoods addGestureRecognizer:labelTapGestureRecognizer];
-    _ypgoods.userInteractionEnabled = YES;
-    _ypgoods.layer.borderWidth=1;
-    _ypgoods.layer.borderColor=[[UIColor blackColor] CGColor];
-    _ypgoods.layer.cornerRadius=5;
-    _ypgoods.tag=1001;
+//    UITapGestureRecognizer *labelTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelClick:)];
+//    [_ypgoods addGestureRecognizer:labelTapGestureRecognizer];
+//    _ypgoods.userInteractionEnabled = YES;
+//    _ypgoods.layer.borderWidth=1;
+//    _ypgoods.layer.borderColor=[[UIColor blackColor] CGColor];
+//    _ypgoods.layer.cornerRadius=5;
+//    _ypgoods.tag=1001;
     
     UITapGestureRecognizer *TapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shul:)];
     [_onelabel addGestureRecognizer:TapGestureRecognizer];
@@ -161,17 +164,31 @@
     db = [XL getDBWithDBName:@"pandian.sqlite"];
 }
 //货位号点击方法
--(void)labelClick:(UITapGestureRecognizer *)lableField{
+//-(void)labelClick:(UITapGestureRecognizer *)lableField{
+//    onepand=2;
+//    [self firstResponderInSubView];
+//    goodstxt = [[UITextField alloc]init];
+//    goodstxt.delegate = self;
+//    [self.view addSubview:goodstxt];
+//    
+//    UILabel*la =(UILabel *)lableField.self.view;
+//    [self setupCustomedKeyboard:goodstxt :la];
+//    [goodstxt becomeFirstResponder];
+//}
+- (IBAction)Change:(id)sender {
+    
     onepand=2;
     [self firstResponderInSubView];
     goodstxt = [[UITextField alloc]init];
     goodstxt.delegate = self;
     [self.view addSubview:goodstxt];
     
-    UILabel*la =(UILabel *)lableField.self.view;
-    [self setupCustomedKeyboard:goodstxt :la];
+//    UILabel*la =(UILabel *)lableField.self.view;
+    [self setupCustomedKeyboard:goodstxt :_ypgoods];
     [goodstxt becomeFirstResponder];
+    
 }
+
 #pragma mark ---非tableview的点击事件
 -(void)shul:(UITapGestureRecognizer*)lab{
     
@@ -1755,4 +1772,5 @@
     }
     return YES;
 }
+
 @end

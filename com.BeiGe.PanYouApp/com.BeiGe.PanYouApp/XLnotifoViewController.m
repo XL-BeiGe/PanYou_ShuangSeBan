@@ -191,14 +191,10 @@
             
        }
        else if (indexPath.row==2){
-     
-          
-           return 150;
-        
            
-           
-           
-           
+    
+             return 150;
+    
        }
        else if(indexPath.row==3){
            //根据lable返回行高
@@ -272,21 +268,22 @@
              [cell.contentView addSubview:titt];
         }
         else if (indexPath.row==2){
+        
+            if([pushTemplate objectForKey:@"image"]!=nil){
+          
             image =[[UIImageView alloc]init];
             image.frame = CGRectMake(0,0,width,150);
-            if([pushTemplate objectForKey:@"image"]!=nil){
-            
             //image.contentMode = UIViewContentModeScaleAspectFill;
             image.contentMode = UIViewContentModeScaleAspectFit;
             image.clipsToBounds  = YES;//是否剪切掉超出 UIImageView 范围的图片
             [image setContentScaleFactor:[[UIScreen mainScreen] scale]];//缩放图片的分辨率
             NSString *url =[NSString stringWithFormat:@"%@%@%@",Scheme,QianWaiWangIP,[pushTemplate objectForKey:@"image"]];
             url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-            [image sd_setImageWithURL:[NSURL URLWithString:url]  placeholderImage:[UIImage imageNamed:@"icon_541234.png"]];
-           }
-             [self Imageshows];
-           [cell.contentView addSubview:image];
-    
+            [image sd_setImageWithURL:[NSURL URLWithString:url]  placeholderImage:[UIImage imageNamed:@"icon_02_07.png"]];
+                [self Imageshows];
+                [cell.contentView addSubview:image];
+            }
+
         }
         else if (indexPath.row==3){
             mess.numberOfLines=0;
