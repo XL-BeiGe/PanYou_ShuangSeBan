@@ -214,7 +214,7 @@
                                                       context:nil];
            
            mess.text=ss;
-           [mess setFrame:CGRectMake(20,4, rect.size.width, rect.size.height)];
+           [mess setFrame:CGRectMake(20,4, width-40, rect.size.height)];
            
            return mess.frame.size.height+15>40? mess.frame.size.height+5:40;
        }

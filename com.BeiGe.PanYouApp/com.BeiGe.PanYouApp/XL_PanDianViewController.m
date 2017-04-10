@@ -123,7 +123,7 @@
     _change.layer.cornerRadius =5;
     
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(btnLong:)];
-    longPress.minimumPressDuration = 0.8; //定义按的时间
+    longPress.minimumPressDuration = 0.4; //定义按的时间
     [_canbtn addGestureRecognizer:longPress];
 }
 
