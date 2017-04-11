@@ -1744,8 +1744,18 @@
         for (NSDictionary*dd in shangccrr) {
             int aaa=0;
             for (NSDictionary*xd in ato) {
-                if ([[dd objectForKey:@"productCode"] isEqualToString:[xd objectForKey:@"productCode"]]) {
-                    if ([[dd objectForKey:@"prodBatchNo"] isEqualToString:[xd objectForKey:@"prodBatchNo"]]) {
+                if (NULL == [dd objectForKey:@"barCode"]){
+                    if ([[dd objectForKey:@"productCode"] isEqualToString:[xd objectForKey:@"productCode"]]) {
+                        if (NULL ==[dd objectForKey:@"prodBatchNo"]) {
+                            aaa=1;
+                        }else{
+                            if ([[dd objectForKey:@"prodBatchNo"] isEqualToString:[xd objectForKey:@"prodBatchNo"]]) {
+                                aaa=1;
+                            }
+                        }
+                    }
+                }else{
+                    if ([[dd objectForKey:@"barCode"] isEqualToString:[xd objectForKey:@"barCode"]]) {
                         aaa=1;
                     }
                 }
@@ -1758,7 +1768,7 @@
             [WarningBox warningBoxModeText:@"已没有上一条了!" andView:self.view];
         }else{
             _Search.text =[NSString stringWithFormat:@"%@",[ato[ato.count - iii-1] objectForKey:@"barCode"]];
-            if (NULL == _Search.text) {
+            if (NULL == _Search.text||[_Search.text isEqualToString:@""]) {
                 _Search.text =[NSString stringWithFormat:@"%@",[ato[ato.count - iii-1] objectForKey:@"productCode"]];
             }
             [self chazhao];
@@ -1769,7 +1779,7 @@
 
 - (BOOL)isNum:(NSString *)checkedNumString {
     
-    NSString* number=@"^[1-9]\\d*\\.\\d*|0\\.\\d*[1-9]\\d*$";
+    NSString* number=@"^(\\+)?\\d+(\\.\\d+)?$";
     NSPredicate *numberPre = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",number];
     return [numberPre evaluateWithObject:checkedNumString];
    // checkedNumString = [checkedNumString stringByTrimmingCharactersInSet:[NSCharacterSet decimalDigitCharacterSet]];
