@@ -1744,8 +1744,10 @@
         for (NSDictionary*dd in shangccrr) {
             int aaa=0;
             for (NSDictionary*xd in ato) {
-                if ([[dd objectForKey:@"barCode"] isEqualToString:[xd objectForKey:@"barCode"]]) {
-                    aaa=1;
+                if ([[dd objectForKey:@"productCode"] isEqualToString:[xd objectForKey:@"productCode"]]) {
+                    if ([[dd objectForKey:@"prodBatchNo"] isEqualToString:[xd objectForKey:@"prodBatchNo"]]) {
+                        aaa=1;
+                    }
                 }
             }
             if (aaa==0) {
@@ -1766,11 +1768,12 @@
 }
 
 - (BOOL)isNum:(NSString *)checkedNumString {
-    checkedNumString = [checkedNumString stringByTrimmingCharactersInSet:[NSCharacterSet decimalDigitCharacterSet]];
-    if(checkedNumString.length > 0) {
-        return NO;
-    }
-    return YES;
+    
+    NSString* number=@"^[1-9]\\d*\\.\\d*|0\\.\\d*[1-9]\\d*$";
+    NSPredicate *numberPre = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",number];
+    return [numberPre evaluateWithObject:checkedNumString];
+   // checkedNumString = [checkedNumString stringByTrimmingCharactersInSet:[NSCharacterSet decimalDigitCharacterSet]];
+   
 }
 
 @end

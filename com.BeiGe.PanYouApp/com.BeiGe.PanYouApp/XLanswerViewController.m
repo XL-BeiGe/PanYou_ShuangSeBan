@@ -106,7 +106,8 @@
     _tableview.frame=CGRectMake(20, CGRectGetMaxY(_wentizhuti.frame)+10, width-40, height-CGRectGetMaxY(_wentizhuti.frame)-54);
     _tableview.delegate=self;
     _tableview.dataSource=self;
-    _tableview.scrollEnabled =NO;
+    //_tableview.scrollEnabled =NO;
+    _tableview.bounces =NO;
     if (self.view.bounds.size.width == 320)
     {
         _tableview.scrollEnabled =YES;

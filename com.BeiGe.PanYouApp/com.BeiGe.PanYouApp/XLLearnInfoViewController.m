@@ -82,16 +82,16 @@
         _time.text =[NSString stringWithFormat:@"发布时间:%@",[[responseObject objectForKey:@"data"] objectForKey:@"created"]];
        
             NSString *urlstr=[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"comments"]];
-       NSString *transString = [NSString stringWithString:[urlstr stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+//       NSString *transString = [NSString stringWithString:[urlstr stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
    
         NSString *stor =@"/stockmgr";
-        if([transString rangeOfString:stor].location!=NSNotFound){
+        if([urlstr rangeOfString:stor].location!=NSNotFound){
 
             NSString*ssss =[NSString stringWithFormat:@"%@%@%@",Scheme,QianWaiWangIP,AppName];
-            transString =[transString stringByReplacingOccurrencesOfString:stor withString:ssss];
+            urlstr =[urlstr stringByReplacingOccurrencesOfString:stor withString:ssss];
             
             }
-            NSMutableString *string = [[NSMutableString alloc] initWithString:transString];
+            NSMutableString *string = [[NSMutableString alloc] initWithString:urlstr];
             [string insertString:@"<body style=\"text-indent:2em;line-height: 25px;\">" atIndex:0];
             [string appendString:@"</body>"];
             

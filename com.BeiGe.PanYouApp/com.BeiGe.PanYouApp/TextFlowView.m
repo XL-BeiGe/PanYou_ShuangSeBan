@@ -109,7 +109,7 @@
             origin.x = 0;
         } else {
             //在控件的中间绘制文本
-            origin.x = (rect.size.width - _textSize.width)/2;
+            origin.x = (rect.size.width - _textSize.width);
         }
         origin.y = (rect.size.height - _textSize.height)/2;
         rect.origin = origin;
