@@ -26,9 +26,10 @@
 //==1 为网络盘点    ==0为单机盘点
 #define panduan  [[NSUserDefaults standardUserDefaults] objectForKey:@"isPandian"]
 
-//#define QianWaiWangIP @"192.168.1.108:8080"
-#define QianWaiWangIP @"192.168.1.144:8082"
-//#define QianWaiWangIP @"125.211.221.232:60088"
+//#define QianWaiWangIP @"192.168.1.118:8080"
+//#define QianWaiWangIP @"192.168.1.122:8081"//徐老师
+//#define QianWaiWangIP @"192.168.1.144:8082"
+#define QianWaiWangIP @"125.211.221.232:60088"
 #define QianWaiWang [NSString stringWithFormat:@"%@%@%@%@",Scheme,QianWaiWangIP,AppName,apath]
 
 #define Appkey   @"d800528f235e4142b78a8c26c4d537d9"
@@ -84,7 +85,6 @@
 #define ShangChuanShiTiLei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"productCode",@"text",@"checkNum",@"text",@"prodBatchNo",@"text",@"status",@"text",@"checkTime",@"text",@"productName",@"text",@"manufacturer",@"text",@"specification",@"text",@"barCode",@"text",@"approvalNumber",@"text",@"pycode",@"text",@"checkId",@"text",@"newpos",@"text",@"f1",@"text",@"f2", nil]
 
 #define ShangChuanBiaoMing @"shangchuan"
-
 
 #define ChaXunShiTiLei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"costPrice",@"text",@"salePrice",@"text",@"vipPrice",@"text",@"pycode",@"text",@"barCode",@"text",@"manufacturer",@"text",@"productName",@"text",@"productCode",@"text",@"specification",@"text",@"approvalNumber",@"text",@"id",@"text",@"isNewRecord", nil]
 

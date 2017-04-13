@@ -18,7 +18,7 @@
 #import <UserNotifications/UserNotifications.h>
 #endif
 
-#define appkey @"de0c75ab347ade0d27a45eee"
+#define appkey @"cd464cd9e89279cf591d1314"
 #define channell @""
 #define isProduction @"0"
 
@@ -49,7 +49,6 @@ static AppDelegate *_appDelegate;
                  apsForProduction:isProduction
             advertisingIdentifier:nil];
     
-    
     NSString *str=[NSString stringWithFormat:@"%@%@%@",Scheme,QianWaiWangIP,[[NSUserDefaults standardUserDefaults] objectForKey:@"tupianqidong"]];
     self.window.backgroundColor=[UIColor colorWithHexString:@"33c383"];
     [self.window makeKeyAndVisible];
@@ -68,9 +67,6 @@ static AppDelegate *_appDelegate;
     [self.window bringSubviewToFront:lunchView];
     
     [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(removeLun) userInfo:nil repeats:NO];
-    
-   
-   
     
     //2.1.9版本新增获取registration id block接口。
     [JPUSHService registrationIDCompletionHandler:^(int resCode, NSString *registrationID) {

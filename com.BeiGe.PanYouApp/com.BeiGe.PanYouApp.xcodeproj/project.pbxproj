@@ -1628,7 +1628,7 @@
 					D2C1AC7E1DC97D8C00092F44 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = GP8BUACAG4;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -2131,7 +2131,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Yulan Zhao (4RSNZMG5V8)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = GP8BUACAG4;
 				INFOPLIST_FILE = com.BeiGe.PanYouApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2139,10 +2139,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.BeiGe.PanYouApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.appleyifeng.pandianzhushou;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "0a92fc76-6a29-4796-b2c4-1b7a161882bb";
+				PROVISIONING_PROFILE_SPECIFIER = ceshi_pandianzhushou;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Lib";
 			};
@@ -2156,7 +2156,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Yulan Zhao (4RSNZMG5V8)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = GP8BUACAG4;
 				INFOPLIST_FILE = com.BeiGe.PanYouApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2164,10 +2164,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.BeiGe.PanYouApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.appleyifeng.pandianzhushou;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "0a92fc76-6a29-4796-b2c4-1b7a161882bb";
+				PROVISIONING_PROFILE_SPECIFIER = ceshi_pandianzhushou;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Lib";
 			};
