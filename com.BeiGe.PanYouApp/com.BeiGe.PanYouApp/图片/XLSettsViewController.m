@@ -7,7 +7,6 @@
 //
 
 #import "XLSettsViewController.h"
-#import "XLExplainViewController.h"
 #import "XLRelationViewController.h"
 #import "XLChangeViewController.h"
 @interface XLSettsViewController ()
@@ -56,12 +55,6 @@
 
 - (IBAction)xlia:(id)sender {
     XLRelationViewController *shop = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"relation"];
-    
-    [self.navigationController pushViewController:shop animated:YES];
-}
-
-- (IBAction)exl:(id)sender {
-    XLExplainViewController *shop = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"explain"];
     
     [self.navigationController pushViewController:shop animated:YES];
 }

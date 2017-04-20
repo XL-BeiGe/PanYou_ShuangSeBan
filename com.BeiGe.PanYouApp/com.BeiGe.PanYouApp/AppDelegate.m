@@ -20,7 +20,7 @@
 
 #define appkey @"cd464cd9e89279cf591d1314"
 #define channell @""
-#define isProduction @"0"
+#define isProduction 1
 
 #define UISCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define UISCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
@@ -296,21 +296,15 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
     UILocalNotification *notification = [[UILocalNotification alloc]init];
     if (notification) {
-        
         notification.timeZone = [NSTimeZone defaultTimeZone];
         notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:time];
         
         // 设置重复间隔
-        
         notification.repeatInterval = kCFCalendarUnitDay;
         
-        
         // 设置提醒的文字内容
-        
         notification.alertBody   = @"您该去考勤了";
-        
         notification.alertAction = @"打开";
-        
         notification.hasAction = NO; //是否显示额外的按钮，为no时alertAction消失
         
         // 通知提示音 使用默认的
@@ -343,7 +337,6 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     int minute = (int)[dateComponent minute];
     
     int sedconds = [self hour:(hour1 - hour)] + [self min:(minute1 - minute)];
-    
     
     return sedconds;
 }

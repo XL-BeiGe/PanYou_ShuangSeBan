@@ -26,10 +26,11 @@
 //==1 为网络盘点    ==0为单机盘点
 #define panduan  [[NSUserDefaults standardUserDefaults] objectForKey:@"isPandian"]
 
-//#define QianWaiWangIP @"192.168.1.118:8080"
+//#define QianWaiWangIP @"192.168.1.106:8080"
 //#define QianWaiWangIP @"192.168.1.122:8081"//徐老师
 //#define QianWaiWangIP @"192.168.1.144:8082"
-#define QianWaiWangIP @"125.211.221.232:60088"
+//#define QianWaiWangIP @"125.211.221.232:60088"
+#define QianWaiWangIP @"www.yaopandian.com"
 #define QianWaiWang [NSString stringWithFormat:@"%@%@%@%@",Scheme,QianWaiWangIP,AppName,apath]
 
 #define Appkey   @"d800528f235e4142b78a8c26c4d537d9"

@@ -11,7 +11,4 @@
 @interface XLSettsViewController : UIViewController
 - (IBAction)change:(id)sender;
 - (IBAction)xlia:(id)sender;
-- (IBAction)exl:(id)sender;
-
-
 @end
