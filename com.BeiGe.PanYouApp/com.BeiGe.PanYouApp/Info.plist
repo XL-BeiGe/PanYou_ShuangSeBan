@@ -58,7 +58,7 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>是否允许盘点助手访问您的媒体资料库？</string>
 	<key>UILaunchStoryboardName</key>
-	<string>Main</string>
+	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

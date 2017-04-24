@@ -180,7 +180,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="i1y-GS-9gR" id="cQm-xz-tft">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="54"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" tag="200" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1wd-k3-Anc">
@@ -1377,7 +1377,7 @@
                                         <rect key="frame" x="0.0" y="28" width="270" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1Qq-6j-CTg" id="DNe-kw-B62">
-                                            <rect key="frame" x="0.0" y="0.0" width="270" height="150"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="270" height="149"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view tag="10" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qVL-yk-pD7">
@@ -1704,7 +1704,7 @@
                                         <rect key="frame" x="0.0" y="28" width="288" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="g3E-3N-Vez" id="EaE-OY-R2Q">
-                                            <rect key="frame" x="0.0" y="0.0" width="288" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" tag="101" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="inW-jN-T5m">
@@ -2351,7 +2351,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eM3-Md-LId" id="DUl-c4-bxj">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="统计-工作天数.png" translatesAutoresizingMaskIntoConstraints="NO" id="ZeW-L3-EGP">
@@ -4115,7 +4115,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Xq-OY-ESU">
                                         <rect key="frame" x="5" y="56.5" width="58" height="47"/>
-                                        <state key="normal" backgroundImage="jianpan_mr_19.png"/>
+                                        <state key="normal" backgroundImage="jianpan_mr_119.png"/>
                                         <state key="highlighted" backgroundImage="jianpan_dk_01_03_03.png"/>
                                         <connections>
                                             <action selector="four:" destination="bkY-3A-XSK" eventType="touchUpInside" id="5IL-Qe-KPL"/>
@@ -4660,7 +4660,7 @@
         <image name="jianpan_mr_08.png" width="190" height="154"/>
         <image name="jianpan_mr_09.png" width="190" height="151"/>
         <image name="jianpan_mr_09_03.png" width="190" height="151"/>
-        <image name="jianpan_mr_19.png" width="190" height="154"/>
+        <image name="jianpan_mr_119.png" width="190" height="154"/>
         <image name="jianpan_mr_21.png" width="190" height="154"/>
         <image name="jianpan_mr_23.png" width="190" height="154"/>
         <image name="jianpan_mr_25.png" width="190" height="154"/>
