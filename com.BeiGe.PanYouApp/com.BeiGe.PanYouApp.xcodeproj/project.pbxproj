@@ -17,6 +17,7 @@
 		D20954BF1DE583F40091790C /* C4.png in Resources */ = {isa = PBXBuildFile; fileRef = D20954BA1DE583F40091790C /* C4.png */; };
 		D20954C01DE583F40091790C /* D4.png in Resources */ = {isa = PBXBuildFile; fileRef = D20954BB1DE583F40091790C /* D4.png */; };
 		D20954C11DE583F40091790C /* E4.png in Resources */ = {isa = PBXBuildFile; fileRef = D20954BC1DE583F40091790C /* E4.png */; };
+		D21E07041EAA010B00BA6E34 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D21E07031EAA010B00BA6E34 /* Images.xcassets */; };
 		D23B407A1DCC792B00CDACCB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23B40791DCC792B00CDACCB /* CoreLocation.framework */; };
 		D24129971E4D558D00306120 /* XLmemedaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D24129961E4D558D00306120 /* XLmemedaViewController.m */; };
 		D24129991E4D5E2B00306120 /* icon_hahaha1.png in Resources */ = {isa = PBXBuildFile; fileRef = D24129981E4D5E2B00306120 /* icon_hahaha1.png */; };
@@ -48,6 +49,7 @@
 		D2C1ACA81DC97D8C00092F44 /* com_BeiGe_PanYouAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C1ACA71DC97D8C00092F44 /* com_BeiGe_PanYouAppUITests.m */; };
 		D2CF97FA1DEBFC21002782F9 /* XLtongxiangqingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2CF97F91DEBFC21002782F9 /* XLtongxiangqingViewController.m */; };
 		D2D329D91E96165100338756 /* XLquanbushitilei.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D329D81E96165100338756 /* XLquanbushitilei.m */; };
+		D2DB968E1EA9E67F00FB23EA /* naozhong.png in Resources */ = {isa = PBXBuildFile; fileRef = D2DB968D1EA9E67F00FB23EA /* naozhong.png */; };
 		D70124A61E349E9E002F662B /* XLnotifoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D70124A51E349E9E002F662B /* XLnotifoViewController.m */; };
 		D7029C641E2860EE00807D8F /* left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D7029C611E2860EE00807D8F /* left@2x.png */; };
 		D7029C6B1E28664600807D8F /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D7029C6A1E28664600807D8F /* back@2x.png */; };
@@ -337,6 +339,7 @@
 		D20954BA1DE583F40091790C /* C4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = C4.png; sourceTree = "<group>"; };
 		D20954BB1DE583F40091790C /* D4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = D4.png; sourceTree = "<group>"; };
 		D20954BC1DE583F40091790C /* E4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = E4.png; sourceTree = "<group>"; };
+		D21E07031EAA010B00BA6E34 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D23B40791DCC792B00CDACCB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		D24129951E4D558D00306120 /* XLmemedaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLmemedaViewController.h; sourceTree = "<group>"; };
 		D24129961E4D558D00306120 /* XLmemedaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLmemedaViewController.m; sourceTree = "<group>"; };
@@ -384,6 +387,7 @@
 		D2CF97F91DEBFC21002782F9 /* XLtongxiangqingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLtongxiangqingViewController.m; sourceTree = "<group>"; };
 		D2D329D71E96165100338756 /* XLquanbushitilei.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLquanbushitilei.h; sourceTree = "<group>"; };
 		D2D329D81E96165100338756 /* XLquanbushitilei.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLquanbushitilei.m; sourceTree = "<group>"; };
+		D2DB968D1EA9E67F00FB23EA /* naozhong.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = naozhong.png; sourceTree = "<group>"; };
 		D70124A41E349E9E002F662B /* XLnotifoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLnotifoViewController.h; sourceTree = "<group>"; };
 		D70124A51E349E9E002F662B /* XLnotifoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLnotifoViewController.m; sourceTree = "<group>"; };
 		D7029C611E2860EE00807D8F /* left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left@2x.png"; sourceTree = "<group>"; };
@@ -849,6 +853,7 @@
 				D2C1ACB81DC97E2000092F44 /* Model */,
 				D2C1ACB71DC97E1E00092F44 /* Controller */,
 				D2C1ACB61DC97E1C00092F44 /* Additional */,
+				D21E07031EAA010B00BA6E34 /* Images.xcassets */,
 				D2C1AC821DC97D8C00092F44 /* Supporting Files */,
 			);
 			path = com.BeiGe.PanYouApp;
@@ -1357,6 +1362,7 @@
 		D77487481DD9652B007A92E3 /* 图片 */ = {
 			isa = PBXGroup;
 			children = (
+				D2DB968D1EA9E67F00FB23EA /* naozhong.png */,
 				D24129981E4D5E2B00306120 /* icon_hahaha1.png */,
 				D72EB0F11E35D8C8002D93E8 /* settt.png */,
 				D77487491DD9652B007A92E3 /* about.png */,
@@ -1740,10 +1746,12 @@
 				D772CCE91DC9BE3100BB28D9 /* 结账成功.png in Resources */,
 				D77487EC1DD9652B007A92E3 /* jianpan_mr_23.png in Resources */,
 				D7029C641E2860EE00807D8F /* left@2x.png in Resources */,
+				D21E07041EAA010B00BA6E34 /* Images.xcassets in Resources */,
 				D772CD021DC9BE3100BB28D9 /* B2.png in Resources */,
 				D77487BA1DD9652B007A92E3 /* ic_kefu.png in Resources */,
 				D77487CF1DD9652B007A92E3 /* icon_01_07.png in Resources */,
 				D730F8B01DCB1DDB00F07053 /* cuo.png in Resources */,
+				D2DB968E1EA9E67F00FB23EA /* naozhong.png in Resources */,
 				D2C1AC921DC97D8C00092F44 /* LaunchScreen.storyboard in Resources */,
 				D75846E81E495D4D00D4516F /* 22.png in Resources */,
 				D75D8FB11DC9DC1000CC3355 /* jinru_03.png in Resources */,
@@ -2113,9 +2121,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = com.BeiGe.PanYouApp/com.BeiGe.PanYouApp.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Harbin Aipuyifeng Science&Tech. Development Co., Ltd. (GP8BUACAG4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Harbin Aipuyifeng Science&Tech. Development Co., Ltd. (GP8BUACAG4)";
 				COMPRESS_PNG_FILES = NO;
 				DEVELOPMENT_TEAM = GP8BUACAG4;
 				INFOPLIST_FILE = com.BeiGe.PanYouApp/Info.plist;
@@ -2138,9 +2147,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = com.BeiGe.PanYouApp/com.BeiGe.PanYouApp.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Harbin Aipuyifeng Science&Tech. Development Co., Ltd. (GP8BUACAG4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Harbin Aipuyifeng Science&Tech. Development Co., Ltd. (GP8BUACAG4)";
 				COMPRESS_PNG_FILES = NO;
 				DEVELOPMENT_TEAM = GP8BUACAG4;
 				INFOPLIST_FILE = com.BeiGe.PanYouApp/Info.plist;

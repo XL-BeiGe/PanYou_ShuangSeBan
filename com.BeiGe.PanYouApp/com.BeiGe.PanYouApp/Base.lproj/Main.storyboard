@@ -2002,7 +2002,7 @@
                                     <constraint firstItem="t0K-oH-raq" firstAttribute="top" secondItem="6d6-AC-6ce" secondAttribute="top" id="qWr-t6-Ote"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xpE-V3-pjC">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xpE-V3-pjC">
                                 <rect key="frame" x="0.0" y="388" width="320" height="55"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="考勤-05.png" translatesAutoresizingMaskIntoConstraints="NO" id="o8C-xF-u6O">
@@ -3352,7 +3352,7 @@
                                             <constraint firstAttribute="width" constant="20" id="Www-Df-Op2"/>
                                             <constraint firstAttribute="height" constant="20" id="miZ-q0-qte"/>
                                         </constraints>
-                                        <state key="normal" backgroundImage="change.png"/>
+                                        <state key="normal" backgroundImage="naozhong.png"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lUc-cT-dcV">
                                         <rect key="frame" x="290" y="15" width="15" height="15"/>
@@ -4671,6 +4671,7 @@
         <image name="jinru_03.png" width="18" height="24"/>
         <image name="lainxi.png" width="60" height="60"/>
         <image name="left.png" width="16" height="16"/>
+        <image name="naozhong.png" width="48" height="48"/>
         <image name="next.png" width="34" height="54"/>
         <image name="right.png" width="16" height="16"/>
         <image name="wifi.png" width="128" height="128"/>

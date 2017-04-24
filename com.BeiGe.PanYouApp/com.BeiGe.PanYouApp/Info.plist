@@ -8,6 +8,10 @@
 	<string>盘点助手</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIcons</key>
+	<dict/>
+	<key>CFBundleIcons~ipad</key>
+	<dict/>
 	<key>CFBundleIdentifier</key>
 	<string>com.appleyifeng.pandianzhushou</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -23,7 +27,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>3.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>3</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -41,12 +45,18 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>是否允许盘点助手使用蓝牙功能？</string>
 	<key>NSCameraUsageDescription</key>
-	<string>是否允许此App使用你的相机？</string>
+	<string>是否允许盘点助手使用您的相机？</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>是否允许定位？</string>
+	<string>我们需要通过您的地理位置信息获取您周边的相关数据</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>是否允许定位？</string>
+	<string>我们需要通过您的地理位置信息获取您周边的相关数据</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>是否允许盘点助手使用您的麦克风？</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>是否允许盘点助手访问您的媒体资料库？</string>
 	<key>UILaunchStoryboardName</key>
 	<string>Main</string>
 	<key>UIMainStoryboardFile</key>

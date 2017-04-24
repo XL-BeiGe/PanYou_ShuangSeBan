@@ -129,9 +129,9 @@
 
 
 -(void)shoushi{
-//    UITapGestureRecognizer *labelTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelClick:)];
-//    [_ypgoods addGestureRecognizer:labelTapGestureRecognizer];
-//    _ypgoods.userInteractionEnabled = YES;
+    UITapGestureRecognizer *labelTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelClick:)];
+    [_ypgoods addGestureRecognizer:labelTapGestureRecognizer];
+    _ypgoods.userInteractionEnabled = YES;
     _ypgoods.layer.borderWidth=1;
     _ypgoods.layer.borderColor=[[UIColor blackColor] CGColor];
     _ypgoods.layer.cornerRadius=5;
@@ -155,6 +155,9 @@
     [self.view bringSubviewToFront:_oneview];
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    if (onepand==2) {
+        
+    }else
     [self.view endEditing:YES];
 }
 //调用数据库
@@ -164,17 +167,18 @@
     db = [XL getDBWithDBName:@"pandian.sqlite"];
 }
 //货位号点击方法
-//-(void)labelClick:(UITapGestureRecognizer *)lableField{
-//    onepand=2;
-//    [self firstResponderInSubView];
-//    goodstxt = [[UITextField alloc]init];
-//    goodstxt.delegate = self;
-//    [self.view addSubview:goodstxt];
-//    
-//    UILabel*la =(UILabel *)lableField.self.view;
-//    [self setupCustomedKeyboard:goodstxt :la];
-//    [goodstxt becomeFirstResponder];
-//}
+-(void)labelClick:(UITapGestureRecognizer *)lableField{
+    
+    if (onepand==2) {
+        [self firstResponderInSubView];
+        goodstxt = [[UITextField alloc]init];
+        goodstxt.delegate = self;
+        goodstxt.inputView=[[UIView alloc] initWithFrame:CGRectZero];
+        [self.view addSubview:goodstxt];
+        [goodstxt becomeFirstResponder];
+    }
+    
+}
 - (IBAction)Change:(id)sender {
     
     onepand=2;
@@ -1400,7 +1404,7 @@
 #pragma mark-- 自定义键盘
 - (void)setupCustomedKeyboard:(UITextField*)tf :(UILabel *)ss {
     tf.inputView = [DSKyeboard keyboardWithTextField:tf];
-    
+    NSLog(@"\ntextfield ： %@\nlabel ： %@",tf.text,ss.text);
     [(DSKyeboard *)tf.inputView dsKeyboardTextChangedOutputBlock:^(NSString *fakePassword) {
         tf.text = fakePassword;
         ss.text = [NSString stringWithFormat:@"%@", tf.text ];
@@ -1659,6 +1663,12 @@
         if ([string isEqualToString:@"\n"]) {
             _Search.text=[NSString stringWithFormat:@"%@",textField.text];
             [self chazhao];
+        }
+    }
+    if (textField == goodstxt) {
+        if ([string isEqualToString:@"\n"]) {
+            _ypgoods.text=[NSString stringWithFormat:@"%@",textField.text];
+//            [self chazhao];
         }
     }
     return YES;

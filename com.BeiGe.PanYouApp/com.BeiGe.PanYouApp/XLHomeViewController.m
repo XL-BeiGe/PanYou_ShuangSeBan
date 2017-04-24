@@ -86,7 +86,7 @@
     }else{
         [[NSUserDefaults standardUserDefaults]setObject:@"0" forKey:@"zhuangtai"];
         [self tongbushuju];
-       
+        
         [self xiazaishuju:@"全部库存" :@"9"];
         
     }
@@ -155,9 +155,13 @@
 //盘点药品
 - (IBAction)PanDian_Button:(id)sender {
     /*需要加判断*/
-    XL_PanDianViewController *pandian=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"pandian"];
-    [self.navigationController pushViewController:pandian animated:YES];
-    
+    NSArray *xxx=[XL DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing];
+    if (xxx.count==0) {
+        [WarningBox warningBoxModeText:@"请先同步全部库存!" andView:self.view];
+    }else{
+        XL_PanDianViewController *pandian=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"pandian"];
+        [self.navigationController pushViewController:pandian animated:YES];
+    }
 }
 
 //跳转设置
@@ -184,56 +188,7 @@
                 [XL clearDatabase:db from:TongBuBiaoMing];
                 
                 NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(hehe) object:nil];
-                    [thread start];
-               
-                
-                //                NSDate *startTime = [NSDate date];
-                //                [db beginTransaction];
-                //                BOOL isRollBack = NO;
-                //                @try
-                //                {
-                //                    for (int i=0; i<quanbulist.count; i++) {
-                //                        NSString *barcode =[quanbulist[i]objectForKey:@"barCode"];
-                //                        if (NULL==barcode){
-                //                            barcode = @"";
-                //                        }
-                //                        NSString  *code = [NSString stringWithFormat:@"%@,%@",barcode,[quanbulist[i]objectForKey:@"productCode"]];
-                //                        NSMutableDictionary * dd=[NSMutableDictionary dictionaryWithDictionary:quanbulist[i]];
-                //                        if (NULL != [dd objectForKey:@"office"]) {
-                //                            [dd removeObjectForKey:@"office"];
-                //                        }
-                //
-                //                        [dd setObject:[NSString stringWithFormat:@"%@", code ] forKey:@"barCode"];
-                //                        [XL DataBase:db insertKeyValues:dd intoTable:TongBuBiaoMing];
-                //
-                //                    }
-                //                    NSDate *endTime = [NSDate date];
-                //                    NSTimeInterval a = [endTime timeIntervalSince1970] - [startTime timeIntervalSince1970];
-                //                    NSLog(@"使用事务------------插入数据用时%.3f秒",a);
-                //                }
-                //                @catch (NSException *exception)
-                //                {
-                //                    isRollBack = YES;
-                //                    [db rollback];
-                //                }
-                //                @finally
-                //                {
-                //                    if (!isRollBack)
-                //                    {
-                //                        [db commit];
-                //                    }
-                //                }
-                
-                
-                //                NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(hehe) object:nil];
-                //
-                //                [thread start];
-                
-                //                dispatch_queue_t queue =  dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-                //                //2.添加任务到队列中，就可以执行任务
-                //                //异步函数：具备开启新线程的能力
-                //                dispatch_async(queue, ^{
-                //                });
+                [thread start];
             }else{
                 [WarningBox warningBoxModeText:@"同步库存失败，请与管理员联系！" andView:self.view];
             }
@@ -274,7 +229,6 @@
             [db commit];
         }
     }
-    
 }
 -(void)xiazaishuju:(NSString *)str :(NSString *)ss{
     [WarningBox warningBoxModeIndeterminate:[NSString stringWithFormat:@"正在同步%@",str] andView:self.view];
@@ -310,7 +264,6 @@
                     [XL clearDatabase:db from:ShangChuanBiaoMing];
                     [XL clearDatabase:db from:XiaZaiBiaoMing];
                     
-                    
                     NSDate *startTime = [NSDate date];
                     [db beginTransaction];
                     BOOL isRollBack = NO;
@@ -338,57 +291,6 @@
                             [db commit];
                         }
                     }
-                    
-                    
-                    
-                    //                    NSArray*akl=[[NSArray alloc] init];
-                    //                    NSMutableDictionary*dict=[[NSMutableDictionary alloc] init];
-                    //                    for (NSDictionary*dd in xiazailist) {
-                    //                        [dict setObject:dd forKey:[NSString stringWithFormat:@"%@%@",[dd objectForKey:@"productCode"],[dd objectForKey:@"prodBatchNo"]]];
-                    //                    }
-                    //                    akl = [dict allValues];
-                    //
-                    //
-                    //                    NSDate *startTime = [NSDate date];
-                    //                    [db beginTransaction];
-                    //                    BOOL isRollBack = NO;
-                    //                    @try
-                    //                    {
-                    //                        for (int i=0; i<akl.count; i++) {
-                    //                            //向下载表中插入数据
-                    //                            NSString *barcode =[akl[i]objectForKey:@"barCode"];
-                    //                            if (NULL==barcode){
-                    //                                barcode = @"";
-                    //                            }
-                    //                            NSString  *code = [NSString stringWithFormat:@"%@,%@",barcode,[akl[i]objectForKey:@"productCode"]];
-                    //                            NSMutableDictionary * dd=[NSMutableDictionary dictionaryWithDictionary:akl[i]];
-                    //                            [dd setObject:[NSString stringWithFormat:@"%@", code ] forKey:@"barCode"];
-                    //                            [XL DataBase:db insertKeyValues:dd intoTable:XiaZaiBiaoMing];
-                    //
-                    //                        }
-                    //                        NSDate *endTime = [NSDate date];
-                    //                        NSTimeInterval a = [endTime timeIntervalSince1970] - [startTime timeIntervalSince1970];
-                    //                        NSLog(@"使用事务插入数据用时%.3f秒",a);
-                    //
-                    //                    }
-                    //                    @catch (NSException *exception)
-                    //                    {
-                    //                        isRollBack = YES;
-                    //                        [db rollback];
-                    //                    }
-                    //                    @finally
-                    //                    {
-                    //                        if (!isRollBack)
-                    //                        {
-                    //                            [db commit];
-                    //                        }
-                    //                    }
-                    
-                    
-                    
-                    
-                    
-                    
                 }
             }
             else if ([[responseObject objectForKey:@"code"]isEqual:@"0007"]){

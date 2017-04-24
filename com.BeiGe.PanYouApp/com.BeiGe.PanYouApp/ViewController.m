@@ -13,8 +13,11 @@
 #import "AppDelegate.h"
 #import "XLxixixihahaViewController.h"
 #import "XLmemedaViewController.h"
+#import "XL_FMDB.h"
 @interface ViewController ()<UITextFieldDelegate>
 {
+    XL_FMDB  *XL;//数据库调用者
+    FMDatabase *db;//数据库
     CGFloat cha;
     int pan;
 }
@@ -28,11 +31,22 @@
         _password.text=[[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
     }
 }
-
+-(void)shujuku{
+    XL = [XL_FMDB tool];
+    [XL_FMDB allocWithZone:NULL];
+    db = [XL getDBWithDBName:@"pandian.sqlite"];
+    //新建同步表，里边是同步数据信息
+    [XL DataBase:db createTable:TongBuBiaoMing keyTypes:TongBuShiTiLei];
+    //新建下载表，里边是本次盘点数据
+    [XL DataBase:db createTable:XiaZaiBiaoMing keyTypes:XiaZaiShiTiLei];
+    //新建上传表，里边是需要上传的盘点数据
+    [XL DataBase:db createTable:ShangChuanBiaoMing keyTypes:ShangChuanShiTiLei];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self delegate];
     [self registerForKeyboardNotifications];
+    [self shujuku];
 }
 #pragma  mark ---注册通知
 - (void) registerForKeyboardNotifications
@@ -98,58 +112,81 @@
     [self.view endEditing:YES];
 }
 -(void)denglu{
+    
     if ([_username.text isEqual:@""]||[_password.text isEqual:@""]) {
         [WarningBox warningBoxModeText:@"请填写好账号信息哟~" andView:self.view];
     }else{
-        [WarningBox warningBoxModeIndeterminate:@"登录中..." andView:self.view];
-        NSString *fangshi=@"/sys/login";
-        NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:_username.text,@"loginName",_password.text,@"password", nil];
-        //自己写的网络请求    请求外网地址
-        [XL_WangLuo QianWaiwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
-            [WarningBox warningBoxHide:YES andView:self.view];
-            @try {//DD000101    admin
-                if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
-                    NSUserDefaults *user=[NSUserDefaults standardUserDefaults];
-                    
-                    //账号密码
-                    [user setObject:_username.text forKey:@"name"];
-                    [user setObject:_password.text forKey:@"password"];
-                    //其他接口必须用
-                    [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data" ] objectForKey:@"accessToken"]] forKey:@"accesstoken"];
-                    [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data" ] objectForKey:@"accessToken"]] forKey:@"accessToken"];
-                    //1弹    2不弹
-                    [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"status"]] forKey:@"shifoutankuang"];
-                    //平台机器码
-                    [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"mac"]] forKey:@"Mac"];
-                    [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"mac"]] forKey:@"mac"];
-                    //给两个平台的userId 赋值
-                    [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"userId"]] forKey:@"userId"];
-                    [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"userId"]] forKey:@"UserID"];
-                    //给推送用的门店Id 赋值
-                    [user setObject:[NSString stringWithFormat:@"%@",[[[responseObject objectForKey:@"data"] objectForKey:@"office"] objectForKey:@"id"]] forKey:@"mendian"];
-                    //收银台需要显示的名称
-                    [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"name"]] forKey:@"CZname"];
-                    //1是网络盘点   2是单机盘点
-                    [user setObject:[NSString stringWithFormat:@"%@",[[[responseObject objectForKey:@"data"] objectForKey:@"office"] objectForKey:@"edition"]] forKey:@"isDanji"];
-                    if(NULL ==[[NSUserDefaults standardUserDefaults] objectForKey:@"JuYuWang"]){
-                        [[NSUserDefaults standardUserDefaults] setObject:@"www.yaopandian.com" forKey:@"JuYuWang"];
-                    }
-                    
-                    //登陆成功后重新注册一次极光的标签和别名
-                    [[AppDelegate appDelegate] method];
-                    [self jumpHome];
-                }
-                else{
-                    [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.view];
-                }
-            } @catch (NSException *exception) {
-                [WarningBox warningBoxModeText:@"请仔细检查您的网络" andView:self.view];
+        
+        if (NULL == [[NSUserDefaults standardUserDefaults] objectForKey:@"name"]) {
+            [self dengdegndengdeng:@"0"];
+        }else{
+            if([_username.text isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"name"]]){
+                [self dengdegndengdeng:@"0"];
+            }else{
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"请确认上一账号已经提交完盘点结果，更换账号将清空以前数据！" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+                UIAlertAction *okAction =[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    [self dengdegndengdeng:@"1"];
+                }];
+                [alertController addAction:cancelAction];
+                [alertController addAction:okAction];
+                [self presentViewController:alertController animated:YES completion:nil];
             }
-        } failure:^(NSError *error) {
-            [WarningBox warningBoxHide:YES andView:self.view];
-            [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
-        }];
+        }
     }
+}
+-(void)dengdegndengdeng:(NSString*)deng{
+    [WarningBox warningBoxModeIndeterminate:@"登录中..." andView:self.view];
+    NSString *fangshi=@"/sys/login";
+    NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:_username.text,@"loginName",_password.text,@"password", nil];
+    //自己写的网络请求    请求外网地址
+    [XL_WangLuo QianWaiwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
+        [WarningBox warningBoxHide:YES andView:self.view];
+        @try {//DD000101    admin
+            if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
+                NSUserDefaults *user=[NSUserDefaults standardUserDefaults];
+                
+                //账号密码
+                [user setObject:_username.text forKey:@"name"];
+                [user setObject:_password.text forKey:@"password"];
+                //其他接口必须用
+                [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data" ] objectForKey:@"accessToken"]] forKey:@"accesstoken"];
+                [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data" ] objectForKey:@"accessToken"]] forKey:@"accessToken"];
+                //1弹    2不弹
+                [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"status"]] forKey:@"shifoutankuang"];
+                //平台机器码
+                [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"mac"]] forKey:@"Mac"];
+                [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"mac"]] forKey:@"mac"];
+                //给两个平台的userId 赋值
+                [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"userId"]] forKey:@"userId"];
+                [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"userId"]] forKey:@"UserID"];
+                //给推送用的门店Id 赋值
+                [user setObject:[NSString stringWithFormat:@"%@",[[[responseObject objectForKey:@"data"] objectForKey:@"office"] objectForKey:@"id"]] forKey:@"mendian"];
+                //收银台需要显示的名称
+                [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"name"]] forKey:@"CZname"];
+                //1是网络盘点   2是单机盘点
+                [user setObject:[NSString stringWithFormat:@"%@",[[[responseObject objectForKey:@"data"] objectForKey:@"office"] objectForKey:@"edition"]] forKey:@"isDanji"];
+                if(NULL ==[[NSUserDefaults standardUserDefaults] objectForKey:@"JuYuWang"]){
+                    [[NSUserDefaults standardUserDefaults] setObject:@"www.yaopandian.com" forKey:@"JuYuWang"];
+                }
+                if ([deng isEqual:@"1"]) {
+                    [XL clearDatabase:db from:ShangChuanBiaoMing];
+                    [XL clearDatabase:db from:XiaZaiBiaoMing];
+                }
+                //登陆成功后重新注册一次极光的标签和别名
+                [[AppDelegate appDelegate] method];
+                [self jumpHome];
+            }
+            else{
+                [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.view];
+            }
+        } @catch (NSException *exception) {
+            [WarningBox warningBoxModeText:@"请仔细检查您的网络" andView:self.view];
+        }
+    } failure:^(NSError *error) {
+        [WarningBox warningBoxHide:YES andView:self.view];
+        [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
+    }];
 }
 //视图上移的方法
 - (void) animateTextField: (CGFloat) textField up: (BOOL) up
@@ -185,7 +222,6 @@
     if(NULL ==[[NSUserDefaults standardUserDefaults] objectForKey:@"JuYuWang"]){
         [[NSUserDefaults standardUserDefaults] setObject:@"www.yaopandian.com" forKey:@"JuYuWang"];
     }
-    
     [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"isPandian"];
     [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"rukou"];
     XLmemedaViewController *home=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"memeda"];
