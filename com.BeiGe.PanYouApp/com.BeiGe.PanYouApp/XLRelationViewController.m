@@ -78,7 +78,7 @@
     UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"温馨提示" message:@"确定要联系客服吗?" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction*action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-       [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://18390907126"]];
+       [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://13787117811"]];
         
     }];
     UIAlertAction*action2=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -96,7 +96,7 @@
     UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"温馨提示" message:@"确定要联系客服吗?" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction*action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://18390907126"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://073182228890"]];
         
     }];
     UIAlertAction*action2=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
