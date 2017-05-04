@@ -298,7 +298,12 @@
             }
             else if ([[responseObject objectForKey:@"code"]isEqual:@"0008"]){
                 [WarningBox warningBoxModeText:@"后台已提交，请等待下次盘点!" andView:self.view];
+            }else if ([[responseObject objectForKey:@"code"]isEqual:@"0006"]){
+                [WarningBox warningBoxModeText:@"请先同步全部库存进行盘点!" andView:self.view];
+            }else if ([[responseObject objectForKey:@"code"]isEqual:@"0005"]){
+                [WarningBox warningBoxModeText:@"后台已计算，若要盘点异常，请在后台点击“重盘异常数据”！" andView:self.view];
             }
+
         } @catch (NSException *exception) {
             [WarningBox warningBoxModeText:@"请仔细检查您的网络" andView:self.view];
         }

@@ -27,7 +27,7 @@
 #define panduan  [[NSUserDefaults standardUserDefaults] objectForKey:@"isPandian"]
 
 //#define QianWaiWangIP @"192.168.1.106:8080"
-//#define QianWaiWangIP @"192.168.1.122:8081"//徐老师
+//#define QianWaiWangIP @"192.168.1.118:8080"//徐老师
 //#define QianWaiWangIP @"192.168.1.144:8082"
 //#define QianWaiWangIP @"125.211.221.232:60088"
 #define QianWaiWangIP @"www.yaopandian.com"
