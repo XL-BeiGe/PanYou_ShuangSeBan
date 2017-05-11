@@ -2111,8 +2111,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = com.BeiGe.PanYouApp/com.BeiGe.PanYouApp.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Harbin Aipuyifeng Science&Tech. Development Co., Ltd. (GP8BUACAG4)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Harbin Aipuyifeng Science&Tech. Development Co., Ltd. (GP8BUACAG4)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: appleyifeng@163.com (YVP944RN62)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COMPRESS_PNG_FILES = NO;
 				DEVELOPMENT_TEAM = GP8BUACAG4;
 				INFOPLIST_FILE = com.BeiGe.PanYouApp/Info.plist;
@@ -2124,8 +2124,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.appleyifeng.pandianzhushou;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ba901b52-4c21-40d1-965e-e533a38cf15f";
-				PROVISIONING_PROFILE_SPECIFIER = shch_pandianzhushou;
+				PROVISIONING_PROFILE = "a7b3c004-838f-4c6e-b597-b09c120d063c";
+				PROVISIONING_PROFILE_SPECIFIER = shengchan__pandianzhushou;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Lib";
 			};
@@ -2137,8 +2137,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = com.BeiGe.PanYouApp/com.BeiGe.PanYouApp.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Harbin Aipuyifeng Science&Tech. Development Co., Ltd. (GP8BUACAG4)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Harbin Aipuyifeng Science&Tech. Development Co., Ltd. (GP8BUACAG4)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: appleyifeng@163.com (YVP944RN62)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COMPRESS_PNG_FILES = NO;
 				DEVELOPMENT_TEAM = GP8BUACAG4;
 				INFOPLIST_FILE = com.BeiGe.PanYouApp/Info.plist;
@@ -2150,8 +2150,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.appleyifeng.pandianzhushou;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ba901b52-4c21-40d1-965e-e533a38cf15f";
-				PROVISIONING_PROFILE_SPECIFIER = shch_pandianzhushou;
+				PROVISIONING_PROFILE = "a7b3c004-838f-4c6e-b597-b09c120d063c";
+				PROVISIONING_PROFILE_SPECIFIER = shengchan__pandianzhushou;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Lib";
 			};

@@ -318,30 +318,53 @@
 -(void)baocun{
     [self.view endEditing:YES];
     if (arr.count==0) {
-        if ([dic11 allKeys].count==8) {
+        if (NULL==[dic11 objectForKey:@"checkNum"]||[[dic11 objectForKey:@"checkNum"]isEqualToString:@""]) {
+            [WarningBox warningBoxModeText:@"请填写盘点数量!" andView:self.view];
+        }else if(NULL==[dic11 objectForKey:@"productCode"]||[[dic11 objectForKey:@"productCode"]isEqualToString:@""]){
+            [WarningBox warningBoxModeText:@"请填写药品编号!" andView:self.view];
+        }else if(NULL==[dic11 objectForKey:@"prodBatchNo"]||[[dic11 objectForKey:@"prodBatchNo"]isEqualToString:@""]){
+            [WarningBox warningBoxModeText:@"请填写药品批号!" andView:self.view];
+        }else{
+            NSArray*guiding=[self duiying];
+            for (NSString*dd in guiding){
+                int i=0;
+                for (NSString*ss in [dic11 allKeys])  {
+                    if ([dd isEqualToString: ss]) {
+                        i=1;
+                    }
+                }
+                if (i==0) {
+                    [dic11 setObject:@"" forKey:dd];
+                }
+            }
             [self chuanshu];
-        }else
-            [WarningBox warningBoxModeText:@"请填写完整信息!" andView:self.view];
+        }
+//        if ([dic11 allKeys].count==8) {
+//            [self chuanshu];
+//        }else
+//            [WarningBox warningBoxModeText:@"请填写完整信息!" andView:self.view];
         
-    }else{
+    }
+    else{
         if (NULL == [dic11 objectForKey:@"checkNum"]) {
-            [WarningBox warningBoxModeText:@"请填写完整信息!" andView:self.view];
+            [WarningBox warningBoxModeText:@"请填写盘点数量!" andView:self.view];
         }else
             [self chuanshu];
     }
 }
 -(void)chuanshu{
-    int q=0;
-    for (NSString*ss in [dic11 allKeys]) {
-        if ([[dic11 objectForKey:ss]isEqualToString:@""]) {
-            if ([ss isEqualToString:@"approvalNumber"]) {
-                
-            }else
-                q=1;
-        }
-    }
-    if (q==0) {
+//    int q=0;
+//    for (NSString*ss in [dic11 allKeys]) {
+//        if ([[dic11 objectForKey:ss]isEqualToString:@""]) {
+//            if ([ss isEqualToString:@"approvalNumber"]) {
+//                
+//            }else
+//                q=1;
+//        }
+//    }
+//    if (q==0) {
         NSMutableDictionary *dd=[NSMutableDictionary dictionaryWithDictionary:dic11];
+    
         if (arr.count==0) {
             [dd setObject:_str forKey:@"barCode"];
         }
@@ -349,9 +372,9 @@
             self.passdicValueBlock(dd);
         }
         [self.navigationController popViewControllerAnimated:YES];
-    }else{
-        [WarningBox warningBoxModeText:@"请填写完整信息!" andView:self.view];
-    }
+//    }else{
+//        [WarningBox warningBoxModeText:@"请填写完整信息!" andView:self.view];
+//    }
 }
 
 

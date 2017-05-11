@@ -1419,9 +1419,10 @@
     [self.navigationItem setLeftBarButtonItem:left];
     
     self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
-    UIBarButtonItem*right=[[UIBarButtonItem alloc] initWithTitle:@"添加" style:UIBarButtonItemStyleDone target:self  action:@selector(tjpihao)];
-    [self.navigationItem setRightBarButtonItem:right];
-    
+    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"megBatchNoFlag"] isEqualToString:@"0"]){
+        UIBarButtonItem*right=[[UIBarButtonItem alloc] initWithTitle:@"添加" style:UIBarButtonItemStyleDone target:self  action:@selector(tjpihao)];
+        [self.navigationItem setRightBarButtonItem:right];
+    }
 }
 #pragma  mark ----返回到主页面
 -(void)fanhui{

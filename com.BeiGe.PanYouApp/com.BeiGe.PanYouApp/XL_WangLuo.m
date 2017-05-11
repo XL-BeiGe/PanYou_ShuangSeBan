@@ -11,6 +11,7 @@
 #import "SBJsonWriter.h"
 #import "AFNetworking.h"
 #import "ViewController.h"
+#import "XLLogin_ViewController.h"
 @implementation XL_WangLuo
 /*
  * 登陆专用
@@ -311,5 +312,22 @@
     //显示提示框
     [vv presentViewController:alert animated:YES completion:nil];
     
+}
++(void)youyigesigejiu:(UIViewController*)vv :(int)i{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"注意" message:@"您的账号已在其他手机登录，请重新登录..." preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        if (i==1) {
+            [self sigejiu:vv];
+        }else{
+            //具体实现逻辑代码
+            XLLogin_ViewController*view=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"login"];
+            [view setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+            [vv presentViewController:view animated:YES completion:nil];
+        }
+    }];
+    [alert addAction:cancel];
+    //显示提示框
+    [vv presentViewController:alert animated:YES completion:nil];
 }
 @end

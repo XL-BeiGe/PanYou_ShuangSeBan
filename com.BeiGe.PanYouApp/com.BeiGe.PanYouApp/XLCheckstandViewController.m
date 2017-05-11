@@ -39,11 +39,12 @@
     self.title =@"收银台";
     [ZYCustomKeyboardTypeNumberView customKeyboardViewWithServiceTextField:_vipnum Delegate:self];
     _checkyp.delegate = self;
-    _checkyp.keyboardType=UIKeyboardTypeAlphabet;
-    _checkyp.keyboardType=UIKeyboardTypeNamePhonePad;
+//    _checkyp.keyboardType=UIKeyboardTypeAlphabet;
+//    _checkyp.keyboardType=UIKeyboardTypeNamePhonePad;
 //    _checkyp.keyboardType=UIKeyboardTypeNumbersAndPunctuation;
     _checkyp.autocorrectionType = UITextAutocorrectionTypeNo;
 //    [self setupCustomedKeyboard:goodstxt :la];
+    _checkyp.keyboardType=UIKeyboardTypeASCIICapable;
     _queding.layer.borderWidth = 1;
     _queding.layer.borderColor = [[UIColor colorWithHexString:@"32CC96"] CGColor];
     _queding.layer.cornerRadius=5.0;
@@ -368,6 +369,7 @@
 }
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     if ([_vipnum isFirstResponder]) {
+        
 //        [self huiyuanchaxun];
     }
     return YES;

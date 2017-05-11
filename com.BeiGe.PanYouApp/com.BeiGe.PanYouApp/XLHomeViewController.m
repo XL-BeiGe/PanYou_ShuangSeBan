@@ -189,9 +189,10 @@
                 
                 NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(hehe) object:nil];
                 [thread start];
-            }else{
-                [WarningBox warningBoxModeText:@"同步库存失败，请与管理员联系！" andView:self.view];
             }
+            //            else{
+            //                [WarningBox warningBoxModeText:@"同步库存失败，请与管理员联系！" andView:self.view];
+            //            }
         } @catch (NSException *exception) {
             
         }
@@ -247,8 +248,9 @@
         @try {
             //             NSLog(@"%@",responseObject);
             if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
-                NSDictionary*dataa=[responseObject objectForKey:@"data"];
                 
+                NSDictionary*dataa=[responseObject objectForKey:@"data"];
+                //合并批号标识，0不合并，1合并
                 if (NULL == [dataa objectForKey:@"megBatchNoFlag"]||[[dataa objectForKey:@"megBatchNoFlag"] isEqual:[NSNull null]]) {
                     [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"megBatchNoFlag"];
                 }else{
@@ -263,7 +265,6 @@
                     [[NSUserDefaults standardUserDefaults] setObject:[xiazailist[0] objectForKey:@"checkId"] forKey:@"checkId"];
                     [XL clearDatabase:db from:ShangChuanBiaoMing];
                     [XL clearDatabase:db from:XiaZaiBiaoMing];
-                    
                     NSDate *startTime = [NSDate date];
                     [db beginTransaction];
                     BOOL isRollBack = NO;
@@ -302,11 +303,21 @@
                 [WarningBox warningBoxModeText:@"请先同步全部库存进行盘点!" andView:self.view];
             }else if ([[responseObject objectForKey:@"code"]isEqual:@"0005"]){
                 [WarningBox warningBoxModeText:@"后台已计算，若要盘点异常，请在后台点击“重盘异常数据”！" andView:self.view];
-            }
-
-        } @catch (NSException *exception) {
+            }else if([[responseObject objectForKey:@"code"]isEqual:@"9999"]){
+                //账号在其他手机登录，请重新登录。
+                if ([[isPandian objectForKey:@"isPandian"] isEqualToString:@"0"]) {
+                    [XL_WangLuo youyigesigejiu:self :0];
+                }else{
+                    [XL_WangLuo youyigesigejiu:self :1];
+                }
+            }else
+                [WarningBox warningBoxModeText:@"网络失败，请重试！" andView:self.view];
+            
+        }
+        @catch (NSException *exception) {
             [WarningBox warningBoxModeText:@"请仔细检查您的网络" andView:self.view];
         }
+        
     } failure:^(NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
@@ -323,6 +334,13 @@
             [WarningBox warningBoxModeText:ss andView:self.view];
         }else if ([[responseObject objectForKey:@"code"] isEqual:@"0009"]){
             [WarningBox warningBoxModeText:@"后台已计算，请同步异常数据!" andView:self.view];
+        }else if([[responseObject objectForKey:@"code"]isEqual:@"9999"]){
+            //账号在其他手机登录，请重新登录。
+            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isPandian"] isEqualToString:@"0"]) {
+                [XL_WangLuo youyigesigejiu:self :0];
+            }else{
+                [XL_WangLuo youyigesigejiu:self :1];
+            }
         }else
             [WarningBox warningBoxModeText:@"提交盘点结果失败!" andView:self.view];
         
