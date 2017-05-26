@@ -38,6 +38,7 @@
 		D26310171E0794C600154955 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D26310161E0794C600154955 /* AdSupport.framework */; };
 		D26310191E0794D100154955 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D26310181E0794D100154955 /* UserNotifications.framework */; };
 		D263101B1E0794E100154955 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D263101A1E0794E100154955 /* libresolv.tbd */; };
+		D26A71E81ECD3D1E0061DDB8 /* XL_tableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D26A71E71ECD3D1E0061DDB8 /* XL_tableViewController.m */; };
 		D291DD2C1DE42C490044805B /* 答题-背景.png in Resources */ = {isa = PBXBuildFile; fileRef = D291DD2B1DE42C490044805B /* 答题-背景.png */; };
 		D2C1AC841DC97D8C00092F44 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C1AC831DC97D8C00092F44 /* main.m */; };
 		D2C1AC871DC97D8C00092F44 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C1AC861DC97D8C00092F44 /* AppDelegate.m */; };
@@ -364,6 +365,8 @@
 		D26310161E0794C600154955 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		D26310181E0794D100154955 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		D263101A1E0794E100154955 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		D26A71E61ECD3D1E0061DDB8 /* XL_tableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XL_tableViewController.h; sourceTree = "<group>"; };
+		D26A71E71ECD3D1E0061DDB8 /* XL_tableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XL_tableViewController.m; sourceTree = "<group>"; };
 		D291DD2B1DE42C490044805B /* 答题-背景.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "答题-背景.png"; sourceTree = "<group>"; };
 		D2C1AC7F1DC97D8C00092F44 /* com.BeiGe.PanYouApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = com.BeiGe.PanYouApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2C1AC831DC97D8C00092F44 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -902,6 +905,8 @@
 				D2D329D81E96165100338756 /* XLquanbushitilei.m */,
 				D77487361DD964B0007A92E3 /* XL_SearchViewController.h */,
 				D77487371DD964B0007A92E3 /* XL_SearchViewController.m */,
+				D26A71E61ECD3D1E0061DDB8 /* XL_tableViewController.h */,
+				D26A71E71ECD3D1E0061DDB8 /* XL_tableViewController.m */,
 			);
 			name = Additional;
 			sourceTree = "<group>";
@@ -1618,7 +1623,7 @@
 					D2C1AC7E1DC97D8C00092F44 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = GP8BUACAG4;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -1907,6 +1912,7 @@
 				D7E80FAF1E2F376C0025D9D0 /* TianTableViewCell.m in Sources */,
 				D24129971E4D558D00306120 /* XLmemedaViewController.m in Sources */,
 				D76B34BC1DC9925F00E285AB /* DSBaseKeyboard.m in Sources */,
+				D26A71E81ECD3D1E0061DDB8 /* XL_tableViewController.m in Sources */,
 				D76B35171DC992F400E285AB /* SBJsonWriter.m in Sources */,
 				D76B35261DC992FE00E285AB /* FMDatabaseAdditions.m in Sources */,
 				D774873D1DD964B0007A92E3 /* XLSettingViewController.m in Sources */,
@@ -2112,9 +2118,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = com.BeiGe.PanYouApp/com.BeiGe.PanYouApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: appleyifeng@163.com (YVP944RN62)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
-				DEVELOPMENT_TEAM = GP8BUACAG4;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = com.BeiGe.PanYouApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2124,8 +2130,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.appleyifeng.pandianzhushou;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a7b3c004-838f-4c6e-b597-b09c120d063c";
-				PROVISIONING_PROFILE_SPECIFIER = shengchan__pandianzhushou;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Lib";
 			};
@@ -2138,9 +2144,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = com.BeiGe.PanYouApp/com.BeiGe.PanYouApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: appleyifeng@163.com (YVP944RN62)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
-				DEVELOPMENT_TEAM = GP8BUACAG4;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = com.BeiGe.PanYouApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2150,8 +2156,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.appleyifeng.pandianzhushou;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a7b3c004-838f-4c6e-b597-b09c120d063c";
-				PROVISIONING_PROFILE_SPECIFIER = shengchan__pandianzhushou;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Lib";
 			};

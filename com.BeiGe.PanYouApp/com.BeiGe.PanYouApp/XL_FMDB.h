@@ -68,7 +68,7 @@
 
 -(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName;
 /**
- *  单个条件查询数据库中的数据
+ *  单个条件"="查询数据库中的数据
  *  @param db        数据库名称
  *  @param keyTypes 查询字段以及对应字段类型 字典
  *  @param tableName 表名称
@@ -77,6 +77,16 @@
  */
 
 -(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName whereCondition:(NSDictionary *)condition;
+/**
+ *  单个条件""查询数据库中的数据
+ *  @param db        数据库名称
+ *  @param keyTypes 查询字段以及对应字段类型 字典
+ *  @param tableName 表名称
+ *  @param condition 条件
+ *  @return 查询得到数据
+ */
+-(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName where___Condition:(NSDictionary *)condition;
+-(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName where_Condition:(NSDictionary *)condition;
 /**
  *  模糊查询 某字段以指定字符串开头的数据
  *  @param db        数据库名称

@@ -14,8 +14,9 @@
 #import "XL_FMDB.h"
 #import "XL_PanDianViewController.h"
 #import "XLquanbushitilei.h"
+#import "XL_tableViewController.h"
 
-@interface XLHomeViewController (){
+@interface XLHomeViewController ()<UIActionSheetDelegate>{
     XL_FMDB  *XL;//数据库调用者
     FMDatabase *db;//数据库
     
@@ -128,7 +129,6 @@
     }];
 }
 -(void)shangchuanshujujiexi{
-    
     NSArray *list1 = [XL DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing];
     NSMutableArray*list = [[NSMutableArray alloc] init];
     for (NSDictionary*dd in list1) {
@@ -143,14 +143,15 @@
         NSUserDefaults *isPandian=[NSUserDefaults standardUserDefaults];
         NSDictionary*rucan;
         if ([[isPandian objectForKey:@"isPandian"] isEqualToString:@"0"]) {
-            rucan=[NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:@"Mac"],@"mac",[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"],@"checker",[[NSUserDefaults standardUserDefaults]objectForKey:@"zhuangtai"],@"state",list,@"list",nil];
+            NSString * officeId=[isPandian objectForKey:@"mendian"];
+            rucan=[NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:@"Mac"],@"mac",[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"],@"checker",[[NSUserDefaults standardUserDefaults]objectForKey:@"zhuangtai"],@"state",list,@"list",officeId,@"officeId",nil];
+
         }else{
             NSString * officeId=[isPandian objectForKey:@"mendian"];
             rucan=[NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:@"Mac"],@"mac",[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"],@"checker",[[NSUserDefaults standardUserDefaults]objectForKey:@"zhuangtai"],@"state",list,@"list",officeId,@"officeId",nil];
         }
         [self shangchuan:rucan];
     }
-    
 }
 //盘点药品
 - (IBAction)PanDian_Button:(id)sender {
@@ -159,11 +160,22 @@
     if (xxx.count==0) {
         [WarningBox warningBoxModeText:@"请先同步全部库存!" andView:self.view];
     }else{
+        UIActionSheet *sheet=[[UIActionSheet alloc] initWithTitle:@"盘点模式选择" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"初盘",@"异常及日销盘点",nil];
+        
+        [sheet showInView:self.view];
+        
+    }
+}
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if(buttonIndex == 0){
         XL_PanDianViewController *pandian=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"pandian"];
+        pandian.rukou=@"0";
+        [self.navigationController pushViewController:pandian animated:YES];
+    }else if (buttonIndex == 1){
+        XL_tableViewController *pandian=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"tttable"];
         [self.navigationController pushViewController:pandian animated:YES];
     }
 }
-
 //跳转设置
 -(void)set:(UIButton*)sender{
     XLSettsViewController *shezhi=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"setts"];
@@ -174,7 +186,8 @@
     NSUserDefaults *isPandian=[NSUserDefaults standardUserDefaults];
     NSDictionary*rucan;
     if ([[isPandian objectForKey:@"isPandian"] isEqualToString:@"0"]) {
-        rucan=nil;
+        NSString * officeId=[isPandian objectForKey:@"mendian"];
+        rucan=[NSDictionary dictionaryWithObjectsAndKeys:officeId,@"officeId", nil];
     }else{
         NSString * officeId=[isPandian objectForKey:@"mendian"];
         rucan=[NSDictionary dictionaryWithObjectsAndKeys:officeId,@"officeId", nil];
@@ -237,7 +250,8 @@
     NSUserDefaults *isPandian=[NSUserDefaults standardUserDefaults];
     NSDictionary*rucan;
     if ([[isPandian objectForKey:@"isPandian"] isEqualToString:@"0"]) {
-        rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"",@"checkId",ss,@"status", nil];
+        NSString * officeId=[isPandian objectForKey:@"mendian"];
+        rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"",@"checkId",ss,@"status",officeId,@"officeId", nil];
     }else{
         NSString * officeId=[isPandian objectForKey:@"mendian"];
         rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"",@"checkId",ss,@"status",officeId,@"officeId", nil];
@@ -293,6 +307,12 @@
                         }
                     }
                 }
+            }else if ([[responseObject objectForKey:@"code"]isEqual:@"1111"]){
+                [WarningBox warningBoxModeText:@"后台数据未准备，请联系店长!" andView:self.view];
+            }else if ([[responseObject objectForKey:@"code"]isEqual:@"5555"]){
+                [WarningBox warningBoxModeText:[responseObject objectForKey:@"msg"] andView:self.view];
+            }else if ([[responseObject objectForKey:@"code"]isEqual:@"6666"]){
+                [WarningBox warningBoxModeText:[responseObject objectForKey:@"msg"] andView:self.view];
             }
             else if ([[responseObject objectForKey:@"code"]isEqual:@"0007"]){
                 [WarningBox warningBoxModeText:@"后台已计算，请同步异常数据!" andView:self.view];
@@ -326,8 +346,8 @@
 
 -(void)shangchuan:(NSDictionary*)rucan{
     NSString *fangshi=@"/sys/upload";
-    [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
-        //        NSLog(@"%@",responseObject);
+    NSString*Key=@"txt";
+    [XL_WangLuo ShangChuanWenJianwithBizMethod:fangshi Wenjian:@"写多了" key:Key Rucan:rucan type:Post success:^(id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"] isEqual:@"0000"]) {
             NSString *ss = [NSString stringWithFormat:@"已盘点%lu条数据，成功提交%lu条数据请等待后台处理",[[rucan objectForKey:@"list"]count],[[rucan objectForKey:@"list"]count]];
@@ -343,12 +363,11 @@
             }
         }else
             [WarningBox warningBoxModeText:@"提交盘点结果失败!" andView:self.view];
-        
-    } failure:^(NSError *error) {
-        [WarningBox warningBoxHide:YES andView:self.view];
-        [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
-    }];
-    
+    }
+                                       failure:^(NSError *error) {
+                                           [WarningBox warningBoxHide:YES andView:self.view];
+                                           [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
+                                       }];
 }
 
 @end
