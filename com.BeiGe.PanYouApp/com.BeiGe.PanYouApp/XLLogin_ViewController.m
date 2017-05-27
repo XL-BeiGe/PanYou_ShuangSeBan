@@ -222,11 +222,15 @@
             //自己写的网络请求    请求外网地址
             [XL_WangLuo WaiwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
                 [WarningBox warningBoxHide:YES andView:self.view];
+                NSLog(@"%@",responseObject);
+                
                 @try {
+                
                     if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
                         NSUserDefaults *user=[NSUserDefaults standardUserDefaults];
                         [user setObject:[NSString stringWithFormat:@"%@",_Name.text] forKey:@"Name"];
                         [user setObject:[NSString stringWithFormat:@"%@",_Password.text] forKey:@"Password"];
+                        [user setObject:[NSString stringWithFormat:@"%@",[[[responseObject objectForKey:@"data"] objectForKey:@"office"] objectForKey:@"id"]] forKey:@"mendian"];
                         [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data" ] objectForKey:@"accessToken"]] forKey:@"accessToken"];
                         [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"mac"]] forKey:@"Mac"];
                         [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"userId"]] forKey:@"UserID"];

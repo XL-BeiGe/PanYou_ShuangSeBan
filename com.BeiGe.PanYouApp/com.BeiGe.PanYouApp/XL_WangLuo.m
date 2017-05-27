@@ -146,7 +146,7 @@
 }
 //上传文件   外网提交接口,
 +(void)ShangChuanWenJianwithBizMethod:(NSString*)BizMetho Wenjian:(NSString*)Ming key:(NSString*)key Rucan:(NSDictionary*)BizParamSt type:(Post_or_Get)type success:(void (^)(id responseObject))success
-                            failure:(void (^)(NSError *error))failure{
+                              failure:(void (^)(NSError *error))failure{
     NSUserDefaults * shuju=[NSUserDefaults standardUserDefaults];//非登录接口用
     NSString *JuYuwang;//登录接口不用
     if([panduan isEqual:@"1"]){
@@ -183,18 +183,20 @@
     AFHTTPSessionManager *manager=[AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
     [manager POST:Url parameters:ChuanCan constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        NSFileManager *fmm;
-        fmm=[NSFileManager defaultManager];
-        NSString*wenjianPath=[NSString stringWithFormat:@"%@/wenjian.txt",NSTemporaryDirectory()];
-        NSData*fileData;
-        fileData=[fmm contentsAtPath:wenjianPath];
-        if (fileData) {
-            NSDateFormatter *fm = [[NSDateFormatter alloc] init];
-            // 设置时间格式
-            fm.dateFormat = @"yyyyMMdd_HHmmss";
-            NSString *str = [fm stringFromDate:[NSDate date]];
-            NSString *fileName = [NSString stringWithFormat:@"%@.txt", str];
-            [formData appendPartWithFileData:fileData name:key fileName:fileName mimeType:@"text/plain"];
+        if ([panduan isEqual:@"1"]) {
+            NSFileManager *fmm;
+            fmm=[NSFileManager defaultManager];
+            NSString*wenjianPath=[NSString stringWithFormat:@"%@/wenjian.txt",NSTemporaryDirectory()];
+            NSData*fileData;
+            fileData=[fmm contentsAtPath:wenjianPath];
+            if (fileData) {
+                NSDateFormatter *fm = [[NSDateFormatter alloc] init];
+                // 设置时间格式
+                fm.dateFormat = @"yyyyMMdd_HHmmss";
+                NSString *str = [fm stringFromDate:[NSDate date]];
+                NSString *fileName = [NSString stringWithFormat:@"%@.txt", str];
+                [formData appendPartWithFileData:fileData name:key fileName:fileName mimeType:@"text/plain"];
+            }
         }
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         
@@ -280,7 +282,7 @@
     }else{
         QianWaiwang=JuYuWang;
     }
-//    NSString *QianWaiwang=QianWaiWang;//登录接口不用
+    //    NSString *QianWaiwang=QianWaiWang;//登录接口不用
     NSString *BizMethod=BizMetho;
     
     NSString *Url=[NSString stringWithFormat:@"%@%@",QianWaiwang,BizMethod];

@@ -216,7 +216,7 @@
     
 }
 -(void)hehe{
-    NSDate *startTime = [NSDate date];
+
     [db beginTransaction];
     BOOL isRollBack = NO;
     @try
@@ -227,9 +227,7 @@
             NSDictionary*dd=[XLquanbushitilei ModeltoDic:shiti];
             [XL DataBase:db insertKeyValues:dd intoTable:TongBuBiaoMing];
         }
-        NSDate *endTime = [NSDate date];
-        NSTimeInterval a = [endTime timeIntervalSince1970] - [startTime timeIntervalSince1970];
-        NSLog(@"使用事务------------插入数据用时%.3f秒",a);
+
     }
     @catch (NSException *exception)
     {
@@ -256,11 +254,12 @@
         NSString * officeId=[isPandian objectForKey:@"mendian"];
         rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"",@"checkId",ss,@"status",officeId,@"officeId", nil];
     }
+    NSLog(@"%@",rucan);
     //自己写的网络请求    请求外网地址
     [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
         @try {
-            //             NSLog(@"%@",responseObject);
+                        NSLog(@"%@",responseObject);
             if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
                 
                 NSDictionary*dataa=[responseObject objectForKey:@"data"];
@@ -279,7 +278,7 @@
                     [[NSUserDefaults standardUserDefaults] setObject:[xiazailist[0] objectForKey:@"checkId"] forKey:@"checkId"];
                     [XL clearDatabase:db from:ShangChuanBiaoMing];
                     [XL clearDatabase:db from:XiaZaiBiaoMing];
-                    NSDate *startTime = [NSDate date];
+                  
                     [db beginTransaction];
                     BOOL isRollBack = NO;
                     @try
@@ -289,9 +288,7 @@
                             
                             [XL DataBase:db insertKeyValues:xiazailist[i] intoTable:XiaZaiBiaoMing];
                         }
-                        NSDate *endTime = [NSDate date];
-                        NSTimeInterval a = [endTime timeIntervalSince1970] - [startTime timeIntervalSince1970];
-                        NSLog(@"使用事务插入数据用时%.3f秒",a);
+                      
                         
                     }
                     @catch (NSException *exception)
@@ -365,6 +362,7 @@
             [WarningBox warningBoxModeText:@"提交盘点结果失败!" andView:self.view];
     }
                                        failure:^(NSError *error) {
+                                           NSLog(@"%@",error);
                                            [WarningBox warningBoxHide:YES andView:self.view];
                                            [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
                                        }];
