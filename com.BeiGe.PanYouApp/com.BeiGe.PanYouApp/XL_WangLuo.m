@@ -149,7 +149,7 @@
                               failure:(void (^)(NSError *error))failure{
     NSUserDefaults * shuju=[NSUserDefaults standardUserDefaults];//非登录接口用
     NSString *JuYuwang;//登录接口不用
-    if([panduan isEqual:@"1"]){
+    if([panduan isEqual:@"1"]/*1是外网*/){
         JuYuwang=JuYuWai;
     }else{
         JuYuwang=JuYuWang;
