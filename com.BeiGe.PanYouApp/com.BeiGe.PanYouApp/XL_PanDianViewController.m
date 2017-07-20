@@ -235,6 +235,7 @@
     }else{
         if ([oo.text floatValue]==0&&oo.text.length<2) {
             oo.text=@"0";
+            [buyaoFuyong setObject:[NSString stringWithFormat:@"%@", oo.text ] forKey:[NSString stringWithFormat:@"%ld",(long)oo.tag]];
         }else
             [self lableFuzhi:@"0"];
     }
@@ -489,12 +490,13 @@
 }
 
 -(void)lableFuzhi:(NSString*)ss{
-    
+    if (oo.text.length==0) {
+        oo.text =[NSString stringWithFormat:@"%@",ss];
+        [buyaoFuyong setObject:[NSString stringWithFormat:@"%@", oo.text ] forKey:[NSString stringWithFormat:@"%ld",(long)oo.tag]];
+    }else{
     oo.text= [oo.text stringByAppendingString:[NSString stringWithFormat:@"%@",ss]];
     [buyaoFuyong setObject:[NSString stringWithFormat:@"%@", oo.text ] forKey:[NSString stringWithFormat:@"%ld",(long)oo.tag]];
-    
-    
-    
+    }
 }
 #pragma mark -----助记码
 - (IBAction)zhujima:(id)sender {
@@ -554,9 +556,13 @@
         arr =[NSArray arrayWithArray:arr2];
     }
     for (int i=0; i<arr.count; i++) {
-        if ([[arr[i] objectForKey:@"checkNum"] floatValue]==0) {
+        if (NULL == [arr[i] objectForKey:@"checkNum"]) {
+            
+        }else{
+        if ([[arr[i] objectForKey:@"checkNum"] floatValue] < 0) {
         }else
             [buyaoFuyong setObject:[arr[i] objectForKey:@"checkNum"] forKey:[NSString stringWithFormat:@"%d",i+100]];
+        }
     }
     [self xianshi:arr];
 }
@@ -718,7 +724,7 @@
             shularr = [[NSMutableArray alloc]init];
             for (int i=0; i<[arr count]; i++) {
                 if(NULL ==[buyaoFuyong objectForKey:[NSString stringWithFormat:@"%d",i+100]]){
-                    [shularr addObject:@"0"];
+                    [shularr addObject:@"-1"];
                 }
                 else{
                     [ shularr addObject:[buyaoFuyong objectForKey:[NSString stringWithFormat:@"%d",i+100]]];
@@ -755,7 +761,7 @@
 //修改下载表
 -(void)xzxiugai:(int)i{
     if ([shularr[i] isEqual:@""]) {
-        shularr[i]=@"0";
+        shularr[i]=@"-1";
     }
     NSString*prodBatchNo;
     if (arr.count==0||NULL ==[arr[i] objectForKey:@"prodBatchNo"]) {
@@ -781,7 +787,7 @@
     NSString *dateString = [dateFormatter stringFromDate:currentDate];
     BOOL ss = [self isNum:shularr[i]];
     if ([shularr[i] isEqual:@""] || ss == NO) {
-        shularr[i]=@"0";
+        shularr[i]=@"-1";
     }
     NSString*prodBatchNo;
     if (arr.count==0||NULL ==[arr[i] objectForKey:@"prodBatchNo"]) {
@@ -1184,7 +1190,7 @@
         }else{
             BOOL ss = [self isNum:shularr[i]];
             if (ss == NO) {
-                [shularr replaceObjectAtIndex:i withObject:@"0"];
+                [shularr replaceObjectAtIndex:i withObject:@"-1"];
             }
             scdic =[NSDictionary dictionaryWithObjectsAndKeys:status,@"status",barCode,@"barCode",checkId,@"checkId",manufacturer,@"manufacturer",pycode,@"pycode",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",_ypgoods.text,@"newpos",dateString,@"checktime",shularr[i],@"checkNum",prodBatchNo,@"prodBatchNo",yuliuziduan2,@"f2",yuliuziduan1,@"f1", nil];
             
@@ -1280,12 +1286,18 @@
     text.textAlignment =NSTextAlignmentCenter;
     
     if(NULL ==[buyaoFuyong objectForKey:[NSString stringWithFormat:@"%ld",indexPath.section+100]]){
-        if ([[arr[indexPath.section] objectForKey:@"checkNum"] floatValue]==0) {
+        NSLog(@"%@",[arr[indexPath.section] objectForKey:@"checkNum"]);
+        if ([[arr[indexPath.section] objectForKey:@"checkNum"] floatValue]==-1) {
             text.text=@"";
         }else
             text.text=[arr[indexPath.section] objectForKey:@"checkNum"];
-    }else
-        text.text=[buyaoFuyong objectForKey:[NSString stringWithFormat:@"%ld",indexPath.section+100]];
+    }else{
+        if ([[buyaoFuyong objectForKey:[NSString stringWithFormat:@"%ld",indexPath.section+100]] floatValue]==-1) {
+            text.text=@"";
+        }else{
+            text.text=[buyaoFuyong objectForKey:[NSString stringWithFormat:@"%ld",indexPath.section+100]];
+        }
+    }
     [text.layer setBorderWidth:1];
     [text.layer setBorderColor:[[UIColor blackColor] CGColor]];
     [text.layer setCornerRadius:5.0];
@@ -1709,10 +1721,10 @@
             shularr = [[NSMutableArray alloc]init];
             for (int i=0; i<[arr count]; i++) {
                 if(NULL ==[buyaoFuyong objectForKey:[NSString stringWithFormat:@"%d",i+100]]){
-                    [shularr addObject:@"0"];
+                    [shularr addObject:@"-1"];
                 }
                 else{
-                    [ shularr addObject:[buyaoFuyong objectForKey:[NSString stringWithFormat:@"%d",i+100]]];
+                    [shularr addObject:[buyaoFuyong objectForKey:[NSString stringWithFormat:@"%d",i+100]]];
                 }
             }
             for (int i=0; i<arr.count; i++) {
