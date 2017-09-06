@@ -149,6 +149,7 @@
         }else{
             NSString * officeId=[isPandian objectForKey:@"mendian"];
             rucan=[NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:@"Mac"],@"mac",[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"],@"checker",[[NSUserDefaults standardUserDefaults]objectForKey:@"zhuangtai"],@"state",list,@"list",officeId,@"officeId",nil];
+            
         }
         [self shangchuan:rucan];
     }
@@ -344,7 +345,7 @@
 -(void)shangchuan:(NSDictionary*)rucan{
     NSString *fangshi=@"/sys/upload";
     NSString*Key=@"txt";
-    [XL_WangLuo ShangChuanWenJianwithBizMethod:fangshi Wenjian:@"写多了" key:Key Rucan:rucan type:Post success:^(id responseObject) {
+    [XL_WangLuo ShangChuanshujuwithBizMethod:fangshi Wenjian:@"写多了" key:Key Rucan:rucan type:Post success:^(id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"] isEqual:@"0000"]) {
             NSString *ss = [NSString stringWithFormat:@"已盘点%lu条数据，成功提交%lu条数据请等待后台处理",[[rucan objectForKey:@"list"]count],[[rucan objectForKey:@"list"]count]];
@@ -367,5 +368,32 @@
                                            [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
                                        }];
 }
+-(void)shangchuanwenjian:(NSDictionary*)rucan{
+    NSString *fangshi=@"/sys/uploadFile";
+    NSString*Key=@"txt";
+    [XL_WangLuo ShangChuanWenJianwithBizMethod:fangshi Wenjian:@"写多了" key:Key Rucan:rucan type:Post success:^(id responseObject) {
+        NSLog(@"%@",responseObject);
+//        [WarningBox warningBoxHide:YES andView:self.view];
+//        if ([[responseObject objectForKey:@"code"] isEqual:@"0000"]) {
+//            NSString *ss = [NSString stringWithFormat:@"已盘点%lu条数据，成功提交%lu条数据请等待后台处理",[[rucan objectForKey:@"list"]count],[[rucan objectForKey:@"list"]count]];
+//            [WarningBox warningBoxModeText:ss andView:self.view];
+//        }else if ([[responseObject objectForKey:@"code"] isEqual:@"0009"]){
+//            [WarningBox warningBoxModeText:@"后台已计算，请同步异常数据!" andView:self.view];
+//        }else if([[responseObject objectForKey:@"code"]isEqual:@"9999"]){
+//            //账号在其他手机登录，请重新登录。
+//            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isPandian"] isEqualToString:@"0"]) {
+//                [XL_WangLuo youyigesigejiu:self :0];
+//            }else{
+//                [XL_WangLuo youyigesigejiu:self :1];
+//            }
+//        }else
+//            [WarningBox warningBoxModeText:@"提交盘点结果失败!" andView:self.view];
+    }
+                                     failure:^(NSError *error) {
+//                                         NSLog(@"%@",error);
+//                                         [WarningBox warningBoxHide:YES andView:self.view];
+//                                         [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
+                                     }];
 
+}
 @end

@@ -144,10 +144,78 @@
             break;
     }
 }
-//上传文件   外网提交接口,
-+(void)ShangChuanWenJianwithBizMethod:(NSString*)BizMetho Wenjian:(NSString*)Ming key:(NSString*)key Rucan:(NSDictionary*)BizParamSt type:(Post_or_Get)type success:(void (^)(id responseObject))success
+//提交数据   外网提交接口,
++(void)ShangChuanshujuwithBizMethod:(NSString*)BizMetho Wenjian:(NSString*)Ming key:(NSString*)key Rucan:(NSDictionary*)BizParamSt type:(Post_or_Get)type success:(void (^)(id responseObject))success
                               failure:(void (^)(NSError *error))failure{
     NSUserDefaults * shuju=[NSUserDefaults standardUserDefaults];//非登录接口用
+    NSString *JuYuwang;//登录接口不用
+    if([panduan isEqual:@"1"]/*1是外网*/){
+        JuYuwang=JuYuWai;
+    }else{
+        JuYuwang=JuYuWang;
+    }
+//    NSFileManager *fmm;
+//    fmm=[NSFileManager defaultManager];
+//    NSString*wenjianPath=[NSString stringWithFormat:@"%@/wenjian.txt",NSTemporaryDirectory()];
+//    NSData*fileData;
+//    fileData=[fmm contentsAtPath:wenjianPath];
+//    if (fileData) {
+//        [fmm removeItemAtPath:wenjianPath error:nil];
+//    }
+    NSString *BizMethod=BizMetho;
+    
+    NSString *Url=[NSString stringWithFormat:@"%@%@",JuYuwang,BizMethod];
+    NSString *UserID=[shuju objectForKey:@"UserID"];//登陆不用传
+    NSString *vaildToken=@"";//传空或非空
+    NSString *accessToken=[shuju objectForKey:@"accessToken"];//登陆不用传
+    SBJsonWriter *writer=[[SBJsonWriter alloc] init];
+    
+    NSDictionary*BizParamStr=BizParamSt;
+    
+    NSString *Rucan=[writer stringWithObject:BizParamStr];
+    
+//    BOOL res = [Rucan writeToFile:wenjianPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+//    if (res) {
+//        NSLog(@"成功");
+//    }
+    
+    NSDictionary *ChuanCan=[NSDictionary dictionaryWithObjectsAndKeys:Appkey,@"appkey",vaildToken,@"vaildToken",UserID,@"userid",accessToken,@"accessToken",Rucan,@"params", nil];
+    AFHTTPSessionManager *manager=[AFHTTPSessionManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
+    [manager POST:Url parameters:ChuanCan constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+//        if ([panduan isEqual:@"1"]) {
+//            NSFileManager *fmm;
+//            fmm=[NSFileManager defaultManager];
+//            NSString*wenjianPath=[NSString stringWithFormat:@"%@/wenjian.txt",NSTemporaryDirectory()];
+//            NSData*fileData;
+//            fileData=[fmm contentsAtPath:wenjianPath];
+//            if (fileData) {
+//                NSDateFormatter *fm = [[NSDateFormatter alloc] init];
+//                // 设置时间格式
+//                fm.dateFormat = @"yyyyMMdd_HHmmss";
+//                NSString *str = [fm stringFromDate:[NSDate date]];
+//                NSString *fileName = [NSString stringWithFormat:@"%@.txt", str];
+//                [formData appendPartWithFileData:fileData name:key fileName:fileName mimeType:@"text/plain"];
+//            }
+//        }
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if (success) {
+            success(responseObject);
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (failure) {
+            failure(error);
+        }
+        
+    }];
+}
+//上传文件
++(void)ShangChuanWenJianwithBizMethod:(NSString*)BizMetho Wenjian:(NSString*)Ming key:(NSString*)key Rucan:(NSDictionary*)BizParamSt type:(Post_or_Get)type success:(void (^)(id responseObject))success
+                              failure:(void (^)(NSError *error))failure{
+//    NSUserDefaults * shuju=[NSUserDefaults standardUserDefaults];//非登录接口用
     NSString *JuYuwang;//登录接口不用
     if([panduan isEqual:@"1"]/*1是外网*/){
         JuYuwang=JuYuWai;
@@ -165,9 +233,9 @@
     NSString *BizMethod=BizMetho;
     
     NSString *Url=[NSString stringWithFormat:@"%@%@",JuYuwang,BizMethod];
-    NSString *UserID=[shuju objectForKey:@"UserID"];//登陆不用传
-    NSString *vaildToken=@"";//传空或非空
-    NSString *accessToken=[shuju objectForKey:@"accessToken"];//登陆不用传
+//    NSString *UserID=[shuju objectForKey:@"UserID"];//登陆不用传
+//    NSString *vaildToken=@"";//传空或非空
+//    NSString *accessToken=[shuju objectForKey:@"accessToken"];//登陆不用传
     SBJsonWriter *writer=[[SBJsonWriter alloc] init];
     
     NSDictionary*BizParamStr=BizParamSt;
@@ -179,10 +247,10 @@
         NSLog(@"成功");
     }
     
-    NSDictionary *ChuanCan=[NSDictionary dictionaryWithObjectsAndKeys:Appkey,@"appkey",vaildToken,@"vaildToken",UserID,@"userid",accessToken,@"accessToken",Rucan,@"params", nil];
+//    NSDictionary *ChuanCan=[NSDictionary dictionaryWithObjectsAndKeys:Appkey,@"appkey",vaildToken,@"vaildToken",UserID,@"userid",accessToken,@"accessToken",Rucan,@"params", nil];
     AFHTTPSessionManager *manager=[AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
-    [manager POST:Url parameters:ChuanCan constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    [manager POST:Url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         if ([panduan isEqual:@"1"]) {
             NSFileManager *fmm;
             fmm=[NSFileManager defaultManager];

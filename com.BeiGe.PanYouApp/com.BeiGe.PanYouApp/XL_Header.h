@@ -27,7 +27,7 @@
 //==1 为网络盘点    ==0为单机盘点
 #define panduan  [[NSUserDefaults standardUserDefaults] objectForKey:@"isPandian"]
 
-//#define QianWaiWangIP @"192.168.1.146:7080"//李世东
+//#define QianWaiWangIP @"192.168.1.101:8080"//李世东
 //#define QianWaiWangIP @"192.168.1.122:8080"//展
 //#define QianWaiWangIP @"192.168.1.117:8080"
 //#define QianWaiWangIP @"125.211.221.232:60088"

@@ -55,6 +55,7 @@
         dic11=[NSMutableDictionary dictionaryWithDictionary:arr[0]];
         [_table reloadData];
         _table.hidden=NO;
+        [self navigationyou];
     }
 }
 - (void)viewDidLoad {
@@ -268,19 +269,20 @@
 }
 #pragma mark-----text
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    if (arr.count!=0) {
-        if (textField.tag==103) {
-            [self setupCustomedKeyboard:textField];
-            [self navigationyou];
-        
-        }else
-            return NO;
-    }else{
+//    if (arr.count!=0) {
+////        if (textField.tag==103) {
+//            [self setupCustomedKeyboard:textField];
+////            [self navigationyou];
+//        
+////        }else
+//            return YES;
+//    }else{
+//    [self navigationyou];
         if (textField.tag==101) {
             
         }else
             [self setupCustomedKeyboard:textField];
-    }
+//    }
     return YES;
 }
 -(void)textFieldDidEndEditing:(UITextField *)textField{

@@ -67,7 +67,7 @@
     if (cell==nil) {
         cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:aa];
     }
-    UILabel *huowei    =[cell viewWithTag:1000];
+    UILabel *huowei    =[cell viewWithTag:1000]; 
     UILabel *yaoming    =[cell viewWithTag:1001];    //weipan
     yaoming.textAlignment=NSTextAlignmentCenter;
     if (NULL == [listarray[indexPath.row] objectForKey:@"hwh"]) {

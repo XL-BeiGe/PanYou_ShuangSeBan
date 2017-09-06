@@ -1346,7 +1346,6 @@
     yuliumian.alpha=1;
     [self.view addSubview:yuliumian];
     yuliumian.hidden=NO;
-    
     //-----
     UILabel*xinxi=[[UILabel alloc] initWithFrame:CGRectMake(5, 2,50, 40)];
     xinxi.font=[UIFont systemFontOfSize:20 weight:1.5];
