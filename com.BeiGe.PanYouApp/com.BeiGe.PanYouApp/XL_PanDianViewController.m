@@ -106,12 +106,12 @@
         [self firstResponderInSubView];
     }
     
-//    if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
-//        _Search.textColor=[UIColor lightGrayColor];
-//    }else{
-//        _Search.textColor=[UIColor colorWithHexString:@"34C083"];
-//    }
- 
+    //    if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
+    //        _Search.textColor=[UIColor lightGrayColor];
+    //    }else{
+    //        _Search.textColor=[UIColor colorWithHexString:@"34C083"];
+    //    }
+    
     
 }
 - (void)viewDidLoad {
@@ -494,8 +494,8 @@
         oo.text =[NSString stringWithFormat:@"%@",ss];
         [buyaoFuyong setObject:[NSString stringWithFormat:@"%@", oo.text ] forKey:[NSString stringWithFormat:@"%ld",(long)oo.tag]];
     }else{
-    oo.text= [oo.text stringByAppendingString:[NSString stringWithFormat:@"%@",ss]];
-    [buyaoFuyong setObject:[NSString stringWithFormat:@"%@", oo.text ] forKey:[NSString stringWithFormat:@"%ld",(long)oo.tag]];
+        oo.text= [oo.text stringByAppendingString:[NSString stringWithFormat:@"%@",ss]];
+        [buyaoFuyong setObject:[NSString stringWithFormat:@"%@", oo.text ] forKey:[NSString stringWithFormat:@"%ld",(long)oo.tag]];
     }
 }
 #pragma mark -----助记码
@@ -559,9 +559,9 @@
         if (NULL == [arr[i] objectForKey:@"checkNum"]) {
             
         }else{
-        if ([[arr[i] objectForKey:@"checkNum"] floatValue] < 0) {
-        }else
-            [buyaoFuyong setObject:[arr[i] objectForKey:@"checkNum"] forKey:[NSString stringWithFormat:@"%d",i+100]];
+            if ([[arr[i] objectForKey:@"checkNum"] floatValue] < 0) {
+            }else
+                [buyaoFuyong setObject:[arr[i] objectForKey:@"checkNum"] forKey:[NSString stringWithFormat:@"%d",i+100]];
         }
     }
     [self xianshi:arr];
@@ -1187,7 +1187,8 @@
                 [shularr replaceObjectAtIndex:i withObject:@"0"];
             }
             scdic =[NSDictionary dictionaryWithObjectsAndKeys:status,@"status",barCode,@"barCode",checkId,@"checkId",manufacturer,@"manufacturer",pycode,@"pycode",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",_ypgoods.text,@"newpos",dateString,@"checktime",shularr[i],@"checkNum",prodBatchNo,@"prodBatchNo",yuliuziduan2,@"f2",yuliuziduan1,@"f1", nil];
-        }else{
+        }
+        else{
             BOOL ss = [self isNum:shularr[i]];
             if (ss == NO) {
                 [shularr replaceObjectAtIndex:i withObject:@"-1"];
@@ -1196,9 +1197,12 @@
             
         }
     }
-    
-    [XL DataBase:db insertKeyValues:scdic intoTable:ShangChuanBiaoMing];
-    
+    NSArray*meyou = [XL DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereConditionzss:[NSDictionary dictionaryWithObjectsAndKeys:[scdic objectForKey:@"prodBatchNo"],@"prodBatchNo",[scdic objectForKey:@"productCode"],@"productCode", nil]];
+    if (meyou.count>0) {
+        [self tishikuang];
+    }else{
+        [XL DataBase:db insertKeyValues:scdic intoTable:ShangChuanBiaoMing];
+    }
 }
 
 -(void)czshangchuan{
@@ -1773,6 +1777,25 @@
     [alert addAction:action1];
     [self presentViewController:alert animated:YES completion:^{
     }];
+}
+-(void)tishikuang{
+    UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"提示:" message:@"此条数据可能出现异常，请重新盘点或跳过此条数据!" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction*action1=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        _Search.textColor = [UIColor lightGrayColor];
+        _Search.text=@"🔍扫描或输入药品条形码";
+        txt.text=@"";
+    }];
+    UIAlertAction*action2=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        _Search.textColor = [UIColor lightGrayColor];
+        _Search.text=@"🔍扫描或输入药品条形码";
+        txt.text=@"";
+        
+    }];
+    [alert addAction:action2];
+    [alert addAction:action1];
+    [self presentViewController:alert animated:YES completion:^{
+    }];
+
 }
 - (IBAction)lastone:(id)sender {
     NSMutableArray *ato;
