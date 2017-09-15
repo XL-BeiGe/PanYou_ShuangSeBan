@@ -1197,7 +1197,7 @@
             
         }
     }
-    NSArray*meyou = [XL DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereConditionzss:[NSDictionary dictionaryWithObjectsAndKeys:[scdic objectForKey:@"prodBatchNo"],@"prodBatchNo",[scdic objectForKey:@"productCode"],@"productCode", nil]];
+     NSArray*meyou=[ XL DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing whereConditions:[NSDictionary dictionaryWithObjectsAndKeys:[scdic objectForKey:@"prodBatchNo"],@"prodBatchNo",[scdic objectForKey:@"productCode"],@"productCode", nil]];
     if (meyou.count>0) {
         [self tishikuang];
     }else{
