@@ -12,26 +12,113 @@
 #import "XL_PanDianViewController.h"
 #import "Color+Hex.h"
 #import "XL_Header.h"
-@interface XL_tableViewController ()
+#import "ZYCustomKeyboardTypeNumberView.h"
+@interface XL_tableViewController ()<ZYCustomKeyboardTypeNumberViewDelegate>
 {
     XL_FMDB *XL;
     FMDatabase *db;
     
     NSArray*listarray;
+    
+    UITextField *customSearchBar;
+    NSArray * arr;
 }
 @end
 
 @implementation XL_tableViewController
 
 -(void)viewWillAppear:(BOOL)animated{
+    [self sousuoKuang];
     if (_biaoqian.selectedSegmentIndex == 0) {
         listarray =[self table_array:0];
     }else if(_biaoqian.selectedSegmentIndex == 1){
         listarray =[self table_array:1];
     }
-    
     [_tableview reloadData];
-    
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    for (UIView *vv in self.navigationController.view.subviews) {
+        if (vv.tag == 1001111) {
+            [vv removeFromSuperview];
+        }
+    }
+}
+-(void)sousuoKuang{
+    CGRect mainViewBounds = self.navigationController.view.bounds;
+    UITextField *customSearchBar = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetWidth(mainViewBounds)/2-((CGRectGetWidth(mainViewBounds)-140)/2), CGRectGetMinY(mainViewBounds)+22, CGRectGetWidth(mainViewBounds)-120, 40)];
+    customSearchBar.tag = 1001111;
+    customSearchBar.placeholder = @" 🔍请输入编号或条码";
+    [ZYCustomKeyboardTypeNumberView customKeyboardViewWithServiceTextField:customSearchBar Delegate:self];
+    [self.navigationController.view addSubview: customSearchBar];
+}
+#pragma mark ------textfield
+- (void)customKeyboardTypeNumberView_changeTextFieldWithText:(UITextField *)string{
+    [self sousuo:string.text];
+}
+#pragma mark ------方法
+-(void)sousuo:(NSString *)str{
+    NSArray * wocalei = [NSArray array];
+    switch (_biaoqian.selectedSegmentIndex) {
+        case 0:
+            wocalei = [self table_array:0];
+            [self woyaosila:wocalei :str];
+            break;
+        case 1:
+            wocalei = [self table_array:1];
+            [self woyaosila:wocalei :str];
+            break;
+        default:
+            break;
+    }
+}
+-(void)woyaosila:(NSArray * )wocailei :(NSString *)str{
+    if ([str isEqualToString:@""]) {
+        listarray = wocailei;
+        [_tableview reloadData];
+    }else{
+        NSMutableArray * hahah = [NSMutableArray array];
+        for (NSDictionary * dd in wocailei) {
+            if ([self congzuodaoyouPIPEI:[dd objectForKey:@"productCode"] :str] || [self congzuodaoyouPIPEI:[dd objectForKey:@"barCode"] :str]) {
+                [hahah addObject:dd];
+            }
+        }
+        listarray = hahah;
+        [_tableview reloadData];
+    }
+}
+-(BOOL)congzuodaoyouPIPEI:(NSString * )da :(NSString *)xiao{
+    if ([da rangeOfString:@","].location != NSNotFound) {
+        NSArray*uty=[da componentsSeparatedByString:@","];
+        for (NSString * he in uty) {
+//            NSLog(@"%lu",(unsigned long)xiao.length);
+            if (he.length>0&&xiao.length<=he.length) {
+                if ([[he substringToIndex:(int)(xiao.length)] isEqualToString:xiao]) {
+                    return YES;
+                }
+            }
+        }
+    }else{
+        
+        if (da.length < xiao.length) {
+            
+        }else{
+            NSString * ha = [da substringToIndex:(int)(xiao.length)];
+            if ([xiao isEqualToString:ha]) {
+                return YES;
+            }
+        }
+    }
+    return NO;
+}
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self tuijianpan];
+}
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [self tuijianpan];
+}
+-(void)tuijianpan{
+    [self.navigationController.view endEditing:YES];
+    customSearchBar.layer.borderColor = [[UIColor blackColor]CGColor];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -46,7 +133,13 @@
     //去除多余分割线
     self.tableview.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
+
+//-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+//    [self.view endEditing:YES];
+//}
 -(void)Action:(UISegmentedControl *)segment{
+    customSearchBar.text = @"";
+    [self.navigationController.view endEditing:YES];
     if (segment.selectedSegmentIndex ==0) {
         listarray=[self table_array:0];
         [_tableview reloadData];
