@@ -279,7 +279,13 @@
                     [[NSUserDefaults standardUserDefaults] setObject:[xiazailist[0] objectForKey:@"checkId"] forKey:@"checkId"];
                     [XL clearDatabase:db from:ShangChuanBiaoMing];
                     [XL clearDatabase:db from:XiaZaiBiaoMing];
-                  
+                    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"SHU"];
+                    if ([ss  isEqual: @"9"]) {
+                        [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"ZHENGYI"];
+                    }else{
+                        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"ZHENGYI"];
+                    }
+                    
                     [db beginTransaction];
                     BOOL isRollBack = NO;
                     @try
