@@ -13,7 +13,8 @@
 #define Port    @"80"
 
 #define Scheme  @"http://"
-#define AppName @"/stockmgr"
+#define AppName @"/dianxiaoer"
+// stockmgr
 //pdzs
 //stockmgr
 #define apath    @"/api/rest/1.0"
@@ -27,12 +28,12 @@
 #define JuYuWai [NSString stringWithFormat:@"%@%@%@%@",Scheme,juyuwaiwangIP,AppName,apath]
 //==1 为网络盘点    ==0为单机盘点
 #define panduan  [[NSUserDefaults standardUserDefaults] objectForKey:@"isPandian"]
-
 //#define QianWaiWangIP @"192.168.1.172:8080"//李世东
-#define QianWaiWangIP @"192.168.1.104:8090"//展
+//#define QianWaiWangIP @"192.168.1.104:8090"//展
 //#define QianWaiWangIP @"192.168.1.117:8080"
 //#define QianWaiWangIP @"125.211.221.232:60088"
-//#define QianWaiWangIP @"www.yaopandian.com"
+#define QianWaiWangIP @"www.yaopandian.com"
+
 #define QianWaiWang [NSString stringWithFormat:@"%@%@%@%@",Scheme,QianWaiWangIP,AppName,apath]
 
 #define Appkey   @"d800528f235e4142b78a8c26c4d537d9"
