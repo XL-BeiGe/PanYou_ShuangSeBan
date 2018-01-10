@@ -801,17 +801,17 @@
     }else{
         ID=[arr[i] objectForKey:@"id"];
     }
-    NSString*productCode;
-    if (arr.count==0|| NULL == [arr[i] objectForKey:@"productCode"]) {
-        productCode=@"";
+    NSString*barCode;
+    if (arr.count==0|| NULL == [arr[i] objectForKey:@"barCode"]) {
+        barCode=@"";
     }else{
-        productCode=[arr[i] objectForKey:@"productCode"];
+        barCode=[arr[i] objectForKey:@"barCode"];
     }
     
     NSDictionary*tiao1=[NSDictionary dictionaryWithObjectsAndKeys:prodBatchNo,@"prodBatchNo",ID,@"id", nil];
     NSArray*nbh=[ XL DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereConditions:tiao1];
     
-    NSDictionary*tiao2=[NSDictionary dictionaryWithObjectsAndKeys:prodBatchNo,@"prodBatchNo",productCode,@"productCode", nil];
+    NSDictionary*tiao2=[NSDictionary dictionaryWithObjectsAndKeys:prodBatchNo,@"prodBatchNo",barCode,@"barCode", nil];
     NSDictionary*val1=[NSDictionary dictionaryWithObjectsAndKeys:shularr[i],@"checkNum",_ypgoods.text,@"newpos",dateString,@"checktime",[nbh[0] objectForKey:@"f1"],@"f1", nil];
     [XL DataBase:db updateTable:ShangChuanBiaoMing setKeyValues:val1 whereConditions:tiao2];
 }
