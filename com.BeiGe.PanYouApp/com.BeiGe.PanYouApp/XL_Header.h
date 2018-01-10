@@ -14,6 +14,7 @@
 
 #define Scheme  @"http://"
 #define AppName @"/stockmgr"
+//pdzs
 //stockmgr
 #define apath    @"/api/rest/1.0"
 
@@ -27,11 +28,11 @@
 //==1 为网络盘点    ==0为单机盘点
 #define panduan  [[NSUserDefaults standardUserDefaults] objectForKey:@"isPandian"]
 
-//#define QianWaiWangIP @"192.168.1.101:8080"//李世东
-//#define QianWaiWangIP @"192.168.1.122:8080"//展
+//#define QianWaiWangIP @"192.168.1.172:8080"//李世东
+#define QianWaiWangIP @"192.168.1.104:8090"//展
 //#define QianWaiWangIP @"192.168.1.117:8080"
 //#define QianWaiWangIP @"125.211.221.232:60088"
-#define QianWaiWangIP @"www.yaopandian.com"
+//#define QianWaiWangIP @"www.yaopandian.com"
 #define QianWaiWang [NSString stringWithFormat:@"%@%@%@%@",Scheme,QianWaiWangIP,AppName,apath]
 
 #define Appkey   @"d800528f235e4142b78a8c26c4d537d9"
@@ -40,7 +41,7 @@
 
 #define TongBuBiaoMing @"tongbu"
 
-#define XiaZaiShiTiLei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"approvalNumber",@"text",@"barCode",@"text",@"checkId",@"text",@"checkNum",@"text",@"costPrice",@"text",@"id",@"text",@"manufacturer",@"text",@"oldpos",@"text",@"prodBatchNo",@"text",@"productCode",@"text",@"productName",@"text",@"purchaseBatchNo",@"text",@"pycode",@"text",@"salePrice",@"text",@"specification",@"text",@"status",@"integer",@"stockNum",@"text",@"vipPrice",@"text",@"f1",@"text",@"f2", nil]
+#define XiaZaiShiTiLei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"approvalNumber",@"text",@"barCode",@"text",@"checkId",@"text",@"checkNum",@"text",@"costPrice",@"text",@"id",@"text",@"manufacturer",@"text",@"oldpos",@"text",@"prodBatchNo",@"text",@"productCode",@"text",@"productName",@"text",@"purchaseBatchNo",@"text",@"pycode",@"text",@"salePrice",@"text",@"specification",@"text",@"status",@"integer",@"stockNum",@"text",@"vipPrice",@"text",@"f1",@"text",@"f2",@"text",@"f3", nil]
 
 
 #define XiaZaiBiaoMing @"xiazai"
@@ -84,7 +85,7 @@
  //	盘点时间
 	String checkTime;
  */
-#define ShangChuanShiTiLei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"productCode",@"text",@"checkNum",@"text",@"prodBatchNo",@"text",@"status",@"text",@"checkTime",@"text",@"productName",@"text",@"manufacturer",@"text",@"specification",@"text",@"barCode",@"text",@"approvalNumber",@"text",@"pycode",@"text",@"checkId",@"text",@"newpos",@"text",@"f1",@"text",@"f2", nil]
+#define ShangChuanShiTiLei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"productCode",@"text",@"checkNum",@"text",@"prodBatchNo",@"text",@"status",@"text",@"checkTime",@"text",@"productName",@"text",@"manufacturer",@"text",@"specification",@"text",@"barCode",@"text",@"approvalNumber",@"text",@"pycode",@"text",@"checkId",@"text",@"newpos",@"text",@"f1",@"text",@"f2",@"text",@"f3",@"text",@"xinci", nil]
 
 #define ShangChuanBiaoMing @"shangchuan"
 
