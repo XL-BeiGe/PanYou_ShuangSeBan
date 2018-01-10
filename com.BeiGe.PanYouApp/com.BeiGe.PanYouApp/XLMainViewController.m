@@ -35,7 +35,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tongzhi) name:@"111" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(tongzhi) name:@"111" object:nil];
     
     NSString *ok = [[NSUserDefaults standardUserDefaults] objectForKey:@"shifoutankuang"];
     if ([ok isEqualToString:@"1"]) {

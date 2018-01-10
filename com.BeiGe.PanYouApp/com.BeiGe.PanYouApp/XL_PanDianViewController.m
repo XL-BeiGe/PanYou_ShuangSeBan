@@ -94,26 +94,10 @@
         }
         [self xztianjia:0];
         [self sccharu:0];
-        //SHU+1
-        NSUserDefaults * ss = [NSUserDefaults standardUserDefaults];
-        int XS = [[ss objectForKey:@"SHU"] intValue];
-        [ss setObject:[NSString stringWithFormat:@"%d",XS+1] forKey:@"SHU"];
         xinzengpanduan=0;
     }
     else if ([_rukou isEqualToString:@"1"]) {
         _Search.text = _jieshouzhi;
-        if ([_souTiao  isEqual: @"1"]) {
-            NSArray * aaa = [self table_array:0];
-//            int bb = [[[NSUserDefaults standardUserDefaults] objectForKey:@"WeiZhi"] intValue];
-            if (aaa.count != 0) {
-                for (int xx = 0 ; xx < aaa.count; xx ++) {
-                    if ([_jieshouzhi isEqualToString:[aaa[xx] objectForKey:@"productCode"]]) {
-                        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%d",xx] forKey:@"WeiZhi"];
-                        break;
-                    }
-                }
-            }
-        }
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self chazhao];
         });
@@ -639,8 +623,8 @@
             }
             TextFlowView *nameview =  [[TextFlowView alloc] initWithFrame:_ypname.frame Text:name.text textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:18] backgroundColor:[UIColor clearColor] alignLeft:YES];
             TextFlowView *changview =  [[TextFlowView alloc] initWithFrame:_ypvender.frame Text:chang.text textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:18] backgroundColor:[UIColor clearColor] alignLeft:YES];
-//            NSLog(@"\n批准文号\n%f     %f------%f    %f\n\n\n",_ypnumber.frame.size.height,_ypnumber.frame.size.width,_ypnumber.frame.origin.x,_ypnumber.frame.origin.y);
-//            NSLog(@"\n厂家\n%f     %f------%f    %f\n\n\n",_ypvender.frame.size.height,_ypvender.frame.size.width,_ypvender.frame.origin.x,_ypvender.frame.origin.y);
+            NSLog(@"\n批准文号\n%f     %f------%f    %f\n\n\n",_ypnumber.frame.size.height,_ypnumber.frame.size.width,_ypnumber.frame.origin.x,_ypnumber.frame.origin.y);
+            NSLog(@"\n厂家\n%f     %f------%f    %f\n\n\n",_ypvender.frame.size.height,_ypvender.frame.size.width,_ypvender.frame.origin.x,_ypvender.frame.origin.y);
             nameview.tag=101;
             changview.tag=102;
             [self.InfoView addSubview:nameview];
@@ -723,10 +707,6 @@
                 [shularr addObject:[NSString stringWithFormat:@"%@",_onelabel.text]];
                 if(scarr.count==0){
                     [self sccharu:0];
-                    //SHU +1
-                    NSUserDefaults * ss = [NSUserDefaults standardUserDefaults];
-                    int XS = [[ss objectForKey:@"SHU"] intValue];
-                    [ss setObject:[NSString stringWithFormat:@"%d",XS+1] forKey:@"SHU"];
                 }else{
                     //修改上传表
                     [self scxiugai:0];
@@ -763,10 +743,6 @@
                 }
                 else{
                     [self sccharu:i];
-                    //SHU+1
-                    NSUserDefaults * ss = [NSUserDefaults standardUserDefaults];
-                    int XS = [[ss objectForKey:@"SHU"] intValue];
-                    [ss setObject:[NSString stringWithFormat:@"%d",XS+1] forKey:@"SHU"];
                 }
                 //修改下载表中的药品数量 （批号prodBatchNo）
                 [self xzxiugai:i];
@@ -776,52 +752,10 @@
             onepand=1;
             [self firstResponderInSubView];
         }
-        //需要条下一条数据。角标位置WeiZhi
-        if ([_rukou isEqualToString:@"1"]&&[_wei isEqualToString:@"0"]&&[[[NSUserDefaults standardUserDefaults] objectForKey:@"KG"] isEqual:@"1"]) {
-            NSArray * aaa = [self table_array:0];
-            int bb = [[[NSUserDefaults standardUserDefaults] objectForKey:@"WeiZhi"] intValue];
-            if (aaa.count >= bb+1) {
-                _Search.text = [NSString stringWithFormat:@"%@",[aaa[bb] objectForKey:@"productCode"]];
-                [self chazhao];
-            }else{
-                [self.navigationController popViewControllerAnimated:YES];
-            }
-        }else if ([_rukou isEqualToString:@"1"]){
+        if ([_rukou isEqualToString:@"1"]) {
             [self.navigationController popViewControllerAnimated:YES];
         }
     }
-}
-//
--(NSArray*)table_array:(int )i{
-    NSMutableArray* aa=[[NSMutableArray alloc] init];
-    NSDictionary*dd=[NSDictionary dictionaryWithObjectsAndKeys: @"0", @"checkNum",nil];
-    if (i == 0) {
-        NSArray * bb=[XL DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing where___Condition:dd];
-        
-        for (NSDictionary * dd in bb) {
-            if ( [dd objectForKey:@"f3"]  ==nil || NULL == [dd objectForKey:@"f3"] ||[[dd objectForKey:@"f3"] isEqual:[NSNull null]]||[[dd objectForKey:@"f3"] isEqualToString:@""]) {
-            }else{
-                [aa addObject:dd];
-            }
-        }
-    }
-    if (aa.count == 0) {
-        return aa;
-    }
-    NSArray* hah=[self paixu:aa];
-    return hah;
-}
--(NSArray*)paixu:(NSArray*)aar{
-    
-    NSArray *sortedArray = [aar sortedArrayUsingComparator:^NSComparisonResult(NSDictionary *p1, NSDictionary *p2){
-        if ([[p1 objectForKey:@"f3"] longLongValue]<[[p2 objectForKey:@"f3"] longLongValue]) {
-            return NSOrderedAscending;
-        } else {
-            return NSOrderedDescending;
-        }
-    }];
-    
-    return sortedArray;
 }
 #pragma mark 数据库操作
 //修改下载表
@@ -1165,26 +1099,11 @@
         }else{
             yuliuziduan2= [nbh[0] objectForKey:@"f2"];
         }
-        NSString*xinci;
-        if(nbh.count==0|| NULL==[nbh[0] objectForKey:@"xinci"]){
-            NSUserDefaults * ss = [NSUserDefaults standardUserDefaults];
-            if ([[ss objectForKey:@"ZHENGYI"]  isEqual: @"0"]) {
-                xinci= [NSString stringWithFormat:@"%@%@%05.f",[ss objectForKey:@"userId"],[ss objectForKey:@"checkId"],[[ss objectForKey:@"SHU"] floatValue]];
-            }else{
-                if ([arr[i] objectForKey:@"f3"] ==nil || NULL == [arr[i] objectForKey:@"f3"]||[[arr[i] objectForKey:@"f3"] isEqual:[NSNull null]]){
-                    xinci=@"";
-                }else{
-                    xinci= [arr[i] objectForKey:@"f3"];
-                }
-            }
-        }else{
-            xinci= [nbh[0] objectForKey:@"xinci"];
-        }
         BOOL ss = [self isNum:_onelabel.text];
         if (ss == NO) {
             _onelabel.text=@"0";
         }
-        scdic =[NSDictionary dictionaryWithObjectsAndKeys:barCode,@"barCode",manufacturer,@"manufacturer",pycode,@"pycode",prodBatchNo,@"prodBatchNo",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",huoweihao,@"newpos",dateString,@"checktime",_onelabel.text,@"checkNum",@"1",@"status",[[NSUserDefaults standardUserDefaults] objectForKey:@"checkId"],@"checkId",yuliuziduan2,@"f2",yuliuziduan1,@"f1",xinci,@"f3", nil];
+        scdic =[NSDictionary dictionaryWithObjectsAndKeys:barCode,@"barCode",manufacturer,@"manufacturer",pycode,@"pycode",prodBatchNo,@"prodBatchNo",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",huoweihao,@"newpos",dateString,@"checktime",_onelabel.text,@"checkNum",@"1",@"status",[[NSUserDefaults standardUserDefaults] objectForKey:@"checkId"],@"checkId",yuliuziduan2,@"f2",yuliuziduan1,@"f1", nil];
     }
     else{
         
@@ -1249,21 +1168,6 @@
         }else{
             yuliuziduan2= [arr[i] objectForKey:@"f2"];
         }
-        NSString*xinci;
-        if(nbh.count==0|| NULL==[nbh[0] objectForKey:@"xinci"]){
-            NSUserDefaults * ss = [NSUserDefaults standardUserDefaults];
-            if ([[ss objectForKey:@"ZHENGYI"]  isEqual: @"0"]) {
-                xinci= [NSString stringWithFormat:@"%@%@%05.f",[ss objectForKey:@"userId"],[ss objectForKey:@"checkId"],[[ss objectForKey:@"SHU"] floatValue]];
-            }else{
-                if ([arr[i] objectForKey:@"f3"] ==nil || NULL == [arr[i] objectForKey:@"f3"]||[[arr[i] objectForKey:@"f3"] isEqual:[NSNull null]]){
-                    xinci=@"";
-                }else{
-                    xinci= [arr[i] objectForKey:@"f3"];
-                }
-            }
-        }else{
-            xinci= [nbh[0] objectForKey:@"xinci"];
-        }
         if (tjphpanduan==1){
             int kkkk=0;
             for (NSDictionary*dd in arr) {
@@ -1278,14 +1182,14 @@
             if (ss == NO) {
                 [shularr replaceObjectAtIndex:i withObject:@"0"];
             }
-            scdic =[NSDictionary dictionaryWithObjectsAndKeys:status,@"status",barCode,@"barCode",checkId,@"checkId",manufacturer,@"manufacturer",pycode,@"pycode",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",_ypgoods.text,@"newpos",dateString,@"checktime",shularr[i],@"checkNum",prodBatchNo,@"prodBatchNo",yuliuziduan2,@"f2",yuliuziduan1,@"f1",xinci,@"f3", nil];
+            scdic =[NSDictionary dictionaryWithObjectsAndKeys:status,@"status",barCode,@"barCode",checkId,@"checkId",manufacturer,@"manufacturer",pycode,@"pycode",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",_ypgoods.text,@"newpos",dateString,@"checktime",shularr[i],@"checkNum",prodBatchNo,@"prodBatchNo",yuliuziduan2,@"f2",yuliuziduan1,@"f1", nil];
         }
         else{
             BOOL ss = [self isNum:shularr[i]];
             if (ss == NO) {
                 [shularr replaceObjectAtIndex:i withObject:@"-1"];
             }
-            scdic =[NSDictionary dictionaryWithObjectsAndKeys:status,@"status",barCode,@"barCode",checkId,@"checkId",manufacturer,@"manufacturer",pycode,@"pycode",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",_ypgoods.text,@"newpos",dateString,@"checktime",shularr[i],@"checkNum",prodBatchNo,@"prodBatchNo",yuliuziduan2,@"f2",yuliuziduan1,@"f1",xinci,@"f3", nil];
+            scdic =[NSDictionary dictionaryWithObjectsAndKeys:status,@"status",barCode,@"barCode",checkId,@"checkId",manufacturer,@"manufacturer",pycode,@"pycode",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",_ypgoods.text,@"newpos",dateString,@"checktime",shularr[i],@"checkNum",prodBatchNo,@"prodBatchNo",yuliuziduan2,@"f2",yuliuziduan1,@"f1", nil];
             
         }
     }
@@ -1887,7 +1791,7 @@
     [alert addAction:action1];
     [self presentViewController:alert animated:YES completion:^{
     }];
-     
+
 }
 - (IBAction)lastone:(id)sender {
     NSMutableArray *ato;

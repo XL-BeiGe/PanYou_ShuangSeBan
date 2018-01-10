@@ -1388,13 +1388,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="1000" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="货位" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="00y-HD-2vy">
-                                                    <rect key="frame" x="16" y="8" width="35" height="36"/>
+                                                    <rect key="frame" x="8" y="8" width="35" height="36"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="1001" contentMode="left" verticalHuggingPriority="251" text="名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1WQ-Rd-b1e">
-                                                    <rect key="frame" x="71" y="8" width="241" height="36"/>
+                                                    <rect key="frame" x="63" y="8" width="249" height="36"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1405,7 +1405,7 @@
                                                 <constraint firstItem="1WQ-Rd-b1e" firstAttribute="leading" secondItem="00y-HD-2vy" secondAttribute="trailing" constant="20" id="AXe-KM-GW6"/>
                                                 <constraint firstAttribute="bottom" secondItem="1WQ-Rd-b1e" secondAttribute="bottom" id="JFh-cw-hLT"/>
                                                 <constraint firstItem="1WQ-Rd-b1e" firstAttribute="top" secondItem="9bI-Lm-3pa" secondAttribute="top" constant="8" id="K05-4Y-3Wk"/>
-                                                <constraint firstItem="00y-HD-2vy" firstAttribute="leading" secondItem="9bI-Lm-3pa" secondAttribute="leading" constant="16" id="NuN-n0-zsq"/>
+                                                <constraint firstItem="00y-HD-2vy" firstAttribute="leading" secondItem="9bI-Lm-3pa" secondAttribute="leading" constant="8" id="NuN-n0-zsq"/>
                                                 <constraint firstItem="00y-HD-2vy" firstAttribute="top" secondItem="9bI-Lm-3pa" secondAttribute="top" constant="8" id="R1J-w3-74t"/>
                                                 <constraint firstAttribute="bottom" secondItem="00y-HD-2vy" secondAttribute="bottom" id="Se6-Ij-0Ch"/>
                                             </constraints>

@@ -48,6 +48,7 @@
 - (IBAction)lastone:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *change;
 - (IBAction)Change:(id)sender;
-@property (nonatomic ,strong)NSString * wei;
-@property (nonatomic , strong) NSString * souTiao;
+
+
+
 @end
