@@ -2119,6 +2119,7 @@
 				CODE_SIGN_ENTITLEMENTS = com.BeiGe.PanYouApp/com.BeiGe.PanYouApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Yulan Zhao (4RSNZMG5V8)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yulan Zhao (4RSNZMG5V8)";
+				CODE_SIGN_STYLE = Manual;
 				COMPRESS_PNG_FILES = NO;
 				DEVELOPMENT_TEAM = GP8BUACAG4;
 				INFOPLIST_FILE = com.BeiGe.PanYouApp/Info.plist;
@@ -2130,8 +2131,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.appleyifeng.pandianzhushou;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c06ab2c2-cf43-4e18-9774-bfd8d493d06a";
-				PROVISIONING_PROFILE_SPECIFIER = ceshi_pandianzhushou;
+				PROVISIONING_PROFILE = "3a42401b-a770-49ac-9a98-5b1c0d428054";
+				PROVISIONING_PROFILE_SPECIFIER = pandianzhushou_ceshi;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Lib";
 			};
@@ -2145,6 +2146,7 @@
 				CODE_SIGN_ENTITLEMENTS = com.BeiGe.PanYouApp/com.BeiGe.PanYouApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Yulan Zhao (4RSNZMG5V8)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yulan Zhao (4RSNZMG5V8)";
+				CODE_SIGN_STYLE = Manual;
 				COMPRESS_PNG_FILES = NO;
 				DEVELOPMENT_TEAM = GP8BUACAG4;
 				INFOPLIST_FILE = com.BeiGe.PanYouApp/Info.plist;
@@ -2156,8 +2158,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.appleyifeng.pandianzhushou;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c06ab2c2-cf43-4e18-9774-bfd8d493d06a";
-				PROVISIONING_PROFILE_SPECIFIER = ceshi_pandianzhushou;
+				PROVISIONING_PROFILE = "3a42401b-a770-49ac-9a98-5b1c0d428054";
+				PROVISIONING_PROFILE_SPECIFIER = pandianzhushou_ceshi;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Lib";
 			};

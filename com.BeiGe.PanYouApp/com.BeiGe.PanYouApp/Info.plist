@@ -49,9 +49,9 @@
 	<string>是否允许盘点助手使用蓝牙功能？</string>
 	<key>NSCameraUsageDescription</key>
 	<string>是否允许盘点助手使用您的相机？</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>我们需要获取您的地理位置信息提供给签到功能使用</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>我们需要获取您的地理位置信息提供给签到功能使用</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>我们需要获取您的地理位置信息提供给签到功能使用</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>是否允许盘点助手使用您的麦克风？</string>
