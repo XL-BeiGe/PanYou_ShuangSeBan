@@ -362,7 +362,12 @@
     NSDictionary*BizParamStr=BizParamSt;
     
     NSString *Rucan=[writer stringWithObject:BizParamStr];
-    NSDictionary *ChuanCan=[NSDictionary dictionaryWithObjectsAndKeys:Appkey,@"appkey",vaildToken,@"vaildToken",UserID,@"userid",accessToken,@"accessToken",Rucan,@"params", nil];
+    NSDictionary *ChuanCan=[NSDictionary dictionaryWithObjectsAndKeys:Appkey,@"appkey",
+                            vaildToken,@"vaildToken",
+                            UserID,@"userid",
+                            accessToken,@"accessToken",
+                            Rucan,@"params",
+                            nil];
     AFHTTPSessionManager *manager=[AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
     

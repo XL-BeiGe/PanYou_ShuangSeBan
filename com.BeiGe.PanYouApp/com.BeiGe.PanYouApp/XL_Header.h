@@ -13,10 +13,10 @@
 #define Port    @"80"
 
 #define Scheme  @"http://"
-#define AppName @"/dianxiaoer"
+#define AppName @"/stockmgr"
 // stockmgr
 //pdzs
-//stockmgr
+//dianxiaoer
 #define apath    @"/api/rest/1.0"
 
 #define WaiWang [NSString stringWithFormat:@"%@%@%@%@",Scheme,JuyuwangIP,AppName,apath]
